@@ -1,0 +1,31 @@
+{
+    "config": {
+        "verbosity": "debug",
+        "run": {
+            "mode": "docker",
+            "exec": "ddev exec"
+        }
+    },
+    "commit-msg": {
+        "enabled": true,
+        "actions": []
+    },
+    "pre-commit": {
+        "enabled": true,
+        "actions": [
+            {
+                "action" : "vendor/bin/phpstan analyze"
+            },
+            {
+                "action" : "vendor/bin/phpmd src text codesize,unusedcode,naming"
+            },
+            {
+                "action" : "vendor/bin/php-cs-fixer check --verbose --diff src"
+            }
+        ]
+    },
+    "pre-push": {
+        "enabled": true,
+        "actions" : []
+    }
+}
