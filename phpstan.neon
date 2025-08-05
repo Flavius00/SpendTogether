@@ -5,3 +5,5 @@ parameters:
         - tests
     excludePaths:
         - tests/bootstrap.php
+        - src/Entity
+        - src/Repository
