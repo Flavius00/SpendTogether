@@ -1,0 +1,89 @@
+{#{% extends 'base.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block body %}
+    <form method="post">
+        {% if error %}
+            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
+
+        {% if app.user %}
+            <div class="mb-3">
+                You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+            </div>
+        {% endif %}
+
+        <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+        <label for="username">Email</label>
+        <input type="email" value="{{ last_username }}" name="_username" id="username" class="form-control" autocomplete="email" required autofocus>
+        <label for="password">Password</label>
+        <input type="password" name="_password" id="password" class="form-control" autocomplete="current-password" required>
+        <input type="hidden" name="_csrf_token" data-controller="csrf-protection" value="{{ csrf_token('authenticate') }}">
+
+        #}{#
+            Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+            See https://symfony.com/doc/current/security/remember_me.html
+
+            <div class="checkbox mb-3">
+                <input type="checkbox" name="_remember_me" id="_remember_me">
+                <label for="_remember_me">Remember me</label>
+            </div>
+        #}{#
+
+        <button class="btn btn-lg btn-primary" type="submit">
+            Sign in
+        </button>
+    </form>
+{% endblock %}#}
+{% extends 'blank.html.twig' %}
+
+{% block title %}Log in{% endblock %}
+
+{% block body %}
+    <div class="min-h-screen bg-gray-900 flex items-center justify-center">
+        <div class="w-full max-w-md bg-gray-800 rounded-lg shadow-lg p-8">
+            <h1 class="text-2xl font-bold text-white mb-6 text-center">Please log in</h1>
+            <form method="POST">
+                <div class="space-y-5">
+                    {% if error %}
+                        <div
+                            class="bg-red-500 text-white p-4 rounded mb-4">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                    {% endif %}
+
+                    {% if app.user %}
+                        <div class="text-gray-300 mb-4">
+                            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}"
+                                                                                   class="text-blue-400 hover:text-blue-300">Logout</a>
+                        </div>
+                    {% endif %}
+
+                    <div>
+                        <label for="username" class="block text-sm font-medium text-white mb-1">Email</label>
+                        <input type="email" value="{{ last_username }}" name="_username" id="username"
+                               class="w-full p-3 bg-gray-700 text-white rounded-md border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                               autocomplete="email" required
+                               autofocus>
+                    </div>
+                    <div>
+                        <label for="password" class="block text-sm font-medium text-white mb-1">Password</label>
+                        <input type="password" name="_password" id="password"
+                               class="w-full p-3 bg-gray-700 text-white rounded-md border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                               autocomplete="current-password"
+                               required>
+                    </div>
+
+                    <input type="hidden" name="_csrf_token" data-controller="csrf-protection"
+                           value="{{ csrf_token('authenticate') }}">
+
+                    <button
+                        class="w-full bg-blue-600 text-white py-2 px-4 rounded-md mt-6 hover:bg-blue-700 transition duration-200 font-semibold"
+                        type="submit">
+                        Sign in
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
