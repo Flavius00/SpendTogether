@@ -33,6 +33,13 @@ class Expense
     #[ORM\JoinColumn(nullable: false)]
     private ?Category $categoryId = null;
 
+    #[ORM\ManyToOne(inversedBy: 'expenses')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $userObject = null;
+
+    #[ORM\ManyToOne(inversedBy: 'expenses')]
+    private ?Subscription $subscription = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -106,6 +113,30 @@ class Expense
     public function setCategoryId(?Category $categoryId): static
     {
         $this->categoryId = $categoryId;
+
+        return $this;
+    }
+
+    public function getUserObject(): ?User
+    {
+        return $this->userObject;
+    }
+
+    public function setUserObject(?User $userObject): static
+    {
+        $this->userObject = $userObject;
+
+        return $this;
+    }
+
+    public function getSubscription(): ?Subscription
+    {
+        return $this->subscription;
+    }
+
+    public function setSubscription(?Subscription $subscription): static
+    {
+        $this->subscription = $subscription;
 
         return $this;
     }

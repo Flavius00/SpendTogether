@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -37,6 +39,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\ManyToOne(inversedBy: 'users')]
     private ?Family $family = null;
+
+    /**
+     * @var Collection<int, Expense>
+     */
+    #[ORM\OneToMany(targetEntity: Expense::class, mappedBy: 'userObject', orphanRemoval: true)]
+    private Collection $expenses;
+
+    /**
+     * @var Collection<int, Subscription>
+     */
+    #[ORM\OneToMany(targetEntity: Subscription::class, mappedBy: 'userObject', orphanRemoval: true)]
+    private Collection $subsriptions;
+
+    public function __construct()
+    {
+        $this->expenses = new ArrayCollection();
+        $this->subsriptions = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -139,6 +159,66 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setFamily(?Family $family): static
     {
         $this->family = $family;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Expense>
+     */
+    public function getExpenses(): Collection
+    {
+        return $this->expenses;
+    }
+
+    public function addExpense(Expense $expense): static
+    {
+        if (!$this->expenses->contains($expense)) {
+            $this->expenses->add($expense);
+            $expense->setUserObject($this);
+        }
+
+        return $this;
+    }
+
+    public function removeExpense(Expense $expense): static
+    {
+        if ($this->expenses->removeElement($expense)) {
+            // set the owning side to null (unless already changed)
+            if ($expense->getUserObject() === $this) {
+                $expense->setUserObject(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Subscription>
+     */
+    public function getSubsriptions(): Collection
+    {
+        return $this->subsriptions;
+    }
+
+    public function addSubsription(Subscription $subsription): static
+    {
+        if (!$this->subsriptions->contains($subsription)) {
+            $this->subsriptions->add($subsription);
+            $subsription->setUserObject($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSubsription(Subscription $subsription): static
+    {
+        if ($this->subsriptions->removeElement($subsription)) {
+            // set the owning side to null (unless already changed)
+            if ($subsription->getUserObject() === $this) {
+                $subsription->setUserObject(null);
+            }
+        }
 
         return $this;
     }
