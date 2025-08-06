@@ -18,7 +18,7 @@ class SecurityController extends AbstractController
     ): Response
     {
         if ($authChecker->isGranted('IS_AUTHENTICATED_FULLY')) {
-            return $this->redirectToRoute('app_main_index');
+//            return $this->redirectToRoute('app_main_index');
         }
 
         // get the login error if there is one

@@ -4,19 +4,50 @@
     <meta charset="UTF-8">
     <title>{% block title %}Welcome!{% endblock %}</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                    colors: {
+                        'custom-light': '#EEEEEE',
+                        'custom-mint': '#393E46',
+                        'custom-teal': '#0092CA',
+                        'custom-dark': '#222831'
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     {% block stylesheets %}{% endblock %}
 </head>
-<body class="bg-gray-900 text-white">
-<nav class="bg-gray-800 p-4">
-    <div class="container mx-auto flex justify-end space-x-4">
-{#        <a href="{{ path('') }}" class="text-white hover:text-gray-300">Login</a>#}
-{#        <a href="{{ path('') }}" class="text-white hover:text-gray-300">Register</a>#}
-{#        *TO BE UNCOMENTED AND FILLED WITH THE CORRECT PATHS*                #}
+<body class="min-h-screen bg-custom-dark font-sans antialiased">
+<nav class="bg-custom-mint border-b border-custom-teal p-4">
+    <div class="container mx-auto flex justify-between items-center">
+        <div class="flex items-center space-x-3">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-custom-teal">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.847a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.847.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456Z"></path>
+            </svg>
+            <span class="text-xl font-bold text-custom-light">Spend Together</span>
+        </div>
+        <div class="flex space-x-4">dddd
+            <a href="{{ path('app_login') }}"
+               class="px-4 py-2 border-2 border-custom-teal text-custom-teal hover:bg-custom-teal hover:text-custom-light transition-all duration-300 font-medium rounded-lg">
+                Login
+            </a>
+            <a href="{{ path('app_register') }}"
+               class="px-4 py-2 border-2 border-custom-light text-custom-light hover:bg-custom-light hover:text-custom-dark transition-all duration-300 font-medium rounded-lg">
+                Register
+            </a>
+        </div>
     </div>
 </nav>
 
-<div class="min-h-screen bg-gray-900 p-6">
-{% block body %}{% endblock %}
+<div class="min-h-screen p-6">
+    {% block body %}{% endblock %}
 </div>
 </body>
 </html>
