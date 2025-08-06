@@ -13,10 +13,10 @@
                         sans: ['Inter', 'system-ui', 'sans-serif'],
                     },
                     colors: {
-                        'custom-light': '#ECFFFB',
-                        'custom-mint': '#B4F1F1',
-                        'custom-teal': '#2D767F',
-                        'custom-dark': '#1E6262'
+                        'custom-light': '#EEEEEE',
+                        'custom-mint': '#393E46',
+                        'custom-teal': '#0092CA',
+                        'custom-dark': '#222831'
                     }
                 }
             }
@@ -31,6 +31,44 @@
     {% endblock %}
 </head>
 <body class="min-h-screen bg-gradient-to-br from-custom-dark via-custom-teal to-custom-mint font-sans antialiased">
-{% block body %}{% endblock %}
+<nav class="bg-custom-mint/95 backdrop-blur-md border-b border-custom-teal/30 px-6 py-4 sticky top-0 z-50 shadow-lg">
+    <div class="w-full flex items-center">
+        <!-- Logo/Brand - Far Left -->
+        <div class="flex items-center space-x-3">
+            <div class="w-8 h-8 bg-custom-teal rounded-lg flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 text-white">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                </svg>
+            </div>
+            <span class="text-xl font-bold text-custom-light">Spend Together</span>
+        </div>
+
+        <!-- Navigation Links - Left Side -->
+        <div class="flex items-center ml-12">
+            <a href="{{ path('app_family_home') }}"
+               class="text-custom-light hover:text-custom-teal transition-colors duration-200 font-medium">
+                Family
+            </a>
+        </div>
+
+        <!-- User Actions - Far Right -->
+        <div class="flex items-center space-x-4 ml-auto">
+            <div class="flex items-center space-x-3 bg-custom-teal/20 rounded-full px-3 py-2">
+                <p class="text-custom-light text-sm font-medium">{{ userEmail }}</p>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-custom-light">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+                </svg>
+            </div>
+            <a href="{{ path('app_logout') }}"
+               class="px-4 py-2 text-sm font-medium text-custom-light hover:text-custom-teal transition-colors duration-200">
+                Logout
+            </a>
+        </div>
+    </div>
+</nav>
+
+<div class="min-h-screen">
+    {% block body %}{% endblock %}
+</div>
 </body>
 </html>

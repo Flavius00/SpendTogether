@@ -1,0 +1,29 @@
+{% extends 'family/index.html.twig' %}
+
+{% block title %}Create Family{% endblock %}
+
+{% block right_content %}
+    <div class="w-full max-w-2xl bg-custom-mint rounded-2xl shadow-lg p-8 border border-custom-teal">
+        <h1 class="text-3xl font-bold text-custom-light mb-8 text-center">Create Family</h1>
+
+        {{ form_start(createFamilyForm) }}
+
+        <div class="space-y-6">
+            {{ form_row(createFamilyForm.name, {
+                label_attr: { class: 'block text-lg font-semibold text-custom-light mb-3' },
+                attr: { class: 'w-full p-4 bg-custom-dark text-custom-light rounded-lg border-2 border-custom-teal focus:outline-none focus:border-custom-light transition-all duration-300 text-lg' }
+            }) }}
+
+            {{ form_row(createFamilyForm.monthlyTargetBudget, {
+                label_attr: { class: 'block text-lg font-semibold text-custom-light mb-3' },
+                attr: { class: 'w-full p-4 bg-custom-dark text-custom-light rounded-lg border-2 border-custom-teal focus:outline-none focus:border-custom-light transition-all duration-300 text-lg' }
+            }) }}
+        </div>
+
+        <button class="w-full px-8 py-4 border-2 border-custom-teal bg-custom-teal text-custom-light hover:bg-custom-light hover:text-custom-dark transition-all duration-300 font-semibold text-xl rounded-lg mt-8">
+            Create Family
+        </button>
+
+        {{ form_end(createFamilyForm) }}
+    </div>
+{% endblock %}
