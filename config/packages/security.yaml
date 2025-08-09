@@ -13,15 +13,26 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+        # API firewall, protected by token
+        api:
+            pattern: ^/api
+            stateless: true
+            provider: app_user_provider
+            access_token:
+                token_handler: App\Security\AccessTokenHandler
+                # token_extractors: [ 'security.access_token_extractor.header' ] # opțional; by default Authorization: Bearer <token>
+
         main:
             lazy: true
             provider: app_user_provider
             form_login:
                 login_path: app_login
                 check_path: app_login
+                default_target_path: /
                 enable_csrf: true
             logout:
                 path: app_logout
+                target: app_login
                 # where to redirect after logout
                 # target: app_any_route
 
@@ -31,12 +42,34 @@ security:
             # https://symfony.com/doc/current/security/impersonating_user.html
             # switch_user: true
 
+    # Defining the role hierarchy: an admin is also a member.
+    role_hierarchy:
+        ROLE_MEMBER: [ROLE_USER]
+        ROLE_ADMIN: [ROLE_MEMBER]
+        ROLE_SUPER_ADMIN: [ROLE_USER]
+
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
-         - { path : ^/register, roles: PUBLIC_ACCESS }
+        # The API login endpoint must be public
+        - { path: ^/api/login$, roles: PUBLIC_ACCESS, methods: [POST] }
+
+        # The API logout endpoint requires a valid token to function.
+        - { path: ^/api/logout$, roles: IS_AUTHENTICATED_FULLY, methods: [POST] }
+
+        # The API section requires at least one authenticated user (valid token)
+        - { path: ^/api, roles: IS_AUTHENTICATED_FULLY }
+
+        # "family admin area" requires the ADMIN role
+        - { path: ^/admin, roles: ROLE_SUPER_ADMIN }
+
+        # Login and registration pages must be public
+        - { path : ^/register, roles: PUBLIC_ACCESS }
+
+        - { path: ^/login, roles: PUBLIC_ACCESS }
+
+        # "waiting room area" require at least the USER role (authenticated)
+        - { path: ^/, roles: ROLE_USER }
 
 when@test:
     security:
