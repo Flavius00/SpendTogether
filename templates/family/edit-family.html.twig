@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Family{% endblock %}
+
+{% block body %}
+    <div class="min-h-screen bg-custom-dark flex">
+        <!-- Main Content -->
+        <div class="flex-1 p-8">
+            <div class="max-w-2xl mx-auto">
+                <div class="bg-custom-mint rounded-2xl shadow-lg p-8 border border-custom-teal">
+                    <h1 class="text-3xl font-bold text-custom-light mb-8 text-center">Edit Family</h1>
+
+                    {{ form_start(editFamilyForm) }}
+
+                    <div class="space-y-6">
+                        {{ form_row(editFamilyForm.name, {
+                            label_attr: { class: 'block text-lg font-semibold text-custom-light mb-3' },
+                            attr: { class: 'w-full p-4 bg-custom-dark text-custom-light rounded-lg border-2 border-custom-teal focus:outline-none focus:border-custom-light transition-all duration-300 text-lg' }
+                        }) }}
+
+                        {{ form_row(editFamilyForm.monthlyTargetBudget, {
+                            label_attr: { class: 'block text-lg font-semibold text-custom-light mb-3' },
+                            attr: { class: 'w-full p-4 bg-custom-dark text-custom-light rounded-lg border-2 border-custom-teal focus:outline-none focus:border-custom-light transition-all duration-300 text-lg' }
+                        }) }}
+                    </div>
+
+                    <div class="flex gap-4 mt-8">
+                        <button type="submit" class="flex-1 px-8 py-4 border-2 border-custom-teal bg-custom-teal text-custom-light hover:bg-custom-light hover:text-custom-dark transition-all duration-300 font-semibold text-xl rounded-lg">
+                            Update Family
+                        </button>
+                        <a href="{{ path('app_family_home') }}" class="flex-1 px-8 py-4 border-2 border-gray-500 bg-gray-500 text-custom-light hover:bg-gray-600 transition-all duration-300 font-semibold text-xl rounded-lg text-center">
+                            Cancel
+                        </a>
+                    </div>
+
+                    {{ form_end(editFamilyForm) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
