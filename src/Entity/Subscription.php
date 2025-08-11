@@ -31,7 +31,7 @@ class Subscription
     #[ORM\Column]
     private ?bool $isActive = null;
 
-    #[ORM\ManyToOne(inversedBy: 'subsriptions')]
+    #[ORM\ManyToOne(inversedBy: 'subscriptions')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $userObject = null;
 
