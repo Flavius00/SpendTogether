@@ -1,0 +1,101 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Add Threshold{% endblock %}
+
+{% block body %}
+    <div class="min-h-screen bg-custom-dark flex">
+
+        <!-- Main Content -->
+        <div class="flex-1 p-8">
+            <div class="max-w-2xl mx-auto">
+                <div class="bg-custom-mint rounded-2xl shadow-lg p-8 border border-custom-teal">
+                    <h1 class="text-3xl font-bold text-custom-light mb-8 text-center flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 mr-3 text-custom-teal" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        Add Threshold
+                    </h1>
+
+                    {{ form_start(createThresholdForm) }}
+
+                    <div class="space-y-6">
+                        <!-- Category Dropdown -->
+                        <div>
+                            {{ form_row(createThresholdForm.category, {
+                                label: 'Category',
+                                label_attr: { class: 'block text-lg font-semibold text-custom-light mb-3' },
+                                attr: { class: 'w-full p-4 bg-custom-dark text-custom-light rounded-lg border-2 border-custom-teal focus:outline-none focus:border-custom-light transition-all duration-300 text-lg' }
+                            }) }}
+                        </div>
+
+                        <!-- Amount Field -->
+                        {{ form_row(createThresholdForm.amount, {
+                            label: 'Threshold Amount (€)',
+                            label_attr: { class: 'block text-lg font-semibold text-custom-light mb-3' },
+                            attr: {
+                                class: 'w-full p-4 bg-custom-dark text-custom-light rounded-lg border-2 border-custom-teal focus:outline-none focus:border-custom-light transition-all duration-300 text-lg',
+                                placeholder: 'Enter amount (e.g., 500.00)',
+                                step: '0.01',
+                                min: '0.01'
+                            }
+                        }) }}
+                    </div>
+
+                    <div class="flex gap-4 mt-8">
+                        <button type="submit" class="flex-1 px-8 py-4 border-2 border-custom-teal bg-custom-teal text-custom-light hover:bg-custom-light hover:text-custom-dark transition-all duration-300 font-semibold text-xl rounded-lg flex items-center justify-center space-x-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.5v15m7.5-7.5h-15" />
+                            </svg>
+                            <span>Create Threshold</span>
+                        </button>
+                        <a href="{{ path('app_family_home') }}" class="flex-1 px-8 py-4 border-2 border-gray-500 bg-gray-500 text-custom-light hover:bg-gray-600 transition-all duration-300 font-semibold text-xl rounded-lg text-center flex items-center justify-center">
+                            Cancel
+                        </a>
+                    </div>
+
+                    {{ form_end(createThresholdForm) }}
+                </div>
+
+                <!-- Help Section -->
+                <div class="mt-8 bg-custom-mint/50 rounded-xl p-6 border border-custom-teal/50">
+                    <h3 class="text-lg font-semibold text-custom-light mb-4 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2 text-custom-teal" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        About Thresholds
+                    </h3>
+                    <p class="text-custom-light opacity-80 text-sm leading-relaxed">
+                        Thresholds help you monitor spending limits for different categories. When spending exceeds the threshold amount within the one-month period, you'll receive notifications to help manage your family budget effectively.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Flash Messages -->
+    <div class="fixed top-4 right-4 z-50 space-y-3">
+        {% for type, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="max-w-sm p-4 rounded-lg shadow-lg border-2 transform transition-all duration-300 ease-in-out
+                    {% if type == 'success' %}
+                        bg-green-100 border-green-500 text-green-700
+                    {% elseif type == 'error' %}
+                        bg-red-100 border-red-500 text-red-700
+                    {% elseif type == 'warning' %}
+                        bg-yellow-100 border-yellow-500 text-yellow-700
+                    {% else %}
+                        bg-blue-100 border-blue-500 text-blue-700
+                    {% endif %}">
+                    <div class="flex items-center justify-between">
+                        <span class="font-medium">{{ message }}</span>
+                        <button onclick="this.parentElement.parentElement.remove()" class="ml-3 text-gray-400 hover:text-gray-600 transition-colors">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endfor %}
+    </div>
+{% endblock %}

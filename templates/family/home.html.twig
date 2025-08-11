@@ -8,8 +8,7 @@
             <div class="flex items-center justify-between mb-8">
                 <div>
                     <h1 class="text-3xl font-bold text-custom-light mb-2">{{ family.name }}</h1>
-                    <p class="text-custom-light opacity-80">Monthly Budget: ${{ family.monthlyTargetBudget }}</p>
-                </div>
+                    <p class="text-custom-light opacity-80">Monthly Budget: €{{ family.monthlyTargetBudget }}</p>                </div>
                 <div class="flex gap-3">
                     {% if userRole == 'ROLE_ADMIN' %}
                         <a href="{{ path('app_family_home', {familyId: family.id}) }}" class="px-6 py-3 bg-custom-teal text-custom-light hover:bg-custom-light hover:text-custom-dark transition-all duration-300 font-semibold rounded-lg flex items-center space-x-2">
@@ -128,10 +127,76 @@
                         <div class="text-custom-light opacity-80">Total Members</div>
                     </div>
                     <div class="text-center bg-custom-dark/50 rounded-lg p-4">
-                        <div class="text-3xl font-bold text-custom-teal mb-2">${{ family.monthlyTargetBudget }}</div>
-                        <div class="text-custom-light opacity-80">Monthly Budget</div>
+                        <div class="text-3xl font-bold text-custom-teal mb-2">€{{ family.monthlyTargetBudget }}</div>                        <div class="text-custom-light opacity-80">Monthly Budget</div>
                     </div>
                 </div>
+            </div>
+
+            <!-- Family Thresholds -->
+            <div class="bg-gradient-to-br from-custom-mint to-custom-dark rounded-xl p-6 border border-custom-teal shadow-lg mb-8">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-xl font-bold text-custom-light flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mr-3 text-custom-teal" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        Family Thresholds
+                    </h2>
+                    {% if userRole == 'ROLE_ADMIN' %}
+                        <a href="{{ path('app_threshold_add') }}" class="px-4 py-2 bg-custom-teal text-custom-light hover:bg-custom-light hover:text-custom-dark transition-all duration-300 font-semibold rounded-lg flex items-center space-x-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                            </svg>
+                            <span>Add Threshold</span>
+                        </a>
+                    {% endif %}
+                </div>
+
+                {% if family.thresholds is not empty %}
+                    <div class="bg-custom-dark/30 rounded-lg overflow-hidden">
+                        <table class="w-full">
+                            <thead>
+                            <tr class="bg-custom-dark/50 border-b border-custom-teal/30">
+                                <th class="text-left px-6 py-4 text-custom-light font-semibold">Category</th>
+                                <th class="text-left px-6 py-4 text-custom-light font-semibold">Amount</th>
+                                {% if userRole == 'ROLE_ADMIN' %}
+                                    <th class="text-right px-6 py-4 text-custom-light font-semibold">Actions</th>
+                                {% endif %}
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for threshold in family.thresholds %}
+                                <tr class="border-b border-custom-teal/20 hover:bg-custom-dark/30 transition-colors">
+                                    <td class="px-6 py-4 text-custom-light font-medium">{{ threshold.category.name }}</td>
+                                    <td class="px-6 py-4 text-custom-teal font-semibold">€{{ threshold.amount }}</td>                                    {% if userRole == 'ROLE_ADMIN' %}
+                                        <td class="px-6 py-4 text-right">
+                                            <div class="flex items-center justify-end gap-2">
+                                                <a href="{{ path('app_threshold_edit', {thresholdId : threshold.id}) }}" class="text-blue-400 hover:text-blue-600 transition-colors p-2 rounded hover:bg-blue-500/10" title="Edit threshold">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                                    </svg>
+                                                </a>
+                                                <a href="{{ path('app_threshold_delete', {thresholdId : threshold.id}) }}" class="text-red-400 hover:text-red-600 transition-colors p-2 rounded hover:bg-red-500/10" title="Delete threshold">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                    </svg>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    {% endif %}
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <div class="text-center py-8">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-16 h-16 mx-auto text-custom-teal/50 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                        </svg>
+                        <p class="text-custom-light opacity-60 text-lg">No thresholds set yet</p>
+                        <p class="text-custom-light opacity-40 text-sm mt-2">Thresholds help you monitor spending limits for different categories</p>
+                    </div>
+                {% endif %}
             </div>
         </div>
     </div>
