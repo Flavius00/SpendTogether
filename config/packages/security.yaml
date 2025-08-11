@@ -53,6 +53,8 @@ security:
     access_control:
         - { path: ^/family, roles: ROLE_USER }
 
+        - { path: ^/api/doc, roles: PUBLIC_ACCESS }
+
         # The API login endpoint must be public
         - { path: ^/api/login$, roles: PUBLIC_ACCESS, methods: [POST] }
 
