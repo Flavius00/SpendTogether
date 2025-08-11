@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Add User to Family{% endblock %}
+
+{% block body %}
+    <div class="h-full bg-custom-dark p-8 overflow-y-auto">
+        <div class="max-w-6xl mx-auto">
+            <!-- Header Section -->
+            <div class="flex items-center justify-between mb-8">
+                <div>
+                    <h1 class="text-3xl font-bold text-custom-light mb-2">Add Users to {{ family.name }}</h1>
+                    <p class="text-custom-light opacity-80">Select users to add to your family</p>
+                </div>
+                <a href="{{ path('app_family_home') }}" class="px-6 py-3 bg-custom-mint text-custom-light hover:bg-custom-light hover:text-custom-dark transition-all duration-300 font-semibold rounded-lg flex items-center space-x-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"></path>
+                    </svg>
+                    <span>Back to Family</span>
+                </a>
+            </div>
+
+            {% if users|length > 0 %}
+                <!-- Available Users Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                    {% for user in users %}
+                        <div class="bg-custom-mint rounded-lg p-6 border border-custom-teal hover:border-custom-light transition-all duration-300">
+                            <div class="flex items-center space-x-4 mb-4">
+                                <div class="w-12 h-12 bg-custom-teal rounded-full flex items-center justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-white">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"></path>
+                                    </svg>
+                                </div>
+                                <div class="flex-1">
+                                    <h3 class="text-lg font-semibold text-custom-light">{{ user.email }}</h3>
+                                    <p class="text-custom-light opacity-70 text-sm">Available User</p>
+                                </div>
+                            </div>
+
+                            <div class="flex justify-end">
+                                <form action="{{ path('app_family_home') }}" method="POST">
+                                    <input type="hidden" name="userId" value="{{ user.id }}">
+                                    <input type="hidden" name="familyId" value="{{ family.id }}">
+                                    <button type="submit" class="px-4 py-2 bg-custom-teal text-custom-light hover:bg-custom-light hover:text-custom-dark transition-all duration-300 font-semibold rounded-lg flex items-center space-x-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"></path>
+                                        </svg>
+                                        <span>Add to Family</span>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <!-- Statistics -->
+                <div class="bg-custom-mint rounded-lg p-6 border border-custom-teal">
+                    <h2 class="text-xl font-bold text-custom-light mb-4">Available Users</h2>
+                    <div class="text-center">
+                        <div class="text-2xl font-bold text-custom-teal">{{ users|length }}</div>
+                        <div class="text-custom-light opacity-80">Users without a family</div>
+                    </div>
+                </div>
+
+            {% else %}
+                <!-- No Users Available -->
+                <div class="text-center py-16">
+                    <div class="w-24 h-24 bg-custom-mint rounded-full flex items-center justify-center mx-auto mb-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-12 h-12 text-custom-light">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M18.364 18.364A9 9 0 0 0 5.636 5.636m12.728 12.728A9 9 0 0 1 5.636 5.636m12.728 12.728L5.636 5.636"></path>
+                        </svg>
+                    </div>
+                    <h2 class="text-2xl font-bold text-custom-light mb-4">No Available Users</h2>
+                    <p class="text-custom-light opacity-80 mb-6">All users are already part of a family or no other users exist.</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

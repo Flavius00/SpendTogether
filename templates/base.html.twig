@@ -30,7 +30,7 @@
         {% block importmap %}{{ importmap('app') }}{% endblock %}
     {% endblock %}
 </head>
-<body class="min-h-screen bg-gradient-to-br from-custom-dark via-custom-teal to-custom-mint font-sans antialiased">
+<body class="h-screen bg-custom-dark font-sans antialiased overflow-hidden">
 <nav class="bg-custom-mint/95 backdrop-blur-md border-b border-custom-teal/30 px-6 py-4 sticky top-0 z-50 shadow-lg">
     <div class="w-full flex items-center">
         <!-- Logo/Brand - Far Left -->
@@ -67,7 +67,7 @@
     </div>
 </nav>
 
-<div class="min-h-screen">
+<div style="height: calc(100vh - 80px);">
     {% block body %}{% endblock %}
 </div>
 </body>
