@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Family;
 use App\Entity\User;
+use App\Form\AddUserToFamilyFormType;
 use App\Form\CreateFamilyFormType;
 use App\Repository\FamilyRepository;
 use App\Repository\UserRepository;
@@ -27,7 +28,7 @@ final class FamilyController extends AbstractController
         AuthorizationCheckerInterface $authCheck,
     ): Response
     {
-        if (!$authCheck->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+        if (!$authCheck->isGranted('IS_AUTHENTICATED_FULLY')) {
             return $this->redirectToRoute('app_login');
         }
 
@@ -38,6 +39,7 @@ final class FamilyController extends AbstractController
         return $this->render('family/home.html.twig', [
             'userEmail' => $user->getEmail(),
             'family' => $user->getFamily(),
+            'userRole' => $user->getRoles()[0],
         ]);
     }
 
@@ -51,7 +53,7 @@ final class FamilyController extends AbstractController
         Security $login,
     ) : Response
     {
-        if (!$authCheck->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+        if (!$authCheck->isGranted('IS_AUTHENTICATED_FULLY')) {
             return $this->redirectToRoute('app_login');
         }
 
@@ -92,7 +94,7 @@ final class FamilyController extends AbstractController
         FamilyRepository $familyRepository,
     ) : Response
     {
-        if (!$authCheck->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+        if (!$authCheck->isGranted('IS_AUTHENTICATED_FULLY')) {
             return $this->redirectToRoute('app_login');
         }
 
@@ -104,29 +106,118 @@ final class FamilyController extends AbstractController
         ]);
     }
 
-    #[Route('/show-free-users', name: 'app_family_show_free_users')]
+    #[Route('/join/{familyId}', name: 'app_family_join_family')]
+    public function joinFamily(
+        int $familyId,
+        #[CurrentUser]
+        User $user,
+        AuthorizationCheckerInterface $authCheck,
+        FamilyRepository $familyRepository,
+        EntityManagerInterface $em,
+        Security $security,
+    ) : Response
+    {
+        if (!$authCheck->isGranted('IS_AUTHENTICATED_FULLY')) {
+            return $this->redirectToRoute('app_login');
+        }
+
+        $family = $familyRepository->find($familyId);
+
+        if (!$family) {
+            $this->addFlash('error', 'Family not found.');
+            return $this->redirectToRoute('app_family_join');
+        }
+
+        $user->setFamily($family);
+        $user->setRoles(['ROLE_MEMBER']);
+
+        $em->persist($user);
+        $em->flush();
+
+        $security->login($user);
+
+        $this->addFlash('success', 'Successfully joined the family!');
+        return $this->redirectToRoute('app_family_home');
+    }
+
+    #[Route('/add-user-to-family', name: 'app_family_add_user')]
     public function getFreeUsers(
+        Request $request,
         #[CurrentUser]
         User $user,
         AuthorizationCheckerInterface $authCheck,
         UserRepository $userRepository,
-        Security $security,
+        EntityManagerInterface $em,
     ) : Response
     {
         if (!$authCheck->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             return $this->redirectToRoute('app_login');
         }
 
-        if (!$security->isGranted('ROLE_ADMIN')) {
-            $this->addFlash("error", "Restricted acccess. You are not allowed to add users to the family.");
+        $form = $this->createForm(AddUserToFamilyFormType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+            $email = $data->getEmail();
+            $userToAdd = $userRepository->findOneBy(['email' => $email]);
+
+            if (!$userToAdd) {
+                $this->addFlash("error", "User with this email does not exist.");
+            } elseif (!is_null($userToAdd->getFamily())){
+                $this->addFlash("error", "User already belongs to a family.");
+            } else {
+                $userToAdd->setFamily($user->getFamily());
+                $userToAdd->setRoles(['ROLE_MEMBER']);
+
+                $em->persist($userToAdd);
+                $em->flush();
+
+                $this->addFlash("success", "User added to family successfully.");
+            }
+
+            return $this->redirectToRoute('app_family_add_user');
+        }
+
+        return $this->render('family/add-user.html.twig', [
+            'userEmail' => $user->getEmail(),
+            'family' => $user->getFamily(),
+            'addUserForm' => $form->createView(),
+        ]);
+    }
+
+    #[Route('/leave', name: 'app_family_leave')]
+    public function leaveFamily(
+        #[CurrentUser]
+        User $user,
+        AuthorizationCheckerInterface $authCheck,
+        EntityManagerInterface $em,
+        Security $security,
+    ): Response
+    {
+        if (!$authCheck->isGranted('IS_AUTHENTICATED_FULLY')) {
+            return $this->redirectToRoute('app_login');
+        }
+
+        if (is_null($user->getFamily())) {
+            $this->addFlash('error', 'You are not part of any family.');
+            return $this->redirectToRoute('app_family_create');
+        }
+
+        if ($user->getRoles()[0] === 'ROLE_ADMIN') {
+            $this->addFlash('error', 'You cannot leave the family as an admin. Please transfer admin rights first.');
             return $this->redirectToRoute('app_family_home');
         }
 
-        $users = $userRepository->findBy(['family' => null]);
-        return $this->render('family/search-free-user.html.twig', [
-            'users' => $users,
-            'userEmail' => $user->getEmail(),
-            'family' => $user->getFamily(),
-        ]);
+        $user->setFamily(null);
+        $user->setRoles(['ROLE_USER']);
+
+        $em->persist($user);
+        $em->flush();
+
+        $security->login($user);
+
+        $this->addFlash('success', 'You have left the family successfully.');
+        return $this->redirectToRoute('app_family_home');
     }
 }
