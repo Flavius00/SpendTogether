@@ -6,6 +6,7 @@ use App\Entity\Family;
 use App\Entity\User;
 use App\Form\AddUserToFamilyFormType;
 use App\Form\CreateFamilyFormType;
+use App\Form\FamilyEditFormType;
 use App\Repository\FamilyRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -219,5 +220,113 @@ final class FamilyController extends AbstractController
 
         $this->addFlash('success', 'You have left the family successfully.');
         return $this->redirectToRoute('app_family_home');
+    }
+
+    #[Route('/kick/{userId}', name: 'app_family_kick_user')]
+    public function kickUserFromFamily(
+        int $userId,
+        #[CurrentUser]
+        User $currentUser,
+        AuthorizationCheckerInterface $authCheck,
+        EntityManagerInterface $em,
+        UserRepository $userRepository,
+    ) : Response
+    {
+        if (!$authCheck->isGranted('IS_AUTHENTICATED_FULLY')) {
+            return $this->redirectToRoute('app_login');
+        }
+
+        $user = $userRepository->find($userId);
+
+        if ($currentUser->getId() === $user->getId()) {
+            $this->addFlash('error', 'You cannot kick this user.');
+            return $this->redirectToRoute('app_family_home');
+        }
+
+        if ($currentUser->getRoles()[0] !== 'ROLE_ADMIN') {
+            $this->addFlash('error', 'Only admins can kick users from the family.');
+            return $this->redirectToRoute('app_family_home');
+        }
+
+        $user->setRoles(['ROLE_USER']);
+        $user->setFamily(null);
+        $em->persist($user);
+        $em->flush();
+
+        $this->addFlash('success', 'User has been kicked from the family successfully.');
+        return $this->redirectToRoute('app_family_home'); // Placeholder for kick user logic
+    }
+
+    #[Route('/role-change/{userId}', name: 'app_family_role_change')]
+    public function roleChange(
+        int $userId,
+        Request $request,
+        #[CurrentUser]
+        User $user,
+        AuthorizationCheckerInterface $authCheck,
+        EntityManagerInterface $em,
+        UserRepository $userRepository,
+    ): Response
+    {
+        if (!$authCheck->isGranted('IS_AUTHENTICATED_FULLY')) {
+            return $this->redirectToRoute('app_login');
+        }
+
+        if($user->getRoles()[0] !== 'ROLE_ADMIN') {
+            $this->addFlash('error', 'Only admins can change user roles.');
+            return $this->redirectToRoute('app_family_home');
+        }
+
+        $newRole = $request->request->get('role');
+        $changedUser = $userRepository->find($userId);
+
+        if (!$changedUser) {
+            $this->addFlash('error', 'User not found.');
+            return $this->redirectToRoute('app_family_home');
+        }
+
+        $changedUser->setRoles([$newRole]);
+        $em->persist($changedUser);
+        $em->flush();
+
+        $this->addFlash('success', 'User role has been changed successfully.');
+        return $this->redirectToRoute('app_family_home');
+    }
+
+    #[Route('/edit', name: 'app_family_edit')]
+    public function editFamily(
+        #[CurrentUser]
+        User $user,
+        Request $request,
+        EntityManagerInterface $em,
+        AuthorizationCheckerInterface $authCheck,
+    ) : Response
+    {
+        if (!$authCheck->isGranted('IS_AUTHENTICATED_FULLY')) {
+            return $this->redirectToRoute('app_login');
+        }
+
+        if ($user->getRoles()[0] !== 'ROLE_ADMIN') {
+            $this->addFlash('error', 'Only admins can update family.');
+            return $this->redirectToRoute('app_family_home');
+        }
+
+        $family = $user->getFamily();
+        $form = $this->createForm(FamilyEditFormType::class, $family);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->persist($family);
+            $em->flush();
+
+            $this->addFlash('success', 'Family details updated successfully.');
+            return $this->redirectToRoute('app_family_home');
+        }
+
+        return $this->render('family/edit-family.html.twig',[
+            'userEmail' => $user->getEmail(),
+            'family' => $family,
+            'editFamilyForm' => $form->createView(),
+        ]); //Placeholder for edit family logic
     }
 }
