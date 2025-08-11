@@ -30,6 +30,7 @@ security:
                 check_path: app_login
                 default_target_path: /
                 enable_csrf: true
+                csrf_parameter: _csrf_token
             logout:
                 path: app_logout
                 target: app_login
@@ -41,7 +42,6 @@ security:
 
             # https://symfony.com/doc/current/security/impersonating_user.html
             # switch_user: true
-
     # Defining the role hierarchy: an admin is also a member.
     role_hierarchy:
         ROLE_MEMBER: [ROLE_USER]
@@ -51,6 +51,7 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
+         - { path: ^/family, roles: ROLE_USER }
         # The API login endpoint must be public
         - { path: ^/api/login$, roles: PUBLIC_ACCESS, methods: [POST] }
 

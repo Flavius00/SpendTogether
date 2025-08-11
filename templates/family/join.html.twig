@@ -1,0 +1,48 @@
+{% extends 'family/index.html.twig' %}
+{% block title %}Join a Family{% endblock %}
+
+{% block right_content %}
+    <div class="flex items-center justify-center h-full w-full">
+        <div class="w-full max-w-4xl bg-custom-mint rounded-2xl shadow-lg p-8 border border-custom-teal">
+            <h1 class="text-3xl font-bold text-custom-light mb-8 text-center">Family Registry</h1>
+
+            {% if families is defined and families|length > 0 %}
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {% for family in families %}
+                        <div class="bg-custom-dark rounded-lg p-6 border border-custom-teal hover:border-custom-light transition-all duration-300">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-xl font-bold text-custom-light">{{ family.name }}</h3>
+                                <div class="w-10 h-10 bg-custom-teal rounded-full flex items-center justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-white">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" />
+                                    </svg>
+                                </div>
+                            </div>
+
+                            <div class="space-y-2 mb-4">
+                                <p class="text-custom-light opacity-80">
+                                    <span class="font-medium">Budget:</span> ${{ family.monthlyTargetBudget }}
+                                </p>
+                                <p class="text-custom-light opacity-80">
+                                    <span class="font-medium">Members:</span> {{ family.users|length }}
+                                </p>
+                            </div>
+
+                            <a href="{{ path('app_family_join_family', {familyId: family.id}) }}" class="block w-full px-4 py-3 bg-custom-teal text-custom-light hover:bg-custom-light hover:text-custom-dark transition-all duration-300 font-semibold rounded-lg text-center">
+                                Join Family
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="text-center py-12">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" class="w-16 h-16 mx-auto mb-4 text-custom-light opacity-40">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" />
+                    </svg>
+                    <h3 class="text-xl font-bold text-custom-light mb-2">No Families Available</h3>
+                    <p class="text-custom-light opacity-80">There are no families to join at the moment.</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
