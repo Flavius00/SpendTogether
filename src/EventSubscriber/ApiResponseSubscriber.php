@@ -30,8 +30,11 @@ class ApiResponseSubscriber implements EventSubscriberInterface
         $controllerResult = $event->getControllerResult();
         $request = $event->getRequest();
 
+        $isApiRoute = str_starts_with($request->getPathInfo(), '/api');
+        $isAdminApiRoute = str_starts_with($request->getPathInfo(), '/admin/api');
+
         // We are only interested in API routes that returned an array
-        if (!str_starts_with($request->getPathInfo(), '/api') || !is_array($controllerResult)) {
+        if ((!$isApiRoute && !$isAdminApiRoute) || !is_array($controllerResult)) {
             return;
         }
 

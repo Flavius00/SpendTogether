@@ -1,8 +1,8 @@
 nelmio_api_doc:
     documentation:
         info:
-            title: Family Expense Tracker API
-            description: This is the API for the Family Expense Tracker application.
+            title: SpendTogether API
+            description: This is the API for the SpendTogether application.
             version: 1.0.0
 
         components:
@@ -14,3 +14,4 @@ nelmio_api_doc:
     areas: # to filter documented areas
         path_patterns:
             - ^/api(?!/doc$) # Accepts routes under /api except /api/doc
+            - ^/admin/api
