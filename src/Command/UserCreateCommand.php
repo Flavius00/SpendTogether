@@ -56,7 +56,6 @@ class UserCreateCommand extends Command
                 throw new \InvalidArgumentException('Invalid JSON format.');
             }
 
-            // Check if the necessary keys are present
             $requiredKeys = ['email', 'password', 'name'];
             foreach ($requiredKeys as $key) {
                 if (!isset($data[$key])) {
@@ -64,12 +63,10 @@ class UserCreateCommand extends Command
                 }
             }
 
-            // Check if the user already exists
             if ($this->userRepository->findOneBy(['email' => $data['email']])) {
                 throw new \RuntimeException("User with email '{$data['email']}' already exists.");
             }
 
-            // Create and populate the User object
             $user = new User();
             $user->setEmail($data['email']);
             $user->setRoles(['ROLE_USER']);
@@ -78,7 +75,6 @@ class UserCreateCommand extends Command
             $user->setPassword($hashedPassword);
             $user->setName($data['name']);
 
-            // Validate the entity
             $errors = $this->validator->validate($user);
             if (count($errors) > 0) {
                 $errorMessages = [];
@@ -88,11 +84,9 @@ class UserCreateCommand extends Command
                 throw new \RuntimeException("Validation failed: \n" . implode("\n", $errorMessages));
             }
 
-            // Save to database
             $this->entityManager->persist($user);
             $this->entityManager->flush();
 
-            // Show success message
             $io->success('User created successfully!');
             $io->table(
                 ['ID', 'Name', 'Email', 'Roles'],
