@@ -33,10 +33,17 @@ class Category
     #[ORM\OneToMany(targetEntity: Subscription::class, mappedBy: 'category')]
     private Collection $subscriptions;
 
+    /**
+     * @var Collection<int, Threshold>
+     */
+    #[ORM\OneToMany(targetEntity: Threshold::class, mappedBy: 'category')]
+    private Collection $thresholds;
+
     public function __construct()
     {
         $this->expenses = new ArrayCollection();
         $this->subscriptions = new ArrayCollection();
+        $this->thresholds = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -122,6 +129,36 @@ class Category
             // set the owning side to null (unless already changed)
             if ($subscription->getCategory() === $this) {
                 $subscription->setCategory(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Threshold>
+     */
+    public function getThresholds(): Collection
+    {
+        return $this->thresholds;
+    }
+
+    public function addThreshold(Threshold $threshold): static
+    {
+        if (!$this->thresholds->contains($threshold)) {
+            $this->thresholds->add($threshold);
+            $threshold->setCategory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeThreshold(Threshold $threshold): static
+    {
+        if ($this->thresholds->removeElement($threshold)) {
+            // set the owning side to null (unless already changed)
+            if ($threshold->getCategory() === $this) {
+                $threshold->setCategory(null);
             }
         }
 

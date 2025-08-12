@@ -28,9 +28,16 @@ class Family
     #[ORM\OneToMany(targetEntity: User::class, mappedBy: 'family')]
     private Collection $users;
 
+    /**
+     * @var Collection<int, Threshold>
+     */
+    #[ORM\OneToMany(targetEntity: Threshold::class, mappedBy: 'family')]
+    private Collection $thresholds;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
+        $this->thresholds = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -86,6 +93,36 @@ class Family
             // set the owning side to null (unless already changed)
             if ($user->getFamily() === $this) {
                 $user->setFamily(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Threshold>
+     */
+    public function getThresholds(): Collection
+    {
+        return $this->thresholds;
+    }
+
+    public function addThreshold(Threshold $threshold): static
+    {
+        if (!$this->thresholds->contains($threshold)) {
+            $this->thresholds->add($threshold);
+            $threshold->setFamily($this);
+        }
+
+        return $this;
+    }
+
+    public function removeThreshold(Threshold $threshold): static
+    {
+        if ($this->thresholds->removeElement($threshold)) {
+            // set the owning side to null (unless already changed)
+            if ($threshold->getFamily() === $this) {
+                $threshold->setFamily(null);
             }
         }
 
