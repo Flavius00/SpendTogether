@@ -34,9 +34,9 @@ class Category
     private Collection $subscriptions;
 
     /**
-     * @var Collection<int, Thresholds>
+     * @var Collection<int, Threshold>
      */
-    #[ORM\OneToMany(targetEntity: Thresholds::class, mappedBy: 'category')]
+    #[ORM\OneToMany(targetEntity: Threshold::class, mappedBy: 'category')]
     private Collection $thresholds;
 
     public function __construct()
@@ -136,14 +136,14 @@ class Category
     }
 
     /**
-     * @return Collection<int, Thresholds>
+     * @return Collection<int, Threshold>
      */
     public function getThresholds(): Collection
     {
         return $this->thresholds;
     }
 
-    public function addThreshold(Thresholds $threshold): static
+    public function addThreshold(Threshold $threshold): static
     {
         if (!$this->thresholds->contains($threshold)) {
             $this->thresholds->add($threshold);
@@ -153,7 +153,7 @@ class Category
         return $this;
     }
 
-    public function removeThreshold(Thresholds $threshold): static
+    public function removeThreshold(Threshold $threshold): static
     {
         if ($this->thresholds->removeElement($threshold)) {
             // set the owning side to null (unless already changed)

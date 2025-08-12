@@ -2,22 +2,22 @@
 
 namespace App\Repository;
 
-use App\Entity\Thresholds;
+use App\Entity\Threshold;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Thresholds>
+ * @extends ServiceEntityRepository<Threshold>
  */
 class ThresholdsRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Thresholds::class);
+        parent::__construct($registry, Threshold::class);
     }
 
     //    /**
-    //     * @return Thresholds[] Returns an array of Thresholds objects
+    //     * @return Threshold[] Returns an array of Threshold objects
     //     */
     //    public function findByExampleField($value): array
     //    {
@@ -31,7 +31,7 @@ class ThresholdsRepository extends ServiceEntityRepository
     //        ;
     //    }
 
-    //    public function findOneBySomeField($value): ?Thresholds
+    //    public function findOneBySomeField($value): ?Threshold
     //    {
     //        return $this->createQueryBuilder('t')
     //            ->andWhere('t.exampleField = :val')

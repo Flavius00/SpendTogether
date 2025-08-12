@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Controller\Service\ThresholdService;
-use App\Entity\Thresholds;
+use App\Entity\Threshold;
 use App\Entity\User;
 use App\Form\CreateThresholdFormType;
 use App\Form\EditThresholdFormType;
@@ -35,7 +35,7 @@ final class ThresholdsController extends AbstractController
             return $this->redirectToRoute('app_login');
         }
 
-        $threshold = new Thresholds();
+        $threshold = new Threshold();
         $form = $this->createForm(CreateThresholdFormType::class, $threshold);
         $form->handleRequest($request);
 
@@ -55,7 +55,9 @@ final class ThresholdsController extends AbstractController
                 return $this->redirectToRoute('app_family_home');
             }
 
-            if (!$thresholdService->validateThresholdAmount($threshold->getAmount(), $thresholds, $user->getFamily())) {
+            $familyThresholds = $thresholdsRepository->findBy(['family' => $user->getFamily()]);
+
+            if (!$thresholdService->validateThresholdAmount($threshold->getAmount(), $familyThresholds, $user->getFamily())) {
                 $this->addFlash('error', 'Invalid threshold value, the total exceeds the monthly budget!');
                 return $this->redirectToRoute('app_family_home');
             }

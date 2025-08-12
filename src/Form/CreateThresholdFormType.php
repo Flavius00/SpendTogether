@@ -4,7 +4,7 @@ namespace App\Form;
 
 use App\Entity\Category;
 use App\Entity\Family;
-use App\Entity\Thresholds;
+use App\Entity\Threshold;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -26,7 +26,7 @@ class CreateThresholdFormType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Thresholds::class,
+            'data_class' => Threshold::class,
         ]);
     }
 }
