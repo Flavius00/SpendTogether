@@ -2,14 +2,17 @@
 
 namespace App\Form;
 
-use App\Entity\Family;
 use App\Entity\User;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\IsTrue;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\PasswordStrength;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class RegistrationFormType extends AbstractType
 {
@@ -18,12 +21,35 @@ class RegistrationFormType extends AbstractType
         $builder
             ->add('name')
             ->add('email')
+            ->add('agreeTerms', CheckboxType::class, [
+                                'mapped' => false,
+                'constraints' => [
+                    new IsTrue([
+                        'message' => 'You should agree to our terms.',
+                    ]),
+                ],
+            ])
             ->add('plainPassword', RepeatedType::class, [
+                                // instead of being set onto the object directly,
+                // this is read and encoded in the controller
                 'mapped' => false,
-                'label' => 'Password',
+                'attr' => ['autocomplete' => 'new-password'],
                 'type' => PasswordType::class,
-                'first_options' => ['label' => 'Password'],
-                'second_options' => ['label' => 'Repeat Password'],
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Please enter a password',
+                    ]),
+                    new Length([
+                        'min' => 6,
+                        'minMessage' => 'Your password should be at least {{ limit }} characters',
+                        // max length allowed by Symfony for security reasons
+                        'max' => 4096,
+                    ]),
+//                    new PasswordStrength([
+//                        'minScore' => PasswordStrength::STRENGTH_WEAK,
+//                        'message' => 'The password strength is too low. Please use a stronger password.',
+//                    ]),
+                ],
             ])
         ;
     }
