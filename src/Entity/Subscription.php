@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: SubscriptionRepository::class)]
 class Subscription
@@ -17,18 +18,36 @@ class Subscription
     private ?int $id = null;
 
     #[ORM\Column(length: 75)]
+    #[Assert\NotBlank]
+    #[Assert\Length(max: 75)]
+    #[Assert\Regex(
+        pattern: '/^[a-zA-Z0-9\s]+$/',
+        message: 'The name can only contain letters, numbers, and spaces.'
+    )]
     private ?string $name = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
+    #[Assert\NotBlank]
+    #[Assert\Positive(message: 'The subscription amount must be a positive number.')]
     private ?string $amount = null;
 
     #[ORM\Column(length: 50)]
+    #[Assert\NotBlank]
+    #[Assert\Choice(choices: ['monthly', 'yearly', 'weekly'], message: 'Choose a valid frequency (monthly, yearly, weekly).')]
+    #[Assert\Length(max: 50)]
     private ?string $frequency = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Assert\NotBlank]
+    #[Assert\Date(message: 'The next due date must be a valid date.')]
+    #[Assert\GreaterThanOrEqual(
+        value: 'today',
+        message: 'The next due date must be today or in the future.'
+    )]
     private ?\DateTime $nextDueDate = null;
 
     #[ORM\Column]
+    #[Assert\NotNull]
     private ?bool $isActive = null;
 
     #[ORM\ManyToOne(inversedBy: 'subscriptions')]

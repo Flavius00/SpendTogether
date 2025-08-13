@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: FamilyRepository::class)]
 class Family
@@ -17,9 +18,17 @@ class Family
     private ?int $id = null;
 
     #[ORM\Column(length: 75)]
+    #[Assert\NotBlank]
+    #[Assert\Length(max: 75)]
+    #[Assert\Regex(
+        pattern: '/^[a-zA-Z\s]+$/',
+        message: 'The family name can only contain letters and spaces.'
+    )]
     private ?string $name = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
+    #[Assert\NotBlank]
+    #[Assert\Positive(message: 'The monthly target budget must be a positive number.')]
     private ?string $monthlyTargetBudget = null;
 
     /**

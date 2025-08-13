@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\AccessTokenRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: AccessTokenRepository::class)]
 class AccessToken
@@ -14,12 +15,23 @@ class AccessToken
     private ?int $id = null;
 
     #[ORM\Column(length: 255, unique: true)]
+    #[Assert\NotBlank]
+    #[Assert\Length(max: 255)]
+    #[Assert\Unique]
     private ?string $token = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank]
+    #[Assert\DateTime(message: 'The creation date must be a valid date and time.')]
     private ?\DateTime $createdAt = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank]
+    #[Assert\DateTime(message: 'The expiration date must be a valid date and time.')]
+    #[Assert\GreaterThanOrEqual(
+        propertyPath: 'createdAt',
+        message: 'The expiration date must be greater than or equal to the creation date.'
+    )]
     private ?\DateTime $expiresAt = null;
 
     #[ORM\ManyToOne(inversedBy: 'accessTokens')]

@@ -3,20 +3,18 @@ type: symfony
 docroot: public
 php_version: "8.3"
 webserver_type: nginx-fpm
-router_http_port: "80"
-router_https_port: "443"
-host_db_port: "5432"
 xdebug_enabled: false
 additional_hostnames: []
 additional_fqdns: []
 database:
     type: postgres
     version: "17"
+host_db_port: "5432"
+webimage_extra_packages: [php-pgsql]
 use_dns_when_possible: true
 composer_version: "2"
 web_environment: []
 corepack_enable: false
-
 # Key features of DDEV's config.yaml:
 
 # name: <projectname> # Name of the project, automatically provides
@@ -198,7 +196,6 @@ corepack_enable: false
 # The mailpit port is not normally bound on the host at all, instead being routed
 # through ddev-router, but it can be bound directly to localhost if specified here.
 
-webimage_extra_packages: ["php-pgsql"]
 # webimage_extra_packages: [php7.4-tidy, php-bcmath]
 # Extra Debian packages that are needed in the webimage can be added here
 
