@@ -160,8 +160,7 @@ final class FamilyController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
-            $email = $data->getEmail();
-            $userToAdd = $userRepository->findOneBy(['email' => $email]);
+            $userToAdd = $userRepository->findOneBy(['email' => $data]);
 
             if (!$userToAdd) {
                 $this->addFlash("error", "User with this email does not exist.");

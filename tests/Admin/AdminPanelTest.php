@@ -2,16 +2,21 @@
 
 namespace App\Tests\Admin;
 
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class AdminPanelTest extends WebTestCase
 {
-    public function testSomething(): void
+    public function test(): void
     {
         $client = static::createClient();
-        $crawler = $client->request('GET', '/');
 
-        $this->assertResponseIsSuccessful();
-        $this->assertSelectorTextContains('h1', 'Hello World');
+
+        $userRepository = static::getContainer()->get(UserRepository::class);
+        $admin = $userRepository->findOneBy(['email' => 'admin@example.com']);
+        $client->loginUser($admin);
+
+        $client->followRedirects();
+        $client->request('GET', '/family/home');
     }
 }
