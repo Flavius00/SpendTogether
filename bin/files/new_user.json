@@ -1,5 +1,5 @@
 {
-    "email": "test.super_admin@example.com",
+    "email": "test@example.com",
     "password": "SecurePassword123",
-    "name": "Test Super Admin"
+    "name": "Test Postman"
 }

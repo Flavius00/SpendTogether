@@ -6,21 +6,16 @@ use App\Entity\AccessToken;
 use App\Repository\AccessTokenRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Random\RandomException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\TooManyRequestsHttpException;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use Symfony\Component\RateLimiter\RateLimiterFactory;
 use Symfony\Component\Routing\Annotation\Route;
 use OpenApi\Attributes as OA;
 
 #[Route('/api')]
 #[OA\Tag(name: "Authentication")]
-final class ApiLoginController extends ApiBaseController
+final class ApiLoginController extends AbstractController
 {
     #[Route('/login', name: 'api_login_token', methods: ['POST'])]
     #[OA\Post(
@@ -61,20 +56,7 @@ final class ApiLoginController extends ApiBaseController
         UserRepository $userRepository,
         UserPasswordHasherInterface $passwordHasher,
         EntityManagerInterface $em,
-        #[Autowire(service: 'limiter.api')]
-        RateLimiterFactory $apiLimiter
     ): array { // JsonResponse
-
-        // $this->checkRateLimit($request, $apiLimiter);
-
-        $limiter = $apiLimiter->create($request->getClientIp());
-
-        if (false === $limiter->consume(1)->isAccepted()) {
-            //throw new TooManyRequestsHttpException();
-            //return $this->json(['error' => 'Too Many Requests'], Response::HTTP_TOO_MANY_REQUESTS);
-            return ['data' => ['error' => 'Too Many Requests'], 'status' => Response::HTTP_TOO_MANY_REQUESTS];
-        }
-
         $data = json_decode($request->getContent(), true);
 
         if (!is_array($data)) {
@@ -137,23 +119,11 @@ final class ApiLoginController extends ApiBaseController
         Request $request,
         AccessTokenRepository $accessTokenRepository,
         EntityManagerInterface $em,
-        #[Autowire(service: 'limiter.api')]
-        RateLimiterFactory $apiLimiter
     ): array
     {
-        $limiter = $apiLimiter->create($request->getClientIp());
-
-        if (false === $limiter->consume(1)->isAccepted()) {
-            return ['data' => ['error' => 'Too Many Requests'], 'status' => Response::HTTP_TOO_MANY_REQUESTS];
-        }
-
         // The 'api' firewall protects this endpoint.
         // The authenticator has already verified that the token is valid.
         $authHeader = $request->headers->get('Authorization');
-
-        if (!$authHeader || !str_starts_with($authHeader, 'Bearer ')) {
-            return ['data' => ['message' => 'Authorization token not found'], 'status' => Response::HTTP_UNAUTHORIZED];
-        }
 
         // We extract the token (without "Bearer")
         $tokenValue = substr($authHeader, 7);

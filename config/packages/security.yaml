@@ -28,7 +28,7 @@ security:
             provider: app_user_provider
             access_token:
                 token_handler: App\Security\AccessTokenHandler
-                # token_extractors: [ 'security.access_token_extractor.header' ] # opțional; by default Authorization: Bearer <token>
+                # token_extractors: [ 'security.access_token_extractor.header' ] # optional; by default Authorization: Bearer <token>
 
         main:
             lazy: true
@@ -75,7 +75,7 @@ security:
         - { path: ^/api, roles: IS_AUTHENTICATED_FULLY }
 
         # "family admin area" requires the ADMIN role
-        - { path: ^/admin, roles: ROLE_SUPER_ADMIN }
+        - { path: ^/admin, roles: ROLE_SUPER_ADMIN|IS_AUTHENTICATED_FULLY }
 
         # Login and registration pages must be public
         - { path : ^/register, roles: PUBLIC_ACCESS }
