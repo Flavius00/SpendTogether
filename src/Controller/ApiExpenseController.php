@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Expense;
+use App\Entity\User;
 use App\Repository\CategoryRepository;
 use App\Repository\ExpenseRepository;
 use App\Repository\SubscriptionRepository;
@@ -10,13 +11,11 @@ use App\Repository\UserRepository;
 use App\Security\Voter\ExpenseVoter;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\DependencyInjection\Attribute\Autowire;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\RateLimiter\RateLimiterFactory;
 use Symfony\Component\Routing\Attribute\Route;
 use OpenApi\Attributes as OA;
+use Symfony\Component\Security\Http\Attribute\CurrentUser;
 
 #[Route('/api')]
 #[OA\Tag(name: "Expenses")]
@@ -84,24 +83,12 @@ final class ApiExpenseController extends AbstractController
     public function addExpense(
         Request $request,
         EntityManagerInterface $em,
+        #[CurrentUser]
+        User $user,
         CategoryRepository $categoryRepository,
         UserRepository $userRepository,
-        #[Autowire(service: 'limiter.api')]
-        RateLimiterFactory $apiLimiter,
         ?SubscriptionRepository $subscriptionRepository = null
     ): array {
-
-        $limiter = $apiLimiter->create($request->getClientIp());
-
-        if (false === $limiter->consume(1)->isAccepted()) {
-            return ['data' => ['error' => 'Too Many Requests'], 'status' => Response::HTTP_TOO_MANY_REQUESTS];
-        }
-
-        $authUser = $this->getUser();
-        if (!is_object($authUser)) {
-            return ['data' => ['message' => 'Unauthorized'], 'status' => Response::HTTP_UNAUTHORIZED];
-        }
-
         $data = json_decode($request->getContent(), true);
         if (!is_array($data)) {
             return ['data' => ['message' => 'Invalid JSON body'], 'status' => Response::HTTP_BAD_REQUEST];
@@ -121,7 +108,7 @@ final class ApiExpenseController extends AbstractController
         $amountStr = number_format((float) $amount, 2, '.', '');
 
         // Determine the target user (default authenticated; admin can set user_id)
-        $targetUser = $authUser;
+        $targetUser = $user;
         if (isset($data['user_id'])) {
             $targetUser = $userRepository->find((int) $data['user_id']);
             if (!$targetUser) {
@@ -238,21 +225,7 @@ final class ApiExpenseController extends AbstractController
         int $id,
         ExpenseRepository $expenseRepository,
         UserRepository $userRepository,
-        #[Autowire(service: 'limiter.api')]
-        RateLimiterFactory $apiLimiter
     ): array {
-
-        $limiter = $apiLimiter->create($request->getClientIp());
-
-        if (false === $limiter->consume(1)->isAccepted()) {
-            return ['data' => ['error' => 'Too Many Requests'], 'status' => Response::HTTP_TOO_MANY_REQUESTS];
-        }
-
-        $authUser = $this->getUser();
-        if (!is_object($authUser)) {
-            return ['data' => ['message' => 'Unauthorized'], 'status' => Response::HTTP_UNAUTHORIZED];
-        }
-
         $user = $userRepository->find($id);
         if (!$user) {
             return ['data' => ['message' => 'User not found'], 'status' => Response::HTTP_NOT_FOUND];

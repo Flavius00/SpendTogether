@@ -155,8 +155,8 @@ final class AdminApiCategoryController extends AbstractController
         parameters: [new OA\Parameter(name: "id", in: "path", required: true, schema: new OA\Schema(type: "integer"))],
         responses: [
             new OA\Response(response: 204, description: "Category successfully soft-deleted"),
+            new OA\Response(response: 403, description: "Forbidden - Insufficient permissions"),
             new OA\Response(response: 404, description: "Category not found"),
-            new OA\Response(response: 403, description: "Forbidden - Insufficient permissions")
         ]
     )]
     public function softDeleteCategory(Category $category, EntityManagerInterface $em): array

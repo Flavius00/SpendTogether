@@ -1,7 +1,19 @@
 framework:
     rate_limiter:
-        api:
-            policy: token_bucket
-            limit: 5
-            rate: { interval: '1 minute', amount: 60 }
-            cache_pool: 'cache.rate_limiter'
+        limiters:
+            anonymous_api:
+                policy: 'token_bucket'
+                limit: 60
+                rate: { interval: '1 minute' }
+
+            authenticated_api:
+                policy: 'token_bucket'
+                limit: 120
+                rate: { interval: '1 minute' }
+
+when@test:
+    framework:
+        rate_limiter:
+            limiters:
+                anonymous_api: { policy: 'no_limit' }
+                authenticated_api: { policy: 'no_limit' }
