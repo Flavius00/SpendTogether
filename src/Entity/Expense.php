@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\ExpenseRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ExpenseRepository::class)]
 class Expense
@@ -15,18 +16,34 @@ class Expense
     private ?int $id = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 11, scale: 2)]
+    #[Assert\NotBlank]
+    #[Assert\Positive(message: 'The expense amount must be a positive number.')]
     private ?string $amount = null;
 
     #[ORM\Column(length: 51)]
+    #[Assert\NotBlank]
+    #[Assert\Length(max: 51)]
+    #[Assert\Regex(
+        pattern: '/^[a-zA-Z0-9\s]+$/',
+        message: 'The name can only contain letters, numbers, and spaces.'
+    )]
     private ?string $name = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\Length(max: 255)]
+    #[Assert\Regex(
+        pattern: '/^[a-zA-Z0-9\s,.\'?!-]*$/',
+        message: 'The description can only contain letters, numbers, spaces, commas, periods, and hyphens.'
+    )]
     private ?string $description = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank]
+    #[Assert\Date(message: 'The date must be a valid date.')]
     private ?\DateTime $date = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\Image]
     private ?string $receiptImage = null;
 
     #[ORM\ManyToOne(inversedBy: 'expenses')]

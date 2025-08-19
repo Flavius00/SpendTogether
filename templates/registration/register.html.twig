@@ -10,23 +10,61 @@
 
             <div class="space-y-4">
                 {{ form_row(registrationForm.name, {
-                    label_attr: { class: 'block text-sm font-semibold text-custom-light mb-2' },
-                    attr: { class: 'w-full p-3 bg-custom-dark text-custom-light rounded-lg border-2 border-custom-teal focus:outline-none focus:border-custom-light transition-all duration-300' }
+                    label_attr: {
+                        'class': 'block text-sm font-semibold text-custom-light mb-2'
+                    },
+                    attr: {
+                        'class': 'w-full p-3 bg-custom-dark text-custom-light rounded-lg border-2 border-custom-teal focus:outline-none focus:border-custom-light transition-all duration-300',
+                        'placeholder': 'Example: John Doe'
+                    }
                 }) }}
-
                 {{ form_row(registrationForm.email, {
-                    label_attr: { class: 'block text-sm font-semibold text-custom-light mb-2' },
-                    attr: { class: 'w-full p-3 bg-custom-dark text-custom-light rounded-lg border-2 border-custom-teal focus:outline-none focus:border-custom-light transition-all duration-300' }
+                    label_attr: {
+                        'class': 'block text-sm font-semibold text-custom-light mb-2'
+                    },
+                    attr: {
+                        'class': 'w-full p-3 bg-custom-dark text-custom-light rounded-lg border-2 border-custom-teal focus:outline-none focus:border-custom-light transition-all duration-300',
+                        'placeholder': 'Example: john.doe@gmail.com'
+                    }
                 }) }}
 
-                {{ form_row(registrationForm.plainPassword.first, {
-                    label_attr: { class: 'block text-sm font-semibold text-custom-light mb-2' },
-                    attr: { class: 'w-full p-3 bg-custom-dark text-custom-light rounded-lg border-2 border-custom-teal focus:outline-none focus:border-custom-light transition-all duration-300' }
-                }) }}
+                <div class="mb-4">
+                    {{ form_label(registrationForm.plainPassword.first, 'Password', {
+                        'label_attr': {
+                            'class': 'block text-sm font-semibold text-custom-light mb-2'
+                        }
+                    }) }}
+                    {{ form_widget(registrationForm.plainPassword.first, {
+                        'attr': {
+                            'placeholder': 'Enter your password',
+                            'class': 'w-full p-3 bg-custom-dark text-custom-light rounded-lg border-2 border-custom-teal focus:outline-none focus:border-custom-light transition-all duration-300'
+                        }
+                    }) }}
+                </div>
 
-                {{ form_row(registrationForm.plainPassword.second, {
-                    label_attr: { class: 'block text-sm font-semibold text-custom-light mb-2' },
-                    attr: { class: 'w-full p-3 bg-custom-dark text-custom-light rounded-lg border-2 border-custom-teal focus:outline-none focus:border-custom-light transition-all duration-300' }
+                <div class="mb-4">
+                    {{ form_label(registrationForm.plainPassword.second, 'Repeat Password', {
+                        'label_attr': {
+                            'class': 'block text-sm font-semibold text-custom-light mb-2'
+                        }
+                    }) }}
+                    {{ form_widget(registrationForm.plainPassword.second, {
+                        'attr': {
+                            'placeholder': 'Repeat your password',
+                            'class': 'w-full p-3 bg-custom-dark text-custom-light rounded-lg border-2 border-custom-teal focus:outline-none focus:border-custom-light transition-all duration-300'
+                        }
+                    }) }}
+                </div>
+
+                {{ form_widget(registrationForm.agreeTerms, {
+                    'attr': {
+                        'class': 'mt-1 w-4 h-4 text-custom-teal bg-custom-dark border-2 border-custom-teal rounded focus:ring-custom-light focus:ring-2'
+                    }
+                }) }}
+                {{ form_label(registrationForm.agreeTerms, null, {
+                    'label_attr': {
+                        'class': 'text-sm text-custom-light cursor-pointer flex-1'
+                    }
                 }) }}
             </div>
 

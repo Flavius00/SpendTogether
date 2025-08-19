@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\ThresholdsRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ThresholdsRepository::class)]
 class Threshold
@@ -21,6 +22,9 @@ class Threshold
     private ?Family $family = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
+    #[Assert\NotBlank]
+    #[Assert\Positive(message: 'The threshold amount must be a positive number.')]
+
     private ?string $amount = null;
 
     public function getId(): ?int
