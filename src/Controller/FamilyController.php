@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Controller\Service\FamilyService;
 use App\Entity\Family;
 use App\Entity\User;
 use App\Form\AddUserToFamilyFormType;
@@ -194,6 +195,7 @@ final class FamilyController extends AbstractController
         AuthorizationCheckerInterface $authCheck,
         EntityManagerInterface $em,
         Security $security,
+        FamilyService $familyService,
     ): Response
     {
         if (!$authCheck->isGranted('IS_AUTHENTICATED_FULLY')) {
@@ -205,8 +207,9 @@ final class FamilyController extends AbstractController
             return $this->redirectToRoute('app_family_create');
         }
 
-        if ($user->getRoles()[0] === 'ROLE_ADMIN') {
-            $this->addFlash('error', 'You cannot leave the family as an admin. Please transfer admin rights first.');
+        if ($familyService->verifyLeavePosibility($user) === false) {
+            $this->addFlash('error', 'Can\' leave family if you are the only admin.');
+            $this->addFlash('error', "Give the admin role to someone else before leaving the family.");
             return $this->redirectToRoute('app_family_home');
         }
 
@@ -328,5 +331,46 @@ final class FamilyController extends AbstractController
             'family' => $family,
             'editFamilyForm' => $form->createView(),
         ]); //Placeholder for edit family logic
+    }
+
+    #[Route('/delete', name: 'app_family_delete')]
+    public function deleteFamily(
+        #[CurrentUser]
+        User $user,
+        AuthorizationCheckerInterface $authCheck,
+        EntityManagerInterface $em,
+        Security $security,
+    ) : Response
+    {
+        if (!$authCheck->isGranted('IS_AUTHENTICATED_FULLY')) {
+            return $this->redirectToRoute('app_login');
+        }
+
+        $family = $user->getFamily();
+
+        $numberOfUsers = count($family->getUsers());
+
+        if ($numberOfUsers !== 1) {
+            $this->addFlash('error', 'You cannot delete family.');
+            return $this->redirectToRoute('app_family_home');
+        }
+
+        $user->setRoles(['ROLE_USER']);
+        $user->setFamily(null);
+
+        $em->persist($user);
+
+        foreach ($family->getThresholds() as $threshold) {
+            $threshold->setFamily(null);
+            $em->remove($threshold);
+        }
+
+        $em->remove($family);
+        $em->flush();
+
+        $security->login($user);
+
+        $this->addFlash('success', 'Family has been deleted.');
+        return $this->redirectToRoute('app_family_create');
     }
 }
