@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+{% block title %}New Subscription{% endblock %}
+{% block body %}
+<div class="h-full overflow-auto">
+  <div class="max-w-4xl mx-auto px-6 py-6">
+    <h1 class="text-xl font-semibold text-custom-light mb-4">New Subscription</h1>
+    {% include 'subscription/_form.html.twig' with { form: form } %}
+  </div>
+</div>
+{% endblock %}

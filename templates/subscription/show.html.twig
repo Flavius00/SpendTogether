@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+{% block title %}Subscription{% endblock %}
+{% block body %}
+<div class="h-full overflow-auto">
+  <div class="max-w-3xl mx-auto px-6 py-6">
+    <div class="flex items-center justify-between mb-4">
+      <h1 class="text-xl font-semibold text-custom-light">Subscription</h1>
+      <a class="inline-flex items-center bg-custom-teal/20 hover:bg-custom-teal/30 text-custom-light px-4 py-2 rounded-md transition"
+         href="{{ app.request.headers.get('referer') ?: path('app_subscription_index') }}">
+        Back
+      </a>
+    </div>
+
+    <div class="bg-custom-mint/40 border border-custom-teal/30 rounded-lg p-4 text-custom-light">
+      <div><span class="text-custom-light/70">Name:</span> {{ subscription.name }}</div>
+      <div><span class="text-custom-light/70">Amount:</span> {{ subscription.amount }}</div>
+      <div><span class="text-custom-light/70">Frequency:</span> {{ subscription.frequency }}</div>
+      <div><span class="text-custom-light/70">Next due:</span> {{ subscription.nextDueDate ? subscription.nextDueDate|date('Y-m-d') : '' }}</div>
+      <div><span class="text-custom-light/70">Active:</span> {{ subscription.isActive ? 'Yes' : 'No' }}</div>
+      <div><span class="text-custom-light/70">Category:</span> {{ subscription.category ? subscription.category.name : '—' }}</div>
+      <div><span class="text-custom-light/70">User:</span> {{ subscription.userObject ? subscription.userObject.email : '—' }}</div>
+    </div>
+
+    <div class="mt-4 flex gap-2">
+      {% if is_granted('SUBSCRIPTION_EDIT', subscription) %}
+        <a class="px-3 py-1 border border-custom-teal/40 rounded text-custom-light hover:text-custom-teal hover:border-custom-teal transition"
+           href="{{ path('app_subscription_edit', {id: subscription.id}) }}">Edit</a>
+      {% endif %}
+      {% if is_granted('SUBSCRIPTION_DELETE', subscription) %}
+        <form action="{{ path('app_subscription_delete', {id: subscription.id}) }}" method="post" onsubmit="return confirm('Delete this subscription?');">
+          <input type="hidden" name="_token" value="{{ csrf_token('delete-subscription-' ~ subscription.id) }}">
+          <button type="submit" class="px-3 py-1 border border-red-400/50 text-red-200 rounded hover:bg-red-500/10 transition">
+            Delete
+          </button>
+        </form>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

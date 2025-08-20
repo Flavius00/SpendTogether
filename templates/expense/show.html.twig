@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Expense #{{ expense.id }}{% endblock %}
+
+{% block body %}
+<div class="h-full overflow-auto">
+    <div class="max-w-4xl mx-auto px-6 py-6">
+        <div class="flex items-center justify-between mb-4">
+            <h1 class="text-xl font-semibold text-custom-light">Expense #{{ expense.id }}</h1>
+            <div class="flex gap-2">
+                <a class="px-3 py-2 rounded-md border border-custom-teal/40 text-custom-light hover:text-custom-teal hover:border-custom-teal transition"
+                   href="{{ path('app_expense_edit', {id: expense.id}) }}">Edit</a>
+                <a class="px-3 py-2 rounded-md bg-custom-teal text-white hover:bg-custom-teal/90 transition"
+                   href="{{ app.request.headers.get('referer') ?: path('app_expense_index') }}">Back to list</a>
+            </div>
+        </div>
+
+        <div class="bg-custom-mint/40 border border-custom-teal/30 rounded-lg">
+            <div class="p-4 grid grid-cols-1 md:grid-cols-2 gap-4 text-custom-light">
+                <div>
+                    <div class="text-sm text-custom-light/70">Name</div>
+                    <div class="font-medium">{{ expense.name }}</div>
+                </div>
+
+                <div>
+                    <div class="text-sm text-custom-light/70">Amount</div>
+                    <div class="font-medium">{{ expense.amount }}</div>
+                </div>
+
+                <div>
+                    <div class="text-sm text-custom-light/70">Date</div>
+                    <div class="font-medium">{{ expense.date ? expense.date|date('Y-m-d H:i') : '' }}</div>
+                </div>
+
+                <div>
+                    <div class="text-sm text-custom-light/70">Category</div>
+                    <div class="font-medium">{{ expense.categoryId ? expense.categoryId.name : '' }}</div>
+                </div>
+
+                <div>
+                    <div class="text-sm text-custom-light/70">Subscription</div>
+                    <div class="font-medium">
+                        {% if expense.subscription %}
+                            {{ expense.subscription.name }}
+                        {% else %}
+                            —
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="md:col-span-2">
+                    <div class="text-sm text-custom-light/70">Description</div>
+                    <div class="font-medium">{{ expense.description ?: '—' }}</div>
+                </div>
+
+                <div class="md:col-span-2">
+                    <div class="text-sm text-custom-light/70">Receipt</div>
+                    <div class="mt-1 flex gap-2">
+                        {% if expense.receiptImage %}
+                            <a class="px-3 py-2 rounded-md border border-custom-teal/40 text-custom-light hover:text-custom-teal hover:border-custom-teal transition"
+                               href="{{ path('app_expense_receipt', {id: expense.id}) }}">Download</a>
+                            <a class="px-3 py-2 rounded-md border border-custom-teal/40 text-custom-light hover:text-custom-teal hover:border-custom-teal transition"
+                               href="{{ asset('uploads/receipts/' ~ expense.receiptImage) }}" target="_blank">Open</a>
+                        {% else %}
+                            <span class="text-custom-light/60">—</span>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -37,9 +37,9 @@ class Subscription
     #[Assert\Length(max: 50)]
     private ?string $frequency = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[ORM\Column(type: Types::DATE_MUTABLE)] // why?
     #[Assert\NotBlank]
-    #[Assert\Date(message: 'The next due date must be a valid date.')]
+    //#[Assert\Date(message: 'The next due date must be a valid date.')]
     #[Assert\GreaterThanOrEqual(
         value: 'today',
         message: 'The next due date must be today or in the future.'

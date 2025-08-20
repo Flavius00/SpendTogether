@@ -10,3 +10,7 @@ Console command that creates a new SUPER_ADMIN user:
 ```
 bin/console app:super-admin:create admin@myapp.com "Admin Name"
 ```
+Console command that creates expenses from subscriptions (used by a cronjob):
+```
+bin/console app:subscriptions:process
+```

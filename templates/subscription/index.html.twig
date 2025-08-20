@@ -1,0 +1,199 @@
+{% extends 'base.html.twig' %}
+{% block title %}Subscriptions{% endblock %}
+{% block body %}
+<div class="h-full overflow-auto">
+  <div class="max-w-7xl mx-auto px-6 py-6">
+    <div class="flex items-center justify-between mb-4">
+      <h1 class="text-xl font-semibold text-custom-light">
+        Subscriptions
+        {% if viewingAllFamily %}
+          <span class="text-sm text-custom-teal/80 font-normal">(All family)</span>
+        {% else %}
+          <span class="text-sm text-custom-teal/80 font-normal">(User: {{ targetUser.email }})</span>
+        {% endif %}
+      </h1>
+      <div class="flex items-center gap-2">
+        <a class="inline-flex items-center bg-custom-teal/20 hover:bg-custom-teal/30 text-custom-light px-4 py-2 rounded-md transition"
+           href="{{ path('app_expense_index') }}">
+          Back to Expenses
+        </a>
+        <a class="inline-flex items-center bg-custom-teal hover:bg-custom-teal/90 text-white px-4 py-2 rounded-md transition"
+           href="{{ path('app_subscription_new') }}">
+          New Subscription
+        </a>
+      </div>
+    </div>
+
+    <div class="bg-custom-mint/40 border border-custom-teal/30 rounded-lg mb-4">
+      <form method="get" class="p-4" action="{{ path('app_subscription_index', viewingAllFamily ? { user: '__all__' } : { user: targetUser.id }) }}">
+        <input type="hidden" name="sort" value="{{ sort }}">
+        <input type="hidden" name="dir" value="{{ dir }}">
+        <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4">
+          {% if app.user and is_granted('ROLE_ADMIN') %}
+            <div>
+              <label class="block text-sm text-custom-light mb-1">User</label>
+              <select name="user" class="w-full bg-custom-dark border border-custom-teal/30 text-custom-light rounded px-3 py-2" onchange="this.form.submit()">
+                <option value="__all__" {{ viewingAllFamily ? 'selected' : '' }}>All family</option>
+                {% for u in familyUsers %}
+                  <option value="{{ u.id }}" {{ (not viewingAllFamily and u.id == targetUser.id) ? 'selected' : '' }}>
+                    {{ u.email }}
+                  </option>
+                {% endfor %}
+              </select>
+            </div>
+          {% endif %}
+          <div>
+            <label class="block text-sm text-custom-light mb-1">Search</label>
+            <input type="text" name="q" value="{{ criteria.q }}" class="w-full bg-custom-dark border border-custom-teal/30 text-custom-light rounded px-3 py-2">
+          </div>
+          <div>
+            <label class="block text-sm text-custom-light mb-1">Category</label>
+            <select name="category" class="w-full bg-custom-dark border border-custom-teal/30 text-custom-light rounded px-3 py-2">
+              <option value="">—</option>
+              {% for c in categories %}
+                <option value="{{ c.id }}" {{ criteria.category == c.id ? 'selected' : '' }}>{{ c.name }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div>
+            <label class="block text-sm text-custom-light mb-1">Frequency</label>
+            <select name="frequency" class="w-full bg-custom-dark border border-custom-teal/30 text-custom-light rounded px-3 py-2">
+              <option value="" {{ criteria.frequency is null ? 'selected' : '' }}>Any</option>
+              <option value="weekly" {{ criteria.frequency == 'weekly' ? 'selected' : '' }}>Weekly</option>
+              <option value="monthly" {{ criteria.frequency == 'monthly' ? 'selected' : '' }}>Monthly</option>
+              <option value="yearly" {{ criteria.frequency == 'yearly' ? 'selected' : '' }}>Yearly</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-sm text-custom-light mb-1">Active</label>
+            <select name="active" class="w-full bg-custom-dark border border-custom-teal/30 text-custom-light rounded px-3 py-2">
+              <option value="" {{ criteria.active is null ? 'selected' : '' }}>Any</option>
+              <option value="1" {{ criteria.active is same as(true) ? 'selected' : '' }}>Yes</option>
+              <option value="0" {{ criteria.active is same as(false) ? 'selected' : '' }}>No</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-sm text-custom-light mb-1">Next due from</label>
+            <input type="date" name="next_from" value="{{ criteria.next_from }}" class="w-full bg-custom-dark border border-custom-teal/30 text-custom-light rounded px-3 py-2">
+          </div>
+          <div>
+            <label class="block text-sm text-custom-light mb-1">Next due to</label>
+            <input type="date" name="next_to" value="{{ criteria.next_to }}" class="w-full bg-custom-dark border border-custom-teal/30 text-custom-light rounded px-3 py-2">
+          </div>
+          <div>
+            <label class="block text-sm text-custom-light mb-1">Per page</label>
+            <input type="number" min="5" max="100" name="perPage" value="{{ perPage }}" class="w-full bg-custom-dark border border-custom-teal/30 text-custom-light rounded px-3 py-2">
+          </div>
+        </div>
+        <div class="mt-4 flex gap-2">
+          <button type="submit" class="bg-custom-teal hover:bg-custom-teal/90 text-white px-4 py-2 rounded-md transition">Filter</button>
+          <a class="px-4 py-2 rounded-md border border-custom-teal/40 text-custom-light hover:text-custom-teal hover:border-custom-teal transition"
+             href="{{ path('app_subscription_index', viewingAllFamily ? { user: '__all__' } : { user: targetUser.id }) }}">
+            Reset
+          </a>
+        </div>
+      </form>
+    </div>
+
+    {% set dirToggle = dir == 'ASC' ? 'DESC' : 'ASC' %}
+    <div class="overflow-x-auto bg-custom-mint/40 border border-custom-teal/30 rounded-lg">
+      <table class="min-w-full table-auto">
+        <thead class="bg-custom-mint/70 text-custom-light">
+          <tr class="text-left">
+            <th class="px-4 py-3">
+              <a class="hover:text-custom-teal transition"
+                 href="{{ path('app_subscription_index', app.request.query.all|merge({sort: 'name', dir: sort == 'name' ? dirToggle : 'ASC'})) }}">
+                Name {% if sort == 'name' %}{{ dir == 'ASC' ? '↑' : '↓' }}{% endif %}
+              </a>
+            </th>
+            <th class="px-4 py-3 text-right">
+              <a class="hover:text-custom-teal transition"
+                 href="{{ path('app_subscription_index', app.request.query.all|merge({sort: 'amount', dir: sort == 'amount' ? dirToggle : 'DESC'})) }}">
+                Amount {% if sort == 'amount' %}{{ dir == 'ASC' ? '↑' : '↓' }}{% endif %}
+              </a>
+            </th>
+            <th class="px-4 py-3">
+              <a class="hover:text-custom-teal transition"
+                 href="{{ path('app_subscription_index', app.request.query.all|merge({sort: 'category', dir: sort == 'category' ? dirToggle : 'ASC'})) }}">
+                Category {% if sort == 'category' %}{{ dir == 'ASC' ? '↑' : '↓' }}{% endif %}
+              </a>
+            </th>
+            <th class="px-4 py-3">Frequency</th>
+            <th class="px-4 py-3">
+              <a class="hover:text-custom-teal transition"
+                 href="{{ path('app_subscription_index', app.request.query.all|merge({sort: 'next_due', dir: sort == 'next_due' ? dirToggle : 'ASC'})) }}">
+                Next due {% if sort == 'next_due' %}{{ dir == 'ASC' ? '↑' : '↓' }}{% endif %}
+              </a>
+            </th>
+            <th class="px-4 py-3">Active</th>
+            <th class="px-4 py-3">User</th>
+            <th class="px-4 py-3 w-40">Actions</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-custom-teal/20 text-custom-light">
+          {% for s in items %}
+            <tr class="hover:bg-custom-mint/30">
+              <td class="px-4 py-3">{{ s.name }}</td>
+              <td class="px-4 py-3 text-right">{{ s.amount }}</td>
+              <td class="px-4 py-3">{{ s.category ? s.category.name : '' }}</td>
+              <td class="px-4 py-3 capitalize">{{ s.frequency }}</td>
+              <td class="px-4 py-3">{{ s.nextDueDate ? s.nextDueDate|date('Y-m-d') : '' }}</td>
+              <td class="px-4 py-3">{{ s.isActive ? 'Yes' : 'No' }}</td>
+              <td class="px-4 py-3">{{ s.userObject ? s.userObject.email : '' }}</td>
+              <td class="px-4 py-3">
+                <div class="flex gap-2">
+                  {% if is_granted('SUBSCRIPTION_VIEW', s) %}
+                    <a class="px-3 py-1 text-sm border border-custom-teal/40 rounded hover:text-custom-teal hover:border-custom-teal transition"
+                       href="{{ path('app_subscription_show', {id: s.id}) }}">View</a>
+                  {% endif %}
+                  {% if is_granted('SUBSCRIPTION_EDIT', s) %}
+                    <a class="px-3 py-1 text-sm border border-custom-teal/40 rounded hover:text-custom-teal hover:border-custom-teal transition"
+                       href="{{ path('app_subscription_edit', {id: s.id}) }}">Edit</a>
+                  {% endif %}
+                  {% if is_granted('SUBSCRIPTION_DELETE', s) %}
+                    <form action="{{ path('app_subscription_delete', {id: s.id}) }}" method="post" onsubmit="return confirm('Delete this subscription?');">
+                      <input type="hidden" name="_token" value="{{ csrf_token('delete-subscription-' ~ s.id) }}">
+                      <button type="submit" class="px-3 py-1 text-sm border border-red-400/50 text-red-200 rounded hover:bg-red-500/10 transition">
+                        Delete
+                      </button>
+                    </form>
+                  {% endif %}
+                </div>
+              </td>
+            </tr>
+          {% else %}
+            <tr>
+              <td colspan="8" class="px-4 py-6 text-center text-custom-light/70">No subscriptions found.</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="mt-4 flex items-center justify-between">
+      <div class="text-custom-light/80">Total: <span class="font-semibold text-custom-light">{{ total }}</span></div>
+      <div class="flex gap-2">
+        {% if page > 1 %}
+          <a class="px-3 py-1 border border-custom-teal/40 rounded text-custom-light hover:text-custom-teal hover:border-custom-teal transition"
+             href="{{ path('app_subscription_index', app.request.query.all|merge({page: 1})) }}">« First</a>
+          <a class="px-3 py-1 border border-custom-teal/40 rounded text-custom-light hover:text-custom-teal hover:border-custom-teal transition"
+             href="{{ path('app_subscription_index', app.request.query.all|merge({page: page - 1})) }}">‹ Prev</a>
+        {% else %}
+          <span class="px-3 py-1 border border-transparent rounded text-custom-light/50">« First</span>
+          <span class="px-3 py-1 border border-transparent rounded text-custom-light/50">‹ Prev</span>
+        {% endif %}
+        <span class="px-3 py-1 text-custom-light/70">Page {{ page }} / {{ pages }}</span>
+        {% if page < pages %}
+          <a class="px-3 py-1 border border-custom-teal/40 rounded text-custom-light hover:text-custom-teal hover:border-custom-teal transition"
+             href="{{ path('app_subscription_index', app.request.query.all|merge({page: page + 1})) }}">Next ›</a>
+          <a class="px-3 py-1 border border-custom-teal/40 rounded text-custom-light hover:text-custom-teal hover:border-custom-teal transition"
+             href="{{ path('app_subscription_index', app.request.query.all|merge({page: pages})) }}">Last »</a>
+        {% else %}
+          <span class="px-3 py-1 border border-transparent rounded text-custom-light/50">Next ›</span>
+          <span class="px-3 py-1 border border-transparent rounded text-custom-light/50">Last »</span>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

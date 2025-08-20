@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Expense{% endblock %}
+
+{% block body %}
+<div class="h-full overflow-auto">
+    <div class="max-w-4xl mx-auto px-6 py-6">
+        <h1 class="text-xl font-semibold text-custom-light mb-4">New Expense</h1>
+        {% include 'expense/_form.html.twig' with { form: form } %}
+    </div>
+</div>
+{% endblock %}

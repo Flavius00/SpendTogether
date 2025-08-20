@@ -9,9 +9,7 @@
         tailwind.config = {
             theme: {
                 extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'system-ui', 'sans-serif'],
-                    },
+                    fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
                     colors: {
                         'custom-light': '#EEEEEE',
                         'custom-mint': '#393E46',
@@ -23,8 +21,7 @@
         }
     </script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    {% block stylesheets %}
-    {% endblock %}
+    {% block stylesheets %}{% endblock %}
 
     {% block javascripts %}
         {% block importmap %}{{ importmap('app') }}{% endblock %}
@@ -44,25 +41,35 @@
         </div>
 
         <!-- Navigation Links - Left Side -->
-        <div class="flex items-center ml-12">
+        <div class="flex items-center ml-12 space-x-8">
             <a href="{{ path('app_family_home') }}"
                class="text-custom-light hover:text-custom-teal transition-colors duration-200 font-medium">
                 Family
             </a>
+            {% if app.user %}
+                <a href="{{ path('app_expense_index') }}"
+                   class="text-custom-light hover:text-custom-teal transition-colors duration-200 font-medium">
+                    Expenses
+                </a>
+            {% endif %}
         </div>
 
         <!-- User Actions - Far Right -->
         <div class="flex items-center space-x-4 ml-auto">
-            <div class="flex items-center space-x-3 bg-custom-teal/20 rounded-full px-3 py-2">
-                <p class="text-custom-light text-sm font-medium">{{ userEmail }}</p>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-custom-light">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
-                </svg>
-            </div>
-            <a href="{{ path('app_logout') }}"
-               class="px-4 py-2 text-sm font-medium text-custom-light hover:text-custom-teal transition-colors duration-200">
-                Logout
-            </a>
+            {% if app.user %}
+                <div class="flex items-center space-x-3 bg-custom-teal/20 rounded-full px-3 py-2">
+                    <p class="text-custom-light text-sm font-medium">
+                        {{ app.user.email ?? '' }}
+                    </p>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-custom-light">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+                    </svg>
+                </div>
+                <a href="{{ path('app_logout') }}"
+                   class="px-4 py-2 text-sm font-medium text-custom-light hover:text-custom-teal transition-colors duration-200">
+                    Logout
+                </a>
+            {% endif %}
         </div>
     </div>
 </nav>

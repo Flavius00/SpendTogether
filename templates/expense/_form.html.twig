@@ -1,0 +1,91 @@
+{{ form_start(form, { attr: { novalidate: 'novalidate' } }) }}
+
+{% if form is not empty and form.vars.errors|length > 0 %}
+    <div class="mb-4 border border-red-400/50 bg-red-500/15 text-red-200 rounded px-4 py-3">
+        {{ form_errors(form) }}
+    </div>
+{% endif %}
+
+<div class="bg-custom-mint/40 border border-custom-teal/30 rounded-lg">
+    <div class="p-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+            <label class="block text-sm text-custom-light mb-1">{{ form_label(form.name) }}</label>
+            {{ form_widget(form.name, { attr: { class: 'w-full bg-custom-dark border border-custom-teal/30 text-custom-light rounded px-3 py-2' } }) }}
+            <div class="text-red-300 text-sm mt-1">{{ form_errors(form.name) }}</div>
+        </div>
+
+        <div>
+            <label class="block text-sm text-custom-light mb-1">{{ form_label(form.amount) }}</label>
+            {{ form_widget(form.amount, { attr: { class: 'w-full bg-custom-dark border border-custom-teal/30 text-custom-light rounded px-3 py-2' } }) }}
+            <div class="text-red-300 text-sm mt-1">{{ form_errors(form.amount) }}</div>
+        </div>
+
+        <div>
+            <label class="block text-sm text-custom-light mb-1">{{ form_label(form.date) }}</label>
+            {{ form_widget(form.date, { attr: { class: 'w-full bg-custom-dark border border-custom-teal/30 text-custom-light rounded px-3 py-2' } }) }}
+            <div class="text-red-300 text-sm mt-1">{{ form_errors(form.date) }}</div>
+        </div>
+
+        <div>
+            <label class="block text-sm text-custom-light mb-1">{{ form_label(form.categoryId) }}</label>
+            {{ form_widget(form.categoryId, { attr: { class: 'w-full bg-custom-dark border border-custom-teal/30 text-custom-light rounded px-3 py-2' } }) }}
+            <div class="text-red-300 text-sm mt-1">{{ form_errors(form.categoryId) }}</div>
+        </div>
+
+        <div>
+            <label class="block text-sm text-custom-light mb-1">{{ form_label(form.subscription) }}</label>
+            {{ form_widget(form.subscription, { attr: { class: 'w-full bg-custom-dark border border-custom-teal/30 text-custom-light rounded px-3 py-2' } }) }}
+            <div class="text-red-300 text-sm mt-1">{{ form_errors(form.subscription) }}</div>
+        </div>
+
+        {% if form.userObject is defined %}
+            <div>
+                <label class="block text-sm text-custom-light mb-1">{{ form_label(form.userObject) }}</label>
+                {{ form_widget(form.userObject, { attr: { class: 'w-full bg-custom-dark border border-custom-teal/30 text-custom-light rounded px-3 py-2' } }) }}
+                <div class="text-red-300 text-sm mt-1">{{ form_errors(form.userObject) }}</div>
+            </div>
+        {% endif %}
+
+        <div class="md:col-span-2">
+            <label class="block text-sm text-custom-light mb-1">{{ form_label(form.receiptImageFile) }}</label>
+            {{ form_widget(form.receiptImageFile, { attr: { class: 'w-full bg-custom-dark border border-custom-teal/30 text-custom-light rounded px-3 py-2 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:bg-custom-teal file:text-white hover:file:bg-custom-teal/90' } }) }}
+            <div class="text-custom-light/70 text-xs mt-1">Leave empty to keep the current file.</div>
+            <div class="text-red-300 text-sm mt-1">{{ form_errors(form.receiptImageFile) }}</div>
+
+            {% if expense is defined and expense.receiptImage %}
+                <div class="mt-2 flex items-center gap-3">
+                    <span class="text-sm text-custom-light/80">Current receipt:</span>
+                    <a class="px-2 py-1 text-sm border border-custom-teal/40 rounded hover:text-custom-teal hover:border-custom-teal transition"
+                       href="{{ path('app_expense_receipt', {id: expense.id}) }}">Download</a>
+                    <a class="px-2 py-1 text-sm border border-custom-teal/40 rounded hover:text-custom-teal hover:border-custom-teal transition"
+                       href="{{ asset('uploads/receipts/' ~ expense.receiptImage) }}" target="_blank">Open</a>
+                </div>
+                <div class="mt-2">
+                    {{ form_row(form.removeReceipt, {
+                        label_attr: { class: 'text-sm text-custom-light' }
+                    }) }}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="md:col-span-2">
+            <label class="block text-sm text-custom-light mb-1">{{ form_label(form.description) }}</label>
+            {{ form_widget(form.description, { attr: { rows: 3, class: 'w-full bg-custom-dark border border-custom-teal/30 text-custom-light rounded px-3 py-2' } }) }}
+            <div class="text-red-300 text-sm mt-1">{{ form_errors(form.description) }}</div>
+        </div>
+    </div>
+
+    <div class="px-4 py-3 border-t border-custom-teal/20 flex gap-2">
+        <button type="submit" class="bg-custom-teal hover:bg-custom-teal/90 text-white px-4 py-2 rounded-md transition">Save</button>
+        <a href="{{ app.request.headers.get('referer') ?: path('app_expense_index') }}"
+           class="px-4 py-2 rounded-md border border-custom-teal/40 text-custom-light hover:text-custom-teal hover:border-custom-teal transition">
+            Cancel
+        </a>
+    </div>
+</div>
+
+{# renderăm doar tokenul CSRF, NU și câmpurile nerandate (ex: removeReceipt) #}
+{% if form._token is defined %}
+    {{ form_row(form._token) }}
+{% endif %}
+{{ form_end(form, { render_rest: false }) }}

@@ -36,7 +36,7 @@ security:
             form_login:
                 login_path: app_login
                 check_path: app_login
-                default_target_path: /
+                default_target_path: app_family_home
                 enable_csrf: true
                 csrf_parameter: _csrf_token
             logout:
@@ -81,6 +81,12 @@ security:
         - { path : ^/register, roles: PUBLIC_ACCESS }
 
         - { path: ^/login, roles: PUBLIC_ACCESS }
+
+        # Allows public access to uploaded files ("Open" link)
+        - { path: ^/uploads/receipts, roles: PUBLIC_ACCESS }
+
+        # Expenses UI Pages
+        - { path: ^/expenses, roles: ROLE_USER }
 
         # "waiting room area" require at least the USER role (authenticated)
         - { path: ^/, roles: ROLE_USER }

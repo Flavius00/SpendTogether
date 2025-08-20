@@ -39,11 +39,11 @@ class Expense
 
     #[ORM\Column]
     #[Assert\NotBlank]
-    #[Assert\Date(message: 'The date must be a valid date.')]
+    //#[Assert\Date(message: 'The date must be a valid date.')]
     private ?\DateTime $date = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    #[Assert\Image]
+    //#[Assert\Image]
     private ?string $receiptImage = null;
 
     #[ORM\ManyToOne(inversedBy: 'expenses')]

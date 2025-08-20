@@ -1,0 +1,50 @@
+{{ form_start(form, { attr: { novalidate: 'novalidate' } }) }}
+<div class="bg-custom-mint/40 border border-custom-teal/30 rounded-lg">
+  <div class="p-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div>
+      <label class="block text-sm text-custom-light mb-1">{{ form_label(form.name) }}</label>
+      {{ form_widget(form.name, { attr: { class: 'w-full bg-custom-dark border border-custom-teal/30 text-custom-light rounded px-3 py-2' } }) }}
+      <div class="text-red-300 text-sm mt-1">{{ form_errors(form.name) }}</div>
+    </div>
+    <div>
+      <label class="block text-sm text-custom-light mb-1">{{ form_label(form.amount) }}</label>
+      {{ form_widget(form.amount, { attr: { class: 'w-full bg-custom-dark border border-custom-teal/30 text-custom-light rounded px-3 py-2' } }) }}
+      <div class="text-red-300 text-sm mt-1">{{ form_errors(form.amount) }}</div>
+    </div>
+    <div>
+      <label class="block text-sm text-custom-light mb-1">{{ form_label(form.frequency) }}</label>
+      {{ form_widget(form.frequency, { attr: { class: 'w-full bg-custom-dark border border-custom-teal/30 text-custom-light rounded px-3 py-2' } }) }}
+      <div class="text-red-300 text-sm mt-1">{{ form_errors(form.frequency) }}</div>
+    </div>
+    <div>
+      <label class="block text-sm text-custom-light mb-1">{{ form_label(form.nextDueDate) }}</label>
+      {{ form_widget(form.nextDueDate, { attr: { class: 'w-full bg-custom-dark border border-custom-teal/30 text-custom-light rounded px-3 py-2' } }) }}
+      <div class="text-red-300 text-sm mt-1">{{ form_errors(form.nextDueDate) }}</div>
+    </div>
+    <div>
+      <label class="block text-sm text-custom-light mb-1">{{ form_label(form.category) }}</label>
+      {{ form_widget(form.category, { attr: { class: 'w-full bg-custom-dark border border-custom-teal/30 text-custom-light rounded px-3 py-2' } }) }}
+      <div class="text-red-300 text-sm mt-1">{{ form_errors(form.category) }}</div>
+    </div>
+    {% if form.userObject is defined %}
+      <div>
+        <label class="block text-sm text-custom-light mb-1">{{ form_label(form.userObject) }}</label>
+        {{ form_widget(form.userObject, { attr: { class: 'w-full bg-custom-dark border border-custom-teal/30 text-custom-light rounded px-3 py-2' } }) }}
+        <div class="text-red-300 text-sm mt-1">{{ form_errors(form.userObject) }}</div>
+      </div>
+    {% endif %}
+    <div class="flex items-center gap-3">
+      {{ form_widget(form.isActive) }}
+      <label class="text-sm text-custom-light">{{ form_label(form.isActive) }}</label>
+      <div class="text-red-300 text-sm mt-1">{{ form_errors(form.isActive) }}</div>
+    </div>
+  </div>
+  <div class="px-4 py-3 border-t border-custom-teal/20 flex gap-2">
+    <button type="submit" class="bg-custom-teal hover:bg-custom-teal/90 text-white px-4 py-2 rounded-md transition">Save</button>
+    <a href="{{ app.request.headers.get('referer') ?: path('app_subscription_index') }}"
+       class="px-4 py-2 rounded-md border border-custom-teal/40 text-custom-light hover:text-custom-teal hover:border-custom-teal transition">
+      Cancel
+    </a>
+  </div>
+</div>
+{{ form_end(form) }}
