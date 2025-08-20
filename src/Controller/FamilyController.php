@@ -143,7 +143,7 @@ final class FamilyController extends AbstractController
     }
 
     #[Route('/add-user-to-family', name: 'app_family_add_user')]
-    public function getFreeUsers(
+    public function addUserToFamily(
         Request $request,
         #[CurrentUser]
         User $user,
@@ -160,8 +160,7 @@ final class FamilyController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $data = $form->getData();
-            $email = $data->getEmail();
+            $email = $form->getData();
             $userToAdd = $userRepository->findOneBy(['email' => $email]);
 
             if (!$userToAdd) {
