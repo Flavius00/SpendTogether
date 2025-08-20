@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
 
 use App\Entity\Expense;
@@ -9,101 +11,42 @@ use App\Repository\CategoryRepository;
 use App\Repository\ExpenseRepository;
 use App\Repository\UserRepository;
 use App\Security\Voter\ExpenseVoter;
+use App\Service\ExpenseIndexContextResolver;
+use App\Service\ExpenseParamsExtractor;
 use App\Service\ReceiptStorage;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation as Http;
+use Symfony\Component\Form\FormError;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\Security\Http\Attribute\IsGranted;
-
 
 #[Route('/expenses')]
 final class ExpenseController extends AbstractController
 {
     #[Route('', name: 'app_expense_index', methods: ['GET'])]
     public function index(
-        Http\Request $request,
+        Request $request,
         ExpenseRepository $expenses,
         CategoryRepository $categories,
-        UserRepository $users
-    ): Http\Response
-    {
+        UserRepository $users,
+        ExpenseIndexContextResolver $ctxResolver,
+        ExpenseParamsExtractor $params,
+    ): Response {
         /** @var User $currentUser */
         $currentUser = $this->getUser();
-        $isAdmin = $this->isGranted('ROLE_ADMIN');
 
-        $familyUsers = [];
-        if ($isAdmin && $currentUser->getFamily()) {
-            $familyUsers = $currentUser->getFamily()->getUsers();
-        }
+        $ctx = $ctxResolver->resolveAndAuthorize($request, $users, $currentUser);
+        $pagination = $params->extractPagination($request, defaultPerPage: 20, maxPerPage: 100);
+        $sorting = $params->extractSorting($request, allowedSorts: ['date', 'name', 'amount', 'category'], defaultSort: 'date', defaultDir: 'DESC');
+        $criteria = $params->extractCriteria($request);
 
-        $userParam = $request->query->get('user');
-        $viewingAllFamily = $isAdmin && $userParam === '__all__';
+        $userList = $ctx->viewingAllFamily
+            ? ($ctx->familyUsers ? (method_exists($ctx->familyUsers, 'toArray') ? $ctx->familyUsers->toArray() : (array) $ctx->familyUsers) : [])
+            : [$ctx->targetUser];
 
-        $targetUser = $currentUser;
-        if ($isAdmin && !$viewingAllFamily && $userParam) {
-            $candidate = $users->find((int) $userParam);
-            if ($candidate instanceof User) {
-                $targetUser = $candidate;
-            }
-        }
-
-        if ($viewingAllFamily) {
-            if (!$isAdmin || !$currentUser->getFamily()) {
-                throw $this->createAccessDeniedException();
-            }
-        } else {
-            $this->denyAccessUnlessGranted(ExpenseVoter::LIST, $targetUser);
-        }
-
-        $page = max(1, (int) $request->query->get('page', 1));
-        $perPageRaw = $request->query->get('perPage', 20);
-        $perPage = min(100, max(5, (int) ($perPageRaw === '' ? 20 : $perPageRaw)));
-
-        $sort = (string) $request->query->get('sort', 'date');
-        $dir = strtoupper((string) $request->query->get('dir', 'DESC'));
-        $dir = $dir === 'ASC' ? 'ASC' : 'DESC';
-
-        $hasReceiptRaw = $request->query->get('has_receipt');
-        $hasReceipt = null;
-        if ($hasReceiptRaw !== null && $hasReceiptRaw !== '') {
-            if ($hasReceiptRaw === '1' || $hasReceiptRaw === 'true') {
-                $hasReceipt = true;
-            } elseif ($hasReceiptRaw === '0' || $hasReceiptRaw === 'false') {
-                $hasReceipt = false;
-            }
-        }
-
-        $categoryRaw = $request->query->get('category');
-        $category = ($categoryRaw === null || $categoryRaw === '') ? null : ($request->query->getInt('category') ?: null);
-
-        $minAmountRaw = $request->query->get('min_amount');
-        $minAmount = ($minAmountRaw === null || $minAmountRaw === '') ? null : (float) $minAmountRaw;
-
-        $maxAmountRaw = $request->query->get('max_amount');
-        $maxAmount = ($maxAmountRaw === null || $maxAmountRaw === '') ? null : (float) $maxAmountRaw;
-
-        $q = trim((string) $request->query->get('q', '')) ?: null;
-
-        $dateFrom = $request->query->get('date_from') ?: null;
-        $dateTo = $request->query->get('date_to') ?: null;
-
-        $criteria = [
-            'q' => $q,
-            'category' => $category,
-            'date_from' => $dateFrom,
-            'date_to' => $dateTo,
-            'min_amount' => $minAmount,
-            'max_amount' => $maxAmount,
-            'has_receipt' => $hasReceipt,
-        ];
-
-        if ($viewingAllFamily) {
-            $userList = $familyUsers ? $familyUsers->toArray() : [];
-            $result = $expenses->searchForUsers($userList, $criteria, $sort, $dir, $page, $perPage);
-        } else {
-            $result = $expenses->searchForUser($targetUser, $criteria, $sort, $dir, $page, $perPage);
-        }
+        $result = $expenses->searchByUsers($userList, $criteria, $sorting['sort'], $sorting['dir'], $pagination['page'], $pagination['perPage']);
 
         return $this->render('expense/index.html.twig', [
             'items' => $result['items'],
@@ -111,42 +54,33 @@ final class ExpenseController extends AbstractController
             'page' => $result['page'],
             'pages' => $result['pages'],
             'perPage' => $result['perPage'],
-            'sort' => $sort,
-            'dir' => $dir,
+            'sort' => $sorting['sort'],
+            'dir' => $sorting['dir'],
             'criteria' => $criteria,
-            'targetUser' => $targetUser,
-            'isAdmin' => $isAdmin,
-            'viewingAllFamily' => $viewingAllFamily,
+            'targetUser' => $ctx->targetUser,
+            'isAdmin' => $ctx->isAdmin,
+            'viewingAllFamily' => $ctx->viewingAllFamily,
             'categories' => $categories->findBy([], ['name' => 'ASC']),
-            'familyUsers' => $familyUsers,
+            'familyUsers' => $ctx->familyUsers,
         ]);
     }
 
-
     #[Route('/new', name: 'app_expense_new', methods: ['GET', 'POST'])]
     public function new(
-        Http\Request $request,
+        Request $request,
         EntityManagerInterface $em,
         ReceiptStorage $storage,
-        UserRepository $users
-    ): Http\Response {
+        UserRepository $users,
+    ): Response {
         /** @var User $currentUser */
         $currentUser = $this->getUser();
         $isAdmin = $this->isGranted('ROLE_ADMIN');
 
-        $targetUser = $currentUser;
-        if ($isAdmin && ($uid = $request->query->get('user'))) {
-            $candidate = $users->find((int) $uid);
-            if ($candidate instanceof User) {
-                $targetUser = $candidate;
-            }
-        }
-
+        $targetUser = $this->resolveTargetUserFromQuery($request, $users, $currentUser, $isAdmin);
         $this->denyAccessUnlessGranted(ExpenseVoter::CREATE, $targetUser);
 
         $expense = new Expense();
         $expense->setDate(new \DateTime());
-
         $expense->setUserObject($isAdmin ? $targetUser : $currentUser);
 
         $form = $this->createForm(ExpenseType::class, $expense, [
@@ -157,12 +91,7 @@ final class ExpenseController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
-            // Validation: subscription belongs to the selected user
-            $selectedSubscription = $expense->getSubscription();
-            $selectedUser = $expense->getUserObject() ?: $currentUser;
-            if ($selectedSubscription && $selectedSubscription->getUserObject()?->getId() !== $selectedUser->getId()) {
-                $form->get('subscription')->addError(new \Symfony\Component\Form\FormError('Selected subscription does not belong to the chosen user.'));
-            }
+            $this->validateSubscriptionOwnership($expense, $currentUser, $form);
         }
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -170,15 +99,14 @@ final class ExpenseController extends AbstractController
             $this->denyAccessUnlessGranted(ExpenseVoter::CREATE, $finalUser);
 
             $uploadedFile = $form->get('receiptImageFile')->getData();
-            if ($uploadedFile) {
-                $filename = $storage->store($uploadedFile);
-                $expense->setReceiptImage($filename);
-            }
+            $newReceipt = $this->processReceiptUpload(oldFile: null, uploadedFile: $uploadedFile, removeRequested: false, storage: $storage);
+            $expense->setReceiptImage($newReceipt);
 
             $em->persist($expense);
             $em->flush();
 
             $this->addFlash('success', 'Expense created successfully.');
+
             return $this->redirectToRoute('app_expense_index', [
                 'user' => $isAdmin ? $finalUser->getId() : null,
             ]);
@@ -192,7 +120,7 @@ final class ExpenseController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_expense_show', requirements: ['id' => '\d+'], methods: ['GET'])]
-    public function show(Expense $expense): Http\Response
+    public function show(Expense $expense): Response
     {
         $this->denyAccessUnlessGranted(ExpenseVoter::VIEW, $expense);
 
@@ -203,11 +131,11 @@ final class ExpenseController extends AbstractController
 
     #[Route('/{id}/edit', name: 'app_expense_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     public function edit(
-        Http\Request $request,
+        Request $request,
         Expense $expense,
         EntityManagerInterface $em,
-        ReceiptStorage $storage
-    ): Http\Response {
+        ReceiptStorage $storage,
+    ): Response {
         $this->denyAccessUnlessGranted(ExpenseVoter::EDIT, $expense);
 
         /** @var User $currentUser */
@@ -225,40 +153,22 @@ final class ExpenseController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
-            $selectedSubscription = $expense->getSubscription();
-            $selectedUser = $expense->getUserObject() ?: $originalOwner ?: $currentUser;
-            if ($selectedSubscription && $selectedSubscription->getUserObject()?->getId() !== $selectedUser->getId()) {
-                $form->get('subscription')->addError(new \Symfony\Component\Form\FormError('Selected subscription does not belong to the chosen user.'));
-            }
+            $this->validateSubscriptionOwnership($expense, $originalOwner ?? $currentUser, $form);
         }
 
         if ($form->isSubmitted() && $form->isValid()) {
             $finalUser = $expense->getUserObject() ?? $originalOwner ?? $currentUser;
 
-            // remove existing receipt if requested (and no new file uploaded)
-            $removeRequested = (bool)($form->has('removeReceipt') ? $form->get('removeReceipt')->getData() : false);
+            $removeRequested = (bool) ($form->has('removeReceipt') ? $form->get('removeReceipt')->getData() : false);
             $uploadedFile = $form->get('receiptImageFile')->getData();
 
-            if ($removeRequested && !$uploadedFile && $oldFile) {
-                $storage->remove($oldFile);
-                $expense->setReceiptImage(null);
-            }
-
-
-            /*if ($finalUser !== $originalOwner) {
-                $this->denyAccessUnlessGranted(ExpenseVoter::EDIT, $expense);
-            }
-
-            $uploadedFile = $form->get('receiptImageFile')->getData();*/
-
-            if ($uploadedFile) {
-                $newFilename = $storage->store($uploadedFile, $oldFile);
-                $expense->setReceiptImage($newFilename);
-            }
+            $newReceipt = $this->processReceiptUpload(oldFile: $oldFile, uploadedFile: $uploadedFile, removeRequested: $removeRequested, storage: $storage);
+            $expense->setReceiptImage($newReceipt);
 
             $em->flush();
 
             $this->addFlash('success', 'Expense updated successfully.');
+
             return $this->redirectToRoute('app_expense_index', [
                 'user' => $isAdmin ? $finalUser->getId() : null,
             ]);
@@ -274,11 +184,11 @@ final class ExpenseController extends AbstractController
 
     #[Route('/{id}', name: 'app_expense_delete', requirements: ['id' => '\d+'], methods: ['POST'])]
     public function delete(
-        Http\Request $request,
+        Request $request,
         Expense $expense,
         EntityManagerInterface $em,
-        ReceiptStorage $storage
-    ): Http\Response {
+        ReceiptStorage $storage,
+    ): Response {
         $this->denyAccessUnlessGranted(ExpenseVoter::DELETE, $expense);
 
         if ($this->isCsrfTokenValid('delete-expense-' . $expense->getId(), $request->request->get('_token'))) {
@@ -289,17 +199,19 @@ final class ExpenseController extends AbstractController
             $em->flush();
 
             $this->addFlash('success', 'Expense deleted successfully.');
+
             return $this->redirectToRoute('app_expense_index', [
                 'user' => $this->isGranted('ROLE_ADMIN') && $owner ? $owner->getId() : null,
             ]);
         }
 
         $this->addFlash('error', 'Invalid CSRF token.');
+
         return $this->redirectToRoute('app_expense_show', ['id' => $expense->getId()]);
     }
 
     #[Route('/{id}/receipt', name: 'app_expense_receipt', requirements: ['id' => '\d+'], methods: ['GET'])]
-    public function downloadReceipt(Expense $expense, ReceiptStorage $storage): Http\Response
+    public function downloadReceipt(Expense $expense, ReceiptStorage $storage): Response
     {
         $this->denyAccessUnlessGranted(ExpenseVoter::VIEW, $expense);
 
@@ -314,5 +226,46 @@ final class ExpenseController extends AbstractController
         }
 
         return $this->file($filePath);
+    }
+
+    /**
+     * Helpers private.
+     */
+
+    private function resolveTargetUserFromQuery(Request $request, UserRepository $users, User $currentUser, bool $isAdmin): User
+    {
+        $targetUser = $currentUser;
+        if ($isAdmin && ($uid = $request->query->get('user'))) {
+            $candidate = $users->find((int) $uid);
+            if ($candidate instanceof User) {
+                $targetUser = $candidate;
+            }
+        }
+
+        return $targetUser;
+    }
+
+    private function validateSubscriptionOwnership(Expense $expense, User $fallbackUser, FormInterface $form): void
+    {
+        $selectedSubscription = $expense->getSubscription();
+        $selectedUser = $expense->getUserObject() ?: $fallbackUser;
+
+        if ($selectedSubscription && $selectedSubscription->getUserObject()?->getId() !== $selectedUser->getId()) {
+            $form->get('subscription')->addError(new FormError('Selected subscription does not belong to the chosen user.'));
+        }
+    }
+
+    private function processReceiptUpload(?string $oldFile, mixed $uploadedFile, bool $removeRequested, ReceiptStorage $storage): ?string
+    {
+        if ($removeRequested && !$uploadedFile && $oldFile) {
+            $storage->remove($oldFile);
+            $oldFile = null;
+        }
+
+        if ($uploadedFile) {
+            return $storage->store($uploadedFile, $oldFile);
+        }
+
+        return $oldFile;
     }
 }

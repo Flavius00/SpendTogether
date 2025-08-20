@@ -1,24 +1,27 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Form;
 
 use App\Entity\Category;
+use App\Entity\Family;
 use App\Entity\Subscription;
 use App\Entity\User;
+use App\Repository\UserRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type as Field;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type as Field;
 use Symfony\Component\Validator\Constraints as Assert;
-use App\Repository\UserRepository;
 
 class SubscriptionType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $isAdmin = (bool)($options['is_admin'] ?? false);
-        /** @var \App\Entity\Family|null $family */
+        $isAdmin = (bool) ($options['is_admin'] ?? false);
+        /** @var Family|null $family */
         $family = $options['family'] ?? null;
 
         $builder
@@ -47,10 +50,13 @@ class SubscriptionType extends AbstractType
                 'widget' => 'single_text',
                 'input' => 'datetime',
                 'html5' => true,
+                'required' => true,
+                'empty_data' => (new \DateTime('today'))->format('Y-m-d'),
                 'constraints' => [
-                    new Assert\NotBlank(),
+                    new Assert\NotNull(message: 'Please select a next due date.'),
                     new Assert\GreaterThanOrEqual('today'),
                 ],
+                'invalid_message' => 'Please provide a valid date.',
             ])
             ->add('isActive', Field\CheckboxType::class, [
                 'label' => 'Active',
@@ -77,6 +83,7 @@ class SubscriptionType extends AbstractType
                     } else {
                         $qb->andWhere('1 = 0');
                     }
+
                     return $qb;
                 },
                 'constraints' => [new Assert\NotNull(message: 'Please select a user')],
@@ -93,5 +100,4 @@ class SubscriptionType extends AbstractType
             'current_user' => null,
         ]);
     }
-
 }

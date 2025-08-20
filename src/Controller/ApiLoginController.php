@@ -1,17 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
 
 use App\Entity\AccessToken;
 use App\Repository\AccessTokenRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use OpenApi\Attributes as OA;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use OpenApi\Attributes as OA;
 
 #[Route('/api')]
 #[OA\Tag(name: "Authentication")]
@@ -44,7 +46,7 @@ final class ApiLoginController extends AbstractController
                         properties: [new OA\Property(property: "token", type: "string")],
                         type: "object",
                         xml: new OA\Xml(name: 'response')
-                    )
+                    ),
                 ]
             ),
             new OA\Response(response: 401, description: "Invalid credentials"),
@@ -112,15 +114,14 @@ final class ApiLoginController extends AbstractController
                 ]
             ),
             new OA\Response(response: 401, description: "Unauthorized - Invalid or missing token"),
-            new OA\Response(response: 429, description: "Too Many Requests")
+            new OA\Response(response: 429, description: "Too Many Requests"),
         ]
     )]
     public function logout(
         Request $request,
         AccessTokenRepository $accessTokenRepository,
         EntityManagerInterface $em,
-    ): array
-    {
+    ): array {
         // The 'api' firewall protects this endpoint.
         // The authenticator has already verified that the token is valid.
         $authHeader = $request->headers->get('Authorization');

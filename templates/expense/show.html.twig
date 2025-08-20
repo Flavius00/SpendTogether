@@ -12,6 +12,7 @@
                    href="{{ path('app_expense_edit', {id: expense.id}) }}">Edit</a>
                 <a class="px-3 py-2 rounded-md bg-custom-teal text-white hover:bg-custom-teal/90 transition"
                    href="{{ app.request.headers.get('referer') ?: path('app_expense_index') }}">Back to list</a>
+{#                   href="{{ path('app_expense_index') }}">Back to list</a>#}
             </div>
         </div>
 

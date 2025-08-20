@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Entity;
 
 use App\Repository\SubscriptionRepository;
@@ -38,8 +40,8 @@ class Subscription
     private ?string $frequency = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)] // why?
-    #[Assert\NotBlank]
-    //#[Assert\Date(message: 'The next due date must be a valid date.')]
+    #[Assert\NotNull]
+    // #[Assert\Date(message: 'The next due date must be a valid date.')]
     #[Assert\GreaterThanOrEqual(
         value: 'today',
         message: 'The next due date must be today or in the future.'

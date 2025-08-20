@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Command;
 
 use App\Entity\Family;
@@ -10,10 +12,8 @@ use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use Throwable;
 
 #[AsCommand(
     name: 'app:family:setup',
@@ -23,7 +23,7 @@ class FamilySetupCommand extends Command
 {
     public function __construct(
         private readonly EntityManagerInterface $entityManager,
-        private readonly UserRepository $userRepository
+        private readonly UserRepository $userRepository,
     ) {
         parent::__construct();
     }
@@ -45,7 +45,7 @@ class FamilySetupCommand extends Command
 
         try {
             $potentialAdmins = $this->userRepository->findByName($adminName);
-            $availableAdmins = array_filter($potentialAdmins, fn(User $user) => $user->getFamily() === null);
+            $availableAdmins = array_filter($potentialAdmins, fn (User $user) => $user->getFamily() === null);
 
             if (count($availableAdmins) === 0) {
                 throw new \RuntimeException("No available admin user found with name '{$adminName}'.");
@@ -77,7 +77,7 @@ class FamilySetupCommand extends Command
             foreach ($memberNames as $memberName) {
                 $potentialMembers = $this->userRepository->findByName($memberName);
 
-                $availableMembers = array_filter($potentialMembers, fn(User $user) => $user->getFamily() === null);
+                $availableMembers = array_filter($potentialMembers, fn (User $user) => $user->getFamily() === null);
 
                 if (count($availableMembers) === 0) {
                     $io->warning("No available users found with the name '{$memberName}'. Skipping.");
@@ -115,13 +115,14 @@ class FamilySetupCommand extends Command
                 ['Name', 'Email', 'Role'],
                 [
                     [$adminUser->getName(), $adminUser->getEmail(), 'ADMIN'],
-                    ...array_map(fn($member) => [$member[0], $member[1], 'MEMBER'], $addedMembers)
+                    ...array_map(fn ($member) => [$member[0], $member[1], 'MEMBER'], $addedMembers),
                 ]
             );
 
             return Command::SUCCESS;
-        } catch (Throwable $e) {
+        } catch (\Throwable $e) {
             $io->error($e->getMessage());
+
             return Command::FAILURE;
         }
     }

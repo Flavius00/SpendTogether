@@ -41,8 +41,9 @@
   </div>
   <div class="px-4 py-3 border-t border-custom-teal/20 flex gap-2">
     <button type="submit" class="bg-custom-teal hover:bg-custom-teal/90 text-white px-4 py-2 rounded-md transition">Save</button>
-    <a href="{{ app.request.headers.get('referer') ?: path('app_subscription_index') }}"
-       class="px-4 py-2 rounded-md border border-custom-teal/40 text-custom-light hover:text-custom-teal hover:border-custom-teal transition">
+{#    <a href="{{ app.request.headers.get('referer') ?: path('app_subscription_index') }}"#}
+      <a href="{{ path('app_subscription_index') }}"
+         class="px-4 py-2 rounded-md border border-custom-teal/40 text-custom-light hover:text-custom-teal hover:border-custom-teal transition">
       Cancel
     </a>
   </div>
