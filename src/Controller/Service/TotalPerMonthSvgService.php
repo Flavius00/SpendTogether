@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller\Service;
 
+use App\Entity\Family;
 use App\Entity\User;
 
 class TotalPerMonthSvgService
@@ -43,7 +46,6 @@ class TotalPerMonthSvgService
         $total = array_sum($categoryTotals);
         $colors = ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40', '#FF6384', '#C9CBCF'];
 
-        // Variabile pentru legendă
         $legendX = 20;
         $legendY = 20;
         $legendContent = '';
@@ -113,7 +115,7 @@ class TotalPerMonthSvgService
         return $svg;
     }
 
-    public function generateFamilySvg(string $family) : string
+    public function generateFamilySvg(Family $family) : string
     {
         return '<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
             <text x="200" y="200" text-anchor="middle" dominant-baseline="middle" fill="#9CA3AF">Family data not implemented</text>
