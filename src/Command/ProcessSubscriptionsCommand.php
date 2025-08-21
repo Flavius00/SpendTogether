@@ -52,7 +52,7 @@ final class ProcessSubscriptionsCommand extends Command
                 ->setAmount($sub->getAmount())
                 ->setDescription('Auto generated from subscription')
                 ->setDate(\DateTime::createFromInterface($today))
-                ->setCategoryId($category)
+                ->setCategory($category)
                 ->setUserObject($owner)
                 ->setSubscription($sub);
 

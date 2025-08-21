@@ -9,7 +9,7 @@ use App\Entity\Family;
 use App\Entity\User;
 use App\Form\AddUserToFamilyFormType;
 use App\Form\CreateFamilyFormType;
-use App\Form\FamilyEditFormType;
+use App\Form\EditFamilyFormType;
 use App\Repository\FamilyRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -141,7 +141,7 @@ final class FamilyController extends AbstractController
     }
 
     #[Route('/add-user-to-family', name: 'app_family_add_user')]
-    public function getFreeUsers(
+    public function addUserToFamily(
         Request $request,
         #[CurrentUser]
         User $user,
@@ -157,8 +157,7 @@ final class FamilyController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $data = $form->getData();
-            $email = $data->getEmail();
+            $email = $form->getData();
             $userToAdd = $userRepository->findOneBy(['email' => $email]);
 
             if (!$userToAdd) {
@@ -318,7 +317,7 @@ final class FamilyController extends AbstractController
         }
 
         $family = $user->getFamily();
-        $form = $this->createForm(FamilyEditFormType::class, $family);
+        $form = $this->createForm(EditFamilyFormType::class, $family);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

@@ -192,15 +192,15 @@ final class ApiExpenseController extends AbstractController
                 description: "A list of expenses",
                 content: [
                     new OA\JsonContent(
-                    type: "array",
-                    items: new OA\Items(properties: [
-                        new OA\Property(property: "id", type: "integer"),
-                        new OA\Property(property: "name", type: "string"),
-                        new OA\Property(property: "amount", type: "string"),
-                        new OA\Property(property: "category_id", type: "integer"),
-                        new OA\Property(property: "description", type: "string", nullable: true),
-                        new OA\Property(property: "date", type: "string", format: "date-time"),
-                    ], type: "object")
+                        type: "array",
+                        items: new OA\Items(properties: [
+                            new OA\Property(property: "id", type: "integer"),
+                            new OA\Property(property: "name", type: "string"),
+                            new OA\Property(property: "amount", type: "string"),
+                            new OA\Property(property: "category_id", type: "integer"),
+                            new OA\Property(property: "description", type: "string", nullable: true),
+                            new OA\Property(property: "date", type: "string", format: "date-time"),
+                        ], type: "object")
                     ),
                     new OA\XmlContent(
                         type: "array",

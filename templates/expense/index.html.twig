@@ -155,7 +155,7 @@
                         <td class="px-4 py-3">{{ e.date ? e.date|date('Y-m-d H:i') : '' }}</td>
                         <td class="px-4 py-3">{{ e.name }}</td>
                         <td class="px-4 py-3 text-right">{{ e.amount }}</td>
-                        <td class="px-4 py-3">{{ e.categoryId ? e.categoryId.name : '' }}</td>
+                        <td class="px-4 py-3">{{ e.category ? e.category.name : '' }}</td>
                         <td class="px-4 py-3">
                             {% if e.receiptImage %}
                                 <div class="flex items-center gap-2">
