@@ -96,7 +96,7 @@ class Category
     {
         if (!$this->expenses->contains($expense)) {
             $this->expenses->add($expense);
-            $expense->setCategoryId($this);
+            $expense->setCategory($this);
         }
 
         return $this;
@@ -106,8 +106,8 @@ class Category
     {
         if ($this->expenses->removeElement($expense)) {
             // set the owning side to null (unless already changed)
-            if ($expense->getCategoryId() === $this) {
-                $expense->setCategoryId(null);
+            if ($expense->getCategory() === $this) {
+                $expense->setCategory(null);
             }
         }
 

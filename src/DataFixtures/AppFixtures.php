@@ -74,7 +74,7 @@ class AppFixtures extends Fixture
         $expense1 = new Expense();
         $expense1->setName('Cumparaturi saptamanale')
             ->setAmount('150.75')
-            ->setCategoryId($categoryFood)
+            ->setCategory($categoryFood)
             ->setUserObject($member)
             ->setDate(new \DateTime('-5 days'));
         $manager->persist($expense1);
@@ -82,7 +82,7 @@ class AppFixtures extends Fixture
         $expense2 = new Expense();
         $expense2->setName('Bilet autobuz')
             ->setAmount('25.00')
-            ->setCategoryId($categoryTransport)
+            ->setCategory($categoryTransport)
             ->setUserObject($member)
             ->setDate(new \DateTime('-2 days'));
         $manager->persist($expense2);
@@ -90,7 +90,7 @@ class AppFixtures extends Fixture
         $expense3 = new Expense();
         $expense3->setName('Motorina')
             ->setAmount('250.00')
-            ->setCategoryId($categoryTransport)
+            ->setCategory($categoryTransport)
             ->setUserObject($admin)
             ->setDate(new \DateTime('-1 day'));
         $manager->persist($expense3);
@@ -98,7 +98,7 @@ class AppFixtures extends Fixture
         $expense4 = new Expense();
         $expense4->setName('Restaurant')
             ->setAmount('120.00')
-            ->setCategoryId($categoryFood)
+            ->setCategory($categoryFood)
             ->setUserObject($otherUser)
             ->setDate(new \DateTime('-3 days'));
         $manager->persist($expense4);

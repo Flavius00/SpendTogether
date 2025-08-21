@@ -147,7 +147,7 @@ final class ApiExpenseController extends AbstractController
             ->setDescription($data['description'] ?? null)
             ->setDate($date)
             ->setReceiptImage($data['receipt_image'] ?? null)
-            ->setCategoryId($category)
+            ->setCategory($category)
             ->setUserObject($targetUser)
             ->setSubscription($subscription);
 
@@ -244,7 +244,7 @@ final class ApiExpenseController extends AbstractController
                 'id' => $e->getId(),
                 'name' => $e->getName(),
                 'amount' => $e->getAmount(),
-                'category_id' => $e->getCategoryId()?->getId(),
+                'category_id' => $e->getCategory()?->getId(),
                 'description' => $e->getDescription(),
                 'date' => $e->getDate()?->format(DATE_ATOM),
                 'receipt_image' => $e->getReceiptImage(),

@@ -62,7 +62,7 @@ class ExpenseType extends AbstractType
                     new Assert\LessThanOrEqual('now', message: 'Date cannot be in the future'),
                 ],
             ])
-            ->add('categoryId', EntityType::class, [
+            ->add('category', EntityType::class, [
                 'class' => Category::class,
                 'choice_label' => 'name',
                 'label' => 'Category',

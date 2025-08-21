@@ -7,7 +7,7 @@ use App\Entity\Family;
 use App\Entity\User;
 use App\Form\AddUserToFamilyFormType;
 use App\Form\CreateFamilyFormType;
-use App\Form\FamilyEditFormType;
+use App\Form\EditFamilyFormType;
 use App\Repository\FamilyRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -314,7 +314,7 @@ final class FamilyController extends AbstractController
         }
 
         $family = $user->getFamily();
-        $form = $this->createForm(FamilyEditFormType::class, $family);
+        $form = $this->createForm(EditFamilyFormType::class, $family);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
