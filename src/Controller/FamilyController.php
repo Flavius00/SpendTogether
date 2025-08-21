@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
 
 use App\Controller\Service\FamilyService;
@@ -15,7 +17,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Mailer\Transport\Smtp\Auth\LoginAuthenticator;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Http\Attribute\CurrentUser;
@@ -28,8 +29,7 @@ final class FamilyController extends AbstractController
         #[CurrentUser]
         User $user,
         AuthorizationCheckerInterface $authCheck,
-    ): Response
-    {
+    ): Response {
         if (!$authCheck->isGranted('IS_AUTHENTICATED_FULLY')) {
             return $this->redirectToRoute('app_login');
         }
@@ -53,8 +53,7 @@ final class FamilyController extends AbstractController
         AuthorizationCheckerInterface $authCheck,
         EntityManagerInterface $em,
         Security $login,
-    ) : Response
-    {
+    ): Response {
         if (!$authCheck->isGranted('IS_AUTHENTICATED_FULLY')) {
             return $this->redirectToRoute('app_login');
         }
@@ -62,7 +61,6 @@ final class FamilyController extends AbstractController
         if (!is_null($user->getFamily())) {
             return $this->redirectToRoute('app_family_home');
         }
-
 
         $family = new Family();
         $form = $this->createForm(CreateFamilyFormType::class, $family);
@@ -94,8 +92,7 @@ final class FamilyController extends AbstractController
         User $user,
         AuthorizationCheckerInterface $authCheck,
         FamilyRepository $familyRepository,
-    ) : Response
-    {
+    ): Response {
         if (!$authCheck->isGranted('IS_AUTHENTICATED_FULLY')) {
             return $this->redirectToRoute('app_login');
         }
@@ -117,8 +114,7 @@ final class FamilyController extends AbstractController
         FamilyRepository $familyRepository,
         EntityManagerInterface $em,
         Security $security,
-    ) : Response
-    {
+    ): Response {
         if (!$authCheck->isGranted('IS_AUTHENTICATED_FULLY')) {
             return $this->redirectToRoute('app_login');
         }
@@ -127,6 +123,7 @@ final class FamilyController extends AbstractController
 
         if (!$family) {
             $this->addFlash('error', 'Family not found.');
+
             return $this->redirectToRoute('app_family_join');
         }
 
@@ -139,6 +136,7 @@ final class FamilyController extends AbstractController
         $security->login($user);
 
         $this->addFlash('success', 'Successfully joined the family!');
+
         return $this->redirectToRoute('app_family_home');
     }
 
@@ -150,8 +148,7 @@ final class FamilyController extends AbstractController
         AuthorizationCheckerInterface $authCheck,
         UserRepository $userRepository,
         EntityManagerInterface $em,
-    ) : Response
-    {
+    ): Response {
         if (!$authCheck->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             return $this->redirectToRoute('app_login');
         }
@@ -166,7 +163,7 @@ final class FamilyController extends AbstractController
 
             if (!$userToAdd) {
                 $this->addFlash("error", "User with this email does not exist.");
-            } elseif (!is_null($userToAdd->getFamily())){
+            } elseif (!is_null($userToAdd->getFamily())) {
                 $this->addFlash("error", "User already belongs to a family.");
             } else {
                 $userToAdd->setFamily($user->getFamily());
@@ -196,20 +193,21 @@ final class FamilyController extends AbstractController
         EntityManagerInterface $em,
         Security $security,
         FamilyService $familyService,
-    ): Response
-    {
+    ): Response {
         if (!$authCheck->isGranted('IS_AUTHENTICATED_FULLY')) {
             return $this->redirectToRoute('app_login');
         }
 
         if (is_null($user->getFamily())) {
             $this->addFlash('error', 'You are not part of any family.');
+
             return $this->redirectToRoute('app_family_create');
         }
 
         if ($familyService->verifyLeavePosibility($user) === false) {
             $this->addFlash('error', 'Can\' leave family if you are the only admin.');
             $this->addFlash('error', "Give the admin role to someone else before leaving the family.");
+
             return $this->redirectToRoute('app_family_home');
         }
 
@@ -222,6 +220,7 @@ final class FamilyController extends AbstractController
         $security->login($user);
 
         $this->addFlash('success', 'You have left the family successfully.');
+
         return $this->redirectToRoute('app_family_home');
     }
 
@@ -233,8 +232,7 @@ final class FamilyController extends AbstractController
         AuthorizationCheckerInterface $authCheck,
         EntityManagerInterface $em,
         UserRepository $userRepository,
-    ) : Response
-    {
+    ): Response {
         if (!$authCheck->isGranted('IS_AUTHENTICATED_FULLY')) {
             return $this->redirectToRoute('app_login');
         }
@@ -243,11 +241,13 @@ final class FamilyController extends AbstractController
 
         if ($currentUser->getId() === $user->getId()) {
             $this->addFlash('error', 'You cannot kick this user.');
+
             return $this->redirectToRoute('app_family_home');
         }
 
         if ($currentUser->getRoles()[0] !== 'ROLE_ADMIN') {
             $this->addFlash('error', 'Only admins can kick users from the family.');
+
             return $this->redirectToRoute('app_family_home');
         }
 
@@ -257,6 +257,7 @@ final class FamilyController extends AbstractController
         $em->flush();
 
         $this->addFlash('success', 'User has been kicked from the family successfully.');
+
         return $this->redirectToRoute('app_family_home'); // Placeholder for kick user logic
     }
 
@@ -269,14 +270,14 @@ final class FamilyController extends AbstractController
         AuthorizationCheckerInterface $authCheck,
         EntityManagerInterface $em,
         UserRepository $userRepository,
-    ): Response
-    {
+    ): Response {
         if (!$authCheck->isGranted('IS_AUTHENTICATED_FULLY')) {
             return $this->redirectToRoute('app_login');
         }
 
         if($user->getRoles()[0] !== 'ROLE_ADMIN') {
             $this->addFlash('error', 'Only admins can change user roles.');
+
             return $this->redirectToRoute('app_family_home');
         }
 
@@ -285,6 +286,7 @@ final class FamilyController extends AbstractController
 
         if (!$changedUser) {
             $this->addFlash('error', 'User not found.');
+
             return $this->redirectToRoute('app_family_home');
         }
 
@@ -293,6 +295,7 @@ final class FamilyController extends AbstractController
         $em->flush();
 
         $this->addFlash('success', 'User role has been changed successfully.');
+
         return $this->redirectToRoute('app_family_home');
     }
 
@@ -303,14 +306,14 @@ final class FamilyController extends AbstractController
         Request $request,
         EntityManagerInterface $em,
         AuthorizationCheckerInterface $authCheck,
-    ) : Response
-    {
+    ): Response {
         if (!$authCheck->isGranted('IS_AUTHENTICATED_FULLY')) {
             return $this->redirectToRoute('app_login');
         }
 
         if ($user->getRoles()[0] !== 'ROLE_ADMIN') {
             $this->addFlash('error', 'Only admins can update family.');
+
             return $this->redirectToRoute('app_family_home');
         }
 
@@ -323,14 +326,15 @@ final class FamilyController extends AbstractController
             $em->flush();
 
             $this->addFlash('success', 'Family details updated successfully.');
+
             return $this->redirectToRoute('app_family_home');
         }
 
-        return $this->render('family/edit-family.html.twig',[
+        return $this->render('family/edit-family.html.twig', [
             'userEmail' => $user->getEmail(),
             'family' => $family,
             'editFamilyForm' => $form->createView(),
-        ]); //Placeholder for edit family logic
+        ]); // Placeholder for edit family logic
     }
 
     #[Route('/delete', name: 'app_family_delete')]
@@ -340,8 +344,7 @@ final class FamilyController extends AbstractController
         AuthorizationCheckerInterface $authCheck,
         EntityManagerInterface $em,
         Security $security,
-    ) : Response
-    {
+    ): Response {
         if (!$authCheck->isGranted('IS_AUTHENTICATED_FULLY')) {
             return $this->redirectToRoute('app_login');
         }
@@ -352,6 +355,7 @@ final class FamilyController extends AbstractController
 
         if ($numberOfUsers !== 1) {
             $this->addFlash('error', 'You cannot delete family.');
+
             return $this->redirectToRoute('app_family_home');
         }
 
@@ -371,6 +375,7 @@ final class FamilyController extends AbstractController
         $security->login($user);
 
         $this->addFlash('success', 'Family has been deleted.');
+
         return $this->redirectToRoute('app_family_create');
     }
 }

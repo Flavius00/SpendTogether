@@ -1,6 +1,6 @@
 <?php
 
-Declare(strict_types=1);
+declare(strict_types=1);
 
 namespace App\Controller\Service;
 
@@ -11,9 +11,10 @@ class FamilyService
 {
     public function __construct(
         private readonly UserRepository $userRepository,
-    )
-    {}
-    public function verifyLeavePosibility(User $user) : bool
+    ) {
+    }
+
+    public function verifyLeavePosibility(User $user): bool
     {
         $family = $user->getFamily();
         $admins = $this->userRepository->findBy([

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Command;
 
 use App\Entity\User;
@@ -9,12 +11,10 @@ use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
-use Throwable;
 
 #[AsCommand(
     name: 'app:user:create',
@@ -26,9 +26,8 @@ class UserCreateCommand extends Command
         private readonly EntityManagerInterface $entityManager,
         private readonly UserPasswordHasherInterface $passwordHasher,
         private readonly ValidatorInterface $validator,
-        private readonly UserRepository $userRepository
-    )
-    {
+        private readonly UserRepository $userRepository,
+    ) {
         parent::__construct();
     }
 
@@ -91,14 +90,14 @@ class UserCreateCommand extends Command
             $io->table(
                 ['ID', 'Name', 'Email', 'Roles'],
                 [
-                    [$user->getId(), $user->getName(), $user->getEmail(), implode(', ', $user->getRoles())]
+                    [$user->getId(), $user->getName(), $user->getEmail(), implode(', ', $user->getRoles())],
                 ]
             );
 
             return Command::SUCCESS;
-
-        } catch (Throwable $e) {
+        } catch (\Throwable $e) {
             $io->error($e->getMessage());
+
             return Command::FAILURE;
         }
     }

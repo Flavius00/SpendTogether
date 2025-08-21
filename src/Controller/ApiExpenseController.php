@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
 
 use App\Entity\Expense;
@@ -10,11 +12,11 @@ use App\Repository\SubscriptionRepository;
 use App\Repository\UserRepository;
 use App\Security\Voter\ExpenseVoter;
 use Doctrine\ORM\EntityManagerInterface;
+use OpenApi\Attributes as OA;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use OpenApi\Attributes as OA;
 use Symfony\Component\Security\Http\Attribute\CurrentUser;
 
 #[Route('/api')]
@@ -36,7 +38,7 @@ final class ApiExpenseController extends AbstractController
                     new OA\Property(property: "category_id", type: "integer", example: 1),
                     new OA\Property(property: "description", type: "string", example: "Weekly shopping at Lidl"),
                     new OA\Property(property: "date", type: "string", format: "date-time", example: "2025-08-11T12:00:00Z"),
-                    new OA\Property(property: "user_id", description: "Admin only: specify user ID to create expense for another family member.", type: "integer", example: 2)
+                    new OA\Property(property: "user_id", description: "Admin only: specify user ID to create expense for another family member.", type: "integer", example: 2),
                 ],
                 type: "object"
             )
@@ -54,7 +56,7 @@ final class ApiExpenseController extends AbstractController
                             new OA\Property(property: "amount", type: "string"),
                             new OA\Property(property: "category_id", type: "integer"),
                             new OA\Property(property: "description", type: "string", nullable: true),
-                            new OA\Property(property: "date", type: "string", format: "date-time")
+                            new OA\Property(property: "date", type: "string", format: "date-time"),
                         ],
                         type: "object"
                     ),
@@ -66,7 +68,7 @@ final class ApiExpenseController extends AbstractController
                             new OA\Property(property: "amount", type: "string"),
                             new OA\Property(property: "category_id", type: "integer"),
                             new OA\Property(property: "description", type: "string", nullable: true),
-                            new OA\Property(property: "date", type: "string", format: "date-time")
+                            new OA\Property(property: "date", type: "string", format: "date-time"),
                         ],
                         type: "object",
                         xml: new OA\Xml(name: 'response')
@@ -77,7 +79,7 @@ final class ApiExpenseController extends AbstractController
             new OA\Response(response: 401, description: "Unauthorized - Invalid or missing token"),
             new OA\Response(response: 403, description: "Forbidden - You are not allowed to create an expense for this user"),
             new OA\Response(response: 404, description: "Not Found - Category or User not found"),
-            new OA\Response(response: 429, description: "Too Many Requests")
+            new OA\Response(response: 429, description: "Too Many Requests"),
         ]
     )]
     public function addExpense(
@@ -87,7 +89,7 @@ final class ApiExpenseController extends AbstractController
         User $user,
         CategoryRepository $categoryRepository,
         UserRepository $userRepository,
-        ?SubscriptionRepository $subscriptionRepository = null
+        ?SubscriptionRepository $subscriptionRepository = null,
     ): array {
         $data = json_decode($request->getContent(), true);
         if (!is_array($data)) {
@@ -164,9 +166,9 @@ final class ApiExpenseController extends AbstractController
                 'description' => $expense->getDescription(),
                 'date' => $expense->getDate()?->format(DATE_ATOM),
                 'receipt_image' => $expense->getReceiptImage(),
-                'subscription_id' => $subscription?->getId()
+                'subscription_id' => $subscription?->getId(),
             ],
-            'status' => Response::HTTP_CREATED
+            'status' => Response::HTTP_CREATED,
         ];
     }
 
@@ -182,7 +184,7 @@ final class ApiExpenseController extends AbstractController
                 in: "path",
                 required: true,
                 schema: new OA\Schema(type: "integer")
-            )
+            ),
         ],
         responses: [
             new OA\Response(
@@ -217,7 +219,7 @@ final class ApiExpenseController extends AbstractController
             new OA\Response(response: 401, description: "Unauthorized - Invalid or missing token"),
             new OA\Response(response: 403, description: "Forbidden - You are not allowed to view these expenses"),
             new OA\Response(response: 404, description: "Not Found - User not found"),
-            new OA\Response(response: 429, description: "Too Many Requests")
+            new OA\Response(response: 429, description: "Too Many Requests"),
         ]
     )]
     public function listUserExpenses(
@@ -254,7 +256,7 @@ final class ApiExpenseController extends AbstractController
 
         return [
             'data' => $data,
-            'status' => Response::HTTP_OK
+            'status' => Response::HTTP_OK,
         ];
     }
 }

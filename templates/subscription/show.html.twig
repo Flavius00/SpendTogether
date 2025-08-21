@@ -7,7 +7,8 @@
       <h1 class="text-xl font-semibold text-custom-light">Subscription</h1>
       <a class="inline-flex items-center bg-custom-teal/20 hover:bg-custom-teal/30 text-custom-light px-4 py-2 rounded-md transition"
          href="{{ app.request.headers.get('referer') ?: path('app_subscription_index') }}">
-        Back
+{#          href="{{ path('app_subscription_index') }}">#}
+          Back
       </a>
     </div>
 
