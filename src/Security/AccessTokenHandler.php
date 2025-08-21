@@ -1,17 +1,20 @@
 <?php
-// src/Security/AccessTokenHandler.php
+
+declare(strict_types=1);
+
 namespace App\Security;
 
 use App\Repository\AccessTokenRepository;
+use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Http\AccessToken\AccessTokenHandlerInterface;
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
-use Symfony\Component\Security\Core\Exception\AuthenticationException;
 
 final class AccessTokenHandler implements AccessTokenHandlerInterface
 {
     public function __construct(
         private readonly AccessTokenRepository $accessTokenRepository,
-    ) {}
+    ) {
+    }
 
     public function getUserBadgeFrom(string $accessToken): UserBadge
     {

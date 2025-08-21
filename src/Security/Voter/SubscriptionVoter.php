@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Security\Voter;
 
 use App\Entity\Subscription;
@@ -43,6 +45,7 @@ final class SubscriptionVoter extends Voter
                 if ($subject->getId() === $user->getId()) {
                     return true;
                 }
+
                 return $isAdmin && $user->getFamily() && $subject->getFamily() && $subject->getFamily()->getId() === $user->getFamily()->getId();
 
             case self::VIEW:
@@ -56,6 +59,7 @@ final class SubscriptionVoter extends Voter
                     // owner can view/edit/delete
                     return true;
                 }
+
                 // admin from the same family is allowed (including delete)
                 return $isAdmin
                     && $user->getFamily()

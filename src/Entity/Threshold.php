@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Entity;
 
 use App\Repository\ThresholdsRepository;
@@ -24,7 +26,6 @@ class Threshold
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
     #[Assert\NotBlank]
     #[Assert\Positive(message: 'The threshold amount must be a positive number.')]
-
     private ?string $amount = null;
 
     public function getId(): ?int

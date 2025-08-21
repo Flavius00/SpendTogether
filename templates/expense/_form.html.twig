@@ -55,9 +55,9 @@
             {% if expense is defined and expense.receiptImage %}
                 <div class="mt-2 flex items-center gap-3">
                     <span class="text-sm text-custom-light/80">Current receipt:</span>
-                    <a class="px-2 py-1 text-sm border border-custom-teal/40 rounded hover:text-custom-teal hover:border-custom-teal transition"
+                    <a class="px-2 py-1 text-sm border border-custom-teal/40 rounded text-white hover:text-custom-white hover:border-custom-teal transition"
                        href="{{ path('app_expense_receipt', {id: expense.id}) }}">Download</a>
-                    <a class="px-2 py-1 text-sm border border-custom-teal/40 rounded hover:text-custom-teal hover:border-custom-teal transition"
+                    <a class="px-2 py-1 text-sm border border-custom-teal/40 rounded text-white hover:text-custom-white hover:border-custom-teal transition"
                        href="{{ asset('uploads/receipts/' ~ expense.receiptImage) }}" target="_blank">Open</a>
                 </div>
                 <div class="mt-2">
@@ -77,14 +77,15 @@
 
     <div class="px-4 py-3 border-t border-custom-teal/20 flex gap-2">
         <button type="submit" class="bg-custom-teal hover:bg-custom-teal/90 text-white px-4 py-2 rounded-md transition">Save</button>
-        <a href="{{ app.request.headers.get('referer') ?: path('app_expense_index') }}"
+{#        <a href="{{ app.request.headers.get('referer') ?: path('app_expense_index') }}"#}
+        <a href="{{ path('app_expense_index') }}"
            class="px-4 py-2 rounded-md border border-custom-teal/40 text-custom-light hover:text-custom-teal hover:border-custom-teal transition">
             Cancel
         </a>
     </div>
 </div>
 
-{# renderăm doar tokenul CSRF, NU și câmpurile nerandate (ex: removeReceipt) #}
+{# we only render the CSRF token, NOT the non-rendered fields (ex: removeReceipt) #}
 {% if form._token is defined %}
     {{ form_row(form._token) }}
 {% endif %}

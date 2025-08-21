@@ -1,15 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
 
 use App\Entity\Category;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use OpenApi\Attributes as OA;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use OpenApi\Attributes as OA;
 
 #[Route('/admin/api/categories')]
 #[OA\Tag(name: "Admin - Categories")]
@@ -41,17 +43,17 @@ final class AdminApiCategoryController extends AbstractController
                             new OA\Property(property: "is_deleted", type: "boolean"),
                         ], type: "object"),
                         xml: new OA\Xml(name: 'response')
-                    )
+                    ),
                 ]
             ),
-            new OA\Response(response: 403, description: "Forbidden - Insufficient permissions")
+            new OA\Response(response: 403, description: "Forbidden - Insufficient permissions"),
         ]
     )]
     public function listCategories(CategoryRepository $categoryRepository): array
     {
         $categories = $categoryRepository->findAll();
 
-        $data = array_map(static fn(Category $c) => [
+        $data = array_map(static fn (Category $c) => [
             'id' => $c->getId(),
             'name' => $c->getName(),
             'is_deleted' => $c->isDeleted(),
@@ -87,7 +89,7 @@ final class AdminApiCategoryController extends AbstractController
                             new OA\Property(property: "is_deleted", type: "boolean"),
                         ], type: "object",
                         xml: new OA\Xml(name: 'response')
-                    )
+                    ),
                 ]
             ),
             new OA\Response(
@@ -108,18 +110,18 @@ final class AdminApiCategoryController extends AbstractController
                             new OA\Property(property: "is_deleted", type: "boolean"),
                         ], type: "object",
                         xml: new OA\Xml(name: 'response')
-                    )
+                    ),
                 ]
             ),
             new OA\Response(response: 400, description: "Bad Request - Name is missing"),
             new OA\Response(response: 403, description: "Forbidden - Insufficient permissions"),
-            new OA\Response(response: 409, description: "Conflict - A category with this name already exists")
+            new OA\Response(response: 409, description: "Conflict - A category with this name already exists"),
         ]
     )]
     public function createOrUndeleteCategory(
         Request $request,
         CategoryRepository $categoryRepository,
-        EntityManagerInterface $em
+        EntityManagerInterface $em,
     ): array {
         $data = json_decode($request->getContent(), true);
         $name = $data['name'] ?? null;
@@ -134,8 +136,10 @@ final class AdminApiCategoryController extends AbstractController
             if ($category->isDeleted()) {
                 $category->setIsDeleted(false);
                 $em->flush();
+
                 return ['data' => ['id' => $category->getId(), 'name' => $category->getName(), 'is_deleted' => $category->isDeleted()], 'status' => Response::HTTP_OK];
             }
+
             return ['data' => ['error' => 'A category with this name already exists'], 'status' => Response::HTTP_CONFLICT];
         }
 

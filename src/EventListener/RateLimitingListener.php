@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\EventListener;
 
 use App\Entity\User;
 use Symfony\Bundle\SecurityBundle\Security;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
-use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\RateLimiter\RateLimiterFactory;
 
@@ -18,8 +20,9 @@ final class RateLimitingListener
         private readonly RateLimiterFactory $anonymousApiLimiterFactory,
         #[Autowire(service: 'limiter.authenticated_api')]
         private readonly RateLimiterFactory $authenticatedApiLimiterFactory,
-        private readonly Security $security
-    ) {}
+        private readonly Security $security,
+    ) {
+    }
 
     public function __invoke(RequestEvent $event): void
     {
@@ -34,7 +37,7 @@ final class RateLimitingListener
         $user = $this->security->getUser();
 
         if ($user) {
-            $limiter = $this->authenticatedApiLimiterFactory->create($user->getId());
+            $limiter = $this->authenticatedApiLimiterFactory->create((string) $user->getId());
         } else {
             $limiter = $this->anonymousApiLimiterFactory->create($request->getClientIp());
         }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Security\Voter;
 
 use App\Entity\Expense;
@@ -31,7 +33,7 @@ final class ExpenseVoter extends Voter
     protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token): bool
     {
         $user = $token->getUser();
-        if (!is_object($user)) {
+        if (!$user instanceof User) {
             return false;
         }
         // Super Admin has access to all actions
@@ -55,12 +57,14 @@ final class ExpenseVoter extends Voter
             case self::DELETE:
                 /** @var Expense $expense */
                 $expense = $subject;
+
                 return $expense->getUserObject()?->getId() === $user->getId();
 
             case self::CREATE:
             case self::LIST:
                 /** @var User $targetUser */
                 $targetUser = $subject;
+
                 return $targetUser->getId() === $user->getId();
         }
 

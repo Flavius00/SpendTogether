@@ -1,8 +1,12 @@
 <?php
+
+declare(strict_types=1);
+
 namespace App\Form;
 
 use App\Entity\Category;
 use App\Entity\Expense;
+use App\Entity\Family;
 use App\Entity\Subscription;
 use App\Entity\User;
 use App\Repository\SubscriptionRepository;
@@ -18,11 +22,10 @@ class ExpenseType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        /** @var bool $isAdmin */
-        $isAdmin = (bool)($options['is_admin'] ?? false);
+        $isAdmin = (bool) ($options['is_admin'] ?? false);
         /** @var User|null $targetUser */
         $targetUser = $options['target_user'] ?? null;
-        /** @var \App\Entity\Family|null $family */
+        /** @var Family|null $family */
         $family = $options['family'] ?? null;
 
         $builder
@@ -82,6 +85,7 @@ class ExpenseType extends AbstractType
                     } else {
                         $qb->andWhere('1 = 0');
                     }
+
                     return $qb;
                 },
             ])
@@ -93,7 +97,7 @@ class ExpenseType extends AbstractType
                     new Assert\File(
                         maxSize: '8M',
                         mimeTypes: [
-                            'image/png', 'image/jpeg', 'image/webp', 'application/pdf'
+                            'image/png', 'image/jpeg', 'image/webp', 'application/pdf',
                         ],
                         mimeTypesMessage: 'Please upload a valid image or PDF'
                     ),
@@ -119,6 +123,7 @@ class ExpenseType extends AbstractType
                     } else {
                         $qb->andWhere('1 = 0');
                     }
+
                     return $qb;
                 },
                 'constraints' => [new Assert\NotNull(message: 'Please select a user')],
@@ -137,6 +142,6 @@ class ExpenseType extends AbstractType
 
         $resolver->setAllowedTypes('is_admin', 'bool');
         $resolver->setAllowedTypes('target_user', ['null', User::class]);
-        $resolver->setAllowedTypes('family', ['null', \App\Entity\Family::class]);
+        $resolver->setAllowedTypes('family', ['null', Family::class]);
     }
 }

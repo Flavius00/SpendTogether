@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\DataFixtures;
 
 use App\Entity\Category;
@@ -13,18 +15,20 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AppFixtures extends Fixture
 {
-    public function __construct(private readonly UserPasswordHasherInterface $passwordHasher) {}
+    public function __construct(private readonly UserPasswordHasherInterface $passwordHasher)
+    {
+    }
 
     public function load(ObjectManager $manager): void
     {
         $familyPopescu = new Family();
         $familyPopescu->setName('Familia Popescu');
-        $familyPopescu->setMonthlyTargetBudget(1000);
+        $familyPopescu->setMonthlyTargetBudget('1000');
         $manager->persist($familyPopescu);
 
         $familyAlt = new Family();
         $familyAlt->setName('Familia Alt');
-        $familyAlt->setMonthlyTargetBudget(1000);
+        $familyAlt->setMonthlyTargetBudget('1000');
         $manager->persist($familyAlt);
 
         $admin = new User();
