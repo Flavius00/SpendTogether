@@ -28,7 +28,7 @@ class ExpenseRepository extends ServiceEntityRepository
     public function searchByUsers(array $users, array $criteria, string $sort, string $dir, int $page, int $perPage): array
     {
         $qb = $this->createQueryBuilder('e')
-            ->leftJoin('e.categoryId', 'c')
+            ->leftJoin('e.category', 'c')
             ->addSelect('c');
 
         $count = count($users);
@@ -145,7 +145,7 @@ class ExpenseRepository extends ServiceEntityRepository
                 ->setParameter('q', '%' . mb_strtolower($criteria['q']) . '%');
         }
         if (!empty($criteria['category'])) {
-            $qb->andWhere('e.categoryId = :cat')->setParameter('cat', $criteria['category']);
+            $qb->andWhere('e.category = :cat')->setParameter('cat', $criteria['category']);
         }
         if (!empty($criteria['date_from'])) {
             $qb->andWhere('e.date >= :dfrom')->setParameter('dfrom', new \DateTime($criteria['date_from'] . ' 00:00:00'));
