@@ -6,15 +6,22 @@
     <div class="h-full bg-custom-dark p-8 overflow-y-auto">
         <div class="max-w-7xl mx-auto">
 
-            <div class="flex justify-end mb-4">
+            <div class="flex justify-end mb-4 gap-4">
                 <div class="relative inline-block">
                     <form method="GET" action="{{ path('app_dashboard') }}">
-                        <select name="viewType" class="block appearance-none bg-custom-teal border border-gray-300 text-custom-dark py-2 px-4 pr-8 rounded-lg leading-tight focus:outline-none focus:border-custom-dark focus:ring-2 focus:ring-custom-dark focus:ring-opacity-30 shadow-md transition-all duration-200" onchange="this.form.submit()">
+                        <input type="month" name="month" class="block bg-custom-teal/20 border border-custom-mint text-white py-2 px-4 rounded-lg leading-tight focus:outline-none focus:border-custom-mint focus:ring-2 focus:ring-custom-mint focus:ring-opacity-30 shadow-md transition-all duration-200" value="{{ app.request.get('month') ?: 'now'|date('Y-m') }}" onchange="this.form.submit()">
+                        <input type="hidden" name="viewType" value="{{ app.request.get('viewType') ?: 'user' }}">
+                    </form>
+                </div>
+                <div class="relative inline-block">
+                    <form method="GET" action="{{ path('app_dashboard') }}">
+                        <select name="viewType" class="block appearance-none bg-custom-teal/20 border border-custom-mint text-white  py-2 px-4 pr-8 rounded-lg leading-tight focus:outline-none focus:border-custom-mint focus:ring-2 focus:ring-custom-mint focus:ring-opacity-30 shadow-md transition-all duration-200" onchange="this.form.submit()">
                             <option value="user" {% if app.request.get('viewType') == 'user' %}selected{% endif %}>User</option>
                             <option value="family" {% if app.request.get('viewType') == 'family' %}selected{% endif %}>Family</option>
                         </select>
+                        <input type="hidden" name="month" value="{{ app.request.get('month') }}">
                     </form>
-                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-custom-dark">
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-custom-mint">
                         <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
                     </div>
                 </div>

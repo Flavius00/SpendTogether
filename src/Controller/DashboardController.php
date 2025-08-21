@@ -30,8 +30,9 @@ final class DashboardController extends AbstractController
         }
 
         $viewType = $request->query->get('viewType', 'user');
+        $selectedMonth = $request->query->get('month', date('Y-m'));
 
-        $svg = $monthSvgService->generateSvg($viewType, $user);
+        $svg = $monthSvgService->generateSvg($viewType, $selectedMonth, $user);
 
         return $this->render('dashboard/index.html.twig', [
             'controller_name' => 'DashboardController',
