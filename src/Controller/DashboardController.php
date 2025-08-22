@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Controller\Service\SelectedMonthVsLastMonthSvgService;
 use App\Controller\Service\TotalPerMonthSvgService;
 use App\Controller\Service\SubscriptionsVsOneTimeSvgService;
 use App\Controller\Service\TopExpensesSvgService;
@@ -27,6 +28,7 @@ final class DashboardController extends AbstractController
         TotalPerMonthSvgService $monthSvgService,
         SubscriptionsVsOneTimeSvgService $compareSvgService,
         TopExpensesSvgService $topExpensesSvgService,
+        SelectedMonthVsLastMonthSvgService $selectedMonthVsLastSvgService,
     ): Response
     {
         if (!$authCheck->isGranted('IS_AUTHENTICATED_FULLY')) {
@@ -38,7 +40,8 @@ final class DashboardController extends AbstractController
         $selectedMonth = $request->query->get('month', date('Y-m'));
 
         $svg1 = $monthSvgService->generateSvg($viewType, $selectedMonth, $user);
-        $svg2 = $compareSvgService->generateSvgForLastMonths(12, $viewType, $user);
+        $svg2 = $compareSvgService->generateSvgForLastMonths(6, $viewType, $user);
+        $svg3 = $selectedMonthVsLastSvgService->generateSvg($viewType, $selectedMonth, $user);
 
         $svgTop = $topExpensesSvgService->generateSvg($viewType, $user, $monthKey);
 
@@ -47,6 +50,7 @@ final class DashboardController extends AbstractController
             'controller_name' => 'DashboardController',
             'svg1' => $svg1,
             'svg2' => $svg2,
+            'svg3' => $svg3,
             'svgTop' => $svgTop,
         ]);
     }

@@ -9,7 +9,7 @@
             <div class="flex justify-end mb-4 gap-4">
                 <div class="relative inline-block">
                     <form method="GET" action="{{ path('app_dashboard') }}">
-                        <input type="month" name="month" class="block bg-custom-teal/20 border border-custom-mint text-white py-2 px-4 rounded-lg leading-tight focus:outline-none focus:border-custom-mint focus:ring-2 focus:ring-custom-mint focus:ring-opacity-30 shadow-md transition-all duration-200" value="{{ app.request.get('month') ?: 'now'|date('Y-m') }}" onchange="this.form.submit()">
+                        <input type="month" name="month" class="block bg-custom-teal/20 border border-custom-mint text-white py-2 px-4 rounded-lg leading-tight focus:outline-none focus:border-custom-mint focus:ring-2 focus:ring-custom-mint focus:ring-opacity-30 shadow-md transition-all duration-200" value="{{ app.request.get('month') ?: 'now'|date('Y-m') }}" onchange="this.form.submit()" max="{{ 'now'|date('Y-m') }}">
                         <input type="hidden" name="viewType" value="{{ app.request.get('viewType') ?: 'user' }}">
                     </form>
                 </div>
@@ -29,28 +29,15 @@
 
             <div class="grid w-full gap-5" style="grid-template-areas: 'kpi chart1' 'chart2 chart2'; grid-template-columns: 1.1fr 1fr;">
 
-                <div class="bg-custom-mint rounded-lg shadow-md p-2 text-center flex flex-col relative" style="grid-area: kpi">
-                    <div class="absolute top-2 right-2 z-10">
-                        <div class="relative inline-block rounded-lg">
-                            <select class="block appearance-none bg-gray-200 border border-gray-300 text-gray-700 py-1 px-3 pr-6 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 text-sm">
-                                <option value="option1">Option 1</option>
-                                <option value="option2">Option 2</option>
-                            </select>
-                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-1 text-gray-700">
-                                <svg class="fill-current h-3 w-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
-                            </div>
-                        </div>
-                    </div>
+                <div class="bg-custom-dark rounded-lg border border-gray-700 p-2 text-center flex flex-col relative" style="grid-area: kpi">
                     <div class="w-full bg-custom-dark h-auto text-gray-400 flex justify-center items-center">
                         {{ svg1|raw }}
                     </div>
                 </div>
 
                 <div class="bg-custom-dark rounded-lg flex flex-col justify-center items-center gap-5" style="grid-area: chart1">
-                    <div class="bg-white rounded-lg w-full h-1/2 flex items-center justify-center border-b border-gray-300 p-2">
-                        <svg class="w-full h-full rounded-lg text-gray-400" viewBox="0 0 200 50">
-                            <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="15" fill="currentColor">TO DO - Grafic 1A</text>
-                        </svg>
+                    <div class="bg-custom-dark rounded-lg w-full h-1/2 flex items-center justify-center p-2 border border-gray-700">
+                        {{ svg3|raw }}
                     </div>
                     <div class="bg-custom-dark rounded-lg w-full h-1/2 flex items-center justify-center p-2 border border-gray-700">
                         {{ svg2|raw }}
@@ -58,12 +45,12 @@
                 </div>
 
                 <div style="grid-area: chart2; display:flex; gap:8px; width:100%;">
-                    <div style="flex: 0 0 70%;">
+                    <div style="flex: 0 0 70%;" class="border border-gray-700 rounded-lg bg-custom-dark">
                         <svg class="w-full h-auto text-gray-400" viewBox="0 0 400 200">
                             <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="20" fill="currentColor">TO DO</text>
                         </svg>
                     </div>
-                    <div style="flex: 0 0 30%; padding: 8px; box-sizing: border-box; min-height: 320px;">
+                    <div style="flex: 0 0 30%; padding: 8px; box-sizing: border-box; min-height: 320px;" class="border border-gray-700 rounded-lg bg-custom-dark">
                         <div style="width: 100%; height: 100%;">{{ svgTop|raw }}</div>
                     </div>
                 </div>
