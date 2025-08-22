@@ -10,18 +10,23 @@ use App\Entity\User;
 
 final class TopExpensesSvgService
 {
-    public function generateSvg(string $option, User $user, ?string $monthKey = null): string
+    /**
+     * @param string      $option         'user' | 'family'
+     * @param User        $user
+     * @param string|null $selectedMonth  Month key 'YYYY-MM' (defaults to current month)
+     */
+    public function generateSvg(string $option, User $user, ?string $selectedMonth = null): string
     {
-        [$start, $end, $monthLabel] = $this->resolveMonthRange($monthKey);
+        [$monthRef, $label] = $this->resolveSelectedMonth($selectedMonth);
 
         if ($option === 'family' && $user->getFamily()) {
-            return $this->generateFamilyTopSvg($user->getFamily(), $start, $end, $monthLabel);
+            return $this->generateFamilyTopSvg($user->getFamily(), $monthRef, $label);
         }
 
-        return $this->generateUserTopSvg($user, $start, $end, $monthLabel);
+        return $this->generateUserTopSvg($user, $monthRef, $label);
     }
 
-    private function generateUserTopSvg(User $user, \DateTime $start, \DateTime $end, string $monthLabel): string
+    private function generateUserTopSvg(User $user, \DateTime $monthRef, string $label): string
     {
         $rows = [];
 
@@ -30,7 +35,7 @@ final class TopExpensesSvgService
                 continue;
             }
             $date = $expense->getDate();
-            if (!$date || $date < $start || $date > $end) {
+            if (!$date || $date->format('Y-m') !== $monthRef->format('Y-m')) {
                 continue;
             }
             $amount = (float) $expense->getAmount();
@@ -41,10 +46,10 @@ final class TopExpensesSvgService
             ];
         }
 
-        return $this->buildTopSvg($rows, $monthLabel, showUser: false);
+        return $this->buildTopSvg($rows, $label, showUser: false);
     }
 
-    private function generateFamilyTopSvg(Family $family, \DateTime $start, \DateTime $end, string $monthLabel): string
+    private function generateFamilyTopSvg(Family $family, \DateTime $monthRef, string $label): string
     {
         $rows = [];
 
@@ -63,7 +68,7 @@ final class TopExpensesSvgService
                     continue;
                 }
                 $date = $expense->getDate();
-                if (!$date || $date < $start || $date > $end) {
+                if (!$date || $date->format('Y-m') !== $monthRef->format('Y-m')) {
                     continue;
                 }
                 $amount = (float) $expense->getAmount();
@@ -75,10 +80,10 @@ final class TopExpensesSvgService
             }
         }
 
-        return $this->buildTopSvg($rows, $monthLabel, showUser: true);
+        return $this->buildTopSvg($rows, $label, showUser: true);
     }
 
-    private function buildTopSvg(array $rows, string $monthLabel, bool $showUser): string
+    private function buildTopSvg(array $rows, string $periodLabel, bool $showUser): string
     {
         // Sort by amount desc and keep top 5
         usort($rows, static fn ($a, $b) => $b['amount'] <=> $a['amount']);
@@ -117,10 +122,10 @@ final class TopExpensesSvgService
             + ($rowsCount * $rowHeight) + (($rowsCount - 1) * $rowGap) + $padBottom;
 
         $svg = [];
-        $svg[] = '<svg viewBox="0 0 ' . $width . ' ' . $height . '" width="100%" height="100%" preserveAspectRatio="xMinYMin meet" xmlns="http://www.w3.org/2000/svg" role="img" style="display:block" aria-label="Top 5 expenses for ' . htmlspecialchars($monthLabel) . '">';
+        $svg[] = '<svg viewBox="0 0 ' . $width . ' ' . $height . '" width="100%" height="100%" preserveAspectRatio="xMinYMin meet" xmlns="http://www.w3.org/2000/svg" role="img" style="display:block" aria-label="Top 5 expenses for ' . htmlspecialchars($periodLabel) . '">';
 
         // Title
-        $title = 'Top 5 - ' . $monthLabel;
+        $title = 'Top 5 - ' . $periodLabel;
         $titleX = $padSide;
         $titleY = $padTop + $titleSize;
         $svg[] = '<text x="' . $titleX . '" y="' . $titleY . '" fill="' . $textColor . '" font-size="' . $titleSize . '" font-weight="600">' . htmlspecialchars($title) . '</text>';
@@ -156,6 +161,7 @@ final class TopExpensesSvgService
             $maxDetailsWidth = ($width - $padSide - $reserveRight - $gapToAmount) - $textX;
 
             $name = (string)($r['name'] ?? '');
+            $details = '';
             if ($showUser) {
                 $userDisp = (string)($r['user'] ?? '');
                 // Split available width between name and user (approx. 65% / 35%)
@@ -182,18 +188,20 @@ final class TopExpensesSvgService
         return implode('', $svg);
     }
 
-    private function resolveMonthRange(?string $monthKey): array
+    /**
+     * Normalize selected month (YYYY-MM) to a DateTime (first day of month) and a label.
+     *
+     * @return array{0:\DateTime,1:string}
+     */
+    private function resolveSelectedMonth(?string $selectedMonth): array
     {
-        $firstDay = new \DateTime('first day of this month');
-        if ($monthKey && preg_match('/^\d{4}-\d{2}$/', $monthKey) === 1) {
-            $firstDay = \DateTime::createFromFormat('Y-m-d H:i:s', $monthKey . '-01 00:00:00') ?: $firstDay;
+        if ($selectedMonth && preg_match('/^\d{4}-\d{2}$/', $selectedMonth) === 1) {
+            $firstDay = \DateTime::createFromFormat('Y-m-d H:i:s', $selectedMonth . '-01 00:00:00') ?: new \DateTime('first day of this month');
+        } else {
+            $firstDay = new \DateTime('first day of this month');
         }
-        $start = (clone $firstDay)->setTime(0, 0, 0);
-        $end = (clone $firstDay)->modify('last day of this month')->setTime(23, 59, 59);
-
-        $monthLabel = $firstDay->format('M');
-
-        return [$start, $end, $monthLabel];
+        $label = $firstDay->format('M');
+        return [$firstDay, $label];
     }
 
     private function formatAmount(float $amount): string
