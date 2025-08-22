@@ -8,6 +8,7 @@ use App\Controller\Service\SelectedMonthVsLastMonthSvgService;
 use App\Controller\Service\TotalPerMonthSvgService;
 use App\Controller\Service\SubscriptionsVsOneTimeSvgService;
 use App\Controller\Service\TopExpensesSvgService;
+use App\Controller\Service\ProjectedSpendingSvgService;
 use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,6 +30,7 @@ final class DashboardController extends AbstractController
         SubscriptionsVsOneTimeSvgService $compareSvgService,
         TopExpensesSvgService $topExpensesSvgService,
         SelectedMonthVsLastMonthSvgService $selectedMonthVsLastSvgService,
+        ProjectedSpendingSvgService $projectedSvgService,
     ): Response
     {
         if (!$authCheck->isGranted('IS_AUTHENTICATED_FULLY')) {
@@ -36,15 +38,13 @@ final class DashboardController extends AbstractController
         }
 
         $viewType = $request->query->get('viewType', 'user');
-        $monthKey = $request->query->get('month');
         $selectedMonth = $request->query->get('month', date('Y-m'));
 
         $svg1 = $monthSvgService->generateSvg($viewType, $selectedMonth, $user);
-        $svg2 = $compareSvgService->generateSvgForLastMonths(6, $viewType, $user);
+        $svg2 = $compareSvgService->generateSvgForLastMonths(12, $viewType, $user);
         $svg3 = $selectedMonthVsLastSvgService->generateSvg($viewType, $selectedMonth, $user);
-
-        $svgTop = $topExpensesSvgService->generateSvg($viewType, $user, $monthKey);
-
+        $svgTop = $topExpensesSvgService->generateSvg($viewType, $user, $selectedMonth);
+        $svgProjected = $projectedSvgService->generateSvg($viewType, $user, $selectedMonth);
 
         return $this->render('dashboard/index.html.twig', [
             'controller_name' => 'DashboardController',
@@ -52,6 +52,7 @@ final class DashboardController extends AbstractController
             'svg2' => $svg2,
             'svg3' => $svg3,
             'svgTop' => $svgTop,
+            'svgProjected' => $svgProjected,
         ]);
     }
 }
