@@ -8,11 +8,11 @@ use App\Entity\User;
 class SelectedMonthVsLastMonthSvgService
 {
     private const CHART_WIDTH = 800;
-    private const CHART_HEIGHT = 400;
+    private const CHART_HEIGHT = 500; // Increased for legend space
     private const MARGIN_LEFT = 60;
     private const MARGIN_RIGHT = 40;
     private const MARGIN_TOP = 40;
-    private const MARGIN_BOTTOM = 60;
+    private const MARGIN_BOTTOM = 100; // Increased for legend
     private const Y_INCREMENT = 500;
 
     public function generateSvg(string $option, string $selectedDate, User $user): string
@@ -65,7 +65,8 @@ class SelectedMonthVsLastMonthSvgService
             }
         }
 
-        return $dailyTotals;
+        // Convert to cumulative totals
+        return $this->convertToCumulative($dailyTotals);
     }
 
     private function calculateFamilyDailyExpenses(Family $family, string $month): array
@@ -94,7 +95,21 @@ class SelectedMonthVsLastMonthSvgService
             }
         }
 
-        return $dailyTotals;
+        // Convert to cumulative totals
+        return $this->convertToCumulative($dailyTotals);
+    }
+
+    private function convertToCumulative(array $dailyTotals): array
+    {
+        $cumulative = [];
+        $runningTotal = 0;
+
+        foreach ($dailyTotals as $day => $amount) {
+            $runningTotal += $amount;
+            $cumulative[$day] = $runningTotal;
+        }
+
+        return $cumulative;
     }
 
     private function generateChart(array $selectedMonthData, array $previousMonthData, string $selectedDate): string
@@ -103,7 +118,7 @@ class SelectedMonthVsLastMonthSvgService
         $maxY = ceil($maxAmount / self::Y_INCREMENT) * self::Y_INCREMENT;
         if ($maxY === 0) $maxY = self::Y_INCREMENT;
 
-        $fullMonthDays = $this->getDaysInMonth($selectedDate); // Always use full month for chart width
+        $fullMonthDays = $this->getDaysInMonth($selectedDate);
         $chartWidth = self::CHART_WIDTH - self::MARGIN_LEFT - self::MARGIN_RIGHT;
         $chartHeight = self::CHART_HEIGHT - self::MARGIN_TOP - self::MARGIN_BOTTOM;
 
@@ -115,15 +130,15 @@ class SelectedMonthVsLastMonthSvgService
         // Grid lines and Y-axis labels
         $svg .= $this->generateYAxisAndGrid($maxY, $chartHeight);
 
-        // X-axis labels (using full month)
+        // X-axis labels
         $svg .= $this->generateXAxis($fullMonthDays, $chartWidth);
 
         // Chart lines
         $svg .= $this->generateLine($selectedMonthData, $maxY, $chartWidth, $chartHeight, '#10B981', 'Selected Month', $fullMonthDays);
         $svg .= $this->generateLine($previousMonthData, $maxY, $chartWidth, $chartHeight, '#EF4444', 'Previous Month', $fullMonthDays);
 
-        // Legend
-        $svg .= $this->generateLegend($selectedDate);
+        // Legend below chart
+        $svg .= $this->generateLegend($selectedDate, $chartHeight);
 
         $svg .= '</svg>';
 
@@ -133,7 +148,7 @@ class SelectedMonthVsLastMonthSvgService
     private function generateYAxisAndGrid(float $maxY, int $chartHeight): string
     {
         $svg = '';
-        $steps = (int)($maxY / self::Y_INCREMENT);
+        $steps = (int)($maxY / self::Y_INCREMENT) ?: 1;
 
         for ($i = 0; $i <= $steps; $i++) {
             $amount = $i * self::Y_INCREMENT;
@@ -173,6 +188,7 @@ class SelectedMonthVsLastMonthSvgService
         $svg = '';
         $points = [];
         $stepSize = $chartWidth / $fullMonthDays;
+        $maxY = $maxY ?: 1;
 
         foreach ($data as $day => $amount) {
             $x = self::MARGIN_LEFT + ($day - 0.5) * $stepSize;
@@ -193,20 +209,23 @@ class SelectedMonthVsLastMonthSvgService
         return $svg;
     }
 
-    private function generateLegend(string $selectedDate): string
+    private function generateLegend(string $selectedDate, int $chartHeight): string
     {
         $selectedMonthName = (new \DateTime($selectedDate))->format('F Y');
         $previousMonthName = (new \DateTime($this->getPreviousMonth($selectedDate)))->format('F Y');
 
+        $legendY = self::MARGIN_TOP + $chartHeight + 40;
+        $centerX = self::CHART_WIDTH / 2;
+
         $svg = '<g>';
 
-        // Selected month legend
-        $svg .= '<line x1="20" y1="20" x2="40" y2="20" stroke="#10B981" stroke-width="2"/>';
-        $svg .= '<text x="45" y="25" fill="#374151" font-size="12">' . htmlspecialchars($selectedMonthName) . '</text>';
+        // Selected month legend (centered)
+        $svg .= '<line x1="' . ($centerX - 150) . '" y1="' . $legendY . '" x2="' . ($centerX - 130) . '" y2="' . $legendY . '" stroke="#10B981" stroke-width="2"/>';
+        $svg .= '<text x="' . ($centerX - 125) . '" y="' . ($legendY + 5) . '" fill="#374151" font-size="12">' . htmlspecialchars($selectedMonthName) . '</text>';
 
-        // Previous month legend
-        $svg .= '<line x1="20" y1="40" x2="40" y2="40" stroke="#EF4444" stroke-width="2"/>';
-        $svg .= '<text x="45" y="45" fill="#374151" font-size="12">' . htmlspecialchars($previousMonthName) . '</text>';
+        // Previous month legend (centered)
+        $svg .= '<line x1="' . ($centerX + 30) . '" y1="' . $legendY . '" x2="' . ($centerX + 50) . '" y2="' . $legendY . '" stroke="#EF4444" stroke-width="2"/>';
+        $svg .= '<text x="' . ($centerX + 55) . '" y="' . ($legendY + 5) . '" fill="#374151" font-size="12">' . htmlspecialchars($previousMonthName) . '</text>';
 
         $svg .= '</g>';
 
