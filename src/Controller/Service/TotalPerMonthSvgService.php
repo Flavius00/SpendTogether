@@ -10,6 +10,7 @@ use App\Entity\User;
 class TotalPerMonthSvgService
 {
     private const COLORS = ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40', '#34D399', '#F87171'];
+    private const RED_SHADES = ['#DC2626', '#EF4444', '#F87171', '#FCA5A5', '#FECACA', '#FEE2E2', '#B91C1C', '#991B1B'];
     private const CENTER_X = 200;
     private const CENTER_Y = 260;
     private const RADIUS = 120;
@@ -52,26 +53,46 @@ class TotalPerMonthSvgService
 
         $userExpenses = $this->calculateFamilyUserExpenses($family, $selectedDate);
         $totalSpent = array_sum($userExpenses);
-        $remainingBudget = $familyBudget - $totalSpent;
-
-        if ($remainingBudget > 0) {
-            $userExpenses['Available'] = $remainingBudget;
-        }
 
         if (empty($userExpenses)) {
             return $this->generateEmptyStateSvg('No expenses found');
         }
 
-        $legendData = [];
-        foreach ($userExpenses as $userName => $amount) {
-            $percentage = ($amount / $familyBudget) * 100;
-            $legendData[] = [
-                'label' => $userName . ' - ' . round($percentage, 1) . '% ($' . number_format($amount, 2) . ')',
-                'amount' => $amount
-            ];
+        $isOverBudget = $totalSpent > $familyBudget;
+        $remainingBudget = $familyBudget - $totalSpent;
+
+        // Add remaining budget or over budget indicator
+        if (!$isOverBudget && $remainingBudget > 0) {
+            $userExpenses['Remaining Budget'] = $remainingBudget;
+            $total = $familyBudget;
+        } else {
+            $userExpenses['OVER BUDGET!'] = 0; // Just for legend display
+            $total = $totalSpent;
         }
 
-        return $this->generatePieChartSvg($userExpenses, (float)$familyBudget, $legendData);
+        $legendData = [];
+        foreach ($userExpenses as $userName => $amount) {
+            if ($userName === 'OVER BUDGET!') {
+                $overBudgetAmount = $totalSpent - $familyBudget;
+                $legendData[] = [
+                    'label' => 'OVER BUDGET! +$' . number_format($overBudgetAmount, 2),
+                    'amount' => 0
+                ];
+            } else {
+                $percentage = ($amount / $total) * 100;
+                $legendData[] = [
+                    'label' => $userName . ' - ' . round($percentage, 1) . '% ($' . number_format($amount, 2) . ')',
+                    'amount' => $amount
+                ];
+            }
+        }
+
+        // Remove the "OVER BUDGET!" entry from the pie chart data
+        if ($isOverBudget) {
+            unset($userExpenses['OVER BUDGET!']);
+        }
+
+        return $this->generatePieChartSvg($userExpenses, (float)$total, $legendData, $isOverBudget);
     }
 
     private function calculateUserCategoryTotals(User $user, string $selectedDate): array
@@ -128,29 +149,30 @@ class TotalPerMonthSvgService
         </svg>';
     }
 
-    private function generatePieChartSvg(array $data, float $total, array $legendData): string
+    private function generatePieChartSvg(array $data, float $total, array $legendData, bool $isOverBudget = false): string
     {
         $svg = '<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">';
-        $svg .= $this->generateLegend($legendData);
+        $svg .= $this->generateLegend($legendData, $isOverBudget);
 
         if (count($data) === 1) {
-            $svg .= $this->generateSingleSlice($data, $total);
+            $svg .= $this->generateSingleSlice($data, $total, $isOverBudget);
         } else {
-            $svg .= $this->generateMultipleSlices($data, $total);
+            $svg .= $this->generateMultipleSlices($data, $total, $isOverBudget);
         }
 
         $svg .= '</svg>';
         return $svg;
     }
 
-    private function generateLegend(array $legendData): string
+    private function generateLegend(array $legendData, bool $isOverBudget = false): string
     {
+        $colors = $isOverBudget ? self::RED_SHADES : self::COLORS;
         $legendContent = '';
         $legendX = 20;
         $legendY = 20;
 
         foreach ($legendData as $index => $item) {
-            $color = self::COLORS[$index % count(self::COLORS)];
+            $color = $colors[$index % count($colors)];
             $y = $legendY + ($index * 20);
 
             $legendContent .= '<rect x="' . $legendX . '" y="' . $y . '" width="12" height="12" fill="' . $color . '"/>';
@@ -160,17 +182,19 @@ class TotalPerMonthSvgService
         return $legendContent;
     }
 
-    private function generateSingleSlice(array $data, float $total): string
+    private function generateSingleSlice(array $data, float $total, bool $isOverBudget = false): string
     {
         $percentage = (current($data) / $total) * 100;
-        $color = self::COLORS[0];
+        $colors = $isOverBudget ? self::RED_SHADES : self::COLORS;
+        $color = $colors[0];
 
         return '<circle cx="' . self::CENTER_X . '" cy="' . self::CENTER_Y . '" r="' . self::RADIUS . '" fill="' . $color . '" stroke="white" stroke-width="2" />
             <text x="' . self::CENTER_X . '" y="' . self::CENTER_Y . '" text-anchor="middle" dominant-baseline="middle" fill="white" font-size="18" font-weight="bold">' . round($percentage, 1) . '%</text>';
     }
 
-    private function generateMultipleSlices(array $data, float $total): string
+    private function generateMultipleSlices(array $data, float $total, bool $isOverBudget = false): string
     {
+        $colors = $isOverBudget ? self::RED_SHADES : self::COLORS;
         $svg = '';
         $startAngle = 0;
         $colorIndex = 0;
@@ -187,7 +211,7 @@ class TotalPerMonthSvgService
             $largeArc = $angle > 180 ? 1 : 0;
             $pathData = "M " . self::CENTER_X . " " . self::CENTER_Y . " L $x1 $y1 A " . self::RADIUS . " " . self::RADIUS . " 0 $largeArc 1 $x2 $y2 Z";
 
-            $color = self::COLORS[$colorIndex % count(self::COLORS)];
+            $color = $colors[$colorIndex % count($colors)];
             $svg .= '<path d="' . $pathData . '" fill="' . $color . '" stroke="white" stroke-width="2"/>';
 
             if ($percentage > 5) {
