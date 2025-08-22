@@ -7,6 +7,7 @@ namespace App\Controller;
 use App\Controller\Service\TotalPerMonthSvgService;
 use App\Controller\Service\SubscriptionsVsOneTimeSvgService;
 use App\Controller\Service\TopExpensesSvgService;
+use App\Controller\Service\ProjectedSpendingSvgService;
 use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -27,6 +28,7 @@ final class DashboardController extends AbstractController
         TotalPerMonthSvgService $monthSvgService,
         SubscriptionsVsOneTimeSvgService $compareSvgService,
         TopExpensesSvgService $topExpensesSvgService,
+        ProjectedSpendingSvgService $projectedSvgService,
     ): Response
     {
         if (!$authCheck->isGranted('IS_AUTHENTICATED_FULLY')) {
@@ -34,20 +36,19 @@ final class DashboardController extends AbstractController
         }
 
         $viewType = $request->query->get('viewType', 'user');
-        $monthKey = $request->query->get('month');
         $selectedMonth = $request->query->get('month', date('Y-m'));
 
         $svg1 = $monthSvgService->generateSvg($viewType, $selectedMonth, $user);
         $svg2 = $compareSvgService->generateSvgForLastMonths(12, $viewType, $user);
-
-        $svgTop = $topExpensesSvgService->generateSvg($viewType, $user, $monthKey);
-
+        $svgTop = $topExpensesSvgService->generateSvg($viewType, $user, $selectedMonth);
+        $svgProjected = $projectedSvgService->generateSvg($viewType, $user, $selectedMonth);
 
         return $this->render('dashboard/index.html.twig', [
             'controller_name' => 'DashboardController',
             'svg1' => $svg1,
             'svg2' => $svg2,
             'svgTop' => $svgTop,
+            'svgProjected' => $svgProjected,
         ]);
     }
 }

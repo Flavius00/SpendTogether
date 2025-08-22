@@ -59,9 +59,7 @@
 
                 <div style="grid-area: chart2; display:flex; gap:8px; width:100%;">
                     <div style="flex: 0 0 70%;">
-                        <svg class="w-full h-auto text-gray-400" viewBox="0 0 400 200">
-                            <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="20" fill="currentColor">TO DO</text>
-                        </svg>
+                        {{ svgProjected|raw }}
                     </div>
                     <div style="flex: 0 0 30%; padding: 8px; box-sizing: border-box; min-height: 320px;">
                         <div style="width: 100%; height: 100%;">{{ svgTop|raw }}</div>
