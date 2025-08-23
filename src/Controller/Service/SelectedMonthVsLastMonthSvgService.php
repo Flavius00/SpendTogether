@@ -17,6 +17,10 @@ class SelectedMonthVsLastMonthSvgService
 
     public function generateSvg(string $option, string $selectedDate, User $user): string
     {
+        if (empty($selectedDate)) {
+            $selectedDate = (new \DateTime())->format('Y-m');
+        }
+
         if ($option === 'user') {
             return $this->generateUserSvg($selectedDate, $user);
         } else {
@@ -200,10 +204,28 @@ class SelectedMonthVsLastMonthSvgService
         $svg .= '<polyline points="' . implode(' ', $points) . '" fill="none" stroke="' . $color . '" stroke-width="2"/>';
 
         // Draw points
+        $lastDay = 0;
+        $lastAmount = 0;
+        $lastX = 0;
+        $lastY = 0;
+
         foreach ($data as $day => $amount) {
             $x = self::MARGIN_LEFT + ($day - 0.5) * $stepSize;
             $y = self::MARGIN_TOP + $chartHeight - ($amount / $maxY) * $chartHeight;
             $svg .= '<circle cx="' . $x . '" cy="' . $y . '" r="3" fill="' . $color . '"/>';
+
+            // Keep track of last point
+            if ($day > $lastDay) {
+                $lastDay = $day;
+                $lastAmount = $amount;
+                $lastX = $x;
+                $lastY = $y;
+            }
+        }
+
+        // Add total amount text below the last point
+        if ($lastDay > 0) {
+            $svg .= '<text x="' . $lastX . '" y="' . ($lastY + 20) . '" fill="' . $color . '" font-size="14" font-weight="bold" text-anchor="middle">$' . number_format($lastAmount, 0) . '</text>';
         }
 
         return $svg;
@@ -220,12 +242,12 @@ class SelectedMonthVsLastMonthSvgService
         $svg = '<g>';
 
         // Selected month legend (centered)
-        $svg .= '<line x1="' . ($centerX - 150) . '" y1="' . $legendY . '" x2="' . ($centerX - 130) . '" y2="' . $legendY . '" stroke="#10B981" stroke-width="2"/>';
-        $svg .= '<text x="' . ($centerX - 125) . '" y="' . ($legendY + 5) . '" fill="#374151" font-size="12">' . htmlspecialchars($selectedMonthName) . '</text>';
+        $svg .= '<line x1="' . ($centerX - 150) . '" y1="' . $legendY . '" x2="' . ($centerX - 130) . '" y2="' . $legendY . '" stroke="#10B981" stroke-width="5"/>';
+        $svg .= '<text x="' . ($centerX - 125) . '" y="' . ($legendY + 5) . '" fill="white" font-size="18">' . htmlspecialchars($selectedMonthName) . '</text>';
 
         // Previous month legend (centered)
-        $svg .= '<line x1="' . ($centerX + 30) . '" y1="' . $legendY . '" x2="' . ($centerX + 50) . '" y2="' . $legendY . '" stroke="#EF4444" stroke-width="2"/>';
-        $svg .= '<text x="' . ($centerX + 55) . '" y="' . ($legendY + 5) . '" fill="#374151" font-size="12">' . htmlspecialchars($previousMonthName) . '</text>';
+        $svg .= '<line x1="' . ($centerX + 30) . '" y1="' . $legendY . '" x2="' . ($centerX + 50) . '" y2="' . $legendY . '" stroke="#EF4444" stroke-width="5"/>';
+        $svg .= '<text x="' . ($centerX + 55) . '" y="' . ($legendY + 5) . '" fill="white" font-size="18">' . htmlspecialchars($previousMonthName) . '</text>';
 
         $svg .= '</g>';
 

@@ -40,19 +40,18 @@ final class DashboardController extends AbstractController
         $viewType = $request->query->get('viewType', 'user');
         $selectedMonth = $request->query->get('month', date('Y-m'));
 
-        $svg1 = $monthSvgService->generateSvg($viewType, $selectedMonth, $user);
-        $svg2 = $compareSvgService->generateSvgForLastMonths(12, $viewType, $user);
-        $svg3 = $selectedMonthVsLastSvgService->generateSvg($viewType, $selectedMonth, $user);
-        $svgTop = $topExpensesSvgService->generateSvg($viewType, $user, $selectedMonth);
-        $svgProjected = $projectedSvgService->generateSvg($viewType, $user, $selectedMonth);
+        $pieChartSvg = $monthSvgService->generateSvg($viewType, $selectedMonth, $user);
+        $barsSvg = $compareSvgService->generateSvgForLastMonths(12, $viewType, $user);
+        $normal2LineGraphicSvg = $selectedMonthVsLastSvgService->generateSvg($viewType, $selectedMonth, $user);
+        $topExpensesSvg = $topExpensesSvgService->generateSvg($viewType, $user, $selectedMonth);
+        $projectionsSvg = $projectedSvgService->generateSvg($viewType, $user, $selectedMonth);
 
         return $this->render('dashboard/index.html.twig', [
-            'controller_name' => 'DashboardController',
-            'svg1' => $svg1,
-            'svg2' => $svg2,
-            'svg3' => $svg3,
-            'svgTop' => $svgTop,
-            'svgProjected' => $svgProjected,
+            'pieChartSvg' => $pieChartSvg,
+            'barsSvg' => $barsSvg,
+            'normal2LineGraphicSvg' => $normal2LineGraphicSvg,
+            'topExpensesSvg' => $topExpensesSvg,
+            'projectionsSvg' => $projectionsSvg,
         ]);
     }
 }

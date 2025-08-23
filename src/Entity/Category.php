@@ -35,7 +35,7 @@ class Category
     /**
      * @var Collection<int, Expense>
      */
-    #[ORM\OneToMany(targetEntity: Expense::class, mappedBy: 'categoryId', orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: Expense::class, mappedBy: 'category', orphanRemoval: true)]
     private Collection $expenses;
 
     /**
