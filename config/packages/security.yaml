@@ -88,9 +88,6 @@ security:
         # Expenses UI Pages
         - { path: ^/expenses, roles: ROLE_USER }
 
-        # "waiting room area" require at least the USER role (authenticated)
-        - { path: ^/, roles: ROLE_USER }
-
 when@test:
     security:
         password_hashers:

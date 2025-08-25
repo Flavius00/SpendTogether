@@ -27,7 +27,7 @@
                 </div>
             </div>
 
-            <div class="grid w-full gap-5" style="grid-template-areas: 'kpi chart1' 'chart2 chart2'; grid-template-columns: 1.1fr 1fr;">
+            <div class="grid w-full gap-5" style="grid-template-areas: 'kpi chart1' 'chart2 chart2'; grid-template-columns: 1.1fr 1fr;width:100%">
 
                 <div class="bg-custom-dark rounded-lg border border-gray-700 p-2 text-center flex flex-col relative" style="grid-area: kpi">
                     <div class="w-full bg-custom-dark h-auto text-gray-400 flex justify-center items-center">
@@ -35,14 +35,15 @@
                     </div>
                 </div>
 
-                <div class="bg-custom-dark rounded-lg flex flex-col justify-center items-center gap-5" style="grid-area: chart1">
-                    <div class="bg-custom-dark rounded-lg w-full h-1/2 flex items-center justify-center p-2 border border-gray-700">
+                <div class="bg-custom-dark rounded-lg flex flex-col justify-center items-center gap-5" style="grid-area: chart1;width:100%">
+                    <div class="bg-custom-dark rounded-lg w-full flex-1 flex items-center justify-center p-2 border border-gray-700">
                         {{ normal2LineGraphicSvg|raw }}
                     </div>
-                    <div class="bg-custom-dark rounded-lg w-full h-1/2 flex items-center justify-center p-2 border border-gray-700">
+                    <div class="bg-custom-dark rounded-lg w-full flex-1 flex items-center justify-center p-2 border border-gray-700">
                         {{ barsSvg|raw }}
                     </div>
                 </div>
+
 
                 <div style="grid-area: chart2; display:flex; gap:8px; width:100%;">
                     <div style="flex: 0 0 70%;" class="border border-gray-700 rounded-lg bg-custom-dark">
