@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Facade;
+namespace App\Facades;
 
 use App\Diagrams\Calculators\SelectedMonthVsLastMonthCalculator;
 use App\Diagrams\Generators\SelectedMonthVsLastMonthSvgGenerator;

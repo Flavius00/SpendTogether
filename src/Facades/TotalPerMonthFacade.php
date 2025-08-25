@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Facade;
+namespace App\Facades;
 
 use App\Diagrams\Calculators\TotalPerMonthCalculator;
 use App\Diagrams\Generators\TotalPerMonthSvgGenerator;
