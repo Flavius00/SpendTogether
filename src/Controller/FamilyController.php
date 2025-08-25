@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\Validators\FamilyService;
+use App\Validators\FamilyValidators;
 use App\Entity\Family;
 use App\Entity\User;
 use App\Form\AddUserToFamilyFormType;
@@ -187,11 +187,11 @@ final class FamilyController extends AbstractController
     #[Route('/leave', name: 'app_family_leave')]
     public function leaveFamily(
         #[CurrentUser]
-        User $user,
+        User                          $user,
         AuthorizationCheckerInterface $authCheck,
-        EntityManagerInterface $em,
-        Security $security,
-        FamilyService $familyService,
+        EntityManagerInterface        $em,
+        Security                      $security,
+        FamilyValidators              $familyService,
     ): Response {
         if (!$authCheck->isGranted('IS_AUTHENTICATED_FULLY')) {
             return $this->redirectToRoute('app_login');

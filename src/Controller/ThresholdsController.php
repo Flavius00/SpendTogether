@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\Validators\ThresholdService;
+use App\Validators\ThresholdValidators;
 use App\Entity\Threshold;
 use App\Entity\User;
 use App\Form\CreateThresholdFormType;
@@ -23,13 +23,13 @@ final class ThresholdsController extends AbstractController
 {
     #[Route('/add', name: 'app_threshold_add')]
     public function index(
-        Request $request,
+        Request                       $request,
         #[CurrentUser]
-        User $user,
+        User                          $user,
         AuthorizationCheckerInterface $authCheck,
-        EntityManagerInterface $em,
-        ThresholdsRepository $thresholdsRepository,
-        ThresholdService $thresholdService,
+        EntityManagerInterface        $em,
+        ThresholdsRepository          $thresholdsRepository,
+        ThresholdValidators           $thresholdService,
     ): Response {
         if (!$authCheck->isGranted('IS_AUTHENTICATED_FULLY')) {
             return $this->redirectToRoute('app_login');

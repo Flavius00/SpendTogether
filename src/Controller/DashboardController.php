@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\Controller\Service\SelectedMonthVsLastMonthSvgService;
-use App\Diagrams\Generators\TotalPerMonthSvgService;
+use App\Entity\User;
+use App\Facade\SelectedMonthVsLastMonthFacade;
+use App\Facade\TotalPerMonthFacade;
 use App\Facades\ProjectedSpendingFacade;
 use App\Entity\User;
 use App\Facades\SubscriptionsVsOneTimeFacade;
@@ -26,9 +27,9 @@ final class DashboardController extends AbstractController
         #[CurrentUser]
         User                               $user,
         AuthorizationCheckerInterface      $authCheck,
-        TotalPerMonthSvgService            $monthSvgService,
+        TotalPerMonthFacade                $monthSvgService,
         SubscriptionsVsOneTimeFacade       $subscriptionsVsOneTimeFacade,
-        SelectedMonthVsLastMonthSvgService $selectedMonthVsLastSvgService,
+        SelectedMonthVsLastMonthFacade     $selectedMonthVsLastSvg,
         TopExpensesFacade                  $topExpensesFacade,
         ProjectedSpendingFacade            $projectedSpendingFacade,
     ): Response
@@ -39,10 +40,10 @@ final class DashboardController extends AbstractController
 
         $viewType = $request->query->get('viewType', 'user');
         $selectedMonth = $request->query->get('month', date('Y-m'));
-
-        $pieChartSvg = $monthSvgService->generateSvg($viewType, $selectedMonth, $user);
+      
+        $pieChartSvg = $monthSvgService->generateSvg($user, $selectedMonth, $viewType);
         $barsSvg = $subscriptionsVsOneTimeFacade->generateSvg( $viewType, $user);
-        $normal2LineGraphicSvg = $selectedMonthVsLastSvgService->generateSvg($viewType, $selectedMonth, $user);
+        $normal2LineGraphicSvg = $selectedMonthVsLastSvg->generateSvg($user, $selectedMonth, $viewType);
         $topExpensesSvg = $topExpensesFacade->generateSvg($viewType, $user, $selectedMonth);
         $projectionsSvg = $projectedSpendingFacade->generateSvg($viewType, $user, $selectedMonth);
 

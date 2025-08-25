@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Controller\Service;
+namespace App\Forecast;
 
 use App\Entity\User;
 
-class NextMonthForecastService
+class NextMonthForecast
 {
 
     public function getNextMonthForecast(User $user): float
