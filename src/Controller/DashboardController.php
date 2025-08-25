@@ -6,10 +6,10 @@ namespace App\Controller;
 
 use App\Controller\Service\SelectedMonthVsLastMonthSvgService;
 use App\Diagrams\Generators\TotalPerMonthSvgService;
-use App\Diagrams\Calculators\SubscriptionsVsOneTimeSvgService;
-use App\Controller\Service\TopExpensesSvgService;
-use App\Controller\Service\ProjectedSpendingSvgService;
+use App\Facades\ProjectedSpendingFacade;
 use App\Entity\User;
+use App\Facades\SubscriptionsVsOneTimeFacade;
+use App\Facades\TopExpensesFacade;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,15 +22,15 @@ final class DashboardController extends AbstractController
 {
     #[Route('', name: 'app_dashboard')]
     public function index(
-        Request $request,
+        Request                            $request,
         #[CurrentUser]
-        User $user,
-        AuthorizationCheckerInterface $authCheck,
-        TotalPerMonthSvgService $monthSvgService,
-        SubscriptionsVsOneTimeSvgService $compareSvgService,
-        TopExpensesSvgService $topExpensesSvgService,
+        User                               $user,
+        AuthorizationCheckerInterface      $authCheck,
+        TotalPerMonthSvgService            $monthSvgService,
+        SubscriptionsVsOneTimeFacade       $subscriptionsVsOneTimeFacade,
         SelectedMonthVsLastMonthSvgService $selectedMonthVsLastSvgService,
-        ProjectedSpendingSvgService $projectedSvgService,
+        TopExpensesFacade                  $topExpensesFacade,
+        ProjectedSpendingFacade            $projectedSpendingFacade,
     ): Response
     {
         if (!$authCheck->isGranted('IS_AUTHENTICATED_FULLY')) {
@@ -41,10 +41,10 @@ final class DashboardController extends AbstractController
         $selectedMonth = $request->query->get('month', date('Y-m'));
 
         $pieChartSvg = $monthSvgService->generateSvg($viewType, $selectedMonth, $user);
-        $barsSvg = $compareSvgService->generateSvgForLastMonths(12, $viewType, $user);
+        $barsSvg = $subscriptionsVsOneTimeFacade->generateSvg( $viewType, $user);
         $normal2LineGraphicSvg = $selectedMonthVsLastSvgService->generateSvg($viewType, $selectedMonth, $user);
-        $topExpensesSvg = $topExpensesSvgService->generateSvg($viewType, $user, $selectedMonth);
-        $projectionsSvg = $projectedSvgService->generateSvg($viewType, $user, $selectedMonth);
+        $topExpensesSvg = $topExpensesFacade->generateSvg($viewType, $user, $selectedMonth);
+        $projectionsSvg = $projectedSpendingFacade->generateSvg($viewType, $user, $selectedMonth);
 
         return $this->render('dashboard/index.html.twig', [
             'pieChartSvg' => $pieChartSvg,

@@ -2,92 +2,18 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Service;
+namespace App\Diagrams\Generators;
 
-use App\Entity\Expense;
-use App\Entity\Family;
-use App\Entity\User;
+use App\Dto\TopExpensesResult;
 
-final class TopExpensesSvgService
+final class TopExpensesGenerator
 {
-    /**
-     * @param string      $option         'user' | 'family'
-     * @param User        $user
-     * @param string|null $selectedMonth  Month key 'YYYY-MM' (defaults to current month)
-     */
-    public function generateSvg(string $option, User $user, ?string $selectedMonth = null): string
+    public function generateSvg(TopExpensesResult $result): string
     {
-        [$monthRef, $label] = $this->resolveSelectedMonth($selectedMonth);
-
-        if ($option === 'family' && $user->getFamily()) {
-            return $this->generateFamilyTopSvg($user->getFamily(), $monthRef, $label);
-        }
-
-        return $this->generateUserTopSvg($user, $monthRef, $label);
-    }
-
-    private function generateUserTopSvg(User $user, \DateTime $monthRef, string $label): string
-    {
-        $rows = [];
-
-        foreach ($user->getExpenses() as $expense) {
-            if (!$expense instanceof Expense) {
-                continue;
-            }
-            $date = $expense->getDate();
-            if (!$date || $date->format('Y-m') !== $monthRef->format('Y-m')) {
-                continue;
-            }
-            $amount = (float) $expense->getAmount();
-            $rows[] = [
-                'amount' => $amount,
-                'name' => (string) $expense->getName(),
-                'user' => null,
-            ];
-        }
-
-        return $this->buildTopSvg($rows, $label, showUser: false);
-    }
-
-    private function generateFamilyTopSvg(Family $family, \DateTime $monthRef, string $label): string
-    {
-        $rows = [];
-
-        $users = $family->getUsers();
-        if (!$users || count($users) === 0) {
-            return $this->noDataSvg('No family members');
-        }
-
-        foreach ($users as $u) {
-            if (!$u instanceof User) {
-                continue;
-            }
-            $displayUser = $this->displayUserName($u);
-            foreach ($u->getExpenses() as $expense) {
-                if (!$expense instanceof Expense) {
-                    continue;
-                }
-                $date = $expense->getDate();
-                if (!$date || $date->format('Y-m') !== $monthRef->format('Y-m')) {
-                    continue;
-                }
-                $amount = (float) $expense->getAmount();
-                $rows[] = [
-                    'amount' => $amount,
-                    'name' => (string) $expense->getName(),
-                    'user' => $displayUser,
-                ];
-            }
-        }
-
-        return $this->buildTopSvg($rows, $label, showUser: true);
-    }
-
-    private function buildTopSvg(array $rows, string $periodLabel, bool $showUser): string
-    {
-        // Sort by amount desc and keep top 5
-        usort($rows, static fn ($a, $b) => $b['amount'] <=> $a['amount']);
-        $top = array_slice($rows, 0, 5);
+        // Sort is already done by calculator; just render.
+        $rows = $result->rows;
+        $showUser = $result->showUser;
+        $periodLabel = $result->periodLabel;
 
         // ViewBox width (height is computed); scales responsively in the container
         $width = 600;
@@ -117,7 +43,7 @@ final class TopExpensesSvgService
         $reserveRight = 140; // px
         $gapToAmount = 8;    // px
 
-        $rowsCount = max(1, count($top));
+        $rowsCount = max(1, count($rows));
         $height = $padTop + $titleSize + $titleGap + $headerSize + $headerGap
             + ($rowsCount * $rowHeight) + (($rowsCount - 1) * $rowGap) + $padBottom;
 
@@ -131,7 +57,7 @@ final class TopExpensesSvgService
         $svg[] = '<text x="' . $titleX . '" y="' . $titleY . '" fill="' . $textColor . '" font-size="' . $titleSize . '" font-weight="600">' . htmlspecialchars($title) . '</text>';
 
         // Empty state
-        if (count($top) === 0) {
+        if (count($rows) === 0) {
             $svg[] = '<text x="' . ($width / 2) . '" y="' . ($height / 2) . '" fill="' . $mutedColor . '" font-size="14" text-anchor="middle" dominant-baseline="middle">No expenses found</text>';
             $svg[] = '</svg>';
             return implode('', $svg);
@@ -145,7 +71,7 @@ final class TopExpensesSvgService
 
         // Rows
         $startY = $headerY + $headerGap;
-        foreach ($top as $i => $r) {
+        foreach ($rows as $i => $r) {
             $y = $startY + $i * ($rowHeight + $rowGap);
 
             // Rank badge (position)
@@ -180,7 +106,7 @@ final class TopExpensesSvgService
 
             // Amount on the right
             $valX = $width - $padSide;
-            $amountStr = $this->formatAmount($r['amount'] ?? 0.0);
+            $amountStr = $this->formatAmount((float)($r['amount'] ?? 0.0));
             $svg[] = '<text x="' . $valX . '" y="' . $textY . '" fill="' . $accentColor . '" font-size="' . $valueSize . '" text-anchor="end" dominant-baseline="middle">' . $amountStr . '</text>';
         }
 
@@ -188,34 +114,17 @@ final class TopExpensesSvgService
         return implode('', $svg);
     }
 
-    /**
-     * Normalize selected month (YYYY-MM) to a DateTime (first day of month) and a label.
-     *
-     * @return array{0:\DateTime,1:string}
-     */
-    private function resolveSelectedMonth(?string $selectedMonth): array
+    public function noDataSvg(string $message): string
     {
-        if ($selectedMonth && preg_match('/^\d{4}-\d{2}$/', $selectedMonth) === 1) {
-            $firstDay = \DateTime::createFromFormat('Y-m-d H:i:s', $selectedMonth . '-01 00:00:00') ?: new \DateTime('first day of this month');
-        } else {
-            $firstDay = new \DateTime('first day of this month');
-        }
-        $label = $firstDay->format('M');
-        return [$firstDay, $label];
+        $msg = htmlspecialchars($message);
+        return '<svg viewBox="0 0 400 120" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" preserveAspectRatio="xMinYMin meet" style="display:block">
+            <text x="200" y="60" text-anchor="middle" dominant-baseline="middle" fill="#9CA3AF" font-size="14">' . $msg . '</text>
+        </svg>';
     }
 
     private function formatAmount(float $amount): string
     {
         return number_format($amount, 0, '.', ',');
-    }
-
-    private function truncate(string $s, int $max): string
-    {
-        $s = trim($s);
-        if (mb_strlen($s) <= $max) {
-            return $s;
-        }
-        return rtrim(mb_substr($s, 0, $max - 1)) . '…';
     }
 
     /**
@@ -238,33 +147,5 @@ final class TopExpensesSvgService
             return $text;
         }
         return rtrim(mb_substr($text, 0, max(1, $limit - 1))) . '…';
-    }
-
-    private function displayUserName(User $u): string
-    {
-        if (method_exists($u, 'getName') && $u->getName()) {
-            return (string) $u->getName();
-        }
-        if (method_exists($u, 'getFullName') && $u->getFullName()) {
-            return (string) $u->getFullName();
-        }
-        if (method_exists($u, 'getUserIdentifier') && $u->getUserIdentifier()) {
-            return (string) $u->getUserIdentifier();
-        }
-        if (method_exists($u, 'getEmail') && $u->getEmail()) {
-            return (string) $u->getEmail();
-        }
-        if (method_exists($u, 'getId')) {
-            return 'User #' . (string) $u->getId();
-        }
-        return 'User';
-    }
-
-    private function noDataSvg(string $message): string
-    {
-        $msg = htmlspecialchars($message);
-        return '<svg viewBox="0 0 400 120" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" preserveAspectRatio="xMinYMin meet" style="display:block">
-            <text x="200" y="60" text-anchor="middle" dominant-baseline="middle" fill="#9CA3AF" font-size="14">' . $msg . '</text>
-        </svg>';
     }
 }
