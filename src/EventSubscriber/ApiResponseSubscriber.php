@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\EventSubscriber;
 
-use App\Service\ApiResponseFactory;
+use App\Http\ApiContentNegotiation;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\ViewEvent;
@@ -13,7 +13,7 @@ use Symfony\Component\Serializer\Exception\ExceptionInterface;
 
 class ApiResponseSubscriber implements EventSubscriberInterface
 {
-    public function __construct(private readonly ApiResponseFactory $responseFactory)
+    public function __construct(private readonly ApiContentNegotiation $responseFactory)
     {
     }
 

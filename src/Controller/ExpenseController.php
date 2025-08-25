@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Controller\Service\ExpenseIndexContextResolver;
+use App\Controller\Service\ExpenseParamsExtractor;
+use App\Controller\Service\ReceiptStorage;
 use App\Entity\Expense;
 use App\Entity\User;
 use App\Form\ExpenseType;
@@ -11,9 +14,6 @@ use App\Repository\CategoryRepository;
 use App\Repository\ExpenseRepository;
 use App\Repository\UserRepository;
 use App\Security\Voter\ExpenseVoter;
-use App\Service\ExpenseIndexContextResolver;
-use App\Service\ExpenseParamsExtractor;
-use App\Service\ReceiptStorage;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormError;

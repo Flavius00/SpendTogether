@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\EventListener;
 
-use App\Service\ApiResponseFactory;
+use App\Http\ApiContentNegotiation;
 use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
@@ -17,7 +17,7 @@ final class ApiExceptionListener
 {
     public function __construct(
         // private readonly string $kernelEnvironment,
-        private readonly ApiResponseFactory $responseFactory,
+        private readonly ApiContentNegotiation $responseFactory,
     ) {
     }
 

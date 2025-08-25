@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Controller\Service\SubscriptionIndexContextResolver;
+use App\Controller\Service\SubscriptionParamsExtractor;
 use App\Entity\Subscription;
 use App\Entity\User;
 use App\Form\SubscriptionType;
@@ -11,8 +13,6 @@ use App\Repository\CategoryRepository;
 use App\Repository\SubscriptionRepository;
 use App\Repository\UserRepository;
 use App\Security\Voter\SubscriptionVoter;
-use App\Service\SubscriptionIndexContextResolver;
-use App\Service\SubscriptionParamsExtractor;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
