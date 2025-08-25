@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Service;
+namespace App\Validators;
 
 use App\Entity\User;
 use App\Repository\UserRepository;

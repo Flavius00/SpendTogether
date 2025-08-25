@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\Controller\Service\FamilyService;
+use App\Validators\FamilyService;
 use App\Entity\Family;
 use App\Entity\User;
 use App\Form\AddUserToFamilyFormType;

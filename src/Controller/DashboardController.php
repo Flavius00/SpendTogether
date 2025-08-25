@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Controller\Service\SelectedMonthVsLastMonthSvgService;
-use App\Controller\Service\TotalPerMonthSvgService;
-use App\Controller\Service\SubscriptionsVsOneTimeSvgService;
+use App\Diagrams\Generators\TotalPerMonthSvgService;
+use App\Diagrams\Calculators\SubscriptionsVsOneTimeSvgService;
 use App\Controller\Service\TopExpensesSvgService;
 use App\Controller\Service\ProjectedSpendingSvgService;
 use App\Entity\User;

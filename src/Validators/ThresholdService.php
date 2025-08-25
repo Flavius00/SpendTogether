@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Service;
+namespace App\Validators;
 
 use App\Entity\Family;
 use App\Entity\Threshold;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Service;
+namespace App\Diagrams\Calculators;
 
 use App\Entity\Expense;
 use App\Entity\Family;

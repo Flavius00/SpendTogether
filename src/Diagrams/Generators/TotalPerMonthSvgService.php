@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Service;
+namespace App\Diagrams\Generators;
 
 use App\Entity\Family;
 use App\Entity\User;
