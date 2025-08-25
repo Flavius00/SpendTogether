@@ -17,7 +17,7 @@ services:
     App\:
         resource: '../src/'
 
-    App\Service\ReceiptStorage:
+    App\Controller\Service\ReceiptStorage:
         arguments:
             $targetDirectory: '%expense_receipts_dir%'
 

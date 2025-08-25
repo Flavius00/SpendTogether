@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Service;
+namespace App\Controller\Service;
 
 use App\Dto\ExpenseIndexContext;
 use App\Entity\User;

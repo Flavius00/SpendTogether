@@ -377,16 +377,52 @@ final class ProjectedSpendingSvgService
         // Label next to the "today" marker: amount spent so far
         $svg[] = '<text x="' . ($xToday + 6) . '" y="' . ($yToday - 8) . '" fill="' . $labelColor . '" font-size="12" dominant-baseline="ideographic">To date: ' . number_format($currentToDate, 0) . '</text>';
 
-        // Legend
-        $legendX = $margin['left'];
-        $legendY = $vbH - $margin['bottom'] + 28;
-        $svg[] = '<rect x="' . $legendX . '" y="' . ($legendY - 10) . '" width="14" height="3" fill="' . $actualColor . '"/>';
-        $svg[] = '<text x="' . ($legendX + 20) . '" y="' . $legendY . '" fill="' . $labelColor . '" font-size="12">Actual</text>';
-        $svg[] = '<rect x="' . ($legendX + 80) . '" y="' . ($legendY - 10) . '" width="14" height="3" fill="' . $projectionColor . '" />';
-        $svg[] = '<text x="' . ($legendX + 100) . '" y="' . $legendY . '" fill="' . $labelColor . '" font-size="12">Projected</text>';
+        // Legend (centered horizontally, spaced further below the X axis)
+        $legendItems = [
+            ['label' => 'Actual',    'color' => $actualColor],
+            ['label' => 'Projected', 'color' => $projectionColor],
+        ];
         if ($budget !== null) {
-            $svg[] = '<rect x="' . ($legendX + 190) . '" y="' . ($legendY - 10) . '" width="14" height="3" fill="' . $budgetColor . '" />';
-            $svg[] = '<text x="' . ($legendX + 210) . '" y="' . $legendY . '" fill="' . $labelColor . '" font-size="12">Budget</text>';
+            $legendItems[] = ['label' => 'Budget', 'color' => $budgetColor];
+        }
+
+        // Estimate text width for font-size=12 (~0.6em per character)
+        $estimateTextWidth = static function (string $text): int {
+            return (int) ceil(strlen($text) * 12 * 0.6);
+        };
+
+        $blockGap = 32;         // horizontal gap between legend items
+        $swatchToText = 20;     // distance from swatch to label text
+        $swatchW = 14;
+        $swatchH = 3;
+
+        // Compute total width to center the legend
+        $blockWidths = [];
+        $totalWidth = 0;
+        foreach ($legendItems as $item) {
+            $w = $swatchToText + $estimateTextWidth($item['label']); // swatch width is covered by the offset to text
+            $blockWidths[] = $w;
+            $totalWidth += $w;
+        }
+        $totalWidth += $blockGap * (max(0, count($legendItems) - 1));
+
+        $centerX = $vbW / 2;
+        $xAxisY = $margin['top'] + $chartH;
+        $legendOffset = 40; // distance below x-axis
+        $legendY = $xAxisY + $legendOffset;
+
+        $startX = (int) round($centerX - ($totalWidth / 2));
+
+        $cursorX = $startX;
+        foreach ($legendItems as $index => $item) {
+            // swatch
+            $svg[] = '<rect x="' . $cursorX . '" y="' . ($legendY - 10) . '" width="' . $swatchW . '" height="' . $swatchH . '" fill="' . $item['color'] . '"/>';
+            // text
+            $textX = $cursorX + $swatchToText;
+            $svg[] = '<text x="' . $textX . '" y="' . $legendY . '" fill="' . $labelColor . '" font-size="12">' . htmlspecialchars($item['label']) . '</text>';
+
+            // advance
+            $cursorX += $blockWidths[$index] + $blockGap;
         }
 
         $svg[] = '</svg>';
