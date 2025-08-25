@@ -7,7 +7,7 @@ namespace App\Validators;
 use App\Entity\Family;
 use App\Entity\Threshold;
 
-class ThresholdService
+class ThresholdValidators
 {
     /**
      * @param array<Threshold> $thresholds

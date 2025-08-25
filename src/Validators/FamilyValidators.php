@@ -7,7 +7,7 @@ namespace App\Validators;
 use App\Entity\User;
 use App\Repository\UserRepository;
 
-class FamilyService
+class FamilyValidators
 {
     public function __construct(
         private readonly UserRepository $userRepository,

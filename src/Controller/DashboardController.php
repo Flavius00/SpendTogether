@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\Controller\Service\SelectedMonthVsLastMonthSvgService;
-use App\Diagrams\Generators\TotalPerMonthSvgService;
+use App\Diagrams\Generators\TotalPerMonthSvgGenerator;
 use App\Diagrams\Calculators\SubscriptionsVsOneTimeSvgService;
 use App\Controller\Service\TopExpensesSvgService;
 use App\Controller\Service\ProjectedSpendingSvgService;
 use App\Entity\User;
+use App\Facade\SelectedMonthVsLastMonthFacade;
+use App\Facade\TotalPerMonthFacade;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,15 +23,15 @@ final class DashboardController extends AbstractController
 {
     #[Route('', name: 'app_dashboard')]
     public function index(
-        Request $request,
+        Request                          $request,
         #[CurrentUser]
-        User $user,
-        AuthorizationCheckerInterface $authCheck,
-        TotalPerMonthSvgService $monthSvgService,
+        User                             $user,
+        AuthorizationCheckerInterface    $authCheck,
+        TotalPerMonthFacade              $monthSvgService,
         SubscriptionsVsOneTimeSvgService $compareSvgService,
-        TopExpensesSvgService $topExpensesSvgService,
-        SelectedMonthVsLastMonthSvgService $selectedMonthVsLastSvgService,
-        ProjectedSpendingSvgService $projectedSvgService,
+        TopExpensesSvgService            $topExpensesSvgService,
+        SelectedMonthVsLastMonthFacade   $selectedMonthVsLastSvg,
+        ProjectedSpendingSvgService      $projectedSvgService,
     ): Response
     {
         if (!$authCheck->isGranted('IS_AUTHENTICATED_FULLY')) {
@@ -40,9 +41,9 @@ final class DashboardController extends AbstractController
         $viewType = $request->query->get('viewType', 'user');
         $selectedMonth = $request->query->get('month', date('Y-m'));
 
-        $pieChartSvg = $monthSvgService->generateSvg($viewType, $selectedMonth, $user);
+        $pieChartSvg = $monthSvgService->generateSvg($user, $selectedMonth, $viewType);
         $barsSvg = $compareSvgService->generateSvgForLastMonths(12, $viewType, $user);
-        $normal2LineGraphicSvg = $selectedMonthVsLastSvgService->generateSvg($viewType, $selectedMonth, $user);
+        $normal2LineGraphicSvg = $selectedMonthVsLastSvg->generateSvg($user, $selectedMonth, $viewType);
         $topExpensesSvg = $topExpensesSvgService->generateSvg($viewType, $user, $selectedMonth);
         $projectionsSvg = $projectedSvgService->generateSvg($viewType, $user, $selectedMonth);
 
