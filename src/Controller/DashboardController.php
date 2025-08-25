@@ -8,7 +8,6 @@ use App\Entity\User;
 use App\Facades\SelectedMonthVsLastMonthFacade;
 use App\Facades\TotalPerMonthFacade;
 use App\Facades\ProjectedSpendingFacade;
-use App\Entity\User;
 use App\Facades\SubscriptionsVsOneTimeFacade;
 use App\Facades\TopExpensesFacade;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

@@ -12,6 +12,9 @@ class SelectedMonthVsLastMonthFacade
 {
     public function generateSvg(User $user, string $selectedMonth, string $options): string
     {
+        if ($selectedMonth === '') {
+            $selectedMonth = (new \DateTime())->format('Y-m');
+        }
 
         $calculator = new SelectedMonthVsLastMonthCalculator();
         if ($options === 'family' && $user->getFamily() !== null) {
