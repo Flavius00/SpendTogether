@@ -17,6 +17,7 @@
 
 ###> symfony/asset-mapper ###
 /public/assets/
+/public/coverage/
 /assets/vendor/
 ###< symfony/asset-mapper ###
 
