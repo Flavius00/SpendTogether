@@ -10,7 +10,7 @@ use App\Entity\User;
 class TotalPerMonthCalculator
 {
     /**
-     * Returnează totalurile pe categorii pentru un user într-o lună
+     * Returns the totals per category for a user in a month
      */
     public function calculateUserCategoryTotals(User $user, string $selectedDate): array
     {
@@ -31,7 +31,7 @@ class TotalPerMonthCalculator
     }
 
     /**
-     * Returnează totalurile pe user pentru un Family într-o lună
+     * Returns the totals per user for a Family in a month
      */
     public function calculateFamilyUserExpenses(Family $family, string $selectedDate): array
     {

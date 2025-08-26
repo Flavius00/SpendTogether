@@ -46,7 +46,18 @@
 
 
                 <div style="grid-area: chart2; display:flex; gap:8px; width:100%;">
-                    <div style="flex: 0 0 70%;" class="border border-gray-700 rounded-lg bg-custom-dark">
+                    <div style="flex: 0 0 70%; position: relative;" class="border border-gray-700 rounded-lg bg-custom-dark">
+                        <!-- Dropdown in top-right corner -->
+                        <div style="position: absolute; top: 8px; right: 8px; z-index: 10;">
+                            <form method="GET" action="{{ path('app_dashboard') }}">
+                                <select name="chartComparison" class="block appearance-none bg-custom-teal/20 border border-custom-mint text-white text-xs py-1 px-2 pr-6 rounded leading-tight focus:outline-none focus:border-custom-mint focus:ring-1 focus:ring-custom-mint focus:ring-opacity-30 shadow-md transition-all duration-200" onchange="this.form.submit()">
+                                    <option value="selected" {% if app.request.get('chartComparison') != 'next' %}selected{% endif %}>Selected Month</option>
+                                    <option value="next" {% if app.request.get('chartComparison') == 'next' %}selected{% endif %}>Next Month</option>
+                                </select>
+                                <input type="hidden" name="month" value="{{ app.request.get('month') }}">
+                                <input type="hidden" name="viewType" value="{{ app.request.get('viewType') }}">
+                            </form>
+                        </div>
                         {{ projectionsSvg|raw }}
                     </div>
                     <div style="flex: 0 0 30%; padding: 8px; box-sizing: border-box; min-height: 320px;" class="border border-gray-700 rounded-lg bg-custom-dark">

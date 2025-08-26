@@ -30,6 +30,7 @@ final class ProjectedSpendingGenerator
         $actualColor = '#22C55E';
         $projectionColor = '#9CA3AF';
         $budgetColor = '#EF4444';
+        $infoColor = '#94A3B8';
 
         // Scale Y
         $maxY = max(
@@ -56,6 +57,13 @@ final class ProjectedSpendingGenerator
 
         $svg = [];
         $svg[] = '<svg viewBox="0 0 ' . $vbW . ' ' . $vbH . '" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" role="img" style="display:block" aria-label="Projected current month spending for ' . htmlspecialchars($selectedMonth) . '">';
+
+        // Info icon in top-left corner
+        $svg[] = '<g>';
+        $svg[] = '<circle cx="16" cy="16" r="8" fill="none" stroke="' . $infoColor . '" stroke-width="1.5"/>';
+        $svg[] = '<text x="16" y="20" fill="' . $infoColor . '" font-size="12" font-weight="bold" text-anchor="middle">i</text>';
+        $svg[] = '<title>Need at least 3 months for a prediction.</title>';
+        $svg[] = '</g>';
 
         // Header
         $title = 'Spending Projection - ' . $selectedMonth;

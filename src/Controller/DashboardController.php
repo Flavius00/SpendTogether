@@ -39,12 +39,13 @@ final class DashboardController extends AbstractController
 
         $viewType = $request->query->get('viewType', 'user');
         $selectedMonth = $request->query->get('month', date('Y-m'));
+        $typeOfPrediction = $request->query->get('chartComparison', 'selected');
 
         $pieChartSvg = $monthSvgService->generateSvg($user, $selectedMonth, $viewType);
         $barsSvg = $subscriptionsVsOneTimeFacade->generateSvg( $viewType, $user);
         $normal2LineGraphicSvg = $selectedMonthVsLastSvg->generateSvg($user, $selectedMonth, $viewType);
         $topExpensesSvg = $topExpensesFacade->generateSvg($viewType, $user, $selectedMonth);
-        $projectionsSvg = $projectedSpendingFacade->generateSvg($viewType, $user, $selectedMonth);
+        $projectionsSvg = $projectedSpendingFacade->generateSvg($viewType, $user, $selectedMonth, $typeOfPrediction);
 
         return $this->render('dashboard/index.html.twig', [
             'pieChartSvg' => $pieChartSvg,
