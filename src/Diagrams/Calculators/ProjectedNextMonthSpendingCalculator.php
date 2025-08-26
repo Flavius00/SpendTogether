@@ -3,6 +3,7 @@
 namespace App\Diagrams\Calculators;
 
 use App\Dto\ProjectedSpendingResult;
+use App\Entity\Family;
 use App\Entity\User;
 
 class ProjectedNextMonthSpendingCalculator
@@ -46,6 +47,38 @@ class ProjectedNextMonthSpendingCalculator
             $compareIndex,
             $daysInMonth,
             false
+        );
+    }
+
+    public function calculateFamilyTotal(Family $family): ProjectedSpendingResult
+    {
+        $totalProjected = 0.0;
+        $totalCurrentToDate = 0.0;
+        $totalPrevToDate = 0.0;
+        $avgGrowthRate = 0.0;
+        $userCount = 0;
+
+        foreach ($family->getUsers() as $user) {
+            $result = $this->calculate($user);
+            $totalProjected += $result->projectedTotal;
+            $totalCurrentToDate += $result->currentToDate;
+            $totalPrevToDate += $result->prevToDate;
+            $avgGrowthRate += $result->growthRate;
+            $userCount++;
+        }
+
+        $avgGrowthRate = $userCount > 0 ? ($avgGrowthRate / $userCount) : 0.0;
+
+        return new ProjectedSpendingResult(
+            round($totalCurrentToDate, 2),
+            round($totalProjected, 2),
+            round($avgGrowthRate, 2),
+            null, // budgetHit - not applicable for family total
+            round($totalPrevToDate, 2),
+            [], // cumCurrent - empty for family total
+            0, // compareIndex - not applicable
+            30, // daysInMonth - generic fallback
+            false // isProjection
         );
     }
 

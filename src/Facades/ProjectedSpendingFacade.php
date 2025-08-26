@@ -29,6 +29,13 @@ final class ProjectedSpendingFacade
             $nextMonth = (new \DateTime($selectedMonth . '-01'))->modify('first day of next month')->format('Y-m');
             $result = $this->nextMonthCalculator->calculate($user);
             $budget = null;
+            if ($option === 'family' && $user->getFamily()) {
+                $familyBudget = $user->getFamily()->getMonthlyTargetBudget();
+                if ($familyBudget !== null && (float) $familyBudget > 0) {
+                    $budget = (float) $familyBudget;
+                    $result = $this->nextMonthCalculator->calculateFamilyTotal($user->getFamily());
+                }
+            }
             return $this->generator->generateSvg($nextMonth, $result, $budget);
         }
         return $this->generate($option, $user, $selectedMonth);
