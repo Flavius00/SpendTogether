@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Next month expected expenses</title>
+</head>
+<body style="font-family: Arial, sans-serif; color: #0f172a;">
+<h2 style="margin: 0 0 12px 0;">Next month expected expenses</h2>
+<p style="margin: 0 0 16px 0;">
+    Family: <strong>{{ family.name ?? ('Family #' ~ family.id) }}</strong><br>
+    Period: <strong>{{ next_month_label }}</strong>
+</p>
+
+<h3 style="margin: 16px 0 8px 0;">Forecast</h3>
+<ul style="margin: 0 0 16px 18px; padding: 0;">
+    <li>Projected family total: <strong>{{ projected_family_total|number_format(0, '.', ',') }}</strong></li>
+</ul>
+
+{% if per_user is not empty %}
+    <h3 style="margin: 16px 0 8px 0;">Per-user breakdown</h3>
+    <table cellpadding="6" cellspacing="0" border="0" style="border-collapse: collapse; margin-bottom: 16px;">
+        <thead>
+        <tr>
+            <th align="left">User</th>
+            <th align="right">Projected total</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for row in per_user %}
+            <tr>
+                <td>{{ row.name }}</td>
+                <td align="right">{{ row.value|number_format(0, '.', ',') }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p style="margin: 0 0 16px 0;"><em>No sufficient data to build a forecast.</em></p>
+{% endif %}
+
+<p style="font-size: 12px; color: #64748b;">
+    This forecast uses simple trends (e.g. recent 3 months and last year same period) aggregated at family level.
+</p>
+</body>
+</html>
