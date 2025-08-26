@@ -38,7 +38,7 @@ class ProjectedNextMonthSpendingCalculator
         }
 
         return new ProjectedSpendingResult(
-            $currentToDate,   // în cazul ăsta 0.0, că nu e pe zile curente
+            $currentToDate,   // in this case 0.0, because it's not on current days
             round($projectedTotal, 2),
             $growthRate,
             $budgetHit,

@@ -75,7 +75,7 @@ security:
         - { path: ^/api, roles: IS_AUTHENTICATED_FULLY }
 
         # "family admin area" requires the ADMIN role
-        - { path: ^/admin, roles: ROLE_SUPER_ADMIN|IS_AUTHENTICATED_FULLY }
+        - { path: ^/admin, roles: [ROLE_SUPER_ADMIN, IS_AUTHENTICATED_FULLY] }
 
         # Login and registration pages must be public
         - { path : ^/register, roles: PUBLIC_ACCESS }
