@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Facades;
 
+use App\Diagrams\Calculators\ProjectedNextMonthSpendingCalculator;
 use App\Diagrams\Calculators\ProjectedSpendingCalculator;
 use App\Diagrams\Generators\ProjectedSpendingGenerator;
 use App\Entity\Expense;
@@ -14,14 +15,31 @@ final class ProjectedSpendingFacade
 {
     public function __construct(
         private readonly ProjectedSpendingCalculator $calculator,
+        private readonly ProjectedNextMonthSpendingCalculator $nextMonthCalculator,
         private readonly ProjectedSpendingGenerator $generator
     ) {}
 
     /**
      * Backward-compatible signature for the dashboard.
      */
-    public function generateSvg(string $option, User $user, string $selectedMonth): string
+    public function generateSvg(string $option, User $user, string $selectedMonth, string $typeOfPrediction): string
     {
+        if ($typeOfPrediction === 'next') {
+            // Next month projection
+            $nextMonth = (new \DateTime($selectedMonth . '-01'))->modify('first day of next month')->format('Y-m');
+            $result = $this->nextMonthCalculator->calculate($user);
+
+            $family = $user->getFamily();
+            $budget = null;
+            if ($option === 'family' && $family) {
+                $familyBudget = $family->getMonthlyTargetBudget();
+                if ($familyBudget !== null && (float) $familyBudget > 0) {
+                    $budget = (float) $familyBudget;
+                }
+            }
+
+            return $this->generator->generateSvg($nextMonth, $result, $budget);
+        }
         return $this->generate($option, $user, $selectedMonth);
     }
 
