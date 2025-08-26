@@ -24,12 +24,12 @@ final class SubscriptionController extends AbstractController
 {
     #[Route('', name: 'app_subscription_index', methods: ['GET'])]
     public function index(
-        Request $request,
-        SubscriptionRepository $subscriptions,
-        UserRepository $users,
-        CategoryRepository $categoriesRepo,
-        SubscriptionIndexContextResolver $ctxResolver,
-        SubscriptionParamsExtractor $params,
+        Request                             $request,
+        SubscriptionRepository              $subscriptions,
+        UserRepository                      $users,
+        CategoryRepository                  $categoriesRepo,
+        SubscriptionIndexContextResolver    $ctxResolver,
+        SubscriptionParamsExtractor         $params,
     ): Response {
         /** @var User $currentUser */
         $currentUser = $this->getUser();
@@ -65,8 +65,8 @@ final class SubscriptionController extends AbstractController
 
     #[Route('/new', name: 'app_subscription_new', methods: ['GET', 'POST'])]
     public function new(
-        Request $request,
-        EntityManagerInterface $em,
+        Request                 $request,
+        EntityManagerInterface  $em,
     ): Response {
         /** @var User $currentUser */
         $currentUser = $this->getUser();
@@ -116,9 +116,9 @@ final class SubscriptionController extends AbstractController
 
     #[Route('/{id}/edit', name: 'app_subscription_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     public function edit(
-        Request $request,
-        Subscription $subscription,
-        EntityManagerInterface $em,
+        Request                 $request,
+        Subscription            $subscription,
+        EntityManagerInterface  $em,
     ): Response {
         $this->denyAccessUnlessGranted(SubscriptionVoter::EDIT, $subscription);
 
@@ -153,9 +153,9 @@ final class SubscriptionController extends AbstractController
 
     #[Route('/{id}', name: 'app_subscription_delete', requirements: ['id' => '\d+'], methods: ['POST'])]
     public function delete(
-        Request $request,
-        Subscription $subscription,
-        EntityManagerInterface $em,
+        Request                 $request,
+        Subscription            $subscription,
+        EntityManagerInterface  $em,
     ): Response {
         $this->denyAccessUnlessGranted(SubscriptionVoter::DELETE, $subscription);
 

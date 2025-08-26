@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Dashboard for /var/www/html/src/Diagrams</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="../_css/bootstrap.min.css?v=12.3.2" rel="stylesheet" type="text/css">
+  <link href="../_css/billboard.min.css?v=12.3.2" rel="stylesheet" type="text/css">
+  <link href="../_css/style.css?v=12.3.2" rel="stylesheet" type="text/css">
+  <link href="../_css/custom.css" rel="stylesheet" type="text/css">
+ </head>
+ <body>
+  <header>
+   <div class="container-fluid">
+    <div class="row">
+     <div class="col-md-12">
+      <nav aria-label="breadcrumb">
+       <ol class="breadcrumb">
+         <li class="breadcrumb-item"><a href="../index.html">/var/www/html/src</a></li>
+         <li class="breadcrumb-item"><a href="index.html">Diagrams</a></li>
+         <li class="breadcrumb-item active">(Dashboard)</li>
+
+       </ol>
+      </nav>
+     </div>
+    </div>
+   </div>
+  </header>
+  <div class="container-fluid">
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Classes</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="classesCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="classComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3 style="margin-top: 2rem;">Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Calculators/ProjectedNextMonthSpendingCalculator.php.html#9">App\Diagrams\Calculators\ProjectedNextMonthSpendingCalculator</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Calculators/ProjectedSpendingCalculator.php.html#7">App\Diagrams\Calculators\ProjectedSpendingCalculator</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Calculators/SelectedMonthVsLastMonthCalculator.php.html#10">App\Diagrams\Calculators\SelectedMonthVsLastMonthCalculator</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Calculators/SubscriptionsVsOneTimeCalculator.php.html#13">App\Diagrams\Calculators\SubscriptionsVsOneTimeCalculator</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Calculators/TopExpensesCalculator.php.html#12">App\Diagrams\Calculators\TopExpensesCalculator</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Calculators/TotalPerMonthCalculator.php.html#10">App\Diagrams\Calculators\TotalPerMonthCalculator</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Generators/ProjectedSpendingGenerator.php.html#9">App\Diagrams\Generators\ProjectedSpendingGenerator</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Generators/SelectedMonthVsLastMonthSvgGenerator.php.html#7">App\Diagrams\Generators\SelectedMonthVsLastMonthSvgGenerator</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Generators/SubscriptionsVsOneTimeGenerator.php.html#9">App\Diagrams\Generators\SubscriptionsVsOneTimeGenerator</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Generators/TopExpensesGenerator.php.html#9">App\Diagrams\Generators\TopExpensesGenerator</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Generators/TotalPerMonthSvgGenerator.php.html#7">App\Diagrams\Generators\TotalPerMonthSvgGenerator</a></td><td class="text-right">0%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3 style="margin-top: 2rem;">Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right">Coverage</th>
+         <th class="text-right">Complexity</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Calculators/TopExpensesCalculator.php.html#12">App\Diagrams\Calculators\TopExpensesCalculator</a></td><td class="text-right">0.0%</td><td class="text-right">27</td><td class="text-right">756</td></tr>
+       <tr><td><a href="Calculators/ProjectedSpendingCalculator.php.html#7">App\Diagrams\Calculators\ProjectedSpendingCalculator</a></td><td class="text-right">0.0%</td><td class="text-right">23</td><td class="text-right">552</td></tr>
+       <tr><td><a href="Generators/ProjectedSpendingGenerator.php.html#9">App\Diagrams\Generators\ProjectedSpendingGenerator</a></td><td class="text-right">0.0%</td><td class="text-right">23</td><td class="text-right">552</td></tr>
+       <tr><td><a href="Generators/TotalPerMonthSvgGenerator.php.html#7">App\Diagrams\Generators\TotalPerMonthSvgGenerator</a></td><td class="text-right">0.0%</td><td class="text-right">23</td><td class="text-right">552</td></tr>
+       <tr><td><a href="Calculators/ProjectedNextMonthSpendingCalculator.php.html#9">App\Diagrams\Calculators\ProjectedNextMonthSpendingCalculator</a></td><td class="text-right">0.0%</td><td class="text-right">21</td><td class="text-right">462</td></tr>
+       <tr><td><a href="Calculators/SelectedMonthVsLastMonthCalculator.php.html#10">App\Diagrams\Calculators\SelectedMonthVsLastMonthCalculator</a></td><td class="text-right">0.0%</td><td class="text-right">16</td><td class="text-right">272</td></tr>
+       <tr><td><a href="Generators/SelectedMonthVsLastMonthSvgGenerator.php.html#7">App\Diagrams\Generators\SelectedMonthVsLastMonthSvgGenerator</a></td><td class="text-right">0.0%</td><td class="text-right">16</td><td class="text-right">272</td></tr>
+       <tr><td><a href="Calculators/SubscriptionsVsOneTimeCalculator.php.html#13">App\Diagrams\Calculators\SubscriptionsVsOneTimeCalculator</a></td><td class="text-right">0.0%</td><td class="text-right">12</td><td class="text-right">156</td></tr>
+       <tr><td><a href="Generators/SubscriptionsVsOneTimeGenerator.php.html#9">App\Diagrams\Generators\SubscriptionsVsOneTimeGenerator</a></td><td class="text-right">0.0%</td><td class="text-right">11</td><td class="text-right">132</td></tr>
+       <tr><td><a href="Generators/TopExpensesGenerator.php.html#9">App\Diagrams\Generators\TopExpensesGenerator</a></td><td class="text-right">0.0%</td><td class="text-right">11</td><td class="text-right">132</td></tr>
+       <tr><td><a href="Calculators/TotalPerMonthCalculator.php.html#10">App\Diagrams\Calculators\TotalPerMonthCalculator</a></td><td class="text-right">0.0%</td><td class="text-right">6</td><td class="text-right">42</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-12">
+     <h2 style="margin-top: 3rem;">Methods</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="methodsCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="methodComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3 style="margin-top: 2rem;">Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Calculators/ProjectedNextMonthSpendingCalculator.php.html#11"><abbr title="App\Diagrams\Calculators\ProjectedNextMonthSpendingCalculator::calculate">calculate</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Calculators/ProjectedNextMonthSpendingCalculator.php.html#53"><abbr title="App\Diagrams\Calculators\ProjectedNextMonthSpendingCalculator::calculateFamilyTotal">calculateFamilyTotal</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Calculators/ProjectedNextMonthSpendingCalculator.php.html#85"><abbr title="App\Diagrams\Calculators\ProjectedNextMonthSpendingCalculator::existsThreeMonthsPast">existsThreeMonthsPast</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Calculators/ProjectedNextMonthSpendingCalculator.php.html#90"><abbr title="App\Diagrams\Calculators\ProjectedNextMonthSpendingCalculator::getPastThreeMonthsAverage">getPastThreeMonthsAverage</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Calculators/ProjectedNextMonthSpendingCalculator.php.html#96"><abbr title="App\Diagrams\Calculators\ProjectedNextMonthSpendingCalculator::existsLastYearSameMonths">existsLastYearSameMonths</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Calculators/ProjectedNextMonthSpendingCalculator.php.html#101"><abbr title="App\Diagrams\Calculators\ProjectedNextMonthSpendingCalculator::getLastYearSameMonthsAverage">getLastYearSameMonthsAverage</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Calculators/ProjectedNextMonthSpendingCalculator.php.html#107"><abbr title="App\Diagrams\Calculators\ProjectedNextMonthSpendingCalculator::getLastYearThisMonth">getLastYearThisMonth</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Calculators/ProjectedNextMonthSpendingCalculator.php.html#120"><abbr title="App\Diagrams\Calculators\ProjectedNextMonthSpendingCalculator::hasExpensesForMonths">hasExpensesForMonths</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Calculators/ProjectedNextMonthSpendingCalculator.php.html#137"><abbr title="App\Diagrams\Calculators\ProjectedNextMonthSpendingCalculator::sumExpensesForMonths">sumExpensesForMonths</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Calculators/ProjectedSpendingCalculator.php.html#9"><abbr title="App\Diagrams\Calculators\ProjectedSpendingCalculator::calculate">calculate</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Calculators/ProjectedSpendingCalculator.php.html#43"><abbr title="App\Diagrams\Calculators\ProjectedSpendingCalculator::resolveMonthContext">resolveMonthContext</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Calculators/ProjectedSpendingCalculator.php.html#57"><abbr title="App\Diagrams\Calculators\ProjectedSpendingCalculator::cumulative">cumulative</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Calculators/ProjectedSpendingCalculator.php.html#68"><abbr title="App\Diagrams\Calculators\ProjectedSpendingCalculator::computeGrowthRate">computeGrowthRate</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Calculators/ProjectedSpendingCalculator.php.html#78"><abbr title="App\Diagrams\Calculators\ProjectedSpendingCalculator::computeProjectedTotal">computeProjectedTotal</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Calculators/ProjectedSpendingCalculator.php.html#99"><abbr title="App\Diagrams\Calculators\ProjectedSpendingCalculator::computeBudgetHitDate">computeBudgetHitDate</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Calculators/SelectedMonthVsLastMonthCalculator.php.html#12"><abbr title="App\Diagrams\Calculators\SelectedMonthVsLastMonthCalculator::calculateUserDailyExpenses">calculateUserDailyExpenses</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Calculators/SelectedMonthVsLastMonthCalculator.php.html#35"><abbr title="App\Diagrams\Calculators\SelectedMonthVsLastMonthCalculator::calculateFamilyDailyExpenses">calculateFamilyDailyExpenses</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Calculators/SelectedMonthVsLastMonthCalculator.php.html#59"><abbr title="App\Diagrams\Calculators\SelectedMonthVsLastMonthCalculator::convertToCumulative">convertToCumulative</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Calculators/SelectedMonthVsLastMonthCalculator.php.html#72"><abbr title="App\Diagrams\Calculators\SelectedMonthVsLastMonthCalculator::getDaysInMonth">getDaysInMonth</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Calculators/SelectedMonthVsLastMonthCalculator.php.html#78"><abbr title="App\Diagrams\Calculators\SelectedMonthVsLastMonthCalculator::isCurrentMonth">isCurrentMonth</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Calculators/SelectedMonthVsLastMonthCalculator.php.html#84"><abbr title="App\Diagrams\Calculators\SelectedMonthVsLastMonthCalculator::getPreviousMonth">getPreviousMonth</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Calculators/SubscriptionsVsOneTimeCalculator.php.html#18"><abbr title="App\Diagrams\Calculators\SubscriptionsVsOneTimeCalculator::buildForIterators">buildForIterators</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Calculators/TopExpensesCalculator.php.html#19"><abbr title="App\Diagrams\Calculators\TopExpensesCalculator::resolveSelectedMonth">resolveSelectedMonth</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Calculators/TopExpensesCalculator.php.html#31"><abbr title="App\Diagrams\Calculators\TopExpensesCalculator::calculateForUser">calculateForUser</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Calculators/TopExpensesCalculator.php.html#59"><abbr title="App\Diagrams\Calculators\TopExpensesCalculator::calculateForFamily">calculateForFamily</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Calculators/TopExpensesCalculator.php.html#99"><abbr title="App\Diagrams\Calculators\TopExpensesCalculator::sortAndTakeTop">sortAndTakeTop</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Calculators/TopExpensesCalculator.php.html#105"><abbr title="App\Diagrams\Calculators\TopExpensesCalculator::displayUserName">displayUserName</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Calculators/TotalPerMonthCalculator.php.html#15"><abbr title="App\Diagrams\Calculators\TotalPerMonthCalculator::calculateUserCategoryTotals">calculateUserCategoryTotals</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Calculators/TotalPerMonthCalculator.php.html#36"><abbr title="App\Diagrams\Calculators\TotalPerMonthCalculator::calculateFamilyUserExpenses">calculateFamilyUserExpenses</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Generators/ProjectedSpendingGenerator.php.html#11"><abbr title="App\Diagrams\Generators\ProjectedSpendingGenerator::generateSvg">generateSvg</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Generators/SelectedMonthVsLastMonthSvgGenerator.php.html#17"><abbr title="App\Diagrams\Generators\SelectedMonthVsLastMonthSvgGenerator::generateChart">generateChart</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Generators/SelectedMonthVsLastMonthSvgGenerator.php.html#43"><abbr title="App\Diagrams\Generators\SelectedMonthVsLastMonthSvgGenerator::generateYAxisAndGrid">generateYAxisAndGrid</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Generators/SelectedMonthVsLastMonthSvgGenerator.php.html#59"><abbr title="App\Diagrams\Generators\SelectedMonthVsLastMonthSvgGenerator::generateXAxis">generateXAxis</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Generators/SelectedMonthVsLastMonthSvgGenerator.php.html#75"><abbr title="App\Diagrams\Generators\SelectedMonthVsLastMonthSvgGenerator::generateLine">generateLine</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Generators/SelectedMonthVsLastMonthSvgGenerator.php.html#108"><abbr title="App\Diagrams\Generators\SelectedMonthVsLastMonthSvgGenerator::generateLegend">generateLegend</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Generators/SelectedMonthVsLastMonthSvgGenerator.php.html#126"><abbr title="App\Diagrams\Generators\SelectedMonthVsLastMonthSvgGenerator::getDaysInMonth">getDaysInMonth</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Generators/SubscriptionsVsOneTimeGenerator.php.html#11"><abbr title="App\Diagrams\Generators\SubscriptionsVsOneTimeGenerator::generateSvg">generateSvg</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Generators/SubscriptionsVsOneTimeGenerator.php.html#140"><abbr title="App\Diagrams\Generators\SubscriptionsVsOneTimeGenerator::noDataSvg">noDataSvg</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Generators/SubscriptionsVsOneTimeGenerator.php.html#148"><abbr title="App\Diagrams\Generators\SubscriptionsVsOneTimeGenerator::formatAmountTick">formatAmountTick</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Generators/TopExpensesGenerator.php.html#11"><abbr title="App\Diagrams\Generators\TopExpensesGenerator::generateSvg">generateSvg</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Generators/TopExpensesGenerator.php.html#117"><abbr title="App\Diagrams\Generators\TopExpensesGenerator::noDataSvg">noDataSvg</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Generators/TopExpensesGenerator.php.html#125"><abbr title="App\Diagrams\Generators\TopExpensesGenerator::formatAmount">formatAmount</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Generators/TopExpensesGenerator.php.html#133"><abbr title="App\Diagrams\Generators\TopExpensesGenerator::truncateToWidth">truncateToWidth</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Generators/TotalPerMonthSvgGenerator.php.html#15"><abbr title="App\Diagrams\Generators\TotalPerMonthSvgGenerator::generateSvg">generateSvg</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Generators/TotalPerMonthSvgGenerator.php.html#29"><abbr title="App\Diagrams\Generators\TotalPerMonthSvgGenerator::prepareLegendData">prepareLegendData</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Generators/TotalPerMonthSvgGenerator.php.html#52"><abbr title="App\Diagrams\Generators\TotalPerMonthSvgGenerator::generateEmptyStateSvg">generateEmptyStateSvg</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Generators/TotalPerMonthSvgGenerator.php.html#60"><abbr title="App\Diagrams\Generators\TotalPerMonthSvgGenerator::generatePieChartSvg">generatePieChartSvg</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Generators/TotalPerMonthSvgGenerator.php.html#76"><abbr title="App\Diagrams\Generators\TotalPerMonthSvgGenerator::generateLegend">generateLegend</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Generators/TotalPerMonthSvgGenerator.php.html#101"><abbr title="App\Diagrams\Generators\TotalPerMonthSvgGenerator::generateSingleSlice">generateSingleSlice</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Generators/TotalPerMonthSvgGenerator.php.html#112"><abbr title="App\Diagrams\Generators\TotalPerMonthSvgGenerator::generateMultipleSlices">generateMultipleSlices</abbr></a></td><td class="text-right">0%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3 style="margin-top: 2rem;">Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right">Coverage</th>
+         <th class="text-right">Complexity</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Generators/ProjectedSpendingGenerator.php.html#11"><abbr title="App\Diagrams\Generators\ProjectedSpendingGenerator::generateSvg">generateSvg</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">23</td><td class="text-right">552</td></tr>
+       <tr><td><a href="Calculators/SubscriptionsVsOneTimeCalculator.php.html#18"><abbr title="App\Diagrams\Calculators\SubscriptionsVsOneTimeCalculator::buildForIterators">buildForIterators</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">12</td><td class="text-right">156</td></tr>
+       <tr><td><a href="Calculators/TopExpensesCalculator.php.html#105"><abbr title="App\Diagrams\Calculators\TopExpensesCalculator::displayUserName">displayUserName</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">10</td><td class="text-right">110</td></tr>
+       <tr><td><a href="Calculators/ProjectedSpendingCalculator.php.html#99"><abbr title="App\Diagrams\Calculators\ProjectedSpendingCalculator::computeBudgetHitDate">computeBudgetHitDate</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">9</td><td class="text-right">90</td></tr>
+       <tr><td><a href="Calculators/TopExpensesCalculator.php.html#59"><abbr title="App\Diagrams\Calculators\TopExpensesCalculator::calculateForFamily">calculateForFamily</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">7</td><td class="text-right">56</td></tr>
+       <tr><td><a href="Generators/SubscriptionsVsOneTimeGenerator.php.html#11"><abbr title="App\Diagrams\Generators\SubscriptionsVsOneTimeGenerator::generateSvg">generateSvg</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">7</td><td class="text-right">56</td></tr>
+       <tr><td><a href="Calculators/SelectedMonthVsLastMonthCalculator.php.html#35"><abbr title="App\Diagrams\Calculators\SelectedMonthVsLastMonthCalculator::calculateFamilyDailyExpenses">calculateFamilyDailyExpenses</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">6</td><td class="text-right">42</td></tr>
+       <tr><td><a href="Calculators/SelectedMonthVsLastMonthCalculator.php.html#12"><abbr title="App\Diagrams\Calculators\SelectedMonthVsLastMonthCalculator::calculateUserDailyExpenses">calculateUserDailyExpenses</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">5</td><td class="text-right">30</td></tr>
+       <tr><td><a href="Calculators/TopExpensesCalculator.php.html#31"><abbr title="App\Diagrams\Calculators\TopExpensesCalculator::calculateForUser">calculateForUser</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">5</td><td class="text-right">30</td></tr>
+       <tr><td><a href="Generators/SelectedMonthVsLastMonthSvgGenerator.php.html#75"><abbr title="App\Diagrams\Generators\SelectedMonthVsLastMonthSvgGenerator::generateLine">generateLine</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">5</td><td class="text-right">30</td></tr>
+       <tr><td><a href="Generators/TopExpensesGenerator.php.html#11"><abbr title="App\Diagrams\Generators\TopExpensesGenerator::generateSvg">generateSvg</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">5</td><td class="text-right">30</td></tr>
+       <tr><td><a href="Generators/TotalPerMonthSvgGenerator.php.html#29"><abbr title="App\Diagrams\Generators\TotalPerMonthSvgGenerator::prepareLegendData">prepareLegendData</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">5</td><td class="text-right">30</td></tr>
+       <tr><td><a href="Generators/TotalPerMonthSvgGenerator.php.html#76"><abbr title="App\Diagrams\Generators\TotalPerMonthSvgGenerator::generateLegend">generateLegend</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">5</td><td class="text-right">30</td></tr>
+       <tr><td><a href="Generators/TotalPerMonthSvgGenerator.php.html#112"><abbr title="App\Diagrams\Generators\TotalPerMonthSvgGenerator::generateMultipleSlices">generateMultipleSlices</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">5</td><td class="text-right">30</td></tr>
+       <tr><td><a href="Calculators/ProjectedNextMonthSpendingCalculator.php.html#11"><abbr title="App\Diagrams\Calculators\ProjectedNextMonthSpendingCalculator::calculate">calculate</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">4</td><td class="text-right">20</td></tr>
+       <tr><td><a href="Calculators/ProjectedNextMonthSpendingCalculator.php.html#120"><abbr title="App\Diagrams\Calculators\ProjectedNextMonthSpendingCalculator::hasExpensesForMonths">hasExpensesForMonths</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">4</td><td class="text-right">20</td></tr>
+       <tr><td><a href="Calculators/ProjectedNextMonthSpendingCalculator.php.html#137"><abbr title="App\Diagrams\Calculators\ProjectedNextMonthSpendingCalculator::sumExpensesForMonths">sumExpensesForMonths</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">4</td><td class="text-right">20</td></tr>
+       <tr><td><a href="Calculators/TopExpensesCalculator.php.html#19"><abbr title="App\Diagrams\Calculators\TopExpensesCalculator::resolveSelectedMonth">resolveSelectedMonth</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">4</td><td class="text-right">20</td></tr>
+       <tr><td><a href="Calculators/TotalPerMonthCalculator.php.html#36"><abbr title="App\Diagrams\Calculators\TotalPerMonthCalculator::calculateFamilyUserExpenses">calculateFamilyUserExpenses</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">4</td><td class="text-right">20</td></tr>
+       <tr><td><a href="Generators/SelectedMonthVsLastMonthSvgGenerator.php.html#59"><abbr title="App\Diagrams\Generators\SelectedMonthVsLastMonthSvgGenerator::generateXAxis">generateXAxis</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">4</td><td class="text-right">20</td></tr>
+       <tr><td><a href="Generators/TopExpensesGenerator.php.html#133"><abbr title="App\Diagrams\Generators\TopExpensesGenerator::truncateToWidth">truncateToWidth</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">4</td><td class="text-right">20</td></tr>
+       <tr><td><a href="Calculators/ProjectedNextMonthSpendingCalculator.php.html#53"><abbr title="App\Diagrams\Calculators\ProjectedNextMonthSpendingCalculator::calculateFamilyTotal">calculateFamilyTotal</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">3</td><td class="text-right">12</td></tr>
+       <tr><td><a href="Calculators/ProjectedSpendingCalculator.php.html#9"><abbr title="App\Diagrams\Calculators\ProjectedSpendingCalculator::calculate">calculate</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">3</td><td class="text-right">12</td></tr>
+       <tr><td><a href="Calculators/ProjectedSpendingCalculator.php.html#43"><abbr title="App\Diagrams\Calculators\ProjectedSpendingCalculator::resolveMonthContext">resolveMonthContext</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">3</td><td class="text-right">12</td></tr>
+       <tr><td><a href="Calculators/ProjectedSpendingCalculator.php.html#68"><abbr title="App\Diagrams\Calculators\ProjectedSpendingCalculator::computeGrowthRate">computeGrowthRate</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">3</td><td class="text-right">12</td></tr>
+       <tr><td><a href="Calculators/ProjectedSpendingCalculator.php.html#78"><abbr title="App\Diagrams\Calculators\ProjectedSpendingCalculator::computeProjectedTotal">computeProjectedTotal</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">3</td><td class="text-right">12</td></tr>
+       <tr><td><a href="Generators/SelectedMonthVsLastMonthSvgGenerator.php.html#43"><abbr title="App\Diagrams\Generators\SelectedMonthVsLastMonthSvgGenerator::generateYAxisAndGrid">generateYAxisAndGrid</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">3</td><td class="text-right">12</td></tr>
+       <tr><td><a href="Generators/SubscriptionsVsOneTimeGenerator.php.html#148"><abbr title="App\Diagrams\Generators\SubscriptionsVsOneTimeGenerator::formatAmountTick">formatAmountTick</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">3</td><td class="text-right">12</td></tr>
+       <tr><td><a href="Generators/TotalPerMonthSvgGenerator.php.html#15"><abbr title="App\Diagrams\Generators\TotalPerMonthSvgGenerator::generateSvg">generateSvg</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">3</td><td class="text-right">12</td></tr>
+       <tr><td><a href="Calculators/ProjectedNextMonthSpendingCalculator.php.html#107"><abbr title="App\Diagrams\Calculators\ProjectedNextMonthSpendingCalculator::getLastYearThisMonth">getLastYearThisMonth</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">2</td><td class="text-right">6</td></tr>
+       <tr><td><a href="Calculators/ProjectedSpendingCalculator.php.html#57"><abbr title="App\Diagrams\Calculators\ProjectedSpendingCalculator::cumulative">cumulative</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">2</td><td class="text-right">6</td></tr>
+       <tr><td><a href="Calculators/SelectedMonthVsLastMonthCalculator.php.html#59"><abbr title="App\Diagrams\Calculators\SelectedMonthVsLastMonthCalculator::convertToCumulative">convertToCumulative</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">2</td><td class="text-right">6</td></tr>
+       <tr><td><a href="Calculators/TotalPerMonthCalculator.php.html#15"><abbr title="App\Diagrams\Calculators\TotalPerMonthCalculator::calculateUserCategoryTotals">calculateUserCategoryTotals</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">2</td><td class="text-right">6</td></tr>
+       <tr><td><a href="Generators/SelectedMonthVsLastMonthSvgGenerator.php.html#17"><abbr title="App\Diagrams\Generators\SelectedMonthVsLastMonthSvgGenerator::generateChart">generateChart</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">2</td><td class="text-right">6</td></tr>
+       <tr><td><a href="Generators/TotalPerMonthSvgGenerator.php.html#60"><abbr title="App\Diagrams\Generators\TotalPerMonthSvgGenerator::generatePieChartSvg">generatePieChartSvg</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">2</td><td class="text-right">6</td></tr>
+       <tr><td><a href="Generators/TotalPerMonthSvgGenerator.php.html#101"><abbr title="App\Diagrams\Generators\TotalPerMonthSvgGenerator::generateSingleSlice">generateSingleSlice</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">2</td><td class="text-right">6</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <footer>
+    <hr/>
+    <p>
+     <small>Generated by <a href="https://github.com/sebastianbergmann/php-code-coverage" target="_top">php-code-coverage 12.3.2</a> using <a href="https://www.php.net/" target="_top">PHP 8.3.23</a> and <a href="https://phpunit.de/">PHPUnit 12.3.4</a> at Tue Aug 26 14:29:52 EEST 2025.</small>
+    </p>
+   </footer>
+  </div>
+  <script src="../_js/billboard.pkgd.min.js?v=12.3.2" type="text/javascript"></script>
+  <script type="application/json" id="complexity_class">[[0,21,"Calculators\/ProjectedNextMonthSpendingCalculator.php.html#9","App\\Diagrams\\Calculators\\ProjectedNextMonthSpendingCalculator","462"],[0,23,"Calculators\/ProjectedSpendingCalculator.php.html#7","App\\Diagrams\\Calculators\\ProjectedSpendingCalculator","552"],[0,16,"Calculators\/SelectedMonthVsLastMonthCalculator.php.html#10","App\\Diagrams\\Calculators\\SelectedMonthVsLastMonthCalculator","272"],[0,12,"Calculators\/SubscriptionsVsOneTimeCalculator.php.html#13","App\\Diagrams\\Calculators\\SubscriptionsVsOneTimeCalculator","156"],[0,27,"Calculators\/TopExpensesCalculator.php.html#12","App\\Diagrams\\Calculators\\TopExpensesCalculator","756"],[0,6,"Calculators\/TotalPerMonthCalculator.php.html#10","App\\Diagrams\\Calculators\\TotalPerMonthCalculator","42"],[0,23,"Generators\/ProjectedSpendingGenerator.php.html#9","App\\Diagrams\\Generators\\ProjectedSpendingGenerator","552"],[0,16,"Generators\/SelectedMonthVsLastMonthSvgGenerator.php.html#7","App\\Diagrams\\Generators\\SelectedMonthVsLastMonthSvgGenerator","272"],[0,11,"Generators\/SubscriptionsVsOneTimeGenerator.php.html#9","App\\Diagrams\\Generators\\SubscriptionsVsOneTimeGenerator","132"],[0,11,"Generators\/TopExpensesGenerator.php.html#9","App\\Diagrams\\Generators\\TopExpensesGenerator","132"],[0,23,"Generators\/TotalPerMonthSvgGenerator.php.html#7","App\\Diagrams\\Generators\\TotalPerMonthSvgGenerator","552"]]</script>
+  <script type="application/json" id="complexity_method">[[0,4,"Calculators\/ProjectedNextMonthSpendingCalculator.php.html#11","App\\Diagrams\\Calculators\\ProjectedNextMonthSpendingCalculator::calculate","20"],[0,3,"Calculators\/ProjectedNextMonthSpendingCalculator.php.html#53","App\\Diagrams\\Calculators\\ProjectedNextMonthSpendingCalculator::calculateFamilyTotal","12"],[0,1,"Calculators\/ProjectedNextMonthSpendingCalculator.php.html#85","App\\Diagrams\\Calculators\\ProjectedNextMonthSpendingCalculator::existsThreeMonthsPast","2"],[0,1,"Calculators\/ProjectedNextMonthSpendingCalculator.php.html#90","App\\Diagrams\\Calculators\\ProjectedNextMonthSpendingCalculator::getPastThreeMonthsAverage","2"],[0,1,"Calculators\/ProjectedNextMonthSpendingCalculator.php.html#96","App\\Diagrams\\Calculators\\ProjectedNextMonthSpendingCalculator::existsLastYearSameMonths","2"],[0,1,"Calculators\/ProjectedNextMonthSpendingCalculator.php.html#101","App\\Diagrams\\Calculators\\ProjectedNextMonthSpendingCalculator::getLastYearSameMonthsAverage","2"],[0,2,"Calculators\/ProjectedNextMonthSpendingCalculator.php.html#107","App\\Diagrams\\Calculators\\ProjectedNextMonthSpendingCalculator::getLastYearThisMonth","6"],[0,4,"Calculators\/ProjectedNextMonthSpendingCalculator.php.html#120","App\\Diagrams\\Calculators\\ProjectedNextMonthSpendingCalculator::hasExpensesForMonths","20"],[0,4,"Calculators\/ProjectedNextMonthSpendingCalculator.php.html#137","App\\Diagrams\\Calculators\\ProjectedNextMonthSpendingCalculator::sumExpensesForMonths","20"],[0,3,"Calculators\/ProjectedSpendingCalculator.php.html#9","App\\Diagrams\\Calculators\\ProjectedSpendingCalculator::calculate","12"],[0,3,"Calculators\/ProjectedSpendingCalculator.php.html#43","App\\Diagrams\\Calculators\\ProjectedSpendingCalculator::resolveMonthContext","12"],[0,2,"Calculators\/ProjectedSpendingCalculator.php.html#57","App\\Diagrams\\Calculators\\ProjectedSpendingCalculator::cumulative","6"],[0,3,"Calculators\/ProjectedSpendingCalculator.php.html#68","App\\Diagrams\\Calculators\\ProjectedSpendingCalculator::computeGrowthRate","12"],[0,3,"Calculators\/ProjectedSpendingCalculator.php.html#78","App\\Diagrams\\Calculators\\ProjectedSpendingCalculator::computeProjectedTotal","12"],[0,9,"Calculators\/ProjectedSpendingCalculator.php.html#99","App\\Diagrams\\Calculators\\ProjectedSpendingCalculator::computeBudgetHitDate","90"],[0,5,"Calculators\/SelectedMonthVsLastMonthCalculator.php.html#12","App\\Diagrams\\Calculators\\SelectedMonthVsLastMonthCalculator::calculateUserDailyExpenses","30"],[0,6,"Calculators\/SelectedMonthVsLastMonthCalculator.php.html#35","App\\Diagrams\\Calculators\\SelectedMonthVsLastMonthCalculator::calculateFamilyDailyExpenses","42"],[0,2,"Calculators\/SelectedMonthVsLastMonthCalculator.php.html#59","App\\Diagrams\\Calculators\\SelectedMonthVsLastMonthCalculator::convertToCumulative","6"],[0,1,"Calculators\/SelectedMonthVsLastMonthCalculator.php.html#72","App\\Diagrams\\Calculators\\SelectedMonthVsLastMonthCalculator::getDaysInMonth","2"],[0,1,"Calculators\/SelectedMonthVsLastMonthCalculator.php.html#78","App\\Diagrams\\Calculators\\SelectedMonthVsLastMonthCalculator::isCurrentMonth","2"],[0,1,"Calculators\/SelectedMonthVsLastMonthCalculator.php.html#84","App\\Diagrams\\Calculators\\SelectedMonthVsLastMonthCalculator::getPreviousMonth","2"],[0,12,"Calculators\/SubscriptionsVsOneTimeCalculator.php.html#18","App\\Diagrams\\Calculators\\SubscriptionsVsOneTimeCalculator::buildForIterators","156"],[0,4,"Calculators\/TopExpensesCalculator.php.html#19","App\\Diagrams\\Calculators\\TopExpensesCalculator::resolveSelectedMonth","20"],[0,5,"Calculators\/TopExpensesCalculator.php.html#31","App\\Diagrams\\Calculators\\TopExpensesCalculator::calculateForUser","30"],[0,7,"Calculators\/TopExpensesCalculator.php.html#59","App\\Diagrams\\Calculators\\TopExpensesCalculator::calculateForFamily","56"],[0,1,"Calculators\/TopExpensesCalculator.php.html#99","App\\Diagrams\\Calculators\\TopExpensesCalculator::sortAndTakeTop","2"],[0,10,"Calculators\/TopExpensesCalculator.php.html#105","App\\Diagrams\\Calculators\\TopExpensesCalculator::displayUserName","110"],[0,2,"Calculators\/TotalPerMonthCalculator.php.html#15","App\\Diagrams\\Calculators\\TotalPerMonthCalculator::calculateUserCategoryTotals","6"],[0,4,"Calculators\/TotalPerMonthCalculator.php.html#36","App\\Diagrams\\Calculators\\TotalPerMonthCalculator::calculateFamilyUserExpenses","20"],[0,23,"Generators\/ProjectedSpendingGenerator.php.html#11","App\\Diagrams\\Generators\\ProjectedSpendingGenerator::generateSvg","552"],[0,2,"Generators\/SelectedMonthVsLastMonthSvgGenerator.php.html#17","App\\Diagrams\\Generators\\SelectedMonthVsLastMonthSvgGenerator::generateChart","6"],[0,3,"Generators\/SelectedMonthVsLastMonthSvgGenerator.php.html#43","App\\Diagrams\\Generators\\SelectedMonthVsLastMonthSvgGenerator::generateYAxisAndGrid","12"],[0,4,"Generators\/SelectedMonthVsLastMonthSvgGenerator.php.html#59","App\\Diagrams\\Generators\\SelectedMonthVsLastMonthSvgGenerator::generateXAxis","20"],[0,5,"Generators\/SelectedMonthVsLastMonthSvgGenerator.php.html#75","App\\Diagrams\\Generators\\SelectedMonthVsLastMonthSvgGenerator::generateLine","30"],[0,1,"Generators\/SelectedMonthVsLastMonthSvgGenerator.php.html#108","App\\Diagrams\\Generators\\SelectedMonthVsLastMonthSvgGenerator::generateLegend","2"],[0,1,"Generators\/SelectedMonthVsLastMonthSvgGenerator.php.html#126","App\\Diagrams\\Generators\\SelectedMonthVsLastMonthSvgGenerator::getDaysInMonth","2"],[0,7,"Generators\/SubscriptionsVsOneTimeGenerator.php.html#11","App\\Diagrams\\Generators\\SubscriptionsVsOneTimeGenerator::generateSvg","56"],[0,1,"Generators\/SubscriptionsVsOneTimeGenerator.php.html#140","App\\Diagrams\\Generators\\SubscriptionsVsOneTimeGenerator::noDataSvg","2"],[0,3,"Generators\/SubscriptionsVsOneTimeGenerator.php.html#148","App\\Diagrams\\Generators\\SubscriptionsVsOneTimeGenerator::formatAmountTick","12"],[0,5,"Generators\/TopExpensesGenerator.php.html#11","App\\Diagrams\\Generators\\TopExpensesGenerator::generateSvg","30"],[0,1,"Generators\/TopExpensesGenerator.php.html#117","App\\Diagrams\\Generators\\TopExpensesGenerator::noDataSvg","2"],[0,1,"Generators\/TopExpensesGenerator.php.html#125","App\\Diagrams\\Generators\\TopExpensesGenerator::formatAmount","2"],[0,4,"Generators\/TopExpensesGenerator.php.html#133","App\\Diagrams\\Generators\\TopExpensesGenerator::truncateToWidth","20"],[0,3,"Generators\/TotalPerMonthSvgGenerator.php.html#15","App\\Diagrams\\Generators\\TotalPerMonthSvgGenerator::generateSvg","12"],[0,5,"Generators\/TotalPerMonthSvgGenerator.php.html#29","App\\Diagrams\\Generators\\TotalPerMonthSvgGenerator::prepareLegendData","30"],[0,1,"Generators\/TotalPerMonthSvgGenerator.php.html#52","App\\Diagrams\\Generators\\TotalPerMonthSvgGenerator::generateEmptyStateSvg","2"],[0,2,"Generators\/TotalPerMonthSvgGenerator.php.html#60","App\\Diagrams\\Generators\\TotalPerMonthSvgGenerator::generatePieChartSvg","6"],[0,5,"Generators\/TotalPerMonthSvgGenerator.php.html#76","App\\Diagrams\\Generators\\TotalPerMonthSvgGenerator::generateLegend","30"],[0,2,"Generators\/TotalPerMonthSvgGenerator.php.html#101","App\\Diagrams\\Generators\\TotalPerMonthSvgGenerator::generateSingleSlice","6"],[0,5,"Generators\/TotalPerMonthSvgGenerator.php.html#112","App\\Diagrams\\Generators\\TotalPerMonthSvgGenerator::generateMultipleSlices","30"]]</script>
+  <script type="text/javascript" defer>
+  const barLabels = [
+    '0%',
+    '0-10%',
+    '10-20%',
+    '20-30%',
+    '30-40%',
+    '40-50%',
+    '50-60%',
+    '60-70%',
+    '70-80%',
+    '80-90%',
+    '90-100%',
+    '100%'
+  ];
+  const barConfig = (name, fullName, values) => ({
+    axis: {
+      x: {
+        type: "category",
+        categories: barLabels,
+      },
+      y: {
+        label: {
+          text: `#${name}`,
+          position: 'outer-top',
+        },
+      },
+    },
+    bindto: `#${name}CoverageDistribution`,
+    data: {
+      columns: [
+        [fullName].concat(values),
+      ],
+      colors: {
+        [fullName]: "rgba(69, 114, 167, 0.75)",
+      },
+      type: "bar",
+    },
+    bar: {
+      width: {
+        ratio: 0.9,
+      },
+    },
+    grid: {
+      focus: {
+        show: false,
+      },
+      x: {
+        show: true,
+      },
+      y: {
+        show: true,
+      },
+    },
+    legend: {
+      show: false,
+    },
+    tooltip: {
+      contents: function (data) {
+        return `<table class="bb-tooltip"><tbody>
+            <tr><th colspan="2">Coverage ${barLabels[data[0].x]}</th></tr>
+            <tr><td class="value">${data[0].value} ${name}</td></tr>
+          </tbody></table>`;
+      },
+      grouped: false,
+    },
+  });
+  bb.generate(
+    barConfig('classes', "Class Coverage", [11,0,0,0,0,0,0,0,0,0,0,0])
+  );
+  bb.generate(
+    barConfig('methods', "Method Coverage", [50,0,0,0,0,0,0,0,0,0,0,0])
+  );
+
+  const scatterConfig = (name, complexityData) => ({
+    axis: {
+      x: {
+        label: {
+          text: 'Code Coverage (in percent)',
+          position: 'outer-right',
+        },
+        tick: {
+          values: [0, 20, 40, 60, 80, 100],
+        },
+      },
+      y: {
+        label: {
+          text: 'Cyclomatic Complexity',
+          position: 'outer-top',
+        },
+        min: 0,
+        padding: {
+          bottom: 0,
+          top: 5,
+        },
+      },
+    },
+    bindto: `#${name}Complexity`,
+    data: {
+      columns: [
+        ["complexity_x"].concat(complexityData.map(d => d[0])),
+        ["complexity"].concat(complexityData.map(d => d[1])),
+      ],
+      onclick: function(data, element) {
+        window.location = complexityData[data.index][2];
+      },
+      type: "scatter",
+      xs: {
+        "complexity": "complexity_x",
+      },
+    },
+    grid: {
+      focus: {
+        show: true,
+        y: true,
+      },
+      x: {
+        show: true,
+      },
+      y: {
+        show: true,
+      },
+    },
+    legend: {
+      show: false,
+    },
+    tooltip: {
+      contents: function (data) {
+        const coverage = Math.round(data[0].x);
+        const complexity = data[0].value;
+        const targetName = complexityData[data[0].index][3];
+        const crap = complexityData[data[0].index][4];
+        return `<table class="bb-tooltip"><tbody>
+            <tr><th colspan="2">${targetName}</th></tr>
+            <tr class="bb-tooltip-name-complexity"><td>Coverage</td><td class="name">${coverage}%</td></tr>
+            <tr class="bb-tooltip-name-complexity"><td>Complexity</td><td class="value">${complexity}</td></tr>
+            <tr class="bb-tooltip-name-complexity"><td>Crap</td><td class="value">${crap}</td></tr>
+          </tbody></table>`;
+      },
+      grouped: false,
+    },
+  });
+  const classComplexityData = JSON.parse(document.getElementById('complexity_class').textContent);
+  bb.generate(
+    scatterConfig("class", classComplexityData)
+  );
+  const methodComplexityData = JSON.parse(document.getElementById('complexity_method').textContent);
+  bb.generate(
+    scatterConfig("method", methodComplexityData),
+  );
+  </script>
+ </body>
+</html>

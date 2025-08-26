@@ -27,12 +27,12 @@ final class ExpenseController extends AbstractController
 {
     #[Route('', name: 'app_expense_index', methods: ['GET'])]
     public function index(
-        Request $request,
-        ExpenseRepository $expenses,
-        CategoryRepository $categories,
-        UserRepository $users,
+        Request                     $request,
+        ExpenseRepository           $expenses,
+        CategoryRepository          $categories,
+        UserRepository              $users,
         ExpenseIndexContextResolver $ctxResolver,
-        ExpenseParamsExtractor $params,
+        ExpenseParamsExtractor      $params,
     ): Response {
         /** @var User $currentUser */
         $currentUser = $this->getUser();
@@ -67,10 +67,10 @@ final class ExpenseController extends AbstractController
 
     #[Route('/new', name: 'app_expense_new', methods: ['GET', 'POST'])]
     public function new(
-        Request $request,
-        EntityManagerInterface $em,
-        ReceiptStorage $storage,
-        UserRepository $users,
+        Request                 $request,
+        EntityManagerInterface  $em,
+        ReceiptStorage          $storage,
+        UserRepository          $users,
     ): Response {
         /** @var User $currentUser */
         $currentUser = $this->getUser();
@@ -131,10 +131,10 @@ final class ExpenseController extends AbstractController
 
     #[Route('/{id}/edit', name: 'app_expense_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     public function edit(
-        Request $request,
-        Expense $expense,
-        EntityManagerInterface $em,
-        ReceiptStorage $storage,
+        Request                 $request,
+        Expense                 $expense,
+        EntityManagerInterface  $em,
+        ReceiptStorage          $storage,
     ): Response {
         $this->denyAccessUnlessGranted(ExpenseVoter::EDIT, $expense);
 
@@ -184,10 +184,10 @@ final class ExpenseController extends AbstractController
 
     #[Route('/{id}', name: 'app_expense_delete', requirements: ['id' => '\d+'], methods: ['POST'])]
     public function delete(
-        Request $request,
-        Expense $expense,
-        EntityManagerInterface $em,
-        ReceiptStorage $storage,
+        Request                 $request,
+        Expense                 $expense,
+        EntityManagerInterface  $em,
+        ReceiptStorage          $storage,
     ): Response {
         $this->denyAccessUnlessGranted(ExpenseVoter::DELETE, $expense);
 

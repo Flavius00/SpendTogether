@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Dashboard for /var/www/html/src/Entity</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="../_css/bootstrap.min.css?v=12.3.2" rel="stylesheet" type="text/css">
+  <link href="../_css/billboard.min.css?v=12.3.2" rel="stylesheet" type="text/css">
+  <link href="../_css/style.css?v=12.3.2" rel="stylesheet" type="text/css">
+  <link href="../_css/custom.css" rel="stylesheet" type="text/css">
+ </head>
+ <body>
+  <header>
+   <div class="container-fluid">
+    <div class="row">
+     <div class="col-md-12">
+      <nav aria-label="breadcrumb">
+       <ol class="breadcrumb">
+         <li class="breadcrumb-item"><a href="../index.html">/var/www/html/src</a></li>
+         <li class="breadcrumb-item"><a href="index.html">Entity</a></li>
+         <li class="breadcrumb-item active">(Dashboard)</li>
+
+       </ol>
+      </nav>
+     </div>
+    </div>
+   </div>
+  </header>
+  <div class="container-fluid">
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Classes</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="classesCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="classComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3 style="margin-top: 2rem;">Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Threshold.php.html#12">App\Entity\Threshold</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Family.php.html#14">App\Entity\Family</a></td><td class="text-right">22%</td></tr>
+       <tr><td><a href="Category.php.html#13">App\Entity\Category</a></td><td class="text-right">27%</td></tr>
+       <tr><td><a href="User.php.html#16">App\Entity\User</a></td><td class="text-right">39%</td></tr>
+       <tr><td><a href="Subscription.php.html#14">App\Entity\Subscription</a></td><td class="text-right">50%</td></tr>
+       <tr><td><a href="AccessToken.php.html#11">App\Entity\AccessToken</a></td><td class="text-right">76%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3 style="margin-top: 2rem;">Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right">Coverage</th>
+         <th class="text-right">Complexity</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="User.php.html#16">App\Entity\User</a></td><td class="text-right">39.3%</td><td class="text-right">35</td><td class="text-right">309</td></tr>
+       <tr><td><a href="Category.php.html#13">App\Entity\Category</a></td><td class="text-right">27.0%</td><td class="text-right">24</td><td class="text-right">247</td></tr>
+       <tr><td><a href="Family.php.html#14">App\Entity\Family</a></td><td class="text-right">22.2%</td><td class="text-right">18</td><td class="text-right">170</td></tr>
+       <tr><td><a href="Subscription.php.html#14">App\Entity\Subscription</a></td><td class="text-right">50.0%</td><td class="text-right">22</td><td class="text-right">82</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-12">
+     <h2 style="margin-top: 3rem;">Methods</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="methodsCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="methodComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3 style="margin-top: 2rem;">Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="AccessToken.php.html#43"><abbr title="App\Entity\AccessToken::getId">getId</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AccessToken.php.html#48"><abbr title="App\Entity\AccessToken::getToken">getToken</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AccessToken.php.html#60"><abbr title="App\Entity\AccessToken::getCreatedAt">getCreatedAt</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Category.php.html#92"><abbr title="App\Entity\Category::getExpenses">getExpenses</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Category.php.html#97"><abbr title="App\Entity\Category::addExpense">addExpense</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Category.php.html#107"><abbr title="App\Entity\Category::removeExpense">removeExpense</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Category.php.html#122"><abbr title="App\Entity\Category::getSubscriptions">getSubscriptions</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Category.php.html#127"><abbr title="App\Entity\Category::addSubscription">addSubscription</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Category.php.html#137"><abbr title="App\Entity\Category::removeSubscription">removeSubscription</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Category.php.html#152"><abbr title="App\Entity\Category::getThresholds">getThresholds</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Category.php.html#157"><abbr title="App\Entity\Category::addThreshold">addThreshold</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Category.php.html#167"><abbr title="App\Entity\Category::removeThreshold">removeThreshold</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Expense.php.html#139"><abbr title="App\Entity\Expense::getUserObject">getUserObject</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Family.php.html#54"><abbr title="App\Entity\Family::getId">getId</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Family.php.html#59"><abbr title="App\Entity\Family::getName">getName</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Family.php.html#71"><abbr title="App\Entity\Family::getMonthlyTargetBudget">getMonthlyTargetBudget</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Family.php.html#86"><abbr title="App\Entity\Family::getUsers">getUsers</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Family.php.html#91"><abbr title="App\Entity\Family::addUser">addUser</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Family.php.html#101"><abbr title="App\Entity\Family::removeUser">removeUser</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Family.php.html#116"><abbr title="App\Entity\Family::getThresholds">getThresholds</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Family.php.html#121"><abbr title="App\Entity\Family::addThreshold">addThreshold</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Family.php.html#131"><abbr title="App\Entity\Family::removeThreshold">removeThreshold</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Subscription.php.html#79"><abbr title="App\Entity\Subscription::getName">getName</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Subscription.php.html#91"><abbr title="App\Entity\Subscription::getAmount">getAmount</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Subscription.php.html#103"><abbr title="App\Entity\Subscription::getFrequency">getFrequency</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Subscription.php.html#115"><abbr title="App\Entity\Subscription::getNextDueDate">getNextDueDate</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Subscription.php.html#127"><abbr title="App\Entity\Subscription::isActive">isActive</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Subscription.php.html#139"><abbr title="App\Entity\Subscription::getUserObject">getUserObject</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Subscription.php.html#151"><abbr title="App\Entity\Subscription::getCategory">getCategory</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Subscription.php.html#166"><abbr title="App\Entity\Subscription::getExpenses">getExpenses</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Subscription.php.html#171"><abbr title="App\Entity\Subscription::addExpense">addExpense</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Subscription.php.html#181"><abbr title="App\Entity\Subscription::removeExpense">removeExpense</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Threshold.php.html#31"><abbr title="App\Entity\Threshold::getId">getId</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Threshold.php.html#36"><abbr title="App\Entity\Threshold::getCategory">getCategory</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Threshold.php.html#41"><abbr title="App\Entity\Threshold::setCategory">setCategory</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Threshold.php.html#48"><abbr title="App\Entity\Threshold::getFamily">getFamily</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Threshold.php.html#53"><abbr title="App\Entity\Threshold::setFamily">setFamily</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Threshold.php.html#60"><abbr title="App\Entity\Threshold::getAmount">getAmount</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Threshold.php.html#65"><abbr title="App\Entity\Threshold::setAmount">setAmount</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="User.php.html#151"><abbr title="App\Entity\User::__serialize">__serialize</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="User.php.html#159"><abbr title="App\Entity\User::eraseCredentials">eraseCredentials</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="User.php.html#192"><abbr title="App\Entity\User::getExpenses">getExpenses</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="User.php.html#197"><abbr title="App\Entity\User::addExpense">addExpense</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="User.php.html#207"><abbr title="App\Entity\User::removeExpense">removeExpense</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="User.php.html#222"><abbr title="App\Entity\User::getSubscriptions">getSubscriptions</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="User.php.html#227"><abbr title="App\Entity\User::addSubscription">addSubscription</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="User.php.html#237"><abbr title="App\Entity\User::removeSubscription">removeSubscription</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="User.php.html#252"><abbr title="App\Entity\User::getAccessTokens">getAccessTokens</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="User.php.html#257"><abbr title="App\Entity\User::addAccessToken">addAccessToken</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="User.php.html#267"><abbr title="App\Entity\User::removeAccessToken">removeAccessToken</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="User.php.html#279"><abbr title="App\Entity\User::isVerified">isVerified</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="User.php.html#284"><abbr title="App\Entity\User::setIsVerified">setIsVerified</abbr></a></td><td class="text-right">0%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3 style="margin-top: 2rem;">Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right">Coverage</th>
+         <th class="text-right">Complexity</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Category.php.html#107"><abbr title="App\Entity\Category::removeExpense">removeExpense</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">3</td><td class="text-right">12</td></tr>
+       <tr><td><a href="Category.php.html#137"><abbr title="App\Entity\Category::removeSubscription">removeSubscription</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">3</td><td class="text-right">12</td></tr>
+       <tr><td><a href="Category.php.html#167"><abbr title="App\Entity\Category::removeThreshold">removeThreshold</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">3</td><td class="text-right">12</td></tr>
+       <tr><td><a href="Family.php.html#101"><abbr title="App\Entity\Family::removeUser">removeUser</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">3</td><td class="text-right">12</td></tr>
+       <tr><td><a href="Family.php.html#131"><abbr title="App\Entity\Family::removeThreshold">removeThreshold</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">3</td><td class="text-right">12</td></tr>
+       <tr><td><a href="Subscription.php.html#181"><abbr title="App\Entity\Subscription::removeExpense">removeExpense</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">3</td><td class="text-right">12</td></tr>
+       <tr><td><a href="User.php.html#207"><abbr title="App\Entity\User::removeExpense">removeExpense</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">3</td><td class="text-right">12</td></tr>
+       <tr><td><a href="User.php.html#237"><abbr title="App\Entity\User::removeSubscription">removeSubscription</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">3</td><td class="text-right">12</td></tr>
+       <tr><td><a href="User.php.html#267"><abbr title="App\Entity\User::removeAccessToken">removeAccessToken</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">3</td><td class="text-right">12</td></tr>
+       <tr><td><a href="Category.php.html#97"><abbr title="App\Entity\Category::addExpense">addExpense</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">2</td><td class="text-right">6</td></tr>
+       <tr><td><a href="Category.php.html#127"><abbr title="App\Entity\Category::addSubscription">addSubscription</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">2</td><td class="text-right">6</td></tr>
+       <tr><td><a href="Category.php.html#157"><abbr title="App\Entity\Category::addThreshold">addThreshold</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">2</td><td class="text-right">6</td></tr>
+       <tr><td><a href="Family.php.html#91"><abbr title="App\Entity\Family::addUser">addUser</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">2</td><td class="text-right">6</td></tr>
+       <tr><td><a href="Family.php.html#121"><abbr title="App\Entity\Family::addThreshold">addThreshold</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">2</td><td class="text-right">6</td></tr>
+       <tr><td><a href="Subscription.php.html#171"><abbr title="App\Entity\Subscription::addExpense">addExpense</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">2</td><td class="text-right">6</td></tr>
+       <tr><td><a href="User.php.html#197"><abbr title="App\Entity\User::addExpense">addExpense</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">2</td><td class="text-right">6</td></tr>
+       <tr><td><a href="User.php.html#227"><abbr title="App\Entity\User::addSubscription">addSubscription</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">2</td><td class="text-right">6</td></tr>
+       <tr><td><a href="User.php.html#257"><abbr title="App\Entity\User::addAccessToken">addAccessToken</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">2</td><td class="text-right">6</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <footer>
+    <hr/>
+    <p>
+     <small>Generated by <a href="https://github.com/sebastianbergmann/php-code-coverage" target="_top">php-code-coverage 12.3.2</a> using <a href="https://www.php.net/" target="_top">PHP 8.3.23</a> and <a href="https://phpunit.de/">PHPUnit 12.3.4</a> at Tue Aug 26 14:29:52 EEST 2025.</small>
+    </p>
+   </footer>
+  </div>
+  <script src="../_js/billboard.pkgd.min.js?v=12.3.2" type="text/javascript"></script>
+  <script type="application/json" id="complexity_class">[[0,7,"Threshold.php.html#12","App\\Entity\\Threshold","56"],[22.22222222222222,18,"Family.php.html#14","App\\Entity\\Family","170.44"],[27.027027027027028,24,"Category.php.html#13","App\\Entity\\Category","247.83"],[39.285714285714285,35,"User.php.html#16","App\\Entity\\User","309.16"],[50,22,"Subscription.php.html#14","App\\Entity\\Subscription","82.50"],[76.92307692307693,9,"AccessToken.php.html#11","App\\Entity\\AccessToken","10.00"],[96,17,"Expense.php.html#12","App\\Entity\\Expense","17"]]</script>
+  <script type="application/json" id="complexity_method">[[0,1,"AccessToken.php.html#43","App\\Entity\\AccessToken::getId","2"],[0,1,"AccessToken.php.html#48","App\\Entity\\AccessToken::getToken","2"],[0,1,"AccessToken.php.html#60","App\\Entity\\AccessToken::getCreatedAt","2"],[0,1,"Category.php.html#92","App\\Entity\\Category::getExpenses","2"],[0,2,"Category.php.html#97","App\\Entity\\Category::addExpense","6"],[0,3,"Category.php.html#107","App\\Entity\\Category::removeExpense","12"],[0,1,"Category.php.html#122","App\\Entity\\Category::getSubscriptions","2"],[0,2,"Category.php.html#127","App\\Entity\\Category::addSubscription","6"],[0,3,"Category.php.html#137","App\\Entity\\Category::removeSubscription","12"],[0,1,"Category.php.html#152","App\\Entity\\Category::getThresholds","2"],[0,2,"Category.php.html#157","App\\Entity\\Category::addThreshold","6"],[0,3,"Category.php.html#167","App\\Entity\\Category::removeThreshold","12"],[0,1,"Expense.php.html#139","App\\Entity\\Expense::getUserObject","2"],[0,1,"Family.php.html#54","App\\Entity\\Family::getId","2"],[0,1,"Family.php.html#59","App\\Entity\\Family::getName","2"],[0,1,"Family.php.html#71","App\\Entity\\Family::getMonthlyTargetBudget","2"],[0,1,"Family.php.html#86","App\\Entity\\Family::getUsers","2"],[0,2,"Family.php.html#91","App\\Entity\\Family::addUser","6"],[0,3,"Family.php.html#101","App\\Entity\\Family::removeUser","12"],[0,1,"Family.php.html#116","App\\Entity\\Family::getThresholds","2"],[0,2,"Family.php.html#121","App\\Entity\\Family::addThreshold","6"],[0,3,"Family.php.html#131","App\\Entity\\Family::removeThreshold","12"],[0,1,"Subscription.php.html#79","App\\Entity\\Subscription::getName","2"],[0,1,"Subscription.php.html#91","App\\Entity\\Subscription::getAmount","2"],[0,1,"Subscription.php.html#103","App\\Entity\\Subscription::getFrequency","2"],[0,1,"Subscription.php.html#115","App\\Entity\\Subscription::getNextDueDate","2"],[0,1,"Subscription.php.html#127","App\\Entity\\Subscription::isActive","2"],[0,1,"Subscription.php.html#139","App\\Entity\\Subscription::getUserObject","2"],[0,1,"Subscription.php.html#151","App\\Entity\\Subscription::getCategory","2"],[0,1,"Subscription.php.html#166","App\\Entity\\Subscription::getExpenses","2"],[0,2,"Subscription.php.html#171","App\\Entity\\Subscription::addExpense","6"],[0,3,"Subscription.php.html#181","App\\Entity\\Subscription::removeExpense","12"],[0,1,"Threshold.php.html#31","App\\Entity\\Threshold::getId","2"],[0,1,"Threshold.php.html#36","App\\Entity\\Threshold::getCategory","2"],[0,1,"Threshold.php.html#41","App\\Entity\\Threshold::setCategory","2"],[0,1,"Threshold.php.html#48","App\\Entity\\Threshold::getFamily","2"],[0,1,"Threshold.php.html#53","App\\Entity\\Threshold::setFamily","2"],[0,1,"Threshold.php.html#60","App\\Entity\\Threshold::getAmount","2"],[0,1,"Threshold.php.html#65","App\\Entity\\Threshold::setAmount","2"],[0,1,"User.php.html#151","App\\Entity\\User::__serialize","2"],[0,1,"User.php.html#159","App\\Entity\\User::eraseCredentials","2"],[0,1,"User.php.html#192","App\\Entity\\User::getExpenses","2"],[0,2,"User.php.html#197","App\\Entity\\User::addExpense","6"],[0,3,"User.php.html#207","App\\Entity\\User::removeExpense","12"],[0,1,"User.php.html#222","App\\Entity\\User::getSubscriptions","2"],[0,2,"User.php.html#227","App\\Entity\\User::addSubscription","6"],[0,3,"User.php.html#237","App\\Entity\\User::removeSubscription","12"],[0,1,"User.php.html#252","App\\Entity\\User::getAccessTokens","2"],[0,2,"User.php.html#257","App\\Entity\\User::addAccessToken","6"],[0,3,"User.php.html#267","App\\Entity\\User::removeAccessToken","12"],[0,1,"User.php.html#279","App\\Entity\\User::isVerified","2"],[0,1,"User.php.html#284","App\\Entity\\User::setIsVerified","2"],[100,1,"AccessToken.php.html#53","App\\Entity\\AccessToken::setToken","1"],[100,1,"AccessToken.php.html#65","App\\Entity\\AccessToken::setCreatedAt","1"],[100,1,"AccessToken.php.html#72","App\\Entity\\AccessToken::getExpiresAt","1"],[100,1,"AccessToken.php.html#77","App\\Entity\\AccessToken::setExpiresAt","1"],[100,1,"AccessToken.php.html#84","App\\Entity\\AccessToken::getUserObject","1"],[100,1,"AccessToken.php.html#89","App\\Entity\\AccessToken::setUserObject","1"],[100,1,"Category.php.html#53","App\\Entity\\Category::__construct","1"],[100,1,"Category.php.html#60","App\\Entity\\Category::getId","1"],[100,1,"Category.php.html#65","App\\Entity\\Category::getName","1"],[100,1,"Category.php.html#70","App\\Entity\\Category::setName","1"],[100,1,"Category.php.html#77","App\\Entity\\Category::isDeleted","1"],[100,1,"Category.php.html#82","App\\Entity\\Category::setIsDeleted","1"],[100,1,"Expense.php.html#62","App\\Entity\\Expense::getId","1"],[100,1,"Expense.php.html#67","App\\Entity\\Expense::getAmount","1"],[100,1,"Expense.php.html#72","App\\Entity\\Expense::setAmount","1"],[100,1,"Expense.php.html#79","App\\Entity\\Expense::getName","1"],[100,1,"Expense.php.html#84","App\\Entity\\Expense::setName","1"],[100,1,"Expense.php.html#91","App\\Entity\\Expense::getDescription","1"],[100,1,"Expense.php.html#96","App\\Entity\\Expense::setDescription","1"],[100,1,"Expense.php.html#103","App\\Entity\\Expense::getDate","1"],[100,1,"Expense.php.html#108","App\\Entity\\Expense::setDate","1"],[100,1,"Expense.php.html#115","App\\Entity\\Expense::getReceiptImage","1"],[100,1,"Expense.php.html#120","App\\Entity\\Expense::setReceiptImage","1"],[100,1,"Expense.php.html#127","App\\Entity\\Expense::getCategory","1"],[100,1,"Expense.php.html#132","App\\Entity\\Expense::setCategory","1"],[100,1,"Expense.php.html#144","App\\Entity\\Expense::setUserObject","1"],[100,1,"Expense.php.html#151","App\\Entity\\Expense::getSubscription","1"],[100,1,"Expense.php.html#156","App\\Entity\\Expense::setSubscription","1"],[100,1,"Family.php.html#48","App\\Entity\\Family::__construct","1"],[100,1,"Family.php.html#64","App\\Entity\\Family::setName","1"],[100,1,"Family.php.html#76","App\\Entity\\Family::setMonthlyTargetBudget","1"],[100,1,"Subscription.php.html#69","App\\Entity\\Subscription::__construct","1"],[100,1,"Subscription.php.html#74","App\\Entity\\Subscription::getId","1"],[100,1,"Subscription.php.html#84","App\\Entity\\Subscription::setName","1"],[100,1,"Subscription.php.html#96","App\\Entity\\Subscription::setAmount","1"],[100,1,"Subscription.php.html#108","App\\Entity\\Subscription::setFrequency","1"],[100,1,"Subscription.php.html#120","App\\Entity\\Subscription::setNextDueDate","1"],[100,1,"Subscription.php.html#132","App\\Entity\\Subscription::setIsActive","1"],[100,1,"Subscription.php.html#144","App\\Entity\\Subscription::setUserObject","1"],[100,1,"Subscription.php.html#156","App\\Entity\\Subscription::setCategory","1"],[100,1,"User.php.html#77","App\\Entity\\User::__construct","1"],[100,1,"User.php.html#84","App\\Entity\\User::getId","1"],[100,1,"User.php.html#89","App\\Entity\\User::getEmail","1"],[100,1,"User.php.html#94","App\\Entity\\User::setEmail","1"],[100,1,"User.php.html#106","App\\Entity\\User::getUserIdentifier","1"],[100,1,"User.php.html#114","App\\Entity\\User::getRoles","1"],[100,1,"User.php.html#126","App\\Entity\\User::setRoles","1"],[100,1,"User.php.html#136","App\\Entity\\User::getPassword","1"],[100,1,"User.php.html#141","App\\Entity\\User::setPassword","1"],[100,1,"User.php.html#165","App\\Entity\\User::getName","1"],[100,1,"User.php.html#170","App\\Entity\\User::setName","1"],[100,1,"User.php.html#177","App\\Entity\\User::getFamily","1"],[100,1,"User.php.html#182","App\\Entity\\User::setFamily","1"]]</script>
+  <script type="text/javascript" defer>
+  const barLabels = [
+    '0%',
+    '0-10%',
+    '10-20%',
+    '20-30%',
+    '30-40%',
+    '40-50%',
+    '50-60%',
+    '60-70%',
+    '70-80%',
+    '80-90%',
+    '90-100%',
+    '100%'
+  ];
+  const barConfig = (name, fullName, values) => ({
+    axis: {
+      x: {
+        type: "category",
+        categories: barLabels,
+      },
+      y: {
+        label: {
+          text: `#${name}`,
+          position: 'outer-top',
+        },
+      },
+    },
+    bindto: `#${name}CoverageDistribution`,
+    data: {
+      columns: [
+        [fullName].concat(values),
+      ],
+      colors: {
+        [fullName]: "rgba(69, 114, 167, 0.75)",
+      },
+      type: "bar",
+    },
+    bar: {
+      width: {
+        ratio: 0.9,
+      },
+    },
+    grid: {
+      focus: {
+        show: false,
+      },
+      x: {
+        show: true,
+      },
+      y: {
+        show: true,
+      },
+    },
+    legend: {
+      show: false,
+    },
+    tooltip: {
+      contents: function (data) {
+        return `<table class="bb-tooltip"><tbody>
+            <tr><th colspan="2">Coverage ${barLabels[data[0].x]}</th></tr>
+            <tr><td class="value">${data[0].value} ${name}</td></tr>
+          </tbody></table>`;
+      },
+      grouped: false,
+    },
+  });
+  bb.generate(
+    barConfig('classes', "Class Coverage", [1,0,0,2,1,0,1,0,1,0,1,0])
+  );
+  bb.generate(
+    barConfig('methods', "Method Coverage", [52,0,0,0,0,0,0,0,0,0,0,53])
+  );
+
+  const scatterConfig = (name, complexityData) => ({
+    axis: {
+      x: {
+        label: {
+          text: 'Code Coverage (in percent)',
+          position: 'outer-right',
+        },
+        tick: {
+          values: [0, 20, 40, 60, 80, 100],
+        },
+      },
+      y: {
+        label: {
+          text: 'Cyclomatic Complexity',
+          position: 'outer-top',
+        },
+        min: 0,
+        padding: {
+          bottom: 0,
+          top: 5,
+        },
+      },
+    },
+    bindto: `#${name}Complexity`,
+    data: {
+      columns: [
+        ["complexity_x"].concat(complexityData.map(d => d[0])),
+        ["complexity"].concat(complexityData.map(d => d[1])),
+      ],
+      onclick: function(data, element) {
+        window.location = complexityData[data.index][2];
+      },
+      type: "scatter",
+      xs: {
+        "complexity": "complexity_x",
+      },
+    },
+    grid: {
+      focus: {
+        show: true,
+        y: true,
+      },
+      x: {
+        show: true,
+      },
+      y: {
+        show: true,
+      },
+    },
+    legend: {
+      show: false,
+    },
+    tooltip: {
+      contents: function (data) {
+        const coverage = Math.round(data[0].x);
+        const complexity = data[0].value;
+        const targetName = complexityData[data[0].index][3];
+        const crap = complexityData[data[0].index][4];
+        return `<table class="bb-tooltip"><tbody>
+            <tr><th colspan="2">${targetName}</th></tr>
+            <tr class="bb-tooltip-name-complexity"><td>Coverage</td><td class="name">${coverage}%</td></tr>
+            <tr class="bb-tooltip-name-complexity"><td>Complexity</td><td class="value">${complexity}</td></tr>
+            <tr class="bb-tooltip-name-complexity"><td>Crap</td><td class="value">${crap}</td></tr>
+          </tbody></table>`;
+      },
+      grouped: false,
+    },
+  });
+  const classComplexityData = JSON.parse(document.getElementById('complexity_class').textContent);
+  bb.generate(
+    scatterConfig("class", classComplexityData)
+  );
+  const methodComplexityData = JSON.parse(document.getElementById('complexity_method').textContent);
+  bb.generate(
+    scatterConfig("method", methodComplexityData),
+  );
+  </script>
+ </body>
+</html>

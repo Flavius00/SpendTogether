@@ -27,8 +27,8 @@ final class FamilyController extends AbstractController
     #[Route('/home', name: 'app_family_home')]
     public function index(
         #[CurrentUser]
-        User $user,
-        AuthorizationCheckerInterface $authCheck,
+        User                            $user,
+        AuthorizationCheckerInterface   $authCheck,
     ): Response {
         if (!$authCheck->isGranted('IS_AUTHENTICATED_FULLY')) {
             return $this->redirectToRoute('app_login');
@@ -48,11 +48,11 @@ final class FamilyController extends AbstractController
     #[Route('/create', name: 'app_family_create')]
     public function createFamilyPage(
         #[CurrentUser]
-        User $user,
-        Request $request,
-        AuthorizationCheckerInterface $authCheck,
-        EntityManagerInterface $em,
-        Security $login,
+        User                            $user,
+        Request                         $request,
+        AuthorizationCheckerInterface   $authCheck,
+        EntityManagerInterface          $em,
+        Security                        $login,
     ): Response {
         if (!$authCheck->isGranted('IS_AUTHENTICATED_FULLY')) {
             return $this->redirectToRoute('app_login');
@@ -68,9 +68,8 @@ final class FamilyController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em->persist($family);
-            $em->flush();
 
-            $user->setFamily($family);
+            $family->addUser($user);
             $user->setRoles(['ROLE_ADMIN']);
             $em->persist($user);
             $em->flush();
@@ -87,11 +86,11 @@ final class FamilyController extends AbstractController
     }
 
     #[Route('/join', name: 'app_family_join')]
-    public function getFamily(
+    public function getAllJoinerFamilies(
         #[CurrentUser]
-        User $user,
-        AuthorizationCheckerInterface $authCheck,
-        FamilyRepository $familyRepository,
+        User                            $user,
+        AuthorizationCheckerInterface   $authCheck,
+        FamilyRepository                $familyRepository,
     ): Response {
         if (!$authCheck->isGranted('IS_AUTHENTICATED_FULLY')) {
             return $this->redirectToRoute('app_login');
@@ -107,13 +106,13 @@ final class FamilyController extends AbstractController
 
     #[Route('/join/{familyId}', name: 'app_family_join_family')]
     public function joinFamily(
-        int $familyId,
         #[CurrentUser]
-        User $user,
-        AuthorizationCheckerInterface $authCheck,
-        FamilyRepository $familyRepository,
-        EntityManagerInterface $em,
-        Security $security,
+        User                            $user,
+        int                             $familyId,
+        AuthorizationCheckerInterface   $authCheck,
+        FamilyRepository                $familyRepository,
+        EntityManagerInterface          $em,
+        Security                        $security,
     ): Response {
         if (!$authCheck->isGranted('IS_AUTHENTICATED_FULLY')) {
             return $this->redirectToRoute('app_login');
@@ -142,12 +141,12 @@ final class FamilyController extends AbstractController
 
     #[Route('/add-user-to-family', name: 'app_family_add_user')]
     public function addUserToFamily(
-        Request $request,
         #[CurrentUser]
-        User $user,
-        AuthorizationCheckerInterface $authCheck,
-        UserRepository $userRepository,
-        EntityManagerInterface $em,
+        User                            $user,
+        Request                         $request,
+        AuthorizationCheckerInterface   $authCheck,
+        UserRepository                  $userRepository,
+        EntityManagerInterface          $em,
     ): Response {
         if (!$authCheck->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             return $this->redirectToRoute('app_login');
@@ -225,12 +224,12 @@ final class FamilyController extends AbstractController
 
     #[Route('/kick/{userId}', name: 'app_family_kick_user')]
     public function kickUserFromFamily(
-        int $userId,
         #[CurrentUser]
-        User $currentUser,
-        AuthorizationCheckerInterface $authCheck,
-        EntityManagerInterface $em,
-        UserRepository $userRepository,
+        User                            $currentUser,
+        int                             $userId,
+        AuthorizationCheckerInterface   $authCheck,
+        EntityManagerInterface          $em,
+        UserRepository                  $userRepository,
     ): Response {
         if (!$authCheck->isGranted('IS_AUTHENTICATED_FULLY')) {
             return $this->redirectToRoute('app_login');
@@ -262,13 +261,13 @@ final class FamilyController extends AbstractController
 
     #[Route('/role-change/{userId}', name: 'app_family_role_change')]
     public function roleChange(
-        int $userId,
-        Request $request,
         #[CurrentUser]
-        User $user,
-        AuthorizationCheckerInterface $authCheck,
-        EntityManagerInterface $em,
-        UserRepository $userRepository,
+        User                            $user,
+        int                             $userId,
+        Request                         $request,
+        AuthorizationCheckerInterface   $authCheck,
+        EntityManagerInterface          $em,
+        UserRepository                  $userRepository,
     ): Response {
         if (!$authCheck->isGranted('IS_AUTHENTICATED_FULLY')) {
             return $this->redirectToRoute('app_login');
@@ -301,16 +300,16 @@ final class FamilyController extends AbstractController
     #[Route('/edit', name: 'app_family_edit')]
     public function editFamily(
         #[CurrentUser]
-        User $user,
-        Request $request,
-        EntityManagerInterface $em,
-        AuthorizationCheckerInterface $authCheck,
+        User                            $user,
+        Request                         $request,
+        EntityManagerInterface          $em,
+        AuthorizationCheckerInterface   $authCheck,
     ): Response {
         if (!$authCheck->isGranted('IS_AUTHENTICATED_FULLY')) {
             return $this->redirectToRoute('app_login');
         }
 
-        if ($user->getRoles()[0] !== 'ROLE_ADMIN') {
+        if (!$this->isGranted('ROLE_ADMIN')) {
             $this->addFlash('error', 'Only admins can update family.');
 
             return $this->redirectToRoute('app_family_home');
@@ -339,10 +338,10 @@ final class FamilyController extends AbstractController
     #[Route('/delete', name: 'app_family_delete')]
     public function deleteFamily(
         #[CurrentUser]
-        User $user,
-        AuthorizationCheckerInterface $authCheck,
-        EntityManagerInterface $em,
-        Security $security,
+        User                            $user,
+        AuthorizationCheckerInterface   $authCheck,
+        EntityManagerInterface          $em,
+        Security                        $security,
     ): Response {
         if (!$authCheck->isGranted('IS_AUTHENTICATED_FULLY')) {
             return $this->redirectToRoute('app_login');

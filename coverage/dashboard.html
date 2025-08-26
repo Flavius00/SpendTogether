@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Dashboard for /var/www/html/src</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="_css/bootstrap.min.css?v=12.3.2" rel="stylesheet" type="text/css">
+  <link href="_css/billboard.min.css?v=12.3.2" rel="stylesheet" type="text/css">
+  <link href="_css/style.css?v=12.3.2" rel="stylesheet" type="text/css">
+  <link href="_css/custom.css" rel="stylesheet" type="text/css">
+ </head>
+ <body>
+  <header>
+   <div class="container-fluid">
+    <div class="row">
+     <div class="col-md-12">
+      <nav aria-label="breadcrumb">
+       <ol class="breadcrumb">
+         <li class="breadcrumb-item"><a href="index.html">/var/www/html/src</a></li>
+         <li class="breadcrumb-item active">(Dashboard)</li>
+
+       </ol>
+      </nav>
+     </div>
+    </div>
+   </div>
+  </header>
+  <div class="container-fluid">
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Classes</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="classesCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="classComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3 style="margin-top: 2rem;">Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Command/ProcessSubscriptionsCommand.php.html#16">App\Command\ProcessSubscriptionsCommand</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Command/SendWeeklyFamilyReportCommand.php.html#24">App\Command\SendWeeklyFamilyReportCommand</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/DashboardController.php.html#20">App\Controller\DashboardController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/ExpenseController.php.html#25">App\Controller\ExpenseController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/FamilyController.php.html#24">App\Controller\FamilyController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/RegistrationController.php.html#22">App\Controller\RegistrationController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/SecurityController.php.html#13">App\Controller\SecurityController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/Service/ExpenseIndexContextResolver.php.html#15">App\Controller\Service\ExpenseIndexContextResolver</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/Service/ExpenseParamsExtractor.php.html#9">App\Controller\Service\ExpenseParamsExtractor</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/Service/ReceiptStorage.php.html#9">App\Controller\Service\ReceiptStorage</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/Service/SubscriptionIndexContextResolver.php.html#15">App\Controller\Service\SubscriptionIndexContextResolver</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/Service/SubscriptionParamsExtractor.php.html#9">App\Controller\Service\SubscriptionParamsExtractor</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/SubscriptionController.php.html#22">App\Controller\SubscriptionController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/ThresholdsController.php.html#21">App\Controller\ThresholdsController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Diagrams/Calculators/ProjectedNextMonthSpendingCalculator.php.html#9">App\Diagrams\Calculators\ProjectedNextMonthSpendingCalculator</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Diagrams/Calculators/ProjectedSpendingCalculator.php.html#7">App\Diagrams\Calculators\ProjectedSpendingCalculator</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Diagrams/Calculators/SelectedMonthVsLastMonthCalculator.php.html#10">App\Diagrams\Calculators\SelectedMonthVsLastMonthCalculator</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Diagrams/Calculators/SubscriptionsVsOneTimeCalculator.php.html#13">App\Diagrams\Calculators\SubscriptionsVsOneTimeCalculator</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Diagrams/Calculators/TopExpensesCalculator.php.html#12">App\Diagrams\Calculators\TopExpensesCalculator</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Diagrams/Calculators/TotalPerMonthCalculator.php.html#10">App\Diagrams\Calculators\TotalPerMonthCalculator</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Diagrams/Generators/ProjectedSpendingGenerator.php.html#9">App\Diagrams\Generators\ProjectedSpendingGenerator</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Diagrams/Generators/SelectedMonthVsLastMonthSvgGenerator.php.html#7">App\Diagrams\Generators\SelectedMonthVsLastMonthSvgGenerator</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Diagrams/Generators/SubscriptionsVsOneTimeGenerator.php.html#9">App\Diagrams\Generators\SubscriptionsVsOneTimeGenerator</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Diagrams/Generators/TopExpensesGenerator.php.html#9">App\Diagrams\Generators\TopExpensesGenerator</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Diagrams/Generators/TotalPerMonthSvgGenerator.php.html#7">App\Diagrams\Generators\TotalPerMonthSvgGenerator</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Dto/ExpenseIndexContext.php.html#10">App\Dto\ExpenseIndexContext</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Dto/ProjectedSpendingResult.php.html#7">App\Dto\ProjectedSpendingResult</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Dto/SubscriptionIndexContext.php.html#10">App\Dto\SubscriptionIndexContext</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Dto/SubscriptionsVsOneTimeResult.php.html#13">App\Dto\SubscriptionsVsOneTimeResult</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Dto/TopExpensesResult.php.html#10">App\Dto\TopExpensesResult</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Threshold.php.html#12">App\Entity\Threshold</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Facades/ProjectedSpendingFacade.php.html#14">App\Facades\ProjectedSpendingFacade</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Facades/SelectedMonthVsLastMonthFacade.php.html#11">App\Facades\SelectedMonthVsLastMonthFacade</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Facades/SubscriptionsVsOneTimeFacade.php.html#12">App\Facades\SubscriptionsVsOneTimeFacade</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Facades/TopExpensesFacade.php.html#11">App\Facades\TopExpensesFacade</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Facades/TotalPerMonthFacade.php.html#9">App\Facades\TotalPerMonthFacade</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Form/AddUserToFamilyFormType.php.html#14">App\Form\AddUserToFamilyFormType</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Form/CreateFamilyFormType.php.html#12">App\Form\CreateFamilyFormType</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Form/CreateThresholdFormType.php.html#14">App\Form\CreateThresholdFormType</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Form/EditFamilyFormType.php.html#12">App\Form\EditFamilyFormType</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Form/EditThresholdFormType.php.html#14">App\Form\EditThresholdFormType</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Form/ExpenseType.php.html#21">App\Form\ExpenseType</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Form/RegistrationFormType.php.html#19">App\Form\RegistrationFormType</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Form/SubscriptionType.php.html#19">App\Form\SubscriptionType</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repository/ThresholdsRepository.php.html#14">App\Repository\ThresholdsRepository</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Security/EmailVerifier.php.html#15">App\Security\EmailVerifier</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Validators/FamilyValidators.php.html#10">App\Validators\FamilyValidators</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Validators/ThresholdValidators.php.html#10">App\Validators\ThresholdValidators</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repository/ExpenseRepository.php.html#16">App\Repository\ExpenseRepository</a></td><td class="text-right">1%</td></tr>
+       <tr><td><a href="DataFixtures/SpendingDemoFixtures.php.html#16">App\DataFixtures\SpendingDemoFixtures</a></td><td class="text-right">1%</td></tr>
+       <tr><td><a href="Repository/SubscriptionRepository.php.html#16">App\Repository\SubscriptionRepository</a></td><td class="text-right">1%</td></tr>
+       <tr><td><a href="Security/Voter/SubscriptionVoter.php.html#12">App\Security\Voter\SubscriptionVoter</a></td><td class="text-right">20%</td></tr>
+       <tr><td><a href="Entity/Family.php.html#14">App\Entity\Family</a></td><td class="text-right">22%</td></tr>
+       <tr><td><a href="Entity/Category.php.html#13">App\Entity\Category</a></td><td class="text-right">27%</td></tr>
+       <tr><td><a href="Entity/User.php.html#16">App\Entity\User</a></td><td class="text-right">39%</td></tr>
+       <tr><td><a href="Entity/Subscription.php.html#14">App\Entity\Subscription</a></td><td class="text-right">50%</td></tr>
+       <tr><td><a href="Repository/UserRepository.php.html#17">App\Repository\UserRepository</a></td><td class="text-right">54%</td></tr>
+       <tr><td><a href="Security/Voter/ExpenseVoter.php.html#12">App\Security\Voter\ExpenseVoter</a></td><td class="text-right">61%</td></tr>
+       <tr><td><a href="EventListener/ApiExceptionListener.php.html#15">App\EventListener\ApiExceptionListener</a></td><td class="text-right">70%</td></tr>
+       <tr><td><a href="Command/FamilySetupCommand.php.html#18">App\Command\FamilySetupCommand</a></td><td class="text-right">73%</td></tr>
+       <tr><td><a href="Command/UserCreateCommand.php.html#19">App\Command\UserCreateCommand</a></td><td class="text-right">74%</td></tr>
+       <tr><td><a href="Command/SuperAdminCreateCommand.php.html#19">App\Command\SuperAdminCreateCommand</a></td><td class="text-right">75%</td></tr>
+       <tr><td><a href="Entity/AccessToken.php.html#11">App\Entity\AccessToken</a></td><td class="text-right">76%</td></tr>
+       <tr><td><a href="Security/AccessTokenHandler.php.html#12">App\Security\AccessTokenHandler</a></td><td class="text-right">80%</td></tr>
+       <tr><td><a href="Http/ApiContentNegotiation.php.html#11">App\Http\ApiContentNegotiation</a></td><td class="text-right">87%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3 style="margin-top: 2rem;">Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right">Coverage</th>
+         <th class="text-right">Complexity</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Command/SendWeeklyFamilyReportCommand.php.html#24">App\Command\SendWeeklyFamilyReportCommand</a></td><td class="text-right">0.0%</td><td class="text-right">44</td><td class="text-right">1980</td></tr>
+       <tr><td><a href="Controller/FamilyController.php.html#24">App\Controller\FamilyController</a></td><td class="text-right">0.0%</td><td class="text-right">40</td><td class="text-right">1640</td></tr>
+       <tr><td><a href="Controller/ExpenseController.php.html#25">App\Controller\ExpenseController</a></td><td class="text-right">0.0%</td><td class="text-right">39</td><td class="text-right">1560</td></tr>
+       <tr><td><a href="Repository/ExpenseRepository.php.html#16">App\Repository\ExpenseRepository</a></td><td class="text-right">1.2%</td><td class="text-right">34</td><td class="text-right">1150</td></tr>
+       <tr><td><a href="DataFixtures/SpendingDemoFixtures.php.html#16">App\DataFixtures\SpendingDemoFixtures</a></td><td class="text-right">1.7%</td><td class="text-right">29</td><td class="text-right">828</td></tr>
+       <tr><td><a href="Facades/ProjectedSpendingFacade.php.html#14">App\Facades\ProjectedSpendingFacade</a></td><td class="text-right">0.0%</td><td class="text-right">28</td><td class="text-right">812</td></tr>
+       <tr><td><a href="Diagrams/Calculators/TopExpensesCalculator.php.html#12">App\Diagrams\Calculators\TopExpensesCalculator</a></td><td class="text-right">0.0%</td><td class="text-right">27</td><td class="text-right">756</td></tr>
+       <tr><td><a href="Diagrams/Calculators/ProjectedSpendingCalculator.php.html#7">App\Diagrams\Calculators\ProjectedSpendingCalculator</a></td><td class="text-right">0.0%</td><td class="text-right">23</td><td class="text-right">552</td></tr>
+       <tr><td><a href="Diagrams/Generators/ProjectedSpendingGenerator.php.html#9">App\Diagrams\Generators\ProjectedSpendingGenerator</a></td><td class="text-right">0.0%</td><td class="text-right">23</td><td class="text-right">552</td></tr>
+       <tr><td><a href="Diagrams/Generators/TotalPerMonthSvgGenerator.php.html#7">App\Diagrams\Generators\TotalPerMonthSvgGenerator</a></td><td class="text-right">0.0%</td><td class="text-right">23</td><td class="text-right">552</td></tr>
+       <tr><td><a href="Controller/Service/ExpenseParamsExtractor.php.html#9">App\Controller\Service\ExpenseParamsExtractor</a></td><td class="text-right">0.0%</td><td class="text-right">22</td><td class="text-right">506</td></tr>
+       <tr><td><a href="Diagrams/Calculators/ProjectedNextMonthSpendingCalculator.php.html#9">App\Diagrams\Calculators\ProjectedNextMonthSpendingCalculator</a></td><td class="text-right">0.0%</td><td class="text-right">21</td><td class="text-right">462</td></tr>
+       <tr><td><a href="Controller/SubscriptionController.php.html#22">App\Controller\SubscriptionController</a></td><td class="text-right">0.0%</td><td class="text-right">18</td><td class="text-right">342</td></tr>
+       <tr><td><a href="Entity/User.php.html#16">App\Entity\User</a></td><td class="text-right">39.3%</td><td class="text-right">35</td><td class="text-right">309</td></tr>
+       <tr><td><a href="Controller/ThresholdsController.php.html#21">App\Controller\ThresholdsController</a></td><td class="text-right">0.0%</td><td class="text-right">16</td><td class="text-right">272</td></tr>
+       <tr><td><a href="Diagrams/Calculators/SelectedMonthVsLastMonthCalculator.php.html#10">App\Diagrams\Calculators\SelectedMonthVsLastMonthCalculator</a></td><td class="text-right">0.0%</td><td class="text-right">16</td><td class="text-right">272</td></tr>
+       <tr><td><a href="Diagrams/Generators/SelectedMonthVsLastMonthSvgGenerator.php.html#7">App\Diagrams\Generators\SelectedMonthVsLastMonthSvgGenerator</a></td><td class="text-right">0.0%</td><td class="text-right">16</td><td class="text-right">272</td></tr>
+       <tr><td><a href="Security/Voter/SubscriptionVoter.php.html#12">App\Security\Voter\SubscriptionVoter</a></td><td class="text-right">20.0%</td><td class="text-right">22</td><td class="text-right">269</td></tr>
+       <tr><td><a href="Entity/Category.php.html#13">App\Entity\Category</a></td><td class="text-right">27.0%</td><td class="text-right">24</td><td class="text-right">247</td></tr>
+       <tr><td><a href="Controller/Service/SubscriptionParamsExtractor.php.html#9">App\Controller\Service\SubscriptionParamsExtractor</a></td><td class="text-right">0.0%</td><td class="text-right">15</td><td class="text-right">240</td></tr>
+       <tr><td><a href="Repository/SubscriptionRepository.php.html#16">App\Repository\SubscriptionRepository</a></td><td class="text-right">1.9%</td><td class="text-right">15</td><td class="text-right">227</td></tr>
+       <tr><td><a href="Facades/SubscriptionsVsOneTimeFacade.php.html#12">App\Facades\SubscriptionsVsOneTimeFacade</a></td><td class="text-right">0.0%</td><td class="text-right">14</td><td class="text-right">210</td></tr>
+       <tr><td><a href="Controller/Service/ExpenseIndexContextResolver.php.html#15">App\Controller\Service\ExpenseIndexContextResolver</a></td><td class="text-right">0.0%</td><td class="text-right">13</td><td class="text-right">182</td></tr>
+       <tr><td><a href="Entity/Family.php.html#14">App\Entity\Family</a></td><td class="text-right">22.2%</td><td class="text-right">18</td><td class="text-right">170</td></tr>
+       <tr><td><a href="Diagrams/Calculators/SubscriptionsVsOneTimeCalculator.php.html#13">App\Diagrams\Calculators\SubscriptionsVsOneTimeCalculator</a></td><td class="text-right">0.0%</td><td class="text-right">12</td><td class="text-right">156</td></tr>
+       <tr><td><a href="Controller/Service/ReceiptStorage.php.html#9">App\Controller\Service\ReceiptStorage</a></td><td class="text-right">0.0%</td><td class="text-right">11</td><td class="text-right">132</td></tr>
+       <tr><td><a href="Diagrams/Generators/SubscriptionsVsOneTimeGenerator.php.html#9">App\Diagrams\Generators\SubscriptionsVsOneTimeGenerator</a></td><td class="text-right">0.0%</td><td class="text-right">11</td><td class="text-right">132</td></tr>
+       <tr><td><a href="Diagrams/Generators/TopExpensesGenerator.php.html#9">App\Diagrams\Generators\TopExpensesGenerator</a></td><td class="text-right">0.0%</td><td class="text-right">11</td><td class="text-right">132</td></tr>
+       <tr><td><a href="Controller/Service/SubscriptionIndexContextResolver.php.html#15">App\Controller\Service\SubscriptionIndexContextResolver</a></td><td class="text-right">0.0%</td><td class="text-right">10</td><td class="text-right">110</td></tr>
+       <tr><td><a href="Entity/Subscription.php.html#14">App\Entity\Subscription</a></td><td class="text-right">50.0%</td><td class="text-right">22</td><td class="text-right">82</td></tr>
+       <tr><td><a href="Command/ProcessSubscriptionsCommand.php.html#16">App\Command\ProcessSubscriptionsCommand</a></td><td class="text-right">0.0%</td><td class="text-right">8</td><td class="text-right">72</td></tr>
+       <tr><td><a href="Controller/RegistrationController.php.html#22">App\Controller\RegistrationController</a></td><td class="text-right">0.0%</td><td class="text-right">6</td><td class="text-right">42</td></tr>
+       <tr><td><a href="Diagrams/Calculators/TotalPerMonthCalculator.php.html#10">App\Diagrams\Calculators\TotalPerMonthCalculator</a></td><td class="text-right">0.0%</td><td class="text-right">6</td><td class="text-right">42</td></tr>
+       <tr><td><a href="Facades/TopExpensesFacade.php.html#11">App\Facades\TopExpensesFacade</a></td><td class="text-right">0.0%</td><td class="text-right">6</td><td class="text-right">42</td></tr>
+       <tr><td><a href="Form/ExpenseType.php.html#21">App\Form\ExpenseType</a></td><td class="text-right">0.0%</td><td class="text-right">5</td><td class="text-right">30</td></tr>
+       <tr><td><a href="Security/Voter/ExpenseVoter.php.html#12">App\Security\Voter\ExpenseVoter</a></td><td class="text-right">61.1%</td><td class="text-right">13</td><td class="text-right">22</td></tr>
+       <tr><td><a href="Facades/SelectedMonthVsLastMonthFacade.php.html#11">App\Facades\SelectedMonthVsLastMonthFacade</a></td><td class="text-right">0.0%</td><td class="text-right">4</td><td class="text-right">20</td></tr>
+       <tr><td><a href="Form/SubscriptionType.php.html#19">App\Form\SubscriptionType</a></td><td class="text-right">0.0%</td><td class="text-right">4</td><td class="text-right">20</td></tr>
+       <tr><td><a href="Validators/FamilyValidators.php.html#10">App\Validators\FamilyValidators</a></td><td class="text-right">0.0%</td><td class="text-right">4</td><td class="text-right">20</td></tr>
+       <tr><td><a href="Command/FamilySetupCommand.php.html#18">App\Command\FamilySetupCommand</a></td><td class="text-right">73.0%</td><td class="text-right">12</td><td class="text-right">14</td></tr>
+       <tr><td><a href="Command/UserCreateCommand.php.html#19">App\Command\UserCreateCommand</a></td><td class="text-right">74.4%</td><td class="text-right">11</td><td class="text-right">13</td></tr>
+       <tr><td><a href="Controller/SecurityController.php.html#13">App\Controller\SecurityController</a></td><td class="text-right">0.0%</td><td class="text-right">3</td><td class="text-right">12</td></tr>
+       <tr><td><a href="Facades/TotalPerMonthFacade.php.html#9">App\Facades\TotalPerMonthFacade</a></td><td class="text-right">0.0%</td><td class="text-right">3</td><td class="text-right">12</td></tr>
+       <tr><td><a href="Validators/ThresholdValidators.php.html#10">App\Validators\ThresholdValidators</a></td><td class="text-right">0.0%</td><td class="text-right">3</td><td class="text-right">12</td></tr>
+       <tr><td><a href="Command/SuperAdminCreateCommand.php.html#19">App\Command\SuperAdminCreateCommand</a></td><td class="text-right">75.7%</td><td class="text-right">8</td><td class="text-right">8</td></tr>
+       <tr><td><a href="EventListener/ApiExceptionListener.php.html#15">App\EventListener\ApiExceptionListener</a></td><td class="text-right">70.0%</td><td class="text-right">7</td><td class="text-right">8</td></tr>
+       <tr><td><a href="Controller/DashboardController.php.html#20">App\Controller\DashboardController</a></td><td class="text-right">0.0%</td><td class="text-right">2</td><td class="text-right">6</td></tr>
+       <tr><td><a href="Repository/UserRepository.php.html#17">App\Repository\UserRepository</a></td><td class="text-right">54.5%</td><td class="text-right">4</td><td class="text-right">5</td></tr>
+       <tr><td><a href="Security/AccessTokenHandler.php.html#12">App\Security\AccessTokenHandler</a></td><td class="text-right">80.0%</td><td class="text-right">5</td><td class="text-right">5</td></tr>
+       <tr><td><a href="Http/ApiContentNegotiation.php.html#11">App\Http\ApiContentNegotiation</a></td><td class="text-right">87.5%</td><td class="text-right">3</td><td class="text-right">3</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-12">
+     <h2 style="margin-top: 3rem;">Methods</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="methodsCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="methodComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3 style="margin-top: 2rem;">Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Command/ProcessSubscriptionsCommand.php.html#22"><abbr title="App\Command\ProcessSubscriptionsCommand::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Command/ProcessSubscriptionsCommand.php.html#27"><abbr title="App\Command\ProcessSubscriptionsCommand::execute">execute</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Command/SendWeeklyFamilyReportCommand.php.html#30"><abbr title="App\Command\SendWeeklyFamilyReportCommand::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Command/SendWeeklyFamilyReportCommand.php.html#40"><abbr title="App\Command\SendWeeklyFamilyReportCommand::configure">configure</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Command/SendWeeklyFamilyReportCommand.php.html#51"><abbr title="App\Command\SendWeeklyFamilyReportCommand::execute">execute</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Command/SendWeeklyFamilyReportCommand.php.html#174"><abbr title="App\Command\SendWeeklyFamilyReportCommand::collectFamilyAdmins">collectFamilyAdmins</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Command/SendWeeklyFamilyReportCommand.php.html#191"><abbr title="App\Command\SendWeeklyFamilyReportCommand::accumulateFamilyMonthExpenses">accumulateFamilyMonthExpenses</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Command/SendWeeklyFamilyReportCommand.php.html#218"><abbr title="App\Command\SendWeeklyFamilyReportCommand::computeFamilyCategoryTotals">computeFamilyCategoryTotals</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Command/SendWeeklyFamilyReportCommand.php.html#246"><abbr title="App\Command\SendWeeklyFamilyReportCommand::toPercentages">toPercentages</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Command/SendWeeklyFamilyReportCommand.php.html#262"><abbr title="App\Command\SendWeeklyFamilyReportCommand::formatGrowthPct">formatGrowthPct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/DashboardController.php.html#23"><abbr title="App\Controller\DashboardController::index">index</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/ExpenseController.php.html#28"><abbr title="App\Controller\ExpenseController::index">index</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/ExpenseController.php.html#68"><abbr title="App\Controller\ExpenseController::new">new</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/ExpenseController.php.html#122"><abbr title="App\Controller\ExpenseController::show">show</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/ExpenseController.php.html#132"><abbr title="App\Controller\ExpenseController::edit">edit</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/ExpenseController.php.html#185"><abbr title="App\Controller\ExpenseController::delete">delete</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/ExpenseController.php.html#213"><abbr title="App\Controller\ExpenseController::downloadReceipt">downloadReceipt</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/ExpenseController.php.html#235"><abbr title="App\Controller\ExpenseController::resolveTargetUserFromQuery">resolveTargetUserFromQuery</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/ExpenseController.php.html#248"><abbr title="App\Controller\ExpenseController::validateSubscriptionOwnership">validateSubscriptionOwnership</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/ExpenseController.php.html#258"><abbr title="App\Controller\ExpenseController::processReceiptUpload">processReceiptUpload</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/FamilyController.php.html#27"><abbr title="App\Controller\FamilyController::index">index</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/FamilyController.php.html#48"><abbr title="App\Controller\FamilyController::createFamilyPage">createFamilyPage</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/FamilyController.php.html#88"><abbr title="App\Controller\FamilyController::getAllJoinerFamilies">getAllJoinerFamilies</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/FamilyController.php.html#107"><abbr title="App\Controller\FamilyController::joinFamily">joinFamily</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/FamilyController.php.html#142"><abbr title="App\Controller\FamilyController::addUserToFamily">addUserToFamily</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/FamilyController.php.html#186"><abbr title="App\Controller\FamilyController::leaveFamily">leaveFamily</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/FamilyController.php.html#225"><abbr title="App\Controller\FamilyController::kickUserFromFamily">kickUserFromFamily</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/FamilyController.php.html#262"><abbr title="App\Controller\FamilyController::roleChange">roleChange</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/FamilyController.php.html#300"><abbr title="App\Controller\FamilyController::editFamily">editFamily</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/FamilyController.php.html#338"><abbr title="App\Controller\FamilyController::deleteFamily">deleteFamily</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/RegistrationController.php.html#24"><abbr title="App\Controller\RegistrationController::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/RegistrationController.php.html#29"><abbr title="App\Controller\RegistrationController::register">register</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/RegistrationController.php.html#70"><abbr title="App\Controller\RegistrationController::verifyUserEmail">verifyUserEmail</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/SecurityController.php.html#15"><abbr title="App\Controller\SecurityController::login">login</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/SecurityController.php.html#36"><abbr title="App\Controller\SecurityController::logout">logout</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/Service/ExpenseIndexContextResolver.php.html#17"><abbr title="App\Controller\Service\ExpenseIndexContextResolver::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/Service/ExpenseIndexContextResolver.php.html#22"><abbr title="App\Controller\Service\ExpenseIndexContextResolver::resolveAndAuthorize">resolveAndAuthorize</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/Service/ExpenseParamsExtractor.php.html#14"><abbr title="App\Controller\Service\ExpenseParamsExtractor::extractPagination">extractPagination</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/Service/ExpenseParamsExtractor.php.html#28"><abbr title="App\Controller\Service\ExpenseParamsExtractor::extractSorting">extractSorting</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/Service/ExpenseParamsExtractor.php.html#52"><abbr title="App\Controller\Service\ExpenseParamsExtractor::extractCriteria">extractCriteria</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/Service/ReceiptStorage.php.html#11"><abbr title="App\Controller\Service\ReceiptStorage::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/Service/ReceiptStorage.php.html#15"><abbr title="App\Controller\Service\ReceiptStorage::store">store</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/Service/ReceiptStorage.php.html#31"><abbr title="App\Controller\Service\ReceiptStorage::remove">remove</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/Service/ReceiptStorage.php.html#42"><abbr title="App\Controller\Service\ReceiptStorage::path">path</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/Service/SubscriptionIndexContextResolver.php.html#17"><abbr title="App\Controller\Service\SubscriptionIndexContextResolver::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/Service/SubscriptionIndexContextResolver.php.html#22"><abbr title="App\Controller\Service\SubscriptionIndexContextResolver::resolveAndAuthorize">resolveAndAuthorize</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/Service/SubscriptionParamsExtractor.php.html#14"><abbr title="App\Controller\Service\SubscriptionParamsExtractor::extractPagination">extractPagination</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/Service/SubscriptionParamsExtractor.php.html#28"><abbr title="App\Controller\Service\SubscriptionParamsExtractor::extractSorting">extractSorting</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/Service/SubscriptionParamsExtractor.php.html#51"><abbr title="App\Controller\Service\SubscriptionParamsExtractor::extractCriteria">extractCriteria</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/SubscriptionController.php.html#25"><abbr title="App\Controller\SubscriptionController::index">index</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/SubscriptionController.php.html#66"><abbr title="App\Controller\SubscriptionController::new">new</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/SubscriptionController.php.html#107"><abbr title="App\Controller\SubscriptionController::show">show</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/SubscriptionController.php.html#117"><abbr title="App\Controller\SubscriptionController::edit">edit</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/SubscriptionController.php.html#154"><abbr title="App\Controller\SubscriptionController::delete">delete</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/SubscriptionController.php.html#184"><abbr title="App\Controller\SubscriptionController::ensureOwnerForNonAdmin">ensureOwnerForNonAdmin</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/SubscriptionController.php.html#191"><abbr title="App\Controller\SubscriptionController::keepOwnerForNonAdmin">keepOwnerForNonAdmin</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/ThresholdsController.php.html#24"><abbr title="App\Controller\ThresholdsController::index">index</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/ThresholdsController.php.html#83"><abbr title="App\Controller\ThresholdsController::edit">edit</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/ThresholdsController.php.html#122"><abbr title="App\Controller\ThresholdsController::delete">delete</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DataFixtures/SpendingDemoFixtures.php.html#23"><abbr title="App\DataFixtures\SpendingDemoFixtures::load">load</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DataFixtures/SpendingDemoFixtures.php.html#101"><abbr title="App\DataFixtures\SpendingDemoFixtures::getOrCreateFamily">getOrCreateFamily</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DataFixtures/SpendingDemoFixtures.php.html#118"><abbr title="App\DataFixtures\SpendingDemoFixtures::getOrCreateUser">getOrCreateUser</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DataFixtures/SpendingDemoFixtures.php.html#152"><abbr title="App\DataFixtures\SpendingDemoFixtures::getOrCreateCategory">getOrCreateCategory</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DataFixtures/SpendingDemoFixtures.php.html#168"><abbr title="App\DataFixtures\SpendingDemoFixtures::pickCategory">pickCategory</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DataFixtures/SpendingDemoFixtures.php.html#174"><abbr title="App\DataFixtures\SpendingDemoFixtures::amountForIndex">amountForIndex</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DataFixtures/SpendingDemoFixtures.php.html#182"><abbr title="App\DataFixtures\SpendingDemoFixtures::nameForCategory">nameForCategory</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DataFixtures/SpendingDemoFixtures.php.html#193"><abbr title="App\DataFixtures\SpendingDemoFixtures::addExpense">addExpense</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Diagrams/Calculators/ProjectedNextMonthSpendingCalculator.php.html#11"><abbr title="App\Diagrams\Calculators\ProjectedNextMonthSpendingCalculator::calculate">calculate</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Diagrams/Calculators/ProjectedNextMonthSpendingCalculator.php.html#53"><abbr title="App\Diagrams\Calculators\ProjectedNextMonthSpendingCalculator::calculateFamilyTotal">calculateFamilyTotal</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Diagrams/Calculators/ProjectedNextMonthSpendingCalculator.php.html#85"><abbr title="App\Diagrams\Calculators\ProjectedNextMonthSpendingCalculator::existsThreeMonthsPast">existsThreeMonthsPast</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Diagrams/Calculators/ProjectedNextMonthSpendingCalculator.php.html#90"><abbr title="App\Diagrams\Calculators\ProjectedNextMonthSpendingCalculator::getPastThreeMonthsAverage">getPastThreeMonthsAverage</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Diagrams/Calculators/ProjectedNextMonthSpendingCalculator.php.html#96"><abbr title="App\Diagrams\Calculators\ProjectedNextMonthSpendingCalculator::existsLastYearSameMonths">existsLastYearSameMonths</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Diagrams/Calculators/ProjectedNextMonthSpendingCalculator.php.html#101"><abbr title="App\Diagrams\Calculators\ProjectedNextMonthSpendingCalculator::getLastYearSameMonthsAverage">getLastYearSameMonthsAverage</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Diagrams/Calculators/ProjectedNextMonthSpendingCalculator.php.html#107"><abbr title="App\Diagrams\Calculators\ProjectedNextMonthSpendingCalculator::getLastYearThisMonth">getLastYearThisMonth</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Diagrams/Calculators/ProjectedNextMonthSpendingCalculator.php.html#120"><abbr title="App\Diagrams\Calculators\ProjectedNextMonthSpendingCalculator::hasExpensesForMonths">hasExpensesForMonths</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Diagrams/Calculators/ProjectedNextMonthSpendingCalculator.php.html#137"><abbr title="App\Diagrams\Calculators\ProjectedNextMonthSpendingCalculator::sumExpensesForMonths">sumExpensesForMonths</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Diagrams/Calculators/ProjectedSpendingCalculator.php.html#9"><abbr title="App\Diagrams\Calculators\ProjectedSpendingCalculator::calculate">calculate</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Diagrams/Calculators/ProjectedSpendingCalculator.php.html#43"><abbr title="App\Diagrams\Calculators\ProjectedSpendingCalculator::resolveMonthContext">resolveMonthContext</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Diagrams/Calculators/ProjectedSpendingCalculator.php.html#57"><abbr title="App\Diagrams\Calculators\ProjectedSpendingCalculator::cumulative">cumulative</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Diagrams/Calculators/ProjectedSpendingCalculator.php.html#68"><abbr title="App\Diagrams\Calculators\ProjectedSpendingCalculator::computeGrowthRate">computeGrowthRate</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Diagrams/Calculators/ProjectedSpendingCalculator.php.html#78"><abbr title="App\Diagrams\Calculators\ProjectedSpendingCalculator::computeProjectedTotal">computeProjectedTotal</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Diagrams/Calculators/ProjectedSpendingCalculator.php.html#99"><abbr title="App\Diagrams\Calculators\ProjectedSpendingCalculator::computeBudgetHitDate">computeBudgetHitDate</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Diagrams/Calculators/SelectedMonthVsLastMonthCalculator.php.html#12"><abbr title="App\Diagrams\Calculators\SelectedMonthVsLastMonthCalculator::calculateUserDailyExpenses">calculateUserDailyExpenses</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Diagrams/Calculators/SelectedMonthVsLastMonthCalculator.php.html#35"><abbr title="App\Diagrams\Calculators\SelectedMonthVsLastMonthCalculator::calculateFamilyDailyExpenses">calculateFamilyDailyExpenses</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Diagrams/Calculators/SelectedMonthVsLastMonthCalculator.php.html#59"><abbr title="App\Diagrams\Calculators\SelectedMonthVsLastMonthCalculator::convertToCumulative">convertToCumulative</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Diagrams/Calculators/SelectedMonthVsLastMonthCalculator.php.html#72"><abbr title="App\Diagrams\Calculators\SelectedMonthVsLastMonthCalculator::getDaysInMonth">getDaysInMonth</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Diagrams/Calculators/SelectedMonthVsLastMonthCalculator.php.html#78"><abbr title="App\Diagrams\Calculators\SelectedMonthVsLastMonthCalculator::isCurrentMonth">isCurrentMonth</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Diagrams/Calculators/SelectedMonthVsLastMonthCalculator.php.html#84"><abbr title="App\Diagrams\Calculators\SelectedMonthVsLastMonthCalculator::getPreviousMonth">getPreviousMonth</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Diagrams/Calculators/SubscriptionsVsOneTimeCalculator.php.html#18"><abbr title="App\Diagrams\Calculators\SubscriptionsVsOneTimeCalculator::buildForIterators">buildForIterators</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Diagrams/Calculators/TopExpensesCalculator.php.html#19"><abbr title="App\Diagrams\Calculators\TopExpensesCalculator::resolveSelectedMonth">resolveSelectedMonth</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Diagrams/Calculators/TopExpensesCalculator.php.html#31"><abbr title="App\Diagrams\Calculators\TopExpensesCalculator::calculateForUser">calculateForUser</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Diagrams/Calculators/TopExpensesCalculator.php.html#59"><abbr title="App\Diagrams\Calculators\TopExpensesCalculator::calculateForFamily">calculateForFamily</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Diagrams/Calculators/TopExpensesCalculator.php.html#99"><abbr title="App\Diagrams\Calculators\TopExpensesCalculator::sortAndTakeTop">sortAndTakeTop</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Diagrams/Calculators/TopExpensesCalculator.php.html#105"><abbr title="App\Diagrams\Calculators\TopExpensesCalculator::displayUserName">displayUserName</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Diagrams/Calculators/TotalPerMonthCalculator.php.html#15"><abbr title="App\Diagrams\Calculators\TotalPerMonthCalculator::calculateUserCategoryTotals">calculateUserCategoryTotals</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Diagrams/Calculators/TotalPerMonthCalculator.php.html#36"><abbr title="App\Diagrams\Calculators\TotalPerMonthCalculator::calculateFamilyUserExpenses">calculateFamilyUserExpenses</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Diagrams/Generators/ProjectedSpendingGenerator.php.html#11"><abbr title="App\Diagrams\Generators\ProjectedSpendingGenerator::generateSvg">generateSvg</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Diagrams/Generators/SelectedMonthVsLastMonthSvgGenerator.php.html#17"><abbr title="App\Diagrams\Generators\SelectedMonthVsLastMonthSvgGenerator::generateChart">generateChart</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Diagrams/Generators/SelectedMonthVsLastMonthSvgGenerator.php.html#43"><abbr title="App\Diagrams\Generators\SelectedMonthVsLastMonthSvgGenerator::generateYAxisAndGrid">generateYAxisAndGrid</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Diagrams/Generators/SelectedMonthVsLastMonthSvgGenerator.php.html#59"><abbr title="App\Diagrams\Generators\SelectedMonthVsLastMonthSvgGenerator::generateXAxis">generateXAxis</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Diagrams/Generators/SelectedMonthVsLastMonthSvgGenerator.php.html#75"><abbr title="App\Diagrams\Generators\SelectedMonthVsLastMonthSvgGenerator::generateLine">generateLine</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Diagrams/Generators/SelectedMonthVsLastMonthSvgGenerator.php.html#108"><abbr title="App\Diagrams\Generators\SelectedMonthVsLastMonthSvgGenerator::generateLegend">generateLegend</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Diagrams/Generators/SelectedMonthVsLastMonthSvgGenerator.php.html#126"><abbr title="App\Diagrams\Generators\SelectedMonthVsLastMonthSvgGenerator::getDaysInMonth">getDaysInMonth</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Diagrams/Generators/SubscriptionsVsOneTimeGenerator.php.html#11"><abbr title="App\Diagrams\Generators\SubscriptionsVsOneTimeGenerator::generateSvg">generateSvg</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Diagrams/Generators/SubscriptionsVsOneTimeGenerator.php.html#140"><abbr title="App\Diagrams\Generators\SubscriptionsVsOneTimeGenerator::noDataSvg">noDataSvg</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Diagrams/Generators/SubscriptionsVsOneTimeGenerator.php.html#148"><abbr title="App\Diagrams\Generators\SubscriptionsVsOneTimeGenerator::formatAmountTick">formatAmountTick</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Diagrams/Generators/TopExpensesGenerator.php.html#11"><abbr title="App\Diagrams\Generators\TopExpensesGenerator::generateSvg">generateSvg</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Diagrams/Generators/TopExpensesGenerator.php.html#117"><abbr title="App\Diagrams\Generators\TopExpensesGenerator::noDataSvg">noDataSvg</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Diagrams/Generators/TopExpensesGenerator.php.html#125"><abbr title="App\Diagrams\Generators\TopExpensesGenerator::formatAmount">formatAmount</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Diagrams/Generators/TopExpensesGenerator.php.html#133"><abbr title="App\Diagrams\Generators\TopExpensesGenerator::truncateToWidth">truncateToWidth</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Diagrams/Generators/TotalPerMonthSvgGenerator.php.html#15"><abbr title="App\Diagrams\Generators\TotalPerMonthSvgGenerator::generateSvg">generateSvg</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Diagrams/Generators/TotalPerMonthSvgGenerator.php.html#29"><abbr title="App\Diagrams\Generators\TotalPerMonthSvgGenerator::prepareLegendData">prepareLegendData</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Diagrams/Generators/TotalPerMonthSvgGenerator.php.html#52"><abbr title="App\Diagrams\Generators\TotalPerMonthSvgGenerator::generateEmptyStateSvg">generateEmptyStateSvg</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Diagrams/Generators/TotalPerMonthSvgGenerator.php.html#60"><abbr title="App\Diagrams\Generators\TotalPerMonthSvgGenerator::generatePieChartSvg">generatePieChartSvg</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Diagrams/Generators/TotalPerMonthSvgGenerator.php.html#76"><abbr title="App\Diagrams\Generators\TotalPerMonthSvgGenerator::generateLegend">generateLegend</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Diagrams/Generators/TotalPerMonthSvgGenerator.php.html#101"><abbr title="App\Diagrams\Generators\TotalPerMonthSvgGenerator::generateSingleSlice">generateSingleSlice</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Diagrams/Generators/TotalPerMonthSvgGenerator.php.html#112"><abbr title="App\Diagrams\Generators\TotalPerMonthSvgGenerator::generateMultipleSlices">generateMultipleSlices</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Dto/ExpenseIndexContext.php.html#12"><abbr title="App\Dto\ExpenseIndexContext::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Dto/ProjectedSpendingResult.php.html#12"><abbr title="App\Dto\ProjectedSpendingResult::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Dto/SubscriptionIndexContext.php.html#12"><abbr title="App\Dto\SubscriptionIndexContext::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Dto/SubscriptionsVsOneTimeResult.php.html#21"><abbr title="App\Dto\SubscriptionsVsOneTimeResult::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Dto/TopExpensesResult.php.html#15"><abbr title="App\Dto\TopExpensesResult::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/AccessToken.php.html#43"><abbr title="App\Entity\AccessToken::getId">getId</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/AccessToken.php.html#48"><abbr title="App\Entity\AccessToken::getToken">getToken</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/AccessToken.php.html#60"><abbr title="App\Entity\AccessToken::getCreatedAt">getCreatedAt</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Category.php.html#92"><abbr title="App\Entity\Category::getExpenses">getExpenses</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Category.php.html#97"><abbr title="App\Entity\Category::addExpense">addExpense</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Category.php.html#107"><abbr title="App\Entity\Category::removeExpense">removeExpense</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Category.php.html#122"><abbr title="App\Entity\Category::getSubscriptions">getSubscriptions</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Category.php.html#127"><abbr title="App\Entity\Category::addSubscription">addSubscription</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Category.php.html#137"><abbr title="App\Entity\Category::removeSubscription">removeSubscription</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Category.php.html#152"><abbr title="App\Entity\Category::getThresholds">getThresholds</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Category.php.html#157"><abbr title="App\Entity\Category::addThreshold">addThreshold</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Category.php.html#167"><abbr title="App\Entity\Category::removeThreshold">removeThreshold</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Expense.php.html#139"><abbr title="App\Entity\Expense::getUserObject">getUserObject</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Family.php.html#54"><abbr title="App\Entity\Family::getId">getId</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Family.php.html#59"><abbr title="App\Entity\Family::getName">getName</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Family.php.html#71"><abbr title="App\Entity\Family::getMonthlyTargetBudget">getMonthlyTargetBudget</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Family.php.html#86"><abbr title="App\Entity\Family::getUsers">getUsers</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Family.php.html#91"><abbr title="App\Entity\Family::addUser">addUser</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Family.php.html#101"><abbr title="App\Entity\Family::removeUser">removeUser</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Family.php.html#116"><abbr title="App\Entity\Family::getThresholds">getThresholds</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Family.php.html#121"><abbr title="App\Entity\Family::addThreshold">addThreshold</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Family.php.html#131"><abbr title="App\Entity\Family::removeThreshold">removeThreshold</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Subscription.php.html#79"><abbr title="App\Entity\Subscription::getName">getName</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Subscription.php.html#91"><abbr title="App\Entity\Subscription::getAmount">getAmount</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Subscription.php.html#103"><abbr title="App\Entity\Subscription::getFrequency">getFrequency</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Subscription.php.html#115"><abbr title="App\Entity\Subscription::getNextDueDate">getNextDueDate</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Subscription.php.html#127"><abbr title="App\Entity\Subscription::isActive">isActive</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Subscription.php.html#139"><abbr title="App\Entity\Subscription::getUserObject">getUserObject</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Subscription.php.html#151"><abbr title="App\Entity\Subscription::getCategory">getCategory</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Subscription.php.html#166"><abbr title="App\Entity\Subscription::getExpenses">getExpenses</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Subscription.php.html#171"><abbr title="App\Entity\Subscription::addExpense">addExpense</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Subscription.php.html#181"><abbr title="App\Entity\Subscription::removeExpense">removeExpense</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Threshold.php.html#31"><abbr title="App\Entity\Threshold::getId">getId</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Threshold.php.html#36"><abbr title="App\Entity\Threshold::getCategory">getCategory</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Threshold.php.html#41"><abbr title="App\Entity\Threshold::setCategory">setCategory</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Threshold.php.html#48"><abbr title="App\Entity\Threshold::getFamily">getFamily</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Threshold.php.html#53"><abbr title="App\Entity\Threshold::setFamily">setFamily</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Threshold.php.html#60"><abbr title="App\Entity\Threshold::getAmount">getAmount</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Threshold.php.html#65"><abbr title="App\Entity\Threshold::setAmount">setAmount</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/User.php.html#151"><abbr title="App\Entity\User::__serialize">__serialize</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/User.php.html#159"><abbr title="App\Entity\User::eraseCredentials">eraseCredentials</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/User.php.html#192"><abbr title="App\Entity\User::getExpenses">getExpenses</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/User.php.html#197"><abbr title="App\Entity\User::addExpense">addExpense</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/User.php.html#207"><abbr title="App\Entity\User::removeExpense">removeExpense</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/User.php.html#222"><abbr title="App\Entity\User::getSubscriptions">getSubscriptions</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/User.php.html#227"><abbr title="App\Entity\User::addSubscription">addSubscription</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/User.php.html#237"><abbr title="App\Entity\User::removeSubscription">removeSubscription</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/User.php.html#252"><abbr title="App\Entity\User::getAccessTokens">getAccessTokens</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/User.php.html#257"><abbr title="App\Entity\User::addAccessToken">addAccessToken</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/User.php.html#267"><abbr title="App\Entity\User::removeAccessToken">removeAccessToken</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/User.php.html#279"><abbr title="App\Entity\User::isVerified">isVerified</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/User.php.html#284"><abbr title="App\Entity\User::setIsVerified">setIsVerified</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Facades/ProjectedSpendingFacade.php.html#16"><abbr title="App\Facades\ProjectedSpendingFacade::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Facades/ProjectedSpendingFacade.php.html#25"><abbr title="App\Facades\ProjectedSpendingFacade::generateSvg">generateSvg</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Facades/ProjectedSpendingFacade.php.html#44"><abbr title="App\Facades\ProjectedSpendingFacade::generate">generate</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Facades/ProjectedSpendingFacade.php.html#91"><abbr title="App\Facades\ProjectedSpendingFacade::accumulateUserMonthExpenses">accumulateUserMonthExpenses</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Facades/ProjectedSpendingFacade.php.html#111"><abbr title="App\Facades\ProjectedSpendingFacade::accumulateFamilyMonthExpenses">accumulateFamilyMonthExpenses</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Facades/SelectedMonthVsLastMonthFacade.php.html#13"><abbr title="App\Facades\SelectedMonthVsLastMonthFacade::generateSvg">generateSvg</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Facades/SubscriptionsVsOneTimeFacade.php.html#14"><abbr title="App\Facades\SubscriptionsVsOneTimeFacade::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Facades/SubscriptionsVsOneTimeFacade.php.html#19"><abbr title="App\Facades\SubscriptionsVsOneTimeFacade::generateSvg">generateSvg</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Facades/SubscriptionsVsOneTimeFacade.php.html#24"><abbr title="App\Facades\SubscriptionsVsOneTimeFacade::generateSvgForLastMonths">generateSvgForLastMonths</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Facades/SubscriptionsVsOneTimeFacade.php.html#35"><abbr title="App\Facades\SubscriptionsVsOneTimeFacade::generateUserSvg">generateUserSvg</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Facades/SubscriptionsVsOneTimeFacade.php.html#40"><abbr title="App\Facades\SubscriptionsVsOneTimeFacade::generateFamilySvg">generateFamilySvg</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Facades/SubscriptionsVsOneTimeFacade.php.html#45"><abbr title="App\Facades\SubscriptionsVsOneTimeFacade::generateUserSvgMonths">generateUserSvgMonths</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Facades/SubscriptionsVsOneTimeFacade.php.html#57"><abbr title="App\Facades\SubscriptionsVsOneTimeFacade::generateFamilySvgMonths">generateFamilySvgMonths</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Facades/TopExpensesFacade.php.html#13"><abbr title="App\Facades\TopExpensesFacade::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Facades/TopExpensesFacade.php.html#25"><abbr title="App\Facades\TopExpensesFacade::generateSvg">generateSvg</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Facades/TotalPerMonthFacade.php.html#11"><abbr title="App\Facades\TotalPerMonthFacade::generateSvg">generateSvg</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Form/AddUserToFamilyFormType.php.html#16"><abbr title="App\Form\AddUserToFamilyFormType::buildForm">buildForm</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Form/AddUserToFamilyFormType.php.html#36"><abbr title="App\Form\AddUserToFamilyFormType::configureOptions">configureOptions</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Form/CreateFamilyFormType.php.html#14"><abbr title="App\Form\CreateFamilyFormType::buildForm">buildForm</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Form/CreateFamilyFormType.php.html#25"><abbr title="App\Form\CreateFamilyFormType::configureOptions">configureOptions</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Form/CreateThresholdFormType.php.html#16"><abbr title="App\Form\CreateThresholdFormType::buildForm">buildForm</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Form/CreateThresholdFormType.php.html#27"><abbr title="App\Form\CreateThresholdFormType::configureOptions">configureOptions</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Form/EditFamilyFormType.php.html#14"><abbr title="App\Form\EditFamilyFormType::buildForm">buildForm</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Form/EditFamilyFormType.php.html#22"><abbr title="App\Form\EditFamilyFormType::configureOptions">configureOptions</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Form/EditThresholdFormType.php.html#16"><abbr title="App\Form\EditThresholdFormType::buildForm">buildForm</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Form/EditThresholdFormType.php.html#27"><abbr title="App\Form\EditThresholdFormType::configureOptions">configureOptions</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Form/ExpenseType.php.html#23"><abbr title="App\Form\ExpenseType::buildForm">buildForm</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Form/ExpenseType.php.html#134"><abbr title="App\Form\ExpenseType::configureOptions">configureOptions</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Form/RegistrationFormType.php.html#21"><abbr title="App\Form\RegistrationFormType::buildForm">buildForm</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Form/RegistrationFormType.php.html#59"><abbr title="App\Form\RegistrationFormType::configureOptions">configureOptions</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Form/SubscriptionType.php.html#21"><abbr title="App\Form\SubscriptionType::buildForm">buildForm</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Form/SubscriptionType.php.html#94"><abbr title="App\Form\SubscriptionType::configureOptions">configureOptions</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repository/ExpenseRepository.php.html#28"><abbr title="App\Repository\ExpenseRepository::searchByUsers">searchByUsers</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repository/ExpenseRepository.php.html#83"><abbr title="App\Repository\ExpenseRepository::searchForUser">searchForUser</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repository/ExpenseRepository.php.html#94"><abbr title="App\Repository\ExpenseRepository::searchForUsers">searchForUsers</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repository/ExpenseRepository.php.html#98"><abbr title="App\Repository\ExpenseRepository::applyCriteriaSingle">applyCriteriaSingle</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repository/ExpenseRepository.php.html#141"><abbr title="App\Repository\ExpenseRepository::applyCriteriaMulti">applyCriteriaMulti</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repository/ExpenseRepository.php.html#171"><abbr title="App\Repository\ExpenseRepository::applySorting">applySorting</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repository/SubscriptionRepository.php.html#28"><abbr title="App\Repository\SubscriptionRepository::searchByUsers">searchByUsers</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repository/SubscriptionRepository.php.html#75"><abbr title="App\Repository\SubscriptionRepository::searchForUser">searchForUser</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repository/SubscriptionRepository.php.html#85"><abbr title="App\Repository\SubscriptionRepository::searchForUsers">searchForUsers</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repository/SubscriptionRepository.php.html#90"><abbr title="App\Repository\SubscriptionRepository::applyCriteria">applyCriteria</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repository/SubscriptionRepository.php.html#112"><abbr title="App\Repository\SubscriptionRepository::applySorting">applySorting</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repository/ThresholdsRepository.php.html#16"><abbr title="App\Repository\ThresholdsRepository::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repository/UserRepository.php.html#27"><abbr title="App\Repository\UserRepository::upgradePassword">upgradePassword</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Security/EmailVerifier.php.html#17"><abbr title="App\Security\EmailVerifier::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Security/EmailVerifier.php.html#24"><abbr title="App\Security\EmailVerifier::sendEmailConfirmation">sendEmailConfirmation</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Security/EmailVerifier.php.html#45"><abbr title="App\Security\EmailVerifier::handleEmailConfirmation">handleEmailConfirmation</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Security/Voter/SubscriptionVoter.php.html#29"><abbr title="App\Security\Voter\SubscriptionVoter::voteOnAttribute">voteOnAttribute</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Validators/FamilyValidators.php.html#12"><abbr title="App\Validators\FamilyValidators::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Validators/FamilyValidators.php.html#17"><abbr title="App\Validators\FamilyValidators::verifyLeavePosibility">verifyLeavePosibility</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Validators/ThresholdValidators.php.html#15"><abbr title="App\Validators\ThresholdValidators::validateThresholdAmount">validateThresholdAmount</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Security/Voter/ExpenseVoter.php.html#33"><abbr title="App\Security\Voter\ExpenseVoter::voteOnAttribute">voteOnAttribute</abbr></a></td><td class="text-right">53%</td></tr>
+       <tr><td><a href="EventListener/ApiExceptionListener.php.html#24"><abbr title="App\EventListener\ApiExceptionListener::onKernelException">onKernelException</abbr></a></td><td class="text-right">68%</td></tr>
+       <tr><td><a href="Command/FamilySetupCommand.php.html#39"><abbr title="App\Command\FamilySetupCommand::execute">execute</abbr></a></td><td class="text-right">70%</td></tr>
+       <tr><td><a href="Command/UserCreateCommand.php.html#41"><abbr title="App\Command\UserCreateCommand::execute">execute</abbr></a></td><td class="text-right">71%</td></tr>
+       <tr><td><a href="Command/SuperAdminCreateCommand.php.html#41"><abbr title="App\Command\SuperAdminCreateCommand::execute">execute</abbr></a></td><td class="text-right">72%</td></tr>
+       <tr><td><a href="Security/AccessTokenHandler.php.html#19"><abbr title="App\Security\AccessTokenHandler::getUserBadgeFrom">getUserBadgeFrom</abbr></a></td><td class="text-right">77%</td></tr>
+       <tr><td><a href="Security/Voter/ExpenseVoter.php.html#20"><abbr title="App\Security\Voter\ExpenseVoter::supports">supports</abbr></a></td><td class="text-right">80%</td></tr>
+       <tr><td><a href="Http/ApiContentNegotiation.php.html#17"><abbr title="App\Http\ApiContentNegotiation::createResponse">createResponse</abbr></a></td><td class="text-right">85%</td></tr>
+       <tr><td><a href="EventListener/RateLimitingListener.php.html#27"><abbr title="App\EventListener\RateLimitingListener::__invoke">__invoke</abbr></a></td><td class="text-right">88%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3 style="margin-top: 2rem;">Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right">Coverage</th>
+         <th class="text-right">Complexity</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Diagrams/Generators/ProjectedSpendingGenerator.php.html#11"><abbr title="App\Diagrams\Generators\ProjectedSpendingGenerator::generateSvg">generateSvg</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">23</td><td class="text-right">552</td></tr>
+       <tr><td><a href="Security/Voter/SubscriptionVoter.php.html#29"><abbr title="App\Security\Voter\SubscriptionVoter::voteOnAttribute">voteOnAttribute</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">19</td><td class="text-right">380</td></tr>
+       <tr><td><a href="Controller/Service/ExpenseParamsExtractor.php.html#52"><abbr title="App\Controller\Service\ExpenseParamsExtractor::extractCriteria">extractCriteria</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">17</td><td class="text-right">306</td></tr>
+       <tr><td><a href="Command/SendWeeklyFamilyReportCommand.php.html#51"><abbr title="App\Command\SendWeeklyFamilyReportCommand::execute">execute</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">15</td><td class="text-right">240</td></tr>
+       <tr><td><a href="Repository/ExpenseRepository.php.html#98"><abbr title="App\Repository\ExpenseRepository::applyCriteriaSingle">applyCriteriaSingle</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">13</td><td class="text-right">182</td></tr>
+       <tr><td><a href="Repository/ExpenseRepository.php.html#141"><abbr title="App\Repository\ExpenseRepository::applyCriteriaMulti">applyCriteriaMulti</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">13</td><td class="text-right">182</td></tr>
+       <tr><td><a href="Controller/Service/ExpenseIndexContextResolver.php.html#22"><abbr title="App\Controller\Service\ExpenseIndexContextResolver::resolveAndAuthorize">resolveAndAuthorize</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">12</td><td class="text-right">156</td></tr>
+       <tr><td><a href="Diagrams/Calculators/SubscriptionsVsOneTimeCalculator.php.html#18"><abbr title="App\Diagrams\Calculators\SubscriptionsVsOneTimeCalculator::buildForIterators">buildForIterators</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">12</td><td class="text-right">156</td></tr>
+       <tr><td><a href="Facades/ProjectedSpendingFacade.php.html#44"><abbr title="App\Facades\ProjectedSpendingFacade::generate">generate</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">11</td><td class="text-right">132</td></tr>
+       <tr><td><a href="Controller/Service/SubscriptionParamsExtractor.php.html#51"><abbr title="App\Controller\Service\SubscriptionParamsExtractor::extractCriteria">extractCriteria</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">10</td><td class="text-right">110</td></tr>
+       <tr><td><a href="Diagrams/Calculators/TopExpensesCalculator.php.html#105"><abbr title="App\Diagrams\Calculators\TopExpensesCalculator::displayUserName">displayUserName</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">10</td><td class="text-right">110</td></tr>
+       <tr><td><a href="Command/SendWeeklyFamilyReportCommand.php.html#191"><abbr title="App\Command\SendWeeklyFamilyReportCommand::accumulateFamilyMonthExpenses">accumulateFamilyMonthExpenses</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">9</td><td class="text-right">90</td></tr>
+       <tr><td><a href="Controller/Service/SubscriptionIndexContextResolver.php.html#22"><abbr title="App\Controller\Service\SubscriptionIndexContextResolver::resolveAndAuthorize">resolveAndAuthorize</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">9</td><td class="text-right">90</td></tr>
+       <tr><td><a href="Diagrams/Calculators/ProjectedSpendingCalculator.php.html#99"><abbr title="App\Diagrams\Calculators\ProjectedSpendingCalculator::computeBudgetHitDate">computeBudgetHitDate</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">9</td><td class="text-right">90</td></tr>
+       <tr><td><a href="Command/SendWeeklyFamilyReportCommand.php.html#218"><abbr title="App\Command\SendWeeklyFamilyReportCommand::computeFamilyCategoryTotals">computeFamilyCategoryTotals</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">8</td><td class="text-right">72</td></tr>
+       <tr><td><a href="Repository/SubscriptionRepository.php.html#90"><abbr title="App\Repository\SubscriptionRepository::applyCriteria">applyCriteria</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">8</td><td class="text-right">72</td></tr>
+       <tr><td><a href="Command/ProcessSubscriptionsCommand.php.html#27"><abbr title="App\Command\ProcessSubscriptionsCommand::execute">execute</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">7</td><td class="text-right">56</td></tr>
+       <tr><td><a href="Controller/ExpenseController.php.html#68"><abbr title="App\Controller\ExpenseController::new">new</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">7</td><td class="text-right">56</td></tr>
+       <tr><td><a href="Controller/ExpenseController.php.html#132"><abbr title="App\Controller\ExpenseController::edit">edit</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">7</td><td class="text-right">56</td></tr>
+       <tr><td><a href="Controller/ThresholdsController.php.html#24"><abbr title="App\Controller\ThresholdsController::index">index</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">7</td><td class="text-right">56</td></tr>
+       <tr><td><a href="Diagrams/Calculators/TopExpensesCalculator.php.html#59"><abbr title="App\Diagrams\Calculators\TopExpensesCalculator::calculateForFamily">calculateForFamily</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">7</td><td class="text-right">56</td></tr>
+       <tr><td><a href="Diagrams/Generators/SubscriptionsVsOneTimeGenerator.php.html#11"><abbr title="App\Diagrams\Generators\SubscriptionsVsOneTimeGenerator::generateSvg">generateSvg</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">7</td><td class="text-right">56</td></tr>
+       <tr><td><a href="Facades/ProjectedSpendingFacade.php.html#91"><abbr title="App\Facades\ProjectedSpendingFacade::accumulateUserMonthExpenses">accumulateUserMonthExpenses</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">7</td><td class="text-right">56</td></tr>
+       <tr><td><a href="Controller/FamilyController.php.html#142"><abbr title="App\Controller\FamilyController::addUserToFamily">addUserToFamily</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">6</td><td class="text-right">42</td></tr>
+       <tr><td><a href="Controller/Service/ReceiptStorage.php.html#15"><abbr title="App\Controller\Service\ReceiptStorage::store">store</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">6</td><td class="text-right">42</td></tr>
+       <tr><td><a href="DataFixtures/SpendingDemoFixtures.php.html#23"><abbr title="App\DataFixtures\SpendingDemoFixtures::load">load</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">6</td><td class="text-right">42</td></tr>
+       <tr><td><a href="DataFixtures/SpendingDemoFixtures.php.html#182"><abbr title="App\DataFixtures\SpendingDemoFixtures::nameForCategory">nameForCategory</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">6</td><td class="text-right">42</td></tr>
+       <tr><td><a href="Diagrams/Calculators/SelectedMonthVsLastMonthCalculator.php.html#35"><abbr title="App\Diagrams\Calculators\SelectedMonthVsLastMonthCalculator::calculateFamilyDailyExpenses">calculateFamilyDailyExpenses</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">6</td><td class="text-right">42</td></tr>
+       <tr><td><a href="Facades/ProjectedSpendingFacade.php.html#25"><abbr title="App\Facades\ProjectedSpendingFacade::generateSvg">generateSvg</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">6</td><td class="text-right">42</td></tr>
+       <tr><td><a href="Controller/ExpenseController.php.html#258"><abbr title="App\Controller\ExpenseController::processReceiptUpload">processReceiptUpload</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">5</td><td class="text-right">30</td></tr>
+       <tr><td><a href="Controller/FamilyController.php.html#48"><abbr title="App\Controller\FamilyController::createFamilyPage">createFamilyPage</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">5</td><td class="text-right">30</td></tr>
+       <tr><td><a href="Controller/FamilyController.php.html#300"><abbr title="App\Controller\FamilyController::editFamily">editFamily</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">5</td><td class="text-right">30</td></tr>
+       <tr><td><a href="Controller/ThresholdsController.php.html#83"><abbr title="App\Controller\ThresholdsController::edit">edit</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">5</td><td class="text-right">30</td></tr>
+       <tr><td><a href="Diagrams/Calculators/SelectedMonthVsLastMonthCalculator.php.html#12"><abbr title="App\Diagrams\Calculators\SelectedMonthVsLastMonthCalculator::calculateUserDailyExpenses">calculateUserDailyExpenses</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">5</td><td class="text-right">30</td></tr>
+       <tr><td><a href="Diagrams/Calculators/TopExpensesCalculator.php.html#31"><abbr title="App\Diagrams\Calculators\TopExpensesCalculator::calculateForUser">calculateForUser</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">5</td><td class="text-right">30</td></tr>
+       <tr><td><a href="Diagrams/Generators/SelectedMonthVsLastMonthSvgGenerator.php.html#75"><abbr title="App\Diagrams\Generators\SelectedMonthVsLastMonthSvgGenerator::generateLine">generateLine</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">5</td><td class="text-right">30</td></tr>
+       <tr><td><a href="Diagrams/Generators/TopExpensesGenerator.php.html#11"><abbr title="App\Diagrams\Generators\TopExpensesGenerator::generateSvg">generateSvg</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">5</td><td class="text-right">30</td></tr>
+       <tr><td><a href="Diagrams/Generators/TotalPerMonthSvgGenerator.php.html#29"><abbr title="App\Diagrams\Generators\TotalPerMonthSvgGenerator::prepareLegendData">prepareLegendData</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">5</td><td class="text-right">30</td></tr>
+       <tr><td><a href="Diagrams/Generators/TotalPerMonthSvgGenerator.php.html#76"><abbr title="App\Diagrams\Generators\TotalPerMonthSvgGenerator::generateLegend">generateLegend</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">5</td><td class="text-right">30</td></tr>
+       <tr><td><a href="Diagrams/Generators/TotalPerMonthSvgGenerator.php.html#112"><abbr title="App\Diagrams\Generators\TotalPerMonthSvgGenerator::generateMultipleSlices">generateMultipleSlices</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">5</td><td class="text-right">30</td></tr>
+       <tr><td><a href="Facades/SubscriptionsVsOneTimeFacade.php.html#57"><abbr title="App\Facades\SubscriptionsVsOneTimeFacade::generateFamilySvgMonths">generateFamilySvgMonths</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">5</td><td class="text-right">30</td></tr>
+       <tr><td><a href="Facades/TopExpensesFacade.php.html#25"><abbr title="App\Facades\TopExpensesFacade::generateSvg">generateSvg</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">5</td><td class="text-right">30</td></tr>
+       <tr><td><a href="Command/SendWeeklyFamilyReportCommand.php.html#174"><abbr title="App\Command\SendWeeklyFamilyReportCommand::collectFamilyAdmins">collectFamilyAdmins</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">4</td><td class="text-right">20</td></tr>
+       <tr><td><a href="Controller/ExpenseController.php.html#28"><abbr title="App\Controller\ExpenseController::index">index</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">4</td><td class="text-right">20</td></tr>
+       <tr><td><a href="Controller/ExpenseController.php.html#185"><abbr title="App\Controller\ExpenseController::delete">delete</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">4</td><td class="text-right">20</td></tr>
+       <tr><td><a href="Controller/ExpenseController.php.html#235"><abbr title="App\Controller\ExpenseController::resolveTargetUserFromQuery">resolveTargetUserFromQuery</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">4</td><td class="text-right">20</td></tr>
+       <tr><td><a href="Controller/ExpenseController.php.html#248"><abbr title="App\Controller\ExpenseController::validateSubscriptionOwnership">validateSubscriptionOwnership</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">4</td><td class="text-right">20</td></tr>
+       <tr><td><a href="Controller/FamilyController.php.html#186"><abbr title="App\Controller\FamilyController::leaveFamily">leaveFamily</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">4</td><td class="text-right">20</td></tr>
+       <tr><td><a href="Controller/FamilyController.php.html#225"><abbr title="App\Controller\FamilyController::kickUserFromFamily">kickUserFromFamily</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">4</td><td class="text-right">20</td></tr>
+       <tr><td><a href="Controller/FamilyController.php.html#262"><abbr title="App\Controller\FamilyController::roleChange">roleChange</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">4</td><td class="text-right">20</td></tr>
+       <tr><td><a href="Controller/FamilyController.php.html#338"><abbr title="App\Controller\FamilyController::deleteFamily">deleteFamily</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">4</td><td class="text-right">20</td></tr>
+       <tr><td><a href="Controller/SubscriptionController.php.html#25"><abbr title="App\Controller\SubscriptionController::index">index</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">4</td><td class="text-right">20</td></tr>
+       <tr><td><a href="Controller/ThresholdsController.php.html#122"><abbr title="App\Controller\ThresholdsController::delete">delete</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">4</td><td class="text-right">20</td></tr>
+       <tr><td><a href="DataFixtures/SpendingDemoFixtures.php.html#118"><abbr title="App\DataFixtures\SpendingDemoFixtures::getOrCreateUser">getOrCreateUser</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">4</td><td class="text-right">20</td></tr>
+       <tr><td><a href="Diagrams/Calculators/ProjectedNextMonthSpendingCalculator.php.html#11"><abbr title="App\Diagrams\Calculators\ProjectedNextMonthSpendingCalculator::calculate">calculate</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">4</td><td class="text-right">20</td></tr>
+       <tr><td><a href="Diagrams/Calculators/ProjectedNextMonthSpendingCalculator.php.html#120"><abbr title="App\Diagrams\Calculators\ProjectedNextMonthSpendingCalculator::hasExpensesForMonths">hasExpensesForMonths</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">4</td><td class="text-right">20</td></tr>
+       <tr><td><a href="Diagrams/Calculators/ProjectedNextMonthSpendingCalculator.php.html#137"><abbr title="App\Diagrams\Calculators\ProjectedNextMonthSpendingCalculator::sumExpensesForMonths">sumExpensesForMonths</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">4</td><td class="text-right">20</td></tr>
+       <tr><td><a href="Diagrams/Calculators/TopExpensesCalculator.php.html#19"><abbr title="App\Diagrams\Calculators\TopExpensesCalculator::resolveSelectedMonth">resolveSelectedMonth</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">4</td><td class="text-right">20</td></tr>
+       <tr><td><a href="Diagrams/Calculators/TotalPerMonthCalculator.php.html#36"><abbr title="App\Diagrams\Calculators\TotalPerMonthCalculator::calculateFamilyUserExpenses">calculateFamilyUserExpenses</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">4</td><td class="text-right">20</td></tr>
+       <tr><td><a href="Diagrams/Generators/SelectedMonthVsLastMonthSvgGenerator.php.html#59"><abbr title="App\Diagrams\Generators\SelectedMonthVsLastMonthSvgGenerator::generateXAxis">generateXAxis</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">4</td><td class="text-right">20</td></tr>
+       <tr><td><a href="Diagrams/Generators/TopExpensesGenerator.php.html#133"><abbr title="App\Diagrams\Generators\TopExpensesGenerator::truncateToWidth">truncateToWidth</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">4</td><td class="text-right">20</td></tr>
+       <tr><td><a href="Facades/SelectedMonthVsLastMonthFacade.php.html#13"><abbr title="App\Facades\SelectedMonthVsLastMonthFacade::generateSvg">generateSvg</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">4</td><td class="text-right">20</td></tr>
+       <tr><td><a href="Form/ExpenseType.php.html#23"><abbr title="App\Form\ExpenseType::buildForm">buildForm</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">4</td><td class="text-right">20</td></tr>
+       <tr><td><a href="Security/Voter/ExpenseVoter.php.html#33"><abbr title="App\Security\Voter\ExpenseVoter::voteOnAttribute">voteOnAttribute</abbr></a></td><td class="text-right">53.8%</td><td class="text-right">10</td><td class="text-right">19</td></tr>
+       <tr><td><a href="Command/FamilySetupCommand.php.html#39"><abbr title="App\Command\FamilySetupCommand::execute">execute</abbr></a></td><td class="text-right">70.7%</td><td class="text-right">10</td><td class="text-right">12</td></tr>
+       <tr><td><a href="Command/SendWeeklyFamilyReportCommand.php.html#246"><abbr title="App\Command\SendWeeklyFamilyReportCommand::toPercentages">toPercentages</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">3</td><td class="text-right">12</td></tr>
+       <tr><td><a href="Command/SendWeeklyFamilyReportCommand.php.html#262"><abbr title="App\Command\SendWeeklyFamilyReportCommand::formatGrowthPct">formatGrowthPct</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">3</td><td class="text-right">12</td></tr>
+       <tr><td><a href="Controller/ExpenseController.php.html#213"><abbr title="App\Controller\ExpenseController::downloadReceipt">downloadReceipt</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">3</td><td class="text-right">12</td></tr>
+       <tr><td><a href="Controller/FamilyController.php.html#27"><abbr title="App\Controller\FamilyController::index">index</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">3</td><td class="text-right">12</td></tr>
+       <tr><td><a href="Controller/FamilyController.php.html#107"><abbr title="App\Controller\FamilyController::joinFamily">joinFamily</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">3</td><td class="text-right">12</td></tr>
+       <tr><td><a href="Controller/RegistrationController.php.html#29"><abbr title="App\Controller\RegistrationController::register">register</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">3</td><td class="text-right">12</td></tr>
+       <tr><td><a href="Controller/Service/ExpenseParamsExtractor.php.html#28"><abbr title="App\Controller\Service\ExpenseParamsExtractor::extractSorting">extractSorting</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">3</td><td class="text-right">12</td></tr>
+       <tr><td><a href="Controller/Service/ReceiptStorage.php.html#31"><abbr title="App\Controller\Service\ReceiptStorage::remove">remove</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">3</td><td class="text-right">12</td></tr>
+       <tr><td><a href="Controller/Service/SubscriptionParamsExtractor.php.html#28"><abbr title="App\Controller\Service\SubscriptionParamsExtractor::extractSorting">extractSorting</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">3</td><td class="text-right">12</td></tr>
+       <tr><td><a href="Controller/SubscriptionController.php.html#66"><abbr title="App\Controller\SubscriptionController::new">new</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">3</td><td class="text-right">12</td></tr>
+       <tr><td><a href="Controller/SubscriptionController.php.html#117"><abbr title="App\Controller\SubscriptionController::edit">edit</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">3</td><td class="text-right">12</td></tr>
+       <tr><td><a href="Controller/SubscriptionController.php.html#154"><abbr title="App\Controller\SubscriptionController::delete">delete</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">3</td><td class="text-right">12</td></tr>
+       <tr><td><a href="DataFixtures/SpendingDemoFixtures.php.html#101"><abbr title="App\DataFixtures\SpendingDemoFixtures::getOrCreateFamily">getOrCreateFamily</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">3</td><td class="text-right">12</td></tr>
+       <tr><td><a href="DataFixtures/SpendingDemoFixtures.php.html#152"><abbr title="App\DataFixtures\SpendingDemoFixtures::getOrCreateCategory">getOrCreateCategory</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">3</td><td class="text-right">12</td></tr>
+       <tr><td><a href="DataFixtures/SpendingDemoFixtures.php.html#193"><abbr title="App\DataFixtures\SpendingDemoFixtures::addExpense">addExpense</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">3</td><td class="text-right">12</td></tr>
+       <tr><td><a href="Diagrams/Calculators/ProjectedNextMonthSpendingCalculator.php.html#53"><abbr title="App\Diagrams\Calculators\ProjectedNextMonthSpendingCalculator::calculateFamilyTotal">calculateFamilyTotal</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">3</td><td class="text-right">12</td></tr>
+       <tr><td><a href="Diagrams/Calculators/ProjectedSpendingCalculator.php.html#9"><abbr title="App\Diagrams\Calculators\ProjectedSpendingCalculator::calculate">calculate</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">3</td><td class="text-right">12</td></tr>
+       <tr><td><a href="Diagrams/Calculators/ProjectedSpendingCalculator.php.html#43"><abbr title="App\Diagrams\Calculators\ProjectedSpendingCalculator::resolveMonthContext">resolveMonthContext</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">3</td><td class="text-right">12</td></tr>
+       <tr><td><a href="Diagrams/Calculators/ProjectedSpendingCalculator.php.html#68"><abbr title="App\Diagrams\Calculators\ProjectedSpendingCalculator::computeGrowthRate">computeGrowthRate</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">3</td><td class="text-right">12</td></tr>
+       <tr><td><a href="Diagrams/Calculators/ProjectedSpendingCalculator.php.html#78"><abbr title="App\Diagrams\Calculators\ProjectedSpendingCalculator::computeProjectedTotal">computeProjectedTotal</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">3</td><td class="text-right">12</td></tr>
+       <tr><td><a href="Diagrams/Generators/SelectedMonthVsLastMonthSvgGenerator.php.html#43"><abbr title="App\Diagrams\Generators\SelectedMonthVsLastMonthSvgGenerator::generateYAxisAndGrid">generateYAxisAndGrid</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">3</td><td class="text-right">12</td></tr>
+       <tr><td><a href="Diagrams/Generators/SubscriptionsVsOneTimeGenerator.php.html#148"><abbr title="App\Diagrams\Generators\SubscriptionsVsOneTimeGenerator::formatAmountTick">formatAmountTick</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">3</td><td class="text-right">12</td></tr>
+       <tr><td><a href="Diagrams/Generators/TotalPerMonthSvgGenerator.php.html#15"><abbr title="App\Diagrams\Generators\TotalPerMonthSvgGenerator::generateSvg">generateSvg</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">3</td><td class="text-right">12</td></tr>
+       <tr><td><a href="Entity/Category.php.html#107"><abbr title="App\Entity\Category::removeExpense">removeExpense</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">3</td><td class="text-right">12</td></tr>
+       <tr><td><a href="Entity/Category.php.html#137"><abbr title="App\Entity\Category::removeSubscription">removeSubscription</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">3</td><td class="text-right">12</td></tr>
+       <tr><td><a href="Entity/Category.php.html#167"><abbr title="App\Entity\Category::removeThreshold">removeThreshold</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">3</td><td class="text-right">12</td></tr>
+       <tr><td><a href="Entity/Family.php.html#101"><abbr title="App\Entity\Family::removeUser">removeUser</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">3</td><td class="text-right">12</td></tr>
+       <tr><td><a href="Entity/Family.php.html#131"><abbr title="App\Entity\Family::removeThreshold">removeThreshold</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">3</td><td class="text-right">12</td></tr>
+       <tr><td><a href="Entity/Subscription.php.html#181"><abbr title="App\Entity\Subscription::removeExpense">removeExpense</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">3</td><td class="text-right">12</td></tr>
+       <tr><td><a href="Entity/User.php.html#207"><abbr title="App\Entity\User::removeExpense">removeExpense</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">3</td><td class="text-right">12</td></tr>
+       <tr><td><a href="Entity/User.php.html#237"><abbr title="App\Entity\User::removeSubscription">removeSubscription</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">3</td><td class="text-right">12</td></tr>
+       <tr><td><a href="Entity/User.php.html#267"><abbr title="App\Entity\User::removeAccessToken">removeAccessToken</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">3</td><td class="text-right">12</td></tr>
+       <tr><td><a href="Facades/ProjectedSpendingFacade.php.html#111"><abbr title="App\Facades\ProjectedSpendingFacade::accumulateFamilyMonthExpenses">accumulateFamilyMonthExpenses</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">3</td><td class="text-right">12</td></tr>
+       <tr><td><a href="Facades/SubscriptionsVsOneTimeFacade.php.html#24"><abbr title="App\Facades\SubscriptionsVsOneTimeFacade::generateSvgForLastMonths">generateSvgForLastMonths</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">3</td><td class="text-right">12</td></tr>
+       <tr><td><a href="Facades/TotalPerMonthFacade.php.html#11"><abbr title="App\Facades\TotalPerMonthFacade::generateSvg">generateSvg</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">3</td><td class="text-right">12</td></tr>
+       <tr><td><a href="Form/SubscriptionType.php.html#21"><abbr title="App\Form\SubscriptionType::buildForm">buildForm</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">3</td><td class="text-right">12</td></tr>
+       <tr><td><a href="Repository/ExpenseRepository.php.html#28"><abbr title="App\Repository\ExpenseRepository::searchByUsers">searchByUsers</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">3</td><td class="text-right">12</td></tr>
+       <tr><td><a href="Validators/FamilyValidators.php.html#17"><abbr title="App\Validators\FamilyValidators::verifyLeavePosibility">verifyLeavePosibility</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">3</td><td class="text-right">12</td></tr>
+       <tr><td><a href="Validators/ThresholdValidators.php.html#15"><abbr title="App\Validators\ThresholdValidators::validateThresholdAmount">validateThresholdAmount</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">3</td><td class="text-right">12</td></tr>
+       <tr><td><a href="Command/UserCreateCommand.php.html#41"><abbr title="App\Command\UserCreateCommand::execute">execute</abbr></a></td><td class="text-right">71.8%</td><td class="text-right">9</td><td class="text-right">10</td></tr>
+       <tr><td><a href="EventListener/ApiExceptionListener.php.html#24"><abbr title="App\EventListener\ApiExceptionListener::onKernelException">onKernelException</abbr></a></td><td class="text-right">68.4%</td><td class="text-right">6</td><td class="text-right">7</td></tr>
+       <tr><td><a href="Command/SuperAdminCreateCommand.php.html#41"><abbr title="App\Command\SuperAdminCreateCommand::execute">execute</abbr></a></td><td class="text-right">72.7%</td><td class="text-right">6</td><td class="text-right">6</td></tr>
+       <tr><td><a href="Controller/DashboardController.php.html#23"><abbr title="App\Controller\DashboardController::index">index</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">2</td><td class="text-right">6</td></tr>
+       <tr><td><a href="Controller/FamilyController.php.html#88"><abbr title="App\Controller\FamilyController::getAllJoinerFamilies">getAllJoinerFamilies</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">2</td><td class="text-right">6</td></tr>
+       <tr><td><a href="Controller/RegistrationController.php.html#70"><abbr title="App\Controller\RegistrationController::verifyUserEmail">verifyUserEmail</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">2</td><td class="text-right">6</td></tr>
+       <tr><td><a href="Controller/SecurityController.php.html#15"><abbr title="App\Controller\SecurityController::login">login</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">2</td><td class="text-right">6</td></tr>
+       <tr><td><a href="Controller/Service/ExpenseParamsExtractor.php.html#14"><abbr title="App\Controller\Service\ExpenseParamsExtractor::extractPagination">extractPagination</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">2</td><td class="text-right">6</td></tr>
+       <tr><td><a href="Controller/Service/SubscriptionParamsExtractor.php.html#14"><abbr title="App\Controller\Service\SubscriptionParamsExtractor::extractPagination">extractPagination</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">2</td><td class="text-right">6</td></tr>
+       <tr><td><a href="Controller/SubscriptionController.php.html#184"><abbr title="App\Controller\SubscriptionController::ensureOwnerForNonAdmin">ensureOwnerForNonAdmin</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">2</td><td class="text-right">6</td></tr>
+       <tr><td><a href="Controller/SubscriptionController.php.html#191"><abbr title="App\Controller\SubscriptionController::keepOwnerForNonAdmin">keepOwnerForNonAdmin</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">2</td><td class="text-right">6</td></tr>
+       <tr><td><a href="Diagrams/Calculators/ProjectedNextMonthSpendingCalculator.php.html#107"><abbr title="App\Diagrams\Calculators\ProjectedNextMonthSpendingCalculator::getLastYearThisMonth">getLastYearThisMonth</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">2</td><td class="text-right">6</td></tr>
+       <tr><td><a href="Diagrams/Calculators/ProjectedSpendingCalculator.php.html#57"><abbr title="App\Diagrams\Calculators\ProjectedSpendingCalculator::cumulative">cumulative</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">2</td><td class="text-right">6</td></tr>
+       <tr><td><a href="Diagrams/Calculators/SelectedMonthVsLastMonthCalculator.php.html#59"><abbr title="App\Diagrams\Calculators\SelectedMonthVsLastMonthCalculator::convertToCumulative">convertToCumulative</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">2</td><td class="text-right">6</td></tr>
+       <tr><td><a href="Diagrams/Calculators/TotalPerMonthCalculator.php.html#15"><abbr title="App\Diagrams\Calculators\TotalPerMonthCalculator::calculateUserCategoryTotals">calculateUserCategoryTotals</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">2</td><td class="text-right">6</td></tr>
+       <tr><td><a href="Diagrams/Generators/SelectedMonthVsLastMonthSvgGenerator.php.html#17"><abbr title="App\Diagrams\Generators\SelectedMonthVsLastMonthSvgGenerator::generateChart">generateChart</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">2</td><td class="text-right">6</td></tr>
+       <tr><td><a href="Diagrams/Generators/TotalPerMonthSvgGenerator.php.html#60"><abbr title="App\Diagrams\Generators\TotalPerMonthSvgGenerator::generatePieChartSvg">generatePieChartSvg</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">2</td><td class="text-right">6</td></tr>
+       <tr><td><a href="Diagrams/Generators/TotalPerMonthSvgGenerator.php.html#101"><abbr title="App\Diagrams\Generators\TotalPerMonthSvgGenerator::generateSingleSlice">generateSingleSlice</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">2</td><td class="text-right">6</td></tr>
+       <tr><td><a href="Entity/Category.php.html#97"><abbr title="App\Entity\Category::addExpense">addExpense</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">2</td><td class="text-right">6</td></tr>
+       <tr><td><a href="Entity/Category.php.html#127"><abbr title="App\Entity\Category::addSubscription">addSubscription</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">2</td><td class="text-right">6</td></tr>
+       <tr><td><a href="Entity/Category.php.html#157"><abbr title="App\Entity\Category::addThreshold">addThreshold</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">2</td><td class="text-right">6</td></tr>
+       <tr><td><a href="Entity/Family.php.html#91"><abbr title="App\Entity\Family::addUser">addUser</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">2</td><td class="text-right">6</td></tr>
+       <tr><td><a href="Entity/Family.php.html#121"><abbr title="App\Entity\Family::addThreshold">addThreshold</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">2</td><td class="text-right">6</td></tr>
+       <tr><td><a href="Entity/Subscription.php.html#171"><abbr title="App\Entity\Subscription::addExpense">addExpense</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">2</td><td class="text-right">6</td></tr>
+       <tr><td><a href="Entity/User.php.html#197"><abbr title="App\Entity\User::addExpense">addExpense</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">2</td><td class="text-right">6</td></tr>
+       <tr><td><a href="Entity/User.php.html#227"><abbr title="App\Entity\User::addSubscription">addSubscription</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">2</td><td class="text-right">6</td></tr>
+       <tr><td><a href="Entity/User.php.html#257"><abbr title="App\Entity\User::addAccessToken">addAccessToken</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">2</td><td class="text-right">6</td></tr>
+       <tr><td><a href="Facades/SubscriptionsVsOneTimeFacade.php.html#45"><abbr title="App\Facades\SubscriptionsVsOneTimeFacade::generateUserSvgMonths">generateUserSvgMonths</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">2</td><td class="text-right">6</td></tr>
+       <tr><td><a href="Repository/ExpenseRepository.php.html#171"><abbr title="App\Repository\ExpenseRepository::applySorting">applySorting</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">2</td><td class="text-right">6</td></tr>
+       <tr><td><a href="Repository/SubscriptionRepository.php.html#28"><abbr title="App\Repository\SubscriptionRepository::searchByUsers">searchByUsers</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">2</td><td class="text-right">6</td></tr>
+       <tr><td><a href="Repository/SubscriptionRepository.php.html#112"><abbr title="App\Repository\SubscriptionRepository::applySorting">applySorting</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">2</td><td class="text-right">6</td></tr>
+       <tr><td><a href="Repository/UserRepository.php.html#27"><abbr title="App\Repository\UserRepository::upgradePassword">upgradePassword</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">2</td><td class="text-right">6</td></tr>
+       <tr><td><a href="EventListener/RateLimitingListener.php.html#27"><abbr title="App\EventListener\RateLimitingListener::__invoke">__invoke</abbr></a></td><td class="text-right">88.9%</td><td class="text-right">4</td><td class="text-right">4</td></tr>
+       <tr><td><a href="Security/AccessTokenHandler.php.html#19"><abbr title="App\Security\AccessTokenHandler::getUserBadgeFrom">getUserBadgeFrom</abbr></a></td><td class="text-right">77.8%</td><td class="text-right">4</td><td class="text-right">4</td></tr>
+       <tr><td><a href="Security/Voter/ExpenseVoter.php.html#20"><abbr title="App\Security\Voter\ExpenseVoter::supports">supports</abbr></a></td><td class="text-right">80.0%</td><td class="text-right">3</td><td class="text-right">3</td></tr>
+       <tr><td><a href="Http/ApiContentNegotiation.php.html#17"><abbr title="App\Http\ApiContentNegotiation::createResponse">createResponse</abbr></a></td><td class="text-right">85.7%</td><td class="text-right">2</td><td class="text-right">2</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <footer>
+    <hr/>
+    <p>
+     <small>Generated by <a href="https://github.com/sebastianbergmann/php-code-coverage" target="_top">php-code-coverage 12.3.2</a> using <a href="https://www.php.net/" target="_top">PHP 8.3.23</a> and <a href="https://phpunit.de/">PHPUnit 12.3.4</a> at Tue Aug 26 14:29:52 EEST 2025.</small>
+    </p>
+   </footer>
+  </div>
+  <script src="_js/billboard.pkgd.min.js?v=12.3.2" type="text/javascript"></script>
+  <script type="application/json" id="complexity_class">[[0,8,"Command\/ProcessSubscriptionsCommand.php.html#16","App\\Command\\ProcessSubscriptionsCommand","72"],[0,44,"Command\/SendWeeklyFamilyReportCommand.php.html#24","App\\Command\\SendWeeklyFamilyReportCommand","1980"],[0,2,"Controller\/DashboardController.php.html#20","App\\Controller\\DashboardController","6"],[0,39,"Controller\/ExpenseController.php.html#25","App\\Controller\\ExpenseController","1560"],[0,40,"Controller\/FamilyController.php.html#24","App\\Controller\\FamilyController","1640"],[0,6,"Controller\/RegistrationController.php.html#22","App\\Controller\\RegistrationController","42"],[0,3,"Controller\/SecurityController.php.html#13","App\\Controller\\SecurityController","12"],[0,13,"Controller\/Service\/ExpenseIndexContextResolver.php.html#15","App\\Controller\\Service\\ExpenseIndexContextResolver","182"],[0,22,"Controller\/Service\/ExpenseParamsExtractor.php.html#9","App\\Controller\\Service\\ExpenseParamsExtractor","506"],[0,11,"Controller\/Service\/ReceiptStorage.php.html#9","App\\Controller\\Service\\ReceiptStorage","132"],[0,10,"Controller\/Service\/SubscriptionIndexContextResolver.php.html#15","App\\Controller\\Service\\SubscriptionIndexContextResolver","110"],[0,15,"Controller\/Service\/SubscriptionParamsExtractor.php.html#9","App\\Controller\\Service\\SubscriptionParamsExtractor","240"],[0,18,"Controller\/SubscriptionController.php.html#22","App\\Controller\\SubscriptionController","342"],[0,16,"Controller\/ThresholdsController.php.html#21","App\\Controller\\ThresholdsController","272"],[0,21,"Diagrams\/Calculators\/ProjectedNextMonthSpendingCalculator.php.html#9","App\\Diagrams\\Calculators\\ProjectedNextMonthSpendingCalculator","462"],[0,23,"Diagrams\/Calculators\/ProjectedSpendingCalculator.php.html#7","App\\Diagrams\\Calculators\\ProjectedSpendingCalculator","552"],[0,16,"Diagrams\/Calculators\/SelectedMonthVsLastMonthCalculator.php.html#10","App\\Diagrams\\Calculators\\SelectedMonthVsLastMonthCalculator","272"],[0,12,"Diagrams\/Calculators\/SubscriptionsVsOneTimeCalculator.php.html#13","App\\Diagrams\\Calculators\\SubscriptionsVsOneTimeCalculator","156"],[0,27,"Diagrams\/Calculators\/TopExpensesCalculator.php.html#12","App\\Diagrams\\Calculators\\TopExpensesCalculator","756"],[0,6,"Diagrams\/Calculators\/TotalPerMonthCalculator.php.html#10","App\\Diagrams\\Calculators\\TotalPerMonthCalculator","42"],[0,23,"Diagrams\/Generators\/ProjectedSpendingGenerator.php.html#9","App\\Diagrams\\Generators\\ProjectedSpendingGenerator","552"],[0,16,"Diagrams\/Generators\/SelectedMonthVsLastMonthSvgGenerator.php.html#7","App\\Diagrams\\Generators\\SelectedMonthVsLastMonthSvgGenerator","272"],[0,11,"Diagrams\/Generators\/SubscriptionsVsOneTimeGenerator.php.html#9","App\\Diagrams\\Generators\\SubscriptionsVsOneTimeGenerator","132"],[0,11,"Diagrams\/Generators\/TopExpensesGenerator.php.html#9","App\\Diagrams\\Generators\\TopExpensesGenerator","132"],[0,23,"Diagrams\/Generators\/TotalPerMonthSvgGenerator.php.html#7","App\\Diagrams\\Generators\\TotalPerMonthSvgGenerator","552"],[0,1,"Dto\/ExpenseIndexContext.php.html#10","App\\Dto\\ExpenseIndexContext","2"],[0,1,"Dto\/ProjectedSpendingResult.php.html#7","App\\Dto\\ProjectedSpendingResult","2"],[0,1,"Dto\/SubscriptionIndexContext.php.html#10","App\\Dto\\SubscriptionIndexContext","2"],[0,1,"Dto\/SubscriptionsVsOneTimeResult.php.html#13","App\\Dto\\SubscriptionsVsOneTimeResult","2"],[0,1,"Dto\/TopExpensesResult.php.html#10","App\\Dto\\TopExpensesResult","2"],[0,7,"Entity\/Threshold.php.html#12","App\\Entity\\Threshold","56"],[0,28,"Facades\/ProjectedSpendingFacade.php.html#14","App\\Facades\\ProjectedSpendingFacade","812"],[0,4,"Facades\/SelectedMonthVsLastMonthFacade.php.html#11","App\\Facades\\SelectedMonthVsLastMonthFacade","20"],[0,14,"Facades\/SubscriptionsVsOneTimeFacade.php.html#12","App\\Facades\\SubscriptionsVsOneTimeFacade","210"],[0,6,"Facades\/TopExpensesFacade.php.html#11","App\\Facades\\TopExpensesFacade","42"],[0,3,"Facades\/TotalPerMonthFacade.php.html#9","App\\Facades\\TotalPerMonthFacade","12"],[0,2,"Form\/AddUserToFamilyFormType.php.html#14","App\\Form\\AddUserToFamilyFormType","6"],[0,2,"Form\/CreateFamilyFormType.php.html#12","App\\Form\\CreateFamilyFormType","6"],[0,2,"Form\/CreateThresholdFormType.php.html#14","App\\Form\\CreateThresholdFormType","6"],[0,2,"Form\/EditFamilyFormType.php.html#12","App\\Form\\EditFamilyFormType","6"],[0,2,"Form\/EditThresholdFormType.php.html#14","App\\Form\\EditThresholdFormType","6"],[0,5,"Form\/ExpenseType.php.html#21","App\\Form\\ExpenseType","30"],[0,2,"Form\/RegistrationFormType.php.html#19","App\\Form\\RegistrationFormType","6"],[0,4,"Form\/SubscriptionType.php.html#19","App\\Form\\SubscriptionType","20"],[0,1,"Repository\/ThresholdsRepository.php.html#14","App\\Repository\\ThresholdsRepository","2"],[0,3,"Security\/EmailVerifier.php.html#15","App\\Security\\EmailVerifier","12"],[0,4,"Validators\/FamilyValidators.php.html#10","App\\Validators\\FamilyValidators","20"],[0,3,"Validators\/ThresholdValidators.php.html#10","App\\Validators\\ThresholdValidators","12"],[1.1627906976744187,34,"Repository\/ExpenseRepository.php.html#16","App\\Repository\\ExpenseRepository","1150.14"],[1.6666666666666667,29,"DataFixtures\/SpendingDemoFixtures.php.html#16","App\\DataFixtures\\SpendingDemoFixtures","828.65"],[1.8867924528301887,15,"Repository\/SubscriptionRepository.php.html#16","App\\Repository\\SubscriptionRepository","227.50"],[20,22,"Security\/Voter\/SubscriptionVoter.php.html#12","App\\Security\\Voter\\SubscriptionVoter","269.81"],[22.22222222222222,18,"Entity\/Family.php.html#14","App\\Entity\\Family","170.44"],[27.027027027027028,24,"Entity\/Category.php.html#13","App\\Entity\\Category","247.83"],[39.285714285714285,35,"Entity\/User.php.html#16","App\\Entity\\User","309.16"],[50,22,"Entity\/Subscription.php.html#14","App\\Entity\\Subscription","82.50"],[54.54545454545454,4,"Repository\/UserRepository.php.html#17","App\\Repository\\UserRepository","5.50"],[61.111111111111114,13,"Security\/Voter\/ExpenseVoter.php.html#12","App\\Security\\Voter\\ExpenseVoter","22.94"],[70,7,"EventListener\/ApiExceptionListener.php.html#15","App\\EventListener\\ApiExceptionListener","8.32"],[73.01587301587301,12,"Command\/FamilySetupCommand.php.html#18","App\\Command\\FamilySetupCommand","14.83"],[74.4186046511628,11,"Command\/UserCreateCommand.php.html#19","App\\Command\\UserCreateCommand","13.03"],[75.67567567567568,8,"Command\/SuperAdminCreateCommand.php.html#19","App\\Command\\SuperAdminCreateCommand","8.92"],[76.92307692307693,9,"Entity\/AccessToken.php.html#11","App\\Entity\\AccessToken","10.00"],[80,5,"Security\/AccessTokenHandler.php.html#12","App\\Security\\AccessTokenHandler","5.20"],[87.5,3,"Http\/ApiContentNegotiation.php.html#11","App\\Http\\ApiContentNegotiation","3.02"],[90,5,"EventListener\/RateLimitingListener.php.html#15","App\\EventListener\\RateLimitingListener","5.03"],[92.85714285714286,6,"EventSubscriber\/ApiResponseSubscriber.php.html#14","App\\EventSubscriber\\ApiResponseSubscriber","6.01"],[96,17,"Entity\/Expense.php.html#12","App\\Entity\\Expense","17"],[100,6,"Controller\/AdminApiCategoryController.php.html#16","App\\Controller\\AdminApiCategoryController","6"],[100,15,"Controller\/ApiExpenseController.php.html#22","App\\Controller\\ApiExpenseController","15"],[100,8,"Controller\/ApiLoginController.php.html#18","App\\Controller\\ApiLoginController","8"],[100,2,"DataFixtures\/AdminFixtures.php.html#13","App\\DataFixtures\\AdminFixtures","2"],[100,2,"DataFixtures\/AppFixtures.php.html#16","App\\DataFixtures\\AppFixtures","2"],[100,2,"DataFixtures\/CommandTestFixtures.php.html#12","App\\DataFixtures\\CommandTestFixtures","2"],[100,2,"DataFixtures\/UserFixtures.php.html#12","App\\DataFixtures\\UserFixtures","2"],[100,0,"Kernel.php.html#8","App\\Kernel","0"],[100,1,"Repository\/AccessTokenRepository.php.html#14","App\\Repository\\AccessTokenRepository","1"],[100,1,"Repository\/CategoryRepository.php.html#14","App\\Repository\\CategoryRepository","1"],[100,1,"Repository\/FamilyRepository.php.html#14","App\\Repository\\FamilyRepository","1"]]</script>
+  <script type="application/json" id="complexity_method">[[0,1,"Command\/ProcessSubscriptionsCommand.php.html#22","App\\Command\\ProcessSubscriptionsCommand::__construct","2"],[0,7,"Command\/ProcessSubscriptionsCommand.php.html#27","App\\Command\\ProcessSubscriptionsCommand::execute","56"],[0,1,"Command\/SendWeeklyFamilyReportCommand.php.html#30","App\\Command\\SendWeeklyFamilyReportCommand::__construct","2"],[0,1,"Command\/SendWeeklyFamilyReportCommand.php.html#40","App\\Command\\SendWeeklyFamilyReportCommand::configure","2"],[0,15,"Command\/SendWeeklyFamilyReportCommand.php.html#51","App\\Command\\SendWeeklyFamilyReportCommand::execute","240"],[0,4,"Command\/SendWeeklyFamilyReportCommand.php.html#174","App\\Command\\SendWeeklyFamilyReportCommand::collectFamilyAdmins","20"],[0,9,"Command\/SendWeeklyFamilyReportCommand.php.html#191","App\\Command\\SendWeeklyFamilyReportCommand::accumulateFamilyMonthExpenses","90"],[0,8,"Command\/SendWeeklyFamilyReportCommand.php.html#218","App\\Command\\SendWeeklyFamilyReportCommand::computeFamilyCategoryTotals","72"],[0,3,"Command\/SendWeeklyFamilyReportCommand.php.html#246","App\\Command\\SendWeeklyFamilyReportCommand::toPercentages","12"],[0,3,"Command\/SendWeeklyFamilyReportCommand.php.html#262","App\\Command\\SendWeeklyFamilyReportCommand::formatGrowthPct","12"],[0,2,"Controller\/DashboardController.php.html#23","App\\Controller\\DashboardController::index","6"],[0,4,"Controller\/ExpenseController.php.html#28","App\\Controller\\ExpenseController::index","20"],[0,7,"Controller\/ExpenseController.php.html#68","App\\Controller\\ExpenseController::new","56"],[0,1,"Controller\/ExpenseController.php.html#122","App\\Controller\\ExpenseController::show","2"],[0,7,"Controller\/ExpenseController.php.html#132","App\\Controller\\ExpenseController::edit","56"],[0,4,"Controller\/ExpenseController.php.html#185","App\\Controller\\ExpenseController::delete","20"],[0,3,"Controller\/ExpenseController.php.html#213","App\\Controller\\ExpenseController::downloadReceipt","12"],[0,4,"Controller\/ExpenseController.php.html#235","App\\Controller\\ExpenseController::resolveTargetUserFromQuery","20"],[0,4,"Controller\/ExpenseController.php.html#248","App\\Controller\\ExpenseController::validateSubscriptionOwnership","20"],[0,5,"Controller\/ExpenseController.php.html#258","App\\Controller\\ExpenseController::processReceiptUpload","30"],[0,3,"Controller\/FamilyController.php.html#27","App\\Controller\\FamilyController::index","12"],[0,5,"Controller\/FamilyController.php.html#48","App\\Controller\\FamilyController::createFamilyPage","30"],[0,2,"Controller\/FamilyController.php.html#88","App\\Controller\\FamilyController::getAllJoinerFamilies","6"],[0,3,"Controller\/FamilyController.php.html#107","App\\Controller\\FamilyController::joinFamily","12"],[0,6,"Controller\/FamilyController.php.html#142","App\\Controller\\FamilyController::addUserToFamily","42"],[0,4,"Controller\/FamilyController.php.html#186","App\\Controller\\FamilyController::leaveFamily","20"],[0,4,"Controller\/FamilyController.php.html#225","App\\Controller\\FamilyController::kickUserFromFamily","20"],[0,4,"Controller\/FamilyController.php.html#262","App\\Controller\\FamilyController::roleChange","20"],[0,5,"Controller\/FamilyController.php.html#300","App\\Controller\\FamilyController::editFamily","30"],[0,4,"Controller\/FamilyController.php.html#338","App\\Controller\\FamilyController::deleteFamily","20"],[0,1,"Controller\/RegistrationController.php.html#24","App\\Controller\\RegistrationController::__construct","2"],[0,3,"Controller\/RegistrationController.php.html#29","App\\Controller\\RegistrationController::register","12"],[0,2,"Controller\/RegistrationController.php.html#70","App\\Controller\\RegistrationController::verifyUserEmail","6"],[0,2,"Controller\/SecurityController.php.html#15","App\\Controller\\SecurityController::login","6"],[0,1,"Controller\/SecurityController.php.html#36","App\\Controller\\SecurityController::logout","2"],[0,1,"Controller\/Service\/ExpenseIndexContextResolver.php.html#17","App\\Controller\\Service\\ExpenseIndexContextResolver::__construct","2"],[0,12,"Controller\/Service\/ExpenseIndexContextResolver.php.html#22","App\\Controller\\Service\\ExpenseIndexContextResolver::resolveAndAuthorize","156"],[0,2,"Controller\/Service\/ExpenseParamsExtractor.php.html#14","App\\Controller\\Service\\ExpenseParamsExtractor::extractPagination","6"],[0,3,"Controller\/Service\/ExpenseParamsExtractor.php.html#28","App\\Controller\\Service\\ExpenseParamsExtractor::extractSorting","12"],[0,17,"Controller\/Service\/ExpenseParamsExtractor.php.html#52","App\\Controller\\Service\\ExpenseParamsExtractor::extractCriteria","306"],[0,1,"Controller\/Service\/ReceiptStorage.php.html#11","App\\Controller\\Service\\ReceiptStorage::__construct","2"],[0,6,"Controller\/Service\/ReceiptStorage.php.html#15","App\\Controller\\Service\\ReceiptStorage::store","42"],[0,3,"Controller\/Service\/ReceiptStorage.php.html#31","App\\Controller\\Service\\ReceiptStorage::remove","12"],[0,1,"Controller\/Service\/ReceiptStorage.php.html#42","App\\Controller\\Service\\ReceiptStorage::path","2"],[0,1,"Controller\/Service\/SubscriptionIndexContextResolver.php.html#17","App\\Controller\\Service\\SubscriptionIndexContextResolver::__construct","2"],[0,9,"Controller\/Service\/SubscriptionIndexContextResolver.php.html#22","App\\Controller\\Service\\SubscriptionIndexContextResolver::resolveAndAuthorize","90"],[0,2,"Controller\/Service\/SubscriptionParamsExtractor.php.html#14","App\\Controller\\Service\\SubscriptionParamsExtractor::extractPagination","6"],[0,3,"Controller\/Service\/SubscriptionParamsExtractor.php.html#28","App\\Controller\\Service\\SubscriptionParamsExtractor::extractSorting","12"],[0,10,"Controller\/Service\/SubscriptionParamsExtractor.php.html#51","App\\Controller\\Service\\SubscriptionParamsExtractor::extractCriteria","110"],[0,4,"Controller\/SubscriptionController.php.html#25","App\\Controller\\SubscriptionController::index","20"],[0,3,"Controller\/SubscriptionController.php.html#66","App\\Controller\\SubscriptionController::new","12"],[0,1,"Controller\/SubscriptionController.php.html#107","App\\Controller\\SubscriptionController::show","2"],[0,3,"Controller\/SubscriptionController.php.html#117","App\\Controller\\SubscriptionController::edit","12"],[0,3,"Controller\/SubscriptionController.php.html#154","App\\Controller\\SubscriptionController::delete","12"],[0,2,"Controller\/SubscriptionController.php.html#184","App\\Controller\\SubscriptionController::ensureOwnerForNonAdmin","6"],[0,2,"Controller\/SubscriptionController.php.html#191","App\\Controller\\SubscriptionController::keepOwnerForNonAdmin","6"],[0,7,"Controller\/ThresholdsController.php.html#24","App\\Controller\\ThresholdsController::index","56"],[0,5,"Controller\/ThresholdsController.php.html#83","App\\Controller\\ThresholdsController::edit","30"],[0,4,"Controller\/ThresholdsController.php.html#122","App\\Controller\\ThresholdsController::delete","20"],[0,6,"DataFixtures\/SpendingDemoFixtures.php.html#23","App\\DataFixtures\\SpendingDemoFixtures::load","42"],[0,3,"DataFixtures\/SpendingDemoFixtures.php.html#101","App\\DataFixtures\\SpendingDemoFixtures::getOrCreateFamily","12"],[0,4,"DataFixtures\/SpendingDemoFixtures.php.html#118","App\\DataFixtures\\SpendingDemoFixtures::getOrCreateUser","20"],[0,3,"DataFixtures\/SpendingDemoFixtures.php.html#152","App\\DataFixtures\\SpendingDemoFixtures::getOrCreateCategory","12"],[0,1,"DataFixtures\/SpendingDemoFixtures.php.html#168","App\\DataFixtures\\SpendingDemoFixtures::pickCategory","2"],[0,1,"DataFixtures\/SpendingDemoFixtures.php.html#174","App\\DataFixtures\\SpendingDemoFixtures::amountForIndex","2"],[0,6,"DataFixtures\/SpendingDemoFixtures.php.html#182","App\\DataFixtures\\SpendingDemoFixtures::nameForCategory","42"],[0,3,"DataFixtures\/SpendingDemoFixtures.php.html#193","App\\DataFixtures\\SpendingDemoFixtures::addExpense","12"],[0,4,"Diagrams\/Calculators\/ProjectedNextMonthSpendingCalculator.php.html#11","App\\Diagrams\\Calculators\\ProjectedNextMonthSpendingCalculator::calculate","20"],[0,3,"Diagrams\/Calculators\/ProjectedNextMonthSpendingCalculator.php.html#53","App\\Diagrams\\Calculators\\ProjectedNextMonthSpendingCalculator::calculateFamilyTotal","12"],[0,1,"Diagrams\/Calculators\/ProjectedNextMonthSpendingCalculator.php.html#85","App\\Diagrams\\Calculators\\ProjectedNextMonthSpendingCalculator::existsThreeMonthsPast","2"],[0,1,"Diagrams\/Calculators\/ProjectedNextMonthSpendingCalculator.php.html#90","App\\Diagrams\\Calculators\\ProjectedNextMonthSpendingCalculator::getPastThreeMonthsAverage","2"],[0,1,"Diagrams\/Calculators\/ProjectedNextMonthSpendingCalculator.php.html#96","App\\Diagrams\\Calculators\\ProjectedNextMonthSpendingCalculator::existsLastYearSameMonths","2"],[0,1,"Diagrams\/Calculators\/ProjectedNextMonthSpendingCalculator.php.html#101","App\\Diagrams\\Calculators\\ProjectedNextMonthSpendingCalculator::getLastYearSameMonthsAverage","2"],[0,2,"Diagrams\/Calculators\/ProjectedNextMonthSpendingCalculator.php.html#107","App\\Diagrams\\Calculators\\ProjectedNextMonthSpendingCalculator::getLastYearThisMonth","6"],[0,4,"Diagrams\/Calculators\/ProjectedNextMonthSpendingCalculator.php.html#120","App\\Diagrams\\Calculators\\ProjectedNextMonthSpendingCalculator::hasExpensesForMonths","20"],[0,4,"Diagrams\/Calculators\/ProjectedNextMonthSpendingCalculator.php.html#137","App\\Diagrams\\Calculators\\ProjectedNextMonthSpendingCalculator::sumExpensesForMonths","20"],[0,3,"Diagrams\/Calculators\/ProjectedSpendingCalculator.php.html#9","App\\Diagrams\\Calculators\\ProjectedSpendingCalculator::calculate","12"],[0,3,"Diagrams\/Calculators\/ProjectedSpendingCalculator.php.html#43","App\\Diagrams\\Calculators\\ProjectedSpendingCalculator::resolveMonthContext","12"],[0,2,"Diagrams\/Calculators\/ProjectedSpendingCalculator.php.html#57","App\\Diagrams\\Calculators\\ProjectedSpendingCalculator::cumulative","6"],[0,3,"Diagrams\/Calculators\/ProjectedSpendingCalculator.php.html#68","App\\Diagrams\\Calculators\\ProjectedSpendingCalculator::computeGrowthRate","12"],[0,3,"Diagrams\/Calculators\/ProjectedSpendingCalculator.php.html#78","App\\Diagrams\\Calculators\\ProjectedSpendingCalculator::computeProjectedTotal","12"],[0,9,"Diagrams\/Calculators\/ProjectedSpendingCalculator.php.html#99","App\\Diagrams\\Calculators\\ProjectedSpendingCalculator::computeBudgetHitDate","90"],[0,5,"Diagrams\/Calculators\/SelectedMonthVsLastMonthCalculator.php.html#12","App\\Diagrams\\Calculators\\SelectedMonthVsLastMonthCalculator::calculateUserDailyExpenses","30"],[0,6,"Diagrams\/Calculators\/SelectedMonthVsLastMonthCalculator.php.html#35","App\\Diagrams\\Calculators\\SelectedMonthVsLastMonthCalculator::calculateFamilyDailyExpenses","42"],[0,2,"Diagrams\/Calculators\/SelectedMonthVsLastMonthCalculator.php.html#59","App\\Diagrams\\Calculators\\SelectedMonthVsLastMonthCalculator::convertToCumulative","6"],[0,1,"Diagrams\/Calculators\/SelectedMonthVsLastMonthCalculator.php.html#72","App\\Diagrams\\Calculators\\SelectedMonthVsLastMonthCalculator::getDaysInMonth","2"],[0,1,"Diagrams\/Calculators\/SelectedMonthVsLastMonthCalculator.php.html#78","App\\Diagrams\\Calculators\\SelectedMonthVsLastMonthCalculator::isCurrentMonth","2"],[0,1,"Diagrams\/Calculators\/SelectedMonthVsLastMonthCalculator.php.html#84","App\\Diagrams\\Calculators\\SelectedMonthVsLastMonthCalculator::getPreviousMonth","2"],[0,12,"Diagrams\/Calculators\/SubscriptionsVsOneTimeCalculator.php.html#18","App\\Diagrams\\Calculators\\SubscriptionsVsOneTimeCalculator::buildForIterators","156"],[0,4,"Diagrams\/Calculators\/TopExpensesCalculator.php.html#19","App\\Diagrams\\Calculators\\TopExpensesCalculator::resolveSelectedMonth","20"],[0,5,"Diagrams\/Calculators\/TopExpensesCalculator.php.html#31","App\\Diagrams\\Calculators\\TopExpensesCalculator::calculateForUser","30"],[0,7,"Diagrams\/Calculators\/TopExpensesCalculator.php.html#59","App\\Diagrams\\Calculators\\TopExpensesCalculator::calculateForFamily","56"],[0,1,"Diagrams\/Calculators\/TopExpensesCalculator.php.html#99","App\\Diagrams\\Calculators\\TopExpensesCalculator::sortAndTakeTop","2"],[0,10,"Diagrams\/Calculators\/TopExpensesCalculator.php.html#105","App\\Diagrams\\Calculators\\TopExpensesCalculator::displayUserName","110"],[0,2,"Diagrams\/Calculators\/TotalPerMonthCalculator.php.html#15","App\\Diagrams\\Calculators\\TotalPerMonthCalculator::calculateUserCategoryTotals","6"],[0,4,"Diagrams\/Calculators\/TotalPerMonthCalculator.php.html#36","App\\Diagrams\\Calculators\\TotalPerMonthCalculator::calculateFamilyUserExpenses","20"],[0,23,"Diagrams\/Generators\/ProjectedSpendingGenerator.php.html#11","App\\Diagrams\\Generators\\ProjectedSpendingGenerator::generateSvg","552"],[0,2,"Diagrams\/Generators\/SelectedMonthVsLastMonthSvgGenerator.php.html#17","App\\Diagrams\\Generators\\SelectedMonthVsLastMonthSvgGenerator::generateChart","6"],[0,3,"Diagrams\/Generators\/SelectedMonthVsLastMonthSvgGenerator.php.html#43","App\\Diagrams\\Generators\\SelectedMonthVsLastMonthSvgGenerator::generateYAxisAndGrid","12"],[0,4,"Diagrams\/Generators\/SelectedMonthVsLastMonthSvgGenerator.php.html#59","App\\Diagrams\\Generators\\SelectedMonthVsLastMonthSvgGenerator::generateXAxis","20"],[0,5,"Diagrams\/Generators\/SelectedMonthVsLastMonthSvgGenerator.php.html#75","App\\Diagrams\\Generators\\SelectedMonthVsLastMonthSvgGenerator::generateLine","30"],[0,1,"Diagrams\/Generators\/SelectedMonthVsLastMonthSvgGenerator.php.html#108","App\\Diagrams\\Generators\\SelectedMonthVsLastMonthSvgGenerator::generateLegend","2"],[0,1,"Diagrams\/Generators\/SelectedMonthVsLastMonthSvgGenerator.php.html#126","App\\Diagrams\\Generators\\SelectedMonthVsLastMonthSvgGenerator::getDaysInMonth","2"],[0,7,"Diagrams\/Generators\/SubscriptionsVsOneTimeGenerator.php.html#11","App\\Diagrams\\Generators\\SubscriptionsVsOneTimeGenerator::generateSvg","56"],[0,1,"Diagrams\/Generators\/SubscriptionsVsOneTimeGenerator.php.html#140","App\\Diagrams\\Generators\\SubscriptionsVsOneTimeGenerator::noDataSvg","2"],[0,3,"Diagrams\/Generators\/SubscriptionsVsOneTimeGenerator.php.html#148","App\\Diagrams\\Generators\\SubscriptionsVsOneTimeGenerator::formatAmountTick","12"],[0,5,"Diagrams\/Generators\/TopExpensesGenerator.php.html#11","App\\Diagrams\\Generators\\TopExpensesGenerator::generateSvg","30"],[0,1,"Diagrams\/Generators\/TopExpensesGenerator.php.html#117","App\\Diagrams\\Generators\\TopExpensesGenerator::noDataSvg","2"],[0,1,"Diagrams\/Generators\/TopExpensesGenerator.php.html#125","App\\Diagrams\\Generators\\TopExpensesGenerator::formatAmount","2"],[0,4,"Diagrams\/Generators\/TopExpensesGenerator.php.html#133","App\\Diagrams\\Generators\\TopExpensesGenerator::truncateToWidth","20"],[0,3,"Diagrams\/Generators\/TotalPerMonthSvgGenerator.php.html#15","App\\Diagrams\\Generators\\TotalPerMonthSvgGenerator::generateSvg","12"],[0,5,"Diagrams\/Generators\/TotalPerMonthSvgGenerator.php.html#29","App\\Diagrams\\Generators\\TotalPerMonthSvgGenerator::prepareLegendData","30"],[0,1,"Diagrams\/Generators\/TotalPerMonthSvgGenerator.php.html#52","App\\Diagrams\\Generators\\TotalPerMonthSvgGenerator::generateEmptyStateSvg","2"],[0,2,"Diagrams\/Generators\/TotalPerMonthSvgGenerator.php.html#60","App\\Diagrams\\Generators\\TotalPerMonthSvgGenerator::generatePieChartSvg","6"],[0,5,"Diagrams\/Generators\/TotalPerMonthSvgGenerator.php.html#76","App\\Diagrams\\Generators\\TotalPerMonthSvgGenerator::generateLegend","30"],[0,2,"Diagrams\/Generators\/TotalPerMonthSvgGenerator.php.html#101","App\\Diagrams\\Generators\\TotalPerMonthSvgGenerator::generateSingleSlice","6"],[0,5,"Diagrams\/Generators\/TotalPerMonthSvgGenerator.php.html#112","App\\Diagrams\\Generators\\TotalPerMonthSvgGenerator::generateMultipleSlices","30"],[0,1,"Dto\/ExpenseIndexContext.php.html#12","App\\Dto\\ExpenseIndexContext::__construct","2"],[0,1,"Dto\/ProjectedSpendingResult.php.html#12","App\\Dto\\ProjectedSpendingResult::__construct","2"],[0,1,"Dto\/SubscriptionIndexContext.php.html#12","App\\Dto\\SubscriptionIndexContext::__construct","2"],[0,1,"Dto\/SubscriptionsVsOneTimeResult.php.html#21","App\\Dto\\SubscriptionsVsOneTimeResult::__construct","2"],[0,1,"Dto\/TopExpensesResult.php.html#15","App\\Dto\\TopExpensesResult::__construct","2"],[0,1,"Entity\/AccessToken.php.html#43","App\\Entity\\AccessToken::getId","2"],[0,1,"Entity\/AccessToken.php.html#48","App\\Entity\\AccessToken::getToken","2"],[0,1,"Entity\/AccessToken.php.html#60","App\\Entity\\AccessToken::getCreatedAt","2"],[0,1,"Entity\/Category.php.html#92","App\\Entity\\Category::getExpenses","2"],[0,2,"Entity\/Category.php.html#97","App\\Entity\\Category::addExpense","6"],[0,3,"Entity\/Category.php.html#107","App\\Entity\\Category::removeExpense","12"],[0,1,"Entity\/Category.php.html#122","App\\Entity\\Category::getSubscriptions","2"],[0,2,"Entity\/Category.php.html#127","App\\Entity\\Category::addSubscription","6"],[0,3,"Entity\/Category.php.html#137","App\\Entity\\Category::removeSubscription","12"],[0,1,"Entity\/Category.php.html#152","App\\Entity\\Category::getThresholds","2"],[0,2,"Entity\/Category.php.html#157","App\\Entity\\Category::addThreshold","6"],[0,3,"Entity\/Category.php.html#167","App\\Entity\\Category::removeThreshold","12"],[0,1,"Entity\/Expense.php.html#139","App\\Entity\\Expense::getUserObject","2"],[0,1,"Entity\/Family.php.html#54","App\\Entity\\Family::getId","2"],[0,1,"Entity\/Family.php.html#59","App\\Entity\\Family::getName","2"],[0,1,"Entity\/Family.php.html#71","App\\Entity\\Family::getMonthlyTargetBudget","2"],[0,1,"Entity\/Family.php.html#86","App\\Entity\\Family::getUsers","2"],[0,2,"Entity\/Family.php.html#91","App\\Entity\\Family::addUser","6"],[0,3,"Entity\/Family.php.html#101","App\\Entity\\Family::removeUser","12"],[0,1,"Entity\/Family.php.html#116","App\\Entity\\Family::getThresholds","2"],[0,2,"Entity\/Family.php.html#121","App\\Entity\\Family::addThreshold","6"],[0,3,"Entity\/Family.php.html#131","App\\Entity\\Family::removeThreshold","12"],[0,1,"Entity\/Subscription.php.html#79","App\\Entity\\Subscription::getName","2"],[0,1,"Entity\/Subscription.php.html#91","App\\Entity\\Subscription::getAmount","2"],[0,1,"Entity\/Subscription.php.html#103","App\\Entity\\Subscription::getFrequency","2"],[0,1,"Entity\/Subscription.php.html#115","App\\Entity\\Subscription::getNextDueDate","2"],[0,1,"Entity\/Subscription.php.html#127","App\\Entity\\Subscription::isActive","2"],[0,1,"Entity\/Subscription.php.html#139","App\\Entity\\Subscription::getUserObject","2"],[0,1,"Entity\/Subscription.php.html#151","App\\Entity\\Subscription::getCategory","2"],[0,1,"Entity\/Subscription.php.html#166","App\\Entity\\Subscription::getExpenses","2"],[0,2,"Entity\/Subscription.php.html#171","App\\Entity\\Subscription::addExpense","6"],[0,3,"Entity\/Subscription.php.html#181","App\\Entity\\Subscription::removeExpense","12"],[0,1,"Entity\/Threshold.php.html#31","App\\Entity\\Threshold::getId","2"],[0,1,"Entity\/Threshold.php.html#36","App\\Entity\\Threshold::getCategory","2"],[0,1,"Entity\/Threshold.php.html#41","App\\Entity\\Threshold::setCategory","2"],[0,1,"Entity\/Threshold.php.html#48","App\\Entity\\Threshold::getFamily","2"],[0,1,"Entity\/Threshold.php.html#53","App\\Entity\\Threshold::setFamily","2"],[0,1,"Entity\/Threshold.php.html#60","App\\Entity\\Threshold::getAmount","2"],[0,1,"Entity\/Threshold.php.html#65","App\\Entity\\Threshold::setAmount","2"],[0,1,"Entity\/User.php.html#151","App\\Entity\\User::__serialize","2"],[0,1,"Entity\/User.php.html#159","App\\Entity\\User::eraseCredentials","2"],[0,1,"Entity\/User.php.html#192","App\\Entity\\User::getExpenses","2"],[0,2,"Entity\/User.php.html#197","App\\Entity\\User::addExpense","6"],[0,3,"Entity\/User.php.html#207","App\\Entity\\User::removeExpense","12"],[0,1,"Entity\/User.php.html#222","App\\Entity\\User::getSubscriptions","2"],[0,2,"Entity\/User.php.html#227","App\\Entity\\User::addSubscription","6"],[0,3,"Entity\/User.php.html#237","App\\Entity\\User::removeSubscription","12"],[0,1,"Entity\/User.php.html#252","App\\Entity\\User::getAccessTokens","2"],[0,2,"Entity\/User.php.html#257","App\\Entity\\User::addAccessToken","6"],[0,3,"Entity\/User.php.html#267","App\\Entity\\User::removeAccessToken","12"],[0,1,"Entity\/User.php.html#279","App\\Entity\\User::isVerified","2"],[0,1,"Entity\/User.php.html#284","App\\Entity\\User::setIsVerified","2"],[0,1,"Facades\/ProjectedSpendingFacade.php.html#16","App\\Facades\\ProjectedSpendingFacade::__construct","2"],[0,6,"Facades\/ProjectedSpendingFacade.php.html#25","App\\Facades\\ProjectedSpendingFacade::generateSvg","42"],[0,11,"Facades\/ProjectedSpendingFacade.php.html#44","App\\Facades\\ProjectedSpendingFacade::generate","132"],[0,7,"Facades\/ProjectedSpendingFacade.php.html#91","App\\Facades\\ProjectedSpendingFacade::accumulateUserMonthExpenses","56"],[0,3,"Facades\/ProjectedSpendingFacade.php.html#111","App\\Facades\\ProjectedSpendingFacade::accumulateFamilyMonthExpenses","12"],[0,4,"Facades\/SelectedMonthVsLastMonthFacade.php.html#13","App\\Facades\\SelectedMonthVsLastMonthFacade::generateSvg","20"],[0,1,"Facades\/SubscriptionsVsOneTimeFacade.php.html#14","App\\Facades\\SubscriptionsVsOneTimeFacade::__construct","2"],[0,1,"Facades\/SubscriptionsVsOneTimeFacade.php.html#19","App\\Facades\\SubscriptionsVsOneTimeFacade::generateSvg","2"],[0,3,"Facades\/SubscriptionsVsOneTimeFacade.php.html#24","App\\Facades\\SubscriptionsVsOneTimeFacade::generateSvgForLastMonths","12"],[0,1,"Facades\/SubscriptionsVsOneTimeFacade.php.html#35","App\\Facades\\SubscriptionsVsOneTimeFacade::generateUserSvg","2"],[0,1,"Facades\/SubscriptionsVsOneTimeFacade.php.html#40","App\\Facades\\SubscriptionsVsOneTimeFacade::generateFamilySvg","2"],[0,2,"Facades\/SubscriptionsVsOneTimeFacade.php.html#45","App\\Facades\\SubscriptionsVsOneTimeFacade::generateUserSvgMonths","6"],[0,5,"Facades\/SubscriptionsVsOneTimeFacade.php.html#57","App\\Facades\\SubscriptionsVsOneTimeFacade::generateFamilySvgMonths","30"],[0,1,"Facades\/TopExpensesFacade.php.html#13","App\\Facades\\TopExpensesFacade::__construct","2"],[0,5,"Facades\/TopExpensesFacade.php.html#25","App\\Facades\\TopExpensesFacade::generateSvg","30"],[0,3,"Facades\/TotalPerMonthFacade.php.html#11","App\\Facades\\TotalPerMonthFacade::generateSvg","12"],[0,1,"Form\/AddUserToFamilyFormType.php.html#16","App\\Form\\AddUserToFamilyFormType::buildForm","2"],[0,1,"Form\/AddUserToFamilyFormType.php.html#36","App\\Form\\AddUserToFamilyFormType::configureOptions","2"],[0,1,"Form\/CreateFamilyFormType.php.html#14","App\\Form\\CreateFamilyFormType::buildForm","2"],[0,1,"Form\/CreateFamilyFormType.php.html#25","App\\Form\\CreateFamilyFormType::configureOptions","2"],[0,1,"Form\/CreateThresholdFormType.php.html#16","App\\Form\\CreateThresholdFormType::buildForm","2"],[0,1,"Form\/CreateThresholdFormType.php.html#27","App\\Form\\CreateThresholdFormType::configureOptions","2"],[0,1,"Form\/EditFamilyFormType.php.html#14","App\\Form\\EditFamilyFormType::buildForm","2"],[0,1,"Form\/EditFamilyFormType.php.html#22","App\\Form\\EditFamilyFormType::configureOptions","2"],[0,1,"Form\/EditThresholdFormType.php.html#16","App\\Form\\EditThresholdFormType::buildForm","2"],[0,1,"Form\/EditThresholdFormType.php.html#27","App\\Form\\EditThresholdFormType::configureOptions","2"],[0,4,"Form\/ExpenseType.php.html#23","App\\Form\\ExpenseType::buildForm","20"],[0,1,"Form\/ExpenseType.php.html#134","App\\Form\\ExpenseType::configureOptions","2"],[0,1,"Form\/RegistrationFormType.php.html#21","App\\Form\\RegistrationFormType::buildForm","2"],[0,1,"Form\/RegistrationFormType.php.html#59","App\\Form\\RegistrationFormType::configureOptions","2"],[0,3,"Form\/SubscriptionType.php.html#21","App\\Form\\SubscriptionType::buildForm","12"],[0,1,"Form\/SubscriptionType.php.html#94","App\\Form\\SubscriptionType::configureOptions","2"],[0,3,"Repository\/ExpenseRepository.php.html#28","App\\Repository\\ExpenseRepository::searchByUsers","12"],[0,1,"Repository\/ExpenseRepository.php.html#83","App\\Repository\\ExpenseRepository::searchForUser","2"],[0,1,"Repository\/ExpenseRepository.php.html#94","App\\Repository\\ExpenseRepository::searchForUsers","2"],[0,13,"Repository\/ExpenseRepository.php.html#98","App\\Repository\\ExpenseRepository::applyCriteriaSingle","182"],[0,13,"Repository\/ExpenseRepository.php.html#141","App\\Repository\\ExpenseRepository::applyCriteriaMulti","182"],[0,2,"Repository\/ExpenseRepository.php.html#171","App\\Repository\\ExpenseRepository::applySorting","6"],[0,2,"Repository\/SubscriptionRepository.php.html#28","App\\Repository\\SubscriptionRepository::searchByUsers","6"],[0,1,"Repository\/SubscriptionRepository.php.html#75","App\\Repository\\SubscriptionRepository::searchForUser","2"],[0,1,"Repository\/SubscriptionRepository.php.html#85","App\\Repository\\SubscriptionRepository::searchForUsers","2"],[0,8,"Repository\/SubscriptionRepository.php.html#90","App\\Repository\\SubscriptionRepository::applyCriteria","72"],[0,2,"Repository\/SubscriptionRepository.php.html#112","App\\Repository\\SubscriptionRepository::applySorting","6"],[0,1,"Repository\/ThresholdsRepository.php.html#16","App\\Repository\\ThresholdsRepository::__construct","2"],[0,2,"Repository\/UserRepository.php.html#27","App\\Repository\\UserRepository::upgradePassword","6"],[0,1,"Security\/EmailVerifier.php.html#17","App\\Security\\EmailVerifier::__construct","2"],[0,1,"Security\/EmailVerifier.php.html#24","App\\Security\\EmailVerifier::sendEmailConfirmation","2"],[0,1,"Security\/EmailVerifier.php.html#45","App\\Security\\EmailVerifier::handleEmailConfirmation","2"],[0,19,"Security\/Voter\/SubscriptionVoter.php.html#29","App\\Security\\Voter\\SubscriptionVoter::voteOnAttribute","380"],[0,1,"Validators\/FamilyValidators.php.html#12","App\\Validators\\FamilyValidators::__construct","2"],[0,3,"Validators\/FamilyValidators.php.html#17","App\\Validators\\FamilyValidators::verifyLeavePosibility","12"],[0,3,"Validators\/ThresholdValidators.php.html#15","App\\Validators\\ThresholdValidators::validateThresholdAmount","12"],[53.84615384615385,10,"Security\/Voter\/ExpenseVoter.php.html#33","App\\Security\\Voter\\ExpenseVoter::voteOnAttribute","19.83"],[68.42105263157895,6,"EventListener\/ApiExceptionListener.php.html#24","App\\EventListener\\ApiExceptionListener::onKernelException","7.13"],[70.6896551724138,10,"Command\/FamilySetupCommand.php.html#39","App\\Command\\FamilySetupCommand::execute","12.52"],[71.7948717948718,9,"Command\/UserCreateCommand.php.html#41","App\\Command\\UserCreateCommand::execute","10.82"],[72.72727272727273,6,"Command\/SuperAdminCreateCommand.php.html#41","App\\Command\\SuperAdminCreateCommand::execute","6.73"],[77.77777777777779,4,"Security\/AccessTokenHandler.php.html#19","App\\Security\\AccessTokenHandler::getUserBadgeFrom","4.18"],[80,3,"Security\/Voter\/ExpenseVoter.php.html#20","App\\Security\\Voter\\ExpenseVoter::supports","3.07"],[85.71428571428571,2,"Http\/ApiContentNegotiation.php.html#17","App\\Http\\ApiContentNegotiation::createResponse","2.01"],[88.88888888888889,4,"EventListener\/RateLimitingListener.php.html#27","App\\EventListener\\RateLimitingListener::__invoke","4.02"],[90,4,"EventSubscriber\/ApiResponseSubscriber.php.html#30","App\\EventSubscriber\\ApiResponseSubscriber::onKernelView","4.02"],[100,1,"Command\/FamilySetupCommand.php.html#24","App\\Command\\FamilySetupCommand::__construct","1"],[100,1,"Command\/FamilySetupCommand.php.html#31","App\\Command\\FamilySetupCommand::configure","1"],[100,1,"Command\/SuperAdminCreateCommand.php.html#25","App\\Command\\SuperAdminCreateCommand::__construct","1"],[100,1,"Command\/SuperAdminCreateCommand.php.html#34","App\\Command\\SuperAdminCreateCommand::configure","1"],[100,1,"Command\/UserCreateCommand.php.html#25","App\\Command\\UserCreateCommand::__construct","1"],[100,1,"Command\/UserCreateCommand.php.html#34","App\\Command\\UserCreateCommand::configure","1"],[100,1,"Controller\/AdminApiCategoryController.php.html#20","App\\Controller\\AdminApiCategoryController::listCategories","1"],[100,4,"Controller\/AdminApiCategoryController.php.html#65","App\\Controller\\AdminApiCategoryController::createOrUndeleteCategory","4"],[100,1,"Controller\/AdminApiCategoryController.php.html#155","App\\Controller\\AdminApiCategoryController::softDeleteCategory","1"],[100,13,"Controller\/ApiExpenseController.php.html#26","App\\Controller\\ApiExpenseController::addExpense","13"],[100,2,"Controller\/ApiExpenseController.php.html#175","App\\Controller\\ApiExpenseController::listUserExpenses","2"],[100,6,"Controller\/ApiLoginController.php.html#22","App\\Controller\\ApiLoginController::login","6"],[100,2,"Controller\/ApiLoginController.php.html#95","App\\Controller\\ApiLoginController::logout","2"],[100,1,"DataFixtures\/AdminFixtures.php.html#15","App\\DataFixtures\\AdminFixtures::__construct","1"],[100,1,"DataFixtures\/AdminFixtures.php.html#19","App\\DataFixtures\\AdminFixtures::load","1"],[100,1,"DataFixtures\/AppFixtures.php.html#18","App\\DataFixtures\\AppFixtures::__construct","1"],[100,1,"DataFixtures\/AppFixtures.php.html#22","App\\DataFixtures\\AppFixtures::load","1"],[100,1,"DataFixtures\/CommandTestFixtures.php.html#14","App\\DataFixtures\\CommandTestFixtures::__construct","1"],[100,1,"DataFixtures\/CommandTestFixtures.php.html#18","App\\DataFixtures\\CommandTestFixtures::load","1"],[100,1,"DataFixtures\/SpendingDemoFixtures.php.html#18","App\\DataFixtures\\SpendingDemoFixtures::__construct","1"],[100,1,"DataFixtures\/SpendingDemoFixtures.php.html#217","App\\DataFixtures\\SpendingDemoFixtures::getGroups","1"],[100,1,"DataFixtures\/UserFixtures.php.html#14","App\\DataFixtures\\UserFixtures::__construct","1"],[100,1,"DataFixtures\/UserFixtures.php.html#18","App\\DataFixtures\\UserFixtures::load","1"],[100,1,"Entity\/AccessToken.php.html#53","App\\Entity\\AccessToken::setToken","1"],[100,1,"Entity\/AccessToken.php.html#65","App\\Entity\\AccessToken::setCreatedAt","1"],[100,1,"Entity\/AccessToken.php.html#72","App\\Entity\\AccessToken::getExpiresAt","1"],[100,1,"Entity\/AccessToken.php.html#77","App\\Entity\\AccessToken::setExpiresAt","1"],[100,1,"Entity\/AccessToken.php.html#84","App\\Entity\\AccessToken::getUserObject","1"],[100,1,"Entity\/AccessToken.php.html#89","App\\Entity\\AccessToken::setUserObject","1"],[100,1,"Entity\/Category.php.html#53","App\\Entity\\Category::__construct","1"],[100,1,"Entity\/Category.php.html#60","App\\Entity\\Category::getId","1"],[100,1,"Entity\/Category.php.html#65","App\\Entity\\Category::getName","1"],[100,1,"Entity\/Category.php.html#70","App\\Entity\\Category::setName","1"],[100,1,"Entity\/Category.php.html#77","App\\Entity\\Category::isDeleted","1"],[100,1,"Entity\/Category.php.html#82","App\\Entity\\Category::setIsDeleted","1"],[100,1,"Entity\/Expense.php.html#62","App\\Entity\\Expense::getId","1"],[100,1,"Entity\/Expense.php.html#67","App\\Entity\\Expense::getAmount","1"],[100,1,"Entity\/Expense.php.html#72","App\\Entity\\Expense::setAmount","1"],[100,1,"Entity\/Expense.php.html#79","App\\Entity\\Expense::getName","1"],[100,1,"Entity\/Expense.php.html#84","App\\Entity\\Expense::setName","1"],[100,1,"Entity\/Expense.php.html#91","App\\Entity\\Expense::getDescription","1"],[100,1,"Entity\/Expense.php.html#96","App\\Entity\\Expense::setDescription","1"],[100,1,"Entity\/Expense.php.html#103","App\\Entity\\Expense::getDate","1"],[100,1,"Entity\/Expense.php.html#108","App\\Entity\\Expense::setDate","1"],[100,1,"Entity\/Expense.php.html#115","App\\Entity\\Expense::getReceiptImage","1"],[100,1,"Entity\/Expense.php.html#120","App\\Entity\\Expense::setReceiptImage","1"],[100,1,"Entity\/Expense.php.html#127","App\\Entity\\Expense::getCategory","1"],[100,1,"Entity\/Expense.php.html#132","App\\Entity\\Expense::setCategory","1"],[100,1,"Entity\/Expense.php.html#144","App\\Entity\\Expense::setUserObject","1"],[100,1,"Entity\/Expense.php.html#151","App\\Entity\\Expense::getSubscription","1"],[100,1,"Entity\/Expense.php.html#156","App\\Entity\\Expense::setSubscription","1"],[100,1,"Entity\/Family.php.html#48","App\\Entity\\Family::__construct","1"],[100,1,"Entity\/Family.php.html#64","App\\Entity\\Family::setName","1"],[100,1,"Entity\/Family.php.html#76","App\\Entity\\Family::setMonthlyTargetBudget","1"],[100,1,"Entity\/Subscription.php.html#69","App\\Entity\\Subscription::__construct","1"],[100,1,"Entity\/Subscription.php.html#74","App\\Entity\\Subscription::getId","1"],[100,1,"Entity\/Subscription.php.html#84","App\\Entity\\Subscription::setName","1"],[100,1,"Entity\/Subscription.php.html#96","App\\Entity\\Subscription::setAmount","1"],[100,1,"Entity\/Subscription.php.html#108","App\\Entity\\Subscription::setFrequency","1"],[100,1,"Entity\/Subscription.php.html#120","App\\Entity\\Subscription::setNextDueDate","1"],[100,1,"Entity\/Subscription.php.html#132","App\\Entity\\Subscription::setIsActive","1"],[100,1,"Entity\/Subscription.php.html#144","App\\Entity\\Subscription::setUserObject","1"],[100,1,"Entity\/Subscription.php.html#156","App\\Entity\\Subscription::setCategory","1"],[100,1,"Entity\/User.php.html#77","App\\Entity\\User::__construct","1"],[100,1,"Entity\/User.php.html#84","App\\Entity\\User::getId","1"],[100,1,"Entity\/User.php.html#89","App\\Entity\\User::getEmail","1"],[100,1,"Entity\/User.php.html#94","App\\Entity\\User::setEmail","1"],[100,1,"Entity\/User.php.html#106","App\\Entity\\User::getUserIdentifier","1"],[100,1,"Entity\/User.php.html#114","App\\Entity\\User::getRoles","1"],[100,1,"Entity\/User.php.html#126","App\\Entity\\User::setRoles","1"],[100,1,"Entity\/User.php.html#136","App\\Entity\\User::getPassword","1"],[100,1,"Entity\/User.php.html#141","App\\Entity\\User::setPassword","1"],[100,1,"Entity\/User.php.html#165","App\\Entity\\User::getName","1"],[100,1,"Entity\/User.php.html#170","App\\Entity\\User::setName","1"],[100,1,"Entity\/User.php.html#177","App\\Entity\\User::getFamily","1"],[100,1,"Entity\/User.php.html#182","App\\Entity\\User::setFamily","1"],[100,1,"EventListener\/ApiExceptionListener.php.html#18","App\\EventListener\\ApiExceptionListener::__construct","1"],[100,1,"EventListener\/RateLimitingListener.php.html#18","App\\EventListener\\RateLimitingListener::__construct","1"],[100,1,"EventSubscriber\/ApiResponseSubscriber.php.html#16","App\\EventSubscriber\\ApiResponseSubscriber::__construct","1"],[100,1,"EventSubscriber\/ApiResponseSubscriber.php.html#20","App\\EventSubscriber\\ApiResponseSubscriber::getSubscribedEvents","1"],[100,1,"Http\/ApiContentNegotiation.php.html#13","App\\Http\\ApiContentNegotiation::__construct","1"],[100,1,"Repository\/AccessTokenRepository.php.html#16","App\\Repository\\AccessTokenRepository::__construct","1"],[100,1,"Repository\/CategoryRepository.php.html#16","App\\Repository\\CategoryRepository::__construct","1"],[100,1,"Repository\/ExpenseRepository.php.html#18","App\\Repository\\ExpenseRepository::__construct","1"],[100,1,"Repository\/FamilyRepository.php.html#16","App\\Repository\\FamilyRepository::__construct","1"],[100,1,"Repository\/SubscriptionRepository.php.html#18","App\\Repository\\SubscriptionRepository::__construct","1"],[100,1,"Repository\/UserRepository.php.html#19","App\\Repository\\UserRepository::__construct","1"],[100,1,"Repository\/UserRepository.php.html#41","App\\Repository\\UserRepository::findByName","1"],[100,1,"Security\/AccessTokenHandler.php.html#14","App\\Security\\AccessTokenHandler::__construct","1"],[100,3,"Security\/Voter\/SubscriptionVoter.php.html#20","App\\Security\\Voter\\SubscriptionVoter::supports","3"]]</script>
+  <script type="text/javascript" defer>
+  const barLabels = [
+    '0%',
+    '0-10%',
+    '10-20%',
+    '20-30%',
+    '30-40%',
+    '40-50%',
+    '50-60%',
+    '60-70%',
+    '70-80%',
+    '80-90%',
+    '90-100%',
+    '100%'
+  ];
+  const barConfig = (name, fullName, values) => ({
+    axis: {
+      x: {
+        type: "category",
+        categories: barLabels,
+      },
+      y: {
+        label: {
+          text: `#${name}`,
+          position: 'outer-top',
+        },
+      },
+    },
+    bindto: `#${name}CoverageDistribution`,
+    data: {
+      columns: [
+        [fullName].concat(values),
+      ],
+      colors: {
+        [fullName]: "rgba(69, 114, 167, 0.75)",
+      },
+      type: "bar",
+    },
+    bar: {
+      width: {
+        ratio: 0.9,
+      },
+    },
+    grid: {
+      focus: {
+        show: false,
+      },
+      x: {
+        show: true,
+      },
+      y: {
+        show: true,
+      },
+    },
+    legend: {
+      show: false,
+    },
+    tooltip: {
+      contents: function (data) {
+        return `<table class="bb-tooltip"><tbody>
+            <tr><th colspan="2">Coverage ${barLabels[data[0].x]}</th></tr>
+            <tr><td class="value">${data[0].value} ${name}</td></tr>
+          </tbody></table>`;
+      },
+      grouped: false,
+    },
+  });
+  bb.generate(
+    barConfig('classes', "Class Coverage", [48,3,0,3,1,0,2,1,5,2,3,11])
+  );
+  bb.generate(
+    barConfig('methods', "Method Coverage", [226,0,0,0,0,0,1,1,4,3,1,90])
+  );
+
+  const scatterConfig = (name, complexityData) => ({
+    axis: {
+      x: {
+        label: {
+          text: 'Code Coverage (in percent)',
+          position: 'outer-right',
+        },
+        tick: {
+          values: [0, 20, 40, 60, 80, 100],
+        },
+      },
+      y: {
+        label: {
+          text: 'Cyclomatic Complexity',
+          position: 'outer-top',
+        },
+        min: 0,
+        padding: {
+          bottom: 0,
+          top: 5,
+        },
+      },
+    },
+    bindto: `#${name}Complexity`,
+    data: {
+      columns: [
+        ["complexity_x"].concat(complexityData.map(d => d[0])),
+        ["complexity"].concat(complexityData.map(d => d[1])),
+      ],
+      onclick: function(data, element) {
+        window.location = complexityData[data.index][2];
+      },
+      type: "scatter",
+      xs: {
+        "complexity": "complexity_x",
+      },
+    },
+    grid: {
+      focus: {
+        show: true,
+        y: true,
+      },
+      x: {
+        show: true,
+      },
+      y: {
+        show: true,
+      },
+    },
+    legend: {
+      show: false,
+    },
+    tooltip: {
+      contents: function (data) {
+        const coverage = Math.round(data[0].x);
+        const complexity = data[0].value;
+        const targetName = complexityData[data[0].index][3];
+        const crap = complexityData[data[0].index][4];
+        return `<table class="bb-tooltip"><tbody>
+            <tr><th colspan="2">${targetName}</th></tr>
+            <tr class="bb-tooltip-name-complexity"><td>Coverage</td><td class="name">${coverage}%</td></tr>
+            <tr class="bb-tooltip-name-complexity"><td>Complexity</td><td class="value">${complexity}</td></tr>
+            <tr class="bb-tooltip-name-complexity"><td>Crap</td><td class="value">${crap}</td></tr>
+          </tbody></table>`;
+      },
+      grouped: false,
+    },
+  });
+  const classComplexityData = JSON.parse(document.getElementById('complexity_class').textContent);
+  bb.generate(
+    scatterConfig("class", classComplexityData)
+  );
+  const methodComplexityData = JSON.parse(document.getElementById('complexity_method').textContent);
+  bb.generate(
+    scatterConfig("method", methodComplexityData),
+  );
+  </script>
+ </body>
+</html>

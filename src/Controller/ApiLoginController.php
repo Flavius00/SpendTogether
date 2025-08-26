@@ -54,10 +54,10 @@ final class ApiLoginController extends AbstractController
         ]
     )]
     public function login(
-        Request $request,
-        UserRepository $userRepository,
+        Request                     $request,
+        UserRepository              $userRepository,
         UserPasswordHasherInterface $passwordHasher,
-        EntityManagerInterface $em,
+        EntityManagerInterface      $em,
     ): array { // JsonResponse
         $data = json_decode($request->getContent(), true);
 
@@ -118,9 +118,9 @@ final class ApiLoginController extends AbstractController
         ]
     )]
     public function logout(
-        Request $request,
-        AccessTokenRepository $accessTokenRepository,
-        EntityManagerInterface $em,
+        Request                 $request,
+        AccessTokenRepository   $accessTokenRepository,
+        EntityManagerInterface  $em,
     ): array {
         // The 'api' firewall protects this endpoint.
         // The authenticator has already verified that the token is valid.

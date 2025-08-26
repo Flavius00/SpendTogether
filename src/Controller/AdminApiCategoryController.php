@@ -119,9 +119,9 @@ final class AdminApiCategoryController extends AbstractController
         ]
     )]
     public function createOrUndeleteCategory(
-        Request $request,
-        CategoryRepository $categoryRepository,
-        EntityManagerInterface $em,
+        Request                 $request,
+        CategoryRepository      $categoryRepository,
+        EntityManagerInterface  $em,
     ): array {
         $data = json_decode($request->getContent(), true);
         $name = $data['name'] ?? null;

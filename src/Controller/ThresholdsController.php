@@ -23,9 +23,9 @@ final class ThresholdsController extends AbstractController
 {
     #[Route('/add', name: 'app_threshold_add')]
     public function index(
-        Request                       $request,
         #[CurrentUser]
         User                          $user,
+        Request                       $request,
         AuthorizationCheckerInterface $authCheck,
         EntityManagerInterface        $em,
         ThresholdsRepository          $thresholdsRepository,
@@ -82,13 +82,13 @@ final class ThresholdsController extends AbstractController
 
     #[Route('/edit/{thresholdId}', name: 'app_threshold_edit')]
     public function edit(
-        int $thresholdId,
         #[CurrentUser]
-        User $user,
-        AuthorizationCheckerInterface $authCheck,
-        Request $request,
-        ThresholdsRepository $thresholdsRepository,
-        EntityManagerInterface $em,
+        User                            $user,
+        int                             $thresholdId,
+        AuthorizationCheckerInterface   $authCheck,
+        Request                         $request,
+        ThresholdsRepository            $thresholdsRepository,
+        EntityManagerInterface          $em,
     ): Response {
         if (!$authCheck->isGranted('IS_AUTHENTICATED_FULLY')) {
             return $this->redirectToRoute('app_login');
@@ -121,10 +121,10 @@ final class ThresholdsController extends AbstractController
 
     #[Route('/delete/{thresholdId}', name: 'app_threshold_delete')]
     public function delete(
-        int $thresholdId,
-        AuthorizationCheckerInterface $authCheck,
-        ThresholdsRepository $thresholdsRepository,
-        EntityManagerInterface $em,
+        int                             $thresholdId,
+        AuthorizationCheckerInterface   $authCheck,
+        ThresholdsRepository            $thresholdsRepository,
+        EntityManagerInterface          $em,
     ): Response {
         if (!$authCheck->isGranted('IS_AUTHENTICATED_FULLY')) {
             return $this->redirectToRoute('app_login');

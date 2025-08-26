@@ -83,12 +83,12 @@ final class ApiExpenseController extends AbstractController
         ]
     )]
     public function addExpense(
-        Request $request,
-        EntityManagerInterface $em,
         #[CurrentUser]
-        User $user,
-        CategoryRepository $categoryRepository,
-        UserRepository $userRepository,
+        User                    $user,
+        Request                 $request,
+        EntityManagerInterface  $em,
+        CategoryRepository      $categoryRepository,
+        UserRepository          $userRepository,
         ?SubscriptionRepository $subscriptionRepository = null,
     ): array {
         $data = json_decode($request->getContent(), true);
@@ -223,10 +223,9 @@ final class ApiExpenseController extends AbstractController
         ]
     )]
     public function listUserExpenses(
-        Request $request,
-        int $id,
-        ExpenseRepository $expenseRepository,
-        UserRepository $userRepository,
+        int                 $id,
+        ExpenseRepository   $expenseRepository,
+        UserRepository      $userRepository,
     ): array {
         $user = $userRepository->find($id);
         if (!$user) {
