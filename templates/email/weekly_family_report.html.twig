@@ -1,0 +1,60 @@
+{% set fmt = fn => (fn is defined ? fn : null) %}
+{% set currency = amount => amount|number_format(0, '.', ',') %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Weekly family spending report</title>
+</head>
+<body style="font-family: Arial, sans-serif; color: #0f172a;">
+<h2 style="margin: 0 0 12px 0;">Weekly family spending report</h2>
+<p style="margin: 0 0 16px 0;">
+    Family: <strong>{{ family.name ?? ('Family #' ~ family.id) }}</strong><br>
+    Period: <strong>{{ month_label }}</strong>
+</p>
+
+<h3 style="margin: 16px 0 8px 0;">Projection</h3>
+<ul style="margin: 0 0 16px 18px; padding: 0;">
+    <li>Spent to date: <strong>{{ current_to_date|number_format(0, '.', ',') }}</strong></li>
+    <li>Projected total: <strong>{{ projected_total|number_format(0, '.', ',') }}</strong></li>
+    <li>Growth vs last month to-date:
+        {% if growth_pct is not null %}
+            <strong>{{ growth_pct }}</strong>
+        {% else %}
+            <em>n/a</em>
+        {% endif %}
+    </li>
+    {% if budget is not null %}
+        <li>Budget: <strong>{{ budget|number_format(0, '.', ',') }}</strong></li>
+        <li>Budget hit: <strong>{{ budget_hit ?? 'n/a' }}</strong></li>
+    {% endif %}
+</ul>
+
+<h3 style="margin: 16px 0 8px 0;">Category breakdown (current month)</h3>
+{% if category_breakdown is empty %}
+    <p style="margin: 0 0 16px 0;"><em>No expenses recorded this month.</em></p>
+{% else %}
+    <table cellpadding="6" cellspacing="0" border="0" style="border-collapse: collapse; margin-bottom: 16px;">
+        <thead>
+        <tr>
+            <th align="left">Category</th>
+            <th align="right">Amount</th>
+            <th align="right">Percent</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for name, item in category_breakdown %}
+            <tr>
+                <td>{{ name }}</td>
+                <td align="right">{{ item.amount|number_format(0, '.', ',') }}</td>
+                <td align="right">{{ item.percent|number_format(1, '.', ',') }}%</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endif %}
+
+<p style="font-size: 12px; color: #64748b;">This is an automated weekly report.</p>
+</body>
+</html>
