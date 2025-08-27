@@ -1,0 +1,13 @@
+login:
+    title: "Login"
+    email: "Email Address"
+    password: "Password"
+    submit: "Sign In"
+    register: "Register"
+    welcome_message: "Welcome back"
+language:
+    en: "EN"
+    fr: "French"
+    ro: "RO"
+    de: "German"
+    select: "Language"
