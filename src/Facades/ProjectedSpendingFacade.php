@@ -10,6 +10,7 @@ use App\Diagrams\Generators\ProjectedSpendingGenerator;
 use App\Entity\Expense;
 use App\Entity\Family;
 use App\Entity\User;
+use Psr\Log\LoggerInterface;
 
 final class ProjectedSpendingFacade
 {
@@ -22,7 +23,7 @@ final class ProjectedSpendingFacade
     /**
      * Backward-compatible signature for the dashboard.
      */
-    public function generateSvg(string $option, User $user, string $selectedMonth, string $typeOfPrediction): string
+    public function generateSvg(string $option, User $user, string $selectedMonth, string $typeOfPrediction, LoggerInterface $logger): string
     {
         if ($typeOfPrediction === 'next') {
             // Next month projection
@@ -36,12 +37,13 @@ final class ProjectedSpendingFacade
                     $result = $this->nextMonthCalculator->calculateFamilyTotal($user->getFamily());
                 }
             }
+            $logger->info("The projection for next month ({nextMonth}) for the family ({familyName}): " . json_encode($result), ['nextMonth' => $nextMonth, 'familyName' => $user->getFamily() ? $user->getFamily()->getName() : 'N/A']);
             return $this->generator->generateSvg($nextMonth, $result, $budget);
         }
-        return $this->generate($option, $user, $selectedMonth);
+        return $this->generate($option, $user, $selectedMonth, $logger);
     }
 
-    public function generate(string $option, User $user, string $selectedMonth): string
+    public function generate(string $option, User $user, string $selectedMonth, LoggerInterface $logger): string
     {
         // Resolve month window and allocate arrays
         [$monthStart, $monthEnd, $daysInMonth] = $this->calculator->resolveMonthContext($selectedMonth);
@@ -80,6 +82,7 @@ final class ProjectedSpendingFacade
 
         // Calculate + Generate
         $result = $this->calculator->calculate($selectedMonth, $dailyCurrent, $dailyPrev, $budget);
+        $logger->info("The projection for the month ({selectedMonth}) for the user ({userEmail}): " . json_encode($result), ['selectedMonth' => $selectedMonth, 'userEmail' => $user->getEmail()]);
         return $this->generator->generateSvg($selectedMonth, $result, $budget);
     }
 
