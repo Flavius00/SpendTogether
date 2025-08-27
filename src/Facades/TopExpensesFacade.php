@@ -7,6 +7,7 @@ namespace App\Facades;
 use App\Diagrams\Calculators\TopExpensesCalculator;
 use App\Diagrams\Generators\TopExpensesGenerator;
 use App\Entity\User;
+use Psr\Log\LoggerInterface;
 
 final class TopExpensesFacade
 {
@@ -22,7 +23,7 @@ final class TopExpensesFacade
      * @param User        $user
      * @param string|null $selectedMonth 'YYYY-MM' (defaults to current month)
      */
-    public function generateSvg(string $option, User $user, ?string $selectedMonth = null): string
+    public function generateSvg(string $option, User $user, ?string $selectedMonth = null, LoggerInterface $logger): string
     {
         [$monthRef, $label] = $this->calculator->resolveSelectedMonth($selectedMonth);
 
@@ -35,10 +36,12 @@ final class TopExpensesFacade
             }
 
             $result = $this->calculator->calculateForFamily($family, $monthRef, $label);
+            $logger->info("The top expenses for the family {familyName} are: " . json_encode($result), ['familyName' => $family->getName()]);
             return $this->generator->generateSvg($result);
         }
 
         $result = $this->calculator->calculateForUser($user, $monthRef, $label);
+        $logger->info("The top expenses for user {userEmail} are: " . json_encode($result), ['userEmail' => $user->getEmail()]);
         return $this->generator->generateSvg($result);
     }
 }
