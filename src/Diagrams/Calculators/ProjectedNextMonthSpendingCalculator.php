@@ -46,7 +46,8 @@ class ProjectedNextMonthSpendingCalculator
             $cumCurrent,
             $compareIndex,
             $daysInMonth,
-            false
+            false,
+            true // isProjection
         );
     }
 
