@@ -6,6 +6,17 @@
     <div class="h-full bg-custom-dark p-8 overflow-y-auto">
         <div class="max-w-7xl mx-auto">
 
+            {# Budget warning banner for family admins #}
+            {% if budgetWarning and budgetWarning.exceeds %}
+                <div class="mb-4 px-4 py-3 rounded-lg border border-yellow-500 bg-yellow-500/10 text-yellow-300">
+                    <strong class="font-semibold">Budget warning:</strong>
+                    Forecasted expenses for {{ budgetWarning.month }} are
+                    {{ (budgetWarning.projected)|number_format(2, '.', ',') }}
+                    and exceed the family budget
+                    {{ (budgetWarning.budget)|number_format(2, '.', ',') }}.
+                </div>
+            {% endif %}
+
             <div class="flex justify-end mb-4 gap-4">
                 <div class="relative inline-block">
                     <form method="GET" action="{{ path('app_dashboard') }}">
@@ -43,7 +54,6 @@
                         {{ barsSvg|raw }}
                     </div>
                 </div>
-
 
                 <div style="grid-area: chart2; display:flex; gap:8px; width:100%;">
                     <div style="flex: 0 0 70%; position: relative;" class="border border-gray-700 rounded-lg bg-custom-dark">

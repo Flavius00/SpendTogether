@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <body style="font-family: Arial, sans-serif;">
+    {% if type is defined and type == 'category_threshold' and category is not null %}
+      <h2>Category threshold exceeded</h2>
+      <p>Hello {{ user.name ?? 'member' }},</p>
+      <p>
+        For {{ month }}, your family exceeded the threshold for category
+        <strong>{{ category.name }}</strong>.
+        Current spending is <strong>{{ projected|number_format(2, '.', ',') }}</strong>
+        over the category limit <strong>{{ budget|number_format(2, '.', ',') }}</strong>.
+      </p>
+      <p>Please review the dashboard for details.</p>
+    {% else %}
+      <h2>Budget warning</h2>
+      <p>Hello {{ user.name ?? 'member' }},</p>
+      <p>
+        Forecasted expenses for {{ month }} are
+        <strong>{{ projected|number_format(2, '.', ',') }}</strong>,
+        which exceed the family budget
+        <strong>{{ budget|number_format(2, '.', ',') }}</strong>.
+      </p>
+      <p>Open the dashboard for details and suggested actions.</p>
+    {% endif %}
+  </body>
+</html>

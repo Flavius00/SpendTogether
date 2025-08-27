@@ -10,6 +10,7 @@ use App\Facades\TotalPerMonthFacade;
 use App\Facades\ProjectedSpendingFacade;
 use App\Facades\SubscriptionsVsOneTimeFacade;
 use App\Facades\TopExpensesFacade;
+use App\Warnings\BudgetWarningService;;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,6 +32,7 @@ final class DashboardController extends AbstractController
         SelectedMonthVsLastMonthFacade     $selectedMonthVsLastSvg,
         TopExpensesFacade                  $topExpensesFacade,
         ProjectedSpendingFacade            $projectedSpendingFacade,
+        BudgetWarningService               $budgetWarningService
     ): Response
     {
         if (!$authCheck->isGranted('IS_AUTHENTICATED_FULLY')) {
@@ -47,12 +49,28 @@ final class DashboardController extends AbstractController
         $topExpensesSvg = $topExpensesFacade->generateSvg($viewType, $user, $selectedMonth);
         $projectionsSvg = $projectedSpendingFacade->generateSvg($viewType, $user, $selectedMonth, $typeOfPrediction);
 
+        // Budget warning banner for family admins: compute and possibly enqueue emails
+        $budgetWarning = null;
+        if ($authCheck->isGranted('ROLE_ADMIN')) {
+            $budgetWarning = $budgetWarningService->computeFamilyBudgetWarning($user);
+            if ($budgetWarning && ($budgetWarning['exceeds'] ?? false)) {
+                $budgetWarningService->enqueueBudgetWarningEmails($user, $budgetWarning);
+            }
+
+            // Category thresholds: compute and enqueue (idempotent)
+            $breaches = $budgetWarningService->computeCategoryThresholdBreaches($user);
+            if (!empty($breaches)) {
+                $budgetWarningService->enqueueCategoryThresholdEmails($user, $breaches);
+            }
+        }
+
         return $this->render('dashboard/index.html.twig', [
             'pieChartSvg' => $pieChartSvg,
             'barsSvg' => $barsSvg,
             'normal2LineGraphicSvg' => $normal2LineGraphicSvg,
             'topExpensesSvg' => $topExpensesSvg,
             'projectionsSvg' => $projectionsSvg,
+            'budgetWarning' => $budgetWarning,
         ]);
     }
 }
