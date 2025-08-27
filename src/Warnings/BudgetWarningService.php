@@ -13,6 +13,7 @@ use App\Entity\Threshold;
 use App\Repository\BudgetAlertLogRepository;
 use App\Repository\ThresholdsRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Psr\Cache\CacheItemPoolInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 
 final class BudgetWarningService
@@ -22,7 +23,8 @@ final class BudgetWarningService
         private readonly ProjectedSpendingCalculator $projectedCalculator,
         private readonly BudgetAlertLogRepository $alertRepo,
         private readonly MessageBusInterface $bus,
-        private readonly ThresholdsRepository $thresholdsRepo
+        private readonly ThresholdsRepository $thresholdsRepo,
+        private readonly CacheItemPoolInterface $cache // inject cache.app
     ) {
     }
 
@@ -74,9 +76,23 @@ final class BudgetWarningService
         if (!$family instanceof Family) {
             return;
         }
-        $monthKey = (string) ($warning['_monthKey'] ?? (new \DateTime())->format('Y-m'));
+        $monthKey  = (string) ($warning['_monthKey'] ?? (new \DateTime())->format('Y-m'));
         $projected = (float) $warning['projected'];
-        $budget = (float) $warning['budget'];
+        $budget    = (float) $warning['budget'];
+
+        // Dedupe window (ex: 30s) to avoid double enqueue from two simultaneous streams
+        $dedupeKey = $this->makeSafeCacheKey('family_budget', [
+            'familyId'  => (int) $family->getId(),
+            'month'     => $monthKey,
+            'amount'    => $this->fmt($projected),
+        ]);
+        $item = $this->cache->getItem($dedupeKey);
+        if ($item->isHit()) {
+            return; // another stream has enqueued very recently
+        }
+        $item->expiresAfter(30);
+        $item->set(true);
+        $this->cache->save($item);
 
         if ($this->alertRepo->existsForFamilyMonthAmount($family, 'family_budget', $monthKey, $projected)) {
             return;
@@ -100,10 +116,6 @@ final class BudgetWarningService
         }
     }
 
-    /**
-     * Returnează depășirile pe categorie pentru luna curentă.
-     * Fiecare element: ['category'=>Category,'current'=>float,'limit'=>float,'monthKey'=>string]
-     */
     public function computeCategoryThresholdBreaches(User $admin): array
     {
         $family = $admin->getFamily();
@@ -115,20 +127,18 @@ final class BudgetWarningService
         $monthStart = (new \DateTimeImmutable($monthKey . '-01 00:00:00'));
         $monthEnd   = $monthStart->modify('last day of this month')->setTime(23, 59, 59);
 
-        // Praguri definite pentru familie (Category <-> Family)
         $thresholds = $this->thresholdsRepo->findBy(['family' => $family]);
         if ($thresholds === []) {
             return [];
         }
 
-        // Suma curentă pe categorie în această lună
         $currentPerCategory = [];
         foreach ($family->getUsers() as $u) {
             if (!$u instanceof User) {
                 continue;
             }
             foreach ($u->getExpenses() as $expense) {
-                $d = $expense->getDate();
+                $d   = $expense->getDate();
                 $cat = $expense->getCategory();
                 if (!$d || !$cat instanceof Category) {
                     continue;
@@ -150,7 +160,7 @@ final class BudgetWarningService
             if (!$cat instanceof Category) {
                 continue;
             }
-            $cid = (int) $cat->getId();
+            $cid     = (int) $cat->getId();
             $current = (float) ($currentPerCategory[$cid] ?? 0.0);
             $limit   = (float) ($t->getAmount() ?? '0');
             if ($limit > 0.0 && $current > $limit) {
@@ -166,9 +176,6 @@ final class BudgetWarningService
         return $breaches;
     }
 
-    /**
-     * Pune în coadă emailuri pentru depășirile pe categorie (idempotent prin BudgetAlertLog, cu category).
-     */
     public function enqueueCategoryThresholdEmails(User $admin, array $breaches): void
     {
         $family = $admin->getFamily();
@@ -183,6 +190,21 @@ final class BudgetWarningService
             $limit    = (float) $b['limit'];
             $monthKey = (string) $b['monthKey'];
 
+            // Dedupe window (ex: 30s) on key family+month+category+amount
+            $dedupeKey = $this->makeSafeCacheKey('category_threshold', [
+                'familyId'  => (int) $family->getId(),
+                'month'     => $monthKey,
+                'categoryId'=> (int) $category->getId(),
+                'amount'    => $this->fmt($current),
+            ]);
+            $item = $this->cache->getItem($dedupeKey);
+            if ($item->isHit()) {
+                continue; // another stream has enqueued very recently
+            }
+            $item->expiresAfter(30);
+            $item->set(true);
+            $this->cache->save($item);
+
             if ($this->alertRepo->existsForFamilyMonthAmountAndCategory($family, 'category_threshold', $monthKey, $current, $category)) {
                 continue;
             }
@@ -196,8 +218,8 @@ final class BudgetWarningService
                         familyId: (int) $family->getId(),
                         userId: (int) $member->getId(),
                         month: $monthKey,
-                        projectedTotal: $current, // cheltuială curentă
-                        budget: $limit,           // limită categorie
+                        projectedTotal: $current,
+                        budget: $limit,
                         type: 'category_threshold',
                         categoryId: (int) $category->getId()
                     )
@@ -226,5 +248,24 @@ final class BudgetWarningService
                 }
             }
         }
+    }
+
+    private function fmt(float $amount): string
+    {
+        return number_format($amount, 2, '.', '');
+    }
+
+    /**
+     * Creates a secure cache key (no reserved characters) via MD5 hash.
+     * @param array<string,int|string> $parts
+     */
+    private function makeSafeCacheKey(string $namespace, array $parts): string
+    {
+        // We build a deterministic representation, then hash it
+        $flat = $namespace;
+        foreach ($parts as $k => $v) {
+            $flat .= '|' . $k . '=' . (string) $v;
+        }
+        return 'dedupe_' . md5($flat);
     }
 }
