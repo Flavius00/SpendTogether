@@ -18,7 +18,8 @@ final class ProjectedSpendingResult
         public readonly array $cumCurrent,
         public readonly int $compareIndex,
         public readonly int $daysInMonth,
-        public readonly bool $isCurrentMonth
+        public readonly bool $isCurrentMonth,
+        public readonly ?bool $isProjection=null
     ) {}
 }
 

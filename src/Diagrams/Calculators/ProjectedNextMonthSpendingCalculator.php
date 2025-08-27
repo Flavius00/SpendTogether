@@ -31,7 +31,7 @@ class ProjectedNextMonthSpendingCalculator
                     ? ($lastYearThreeMonthsAverage / $threeMonthsAverage)
                     : 1.0;
 
-                $projectedTotal = $lastYearThisMonth + abs($lastYearThreeMonthsAverage - $threeMonthsAverage);
+                $projectedTotal = $lastYearThisMonth + ($threeMonthsAverage - $lastYearThreeMonthsAverage);
             } else {
                 $projectedTotal = $threeMonthsAverage;
             }
@@ -46,7 +46,8 @@ class ProjectedNextMonthSpendingCalculator
             $cumCurrent,
             $compareIndex,
             $daysInMonth,
-            false
+            false,
+            true // isProjection
         );
     }
 

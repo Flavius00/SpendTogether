@@ -52,7 +52,8 @@ final class ProjectedSpendingGenerator
             return $margin['left'] + $t * $chartW;
         };
         $mapY = static function (float $val) use ($chartH, $margin, $scaleY): float {
-            return $margin['top'] + $chartH - ($val * $scaleY);
+            $y = $margin['top'] + $chartH - ($val * $scaleY);
+            return max($margin['top'], min($y, $margin['top'] + $chartH));
         };
 
         $svg = [];
@@ -123,21 +124,34 @@ final class ProjectedSpendingGenerator
             $svg[] = '<text x="' . ($vbW - $margin['right']) . '" y="' . ($yBudget - 6) . '" fill="' . $budgetColor . '" font-size="12" text-anchor="end">Family budget</text>';
         }
 
-        // Actual path
-        $pathActual = '';
-        for ($d = 1; $d <= $r->compareIndex; $d++) {
-            $x = $mapX($d);
-            $y = $mapY($r->cumCurrent[$d] ?? 0.0);
-            $pathActual .= ($d === 1 ? 'M' : 'L') . $x . ' ' . $y . ' ';
-        }
-        if ($pathActual !== '') {
-            $svg[] = '<path d="' . trim($pathActual) . '" fill="none" stroke="' . $actualColor . '" stroke-width="3" />';
+        // Check if we have actual spending data
+        $hasActualData = $r->compareIndex > 0 && !empty($r->cumCurrent) && ($r->cumCurrent[$r->compareIndex] ?? 0.0) > 0;
+
+        // Actual path (only if we have data)
+        if ($hasActualData) {
+            $pathActual = '';
+            for ($d = 1; $d <= $r->compareIndex; $d++) {
+                $x = $mapX($d);
+                $y = $mapY($r->cumCurrent[$d] ?? 0.0);
+                $pathActual .= ($d === 1 ? 'M' : 'L') . $x . ' ' . $y . ' ';
+            }
+            if ($pathActual !== '') {
+                $svg[] = '<path d="' . trim($pathActual) . '" fill="none" stroke="' . $actualColor . '" stroke-width="3" />';
+            }
         }
 
-        // Projection
-        if ($r->compareIndex < $r->daysInMonth) {
+        // Projection line
+        if ($hasActualData && $r->compareIndex < $r->daysInMonth) {
+            // Start from current position
             $x0 = $mapX($r->compareIndex);
             $y0 = $mapY($r->cumCurrent[$r->compareIndex] ?? 0.0);
+            $x1 = $mapX($r->daysInMonth);
+            $y1 = $mapY($r->projectedTotal);
+            $svg[] = '<path d="M' . $x0 . ' ' . $y0 . ' L' . $x1 . ' ' . $y1 . '" fill="none" stroke="' . $projectionColor . '" stroke-width="3" stroke-dasharray="6,6" />';
+        } elseif (!$hasActualData) {
+            // For next month prediction, start from day 1 at 0
+            $x0 = $mapX(1);
+            $y0 = $mapY(0.0);
             $x1 = $mapX($r->daysInMonth);
             $y1 = $mapY($r->projectedTotal);
             $svg[] = '<path d="M' . $x0 . ' ' . $y0 . ' L' . $x1 . ' ' . $y1 . '" fill="none" stroke="' . $projectionColor . '" stroke-width="3" stroke-dasharray="6,6" />';
@@ -145,21 +159,28 @@ final class ProjectedSpendingGenerator
 
         // Markers
         $rDot = 3.5;
-        $xToday = $mapX($r->compareIndex);
-        $yToday = $mapY($r->cumCurrent[$r->compareIndex] ?? 0.0);
-        $svg[] = '<circle cx="' . $xToday . '" cy="' . $yToday . '" r="' . $rDot . '" fill="' . $actualColor . '" />';
+
+        // Current position marker (only if we have actual data)
+        if ($hasActualData) {
+            $xToday = $mapX($r->compareIndex);
+            $yToday = $mapY($r->cumCurrent[$r->compareIndex] ?? 0.0);
+            $svg[] = '<circle cx="' . $xToday . '" cy="' . $yToday . '" r="' . $rDot . '" fill="' . $actualColor . '" />';
+
+            // Label near "today"
+            $svg[] = '<text x="' . ($xToday + 6) . '" y="' . ($yToday - 8) . '" fill="' . $labelColor . '" font-size="12" dominant-baseline="ideographic">To date: ' . number_format($r->currentToDate, 0) . '</text>';
+        }
+
+        // End projection marker
         $xEnd = $mapX($r->daysInMonth);
         $yEnd = $mapY($r->projectedTotal);
         $svg[] = '<circle cx="' . $xEnd . '" cy="' . $yEnd . '" r="' . $rDot . '" fill="' . $projectionColor . '" />';
 
-        // Label near "today"
-        $svg[] = '<text x="' . ($xToday + 6) . '" y="' . ($yToday - 8) . '" fill="' . $labelColor . '" font-size="12" dominant-baseline="ideographic">To date: ' . number_format($r->currentToDate, 0) . '</text>';
-
         // Legend (centered)
-        $legendItems = [
-            ['label' => 'Actual',    'color' => $actualColor],
-            ['label' => 'Projected', 'color' => $projectionColor],
-        ];
+        $legendItems = [];
+        if ($hasActualData) {
+            $legendItems[] = ['label' => 'Actual', 'color' => $actualColor];
+        }
+        $legendItems[] = ['label' => 'Projected', 'color' => $projectionColor];
         if ($budget !== null) {
             $legendItems[] = ['label' => 'Budget', 'color' => $budgetColor];
         }

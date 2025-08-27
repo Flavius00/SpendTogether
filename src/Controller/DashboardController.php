@@ -11,6 +11,7 @@ use App\Facades\ProjectedSpendingFacade;
 use App\Facades\SubscriptionsVsOneTimeFacade;
 use App\Facades\TopExpensesFacade;
 use App\Warnings\BudgetWarningService;;
+use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -32,7 +33,8 @@ final class DashboardController extends AbstractController
         SelectedMonthVsLastMonthFacade     $selectedMonthVsLastSvg,
         TopExpensesFacade                  $topExpensesFacade,
         ProjectedSpendingFacade            $projectedSpendingFacade,
-        BudgetWarningService               $budgetWarningService
+        BudgetWarningService               $budgetWarningService,
+        LoggerInterface                    $logger,
     ): Response
     {
         if (!$authCheck->isGranted('IS_AUTHENTICATED_FULLY')) {
@@ -43,11 +45,14 @@ final class DashboardController extends AbstractController
         $selectedMonth = $request->query->get('month', date('Y-m'));
         $typeOfPrediction = $request->query->get('chartComparison', 'selected');
 
-        $pieChartSvg = $monthSvgService->generateSvg($user, $selectedMonth, $viewType);
+        $logger->info("The selected month is: " . $selectedMonth);
+        $logger->info("The type of Prediction is: " . $typeOfPrediction);
+
+        $pieChartSvg = $monthSvgService->generateSvg($user, $selectedMonth, $viewType, $logger);
         $barsSvg = $subscriptionsVsOneTimeFacade->generateSvg( $viewType, $user);
         $normal2LineGraphicSvg = $selectedMonthVsLastSvg->generateSvg($user, $selectedMonth, $viewType);
-        $topExpensesSvg = $topExpensesFacade->generateSvg($viewType, $user, $selectedMonth);
-        $projectionsSvg = $projectedSpendingFacade->generateSvg($viewType, $user, $selectedMonth, $typeOfPrediction);
+        $topExpensesSvg = $topExpensesFacade->generateSvg($viewType, $user, $selectedMonth, $logger);
+        $projectionsSvg = $projectedSpendingFacade->generateSvg($viewType, $user, $selectedMonth, $typeOfPrediction, $logger);
 
         // Budget warning banner for family admins: compute and possibly enqueue emails
         $budgetWarning = null;
