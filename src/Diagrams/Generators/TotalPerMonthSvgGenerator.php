@@ -8,6 +8,7 @@ class TotalPerMonthSvgGenerator
 {
     private const COLORS = ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40', '#34D399', '#F87171'];
     private const RED_SHADES = ['#DC2626', '#EF4444', '#F87171', '#FCA5A5', '#FECACA', '#FEE2E2', '#B91C1C', '#991B1B'];
+    private const BUDGET_COLOR = '#22C55E'; // Green for remaining budget
     private const CENTER_X = 200;
     private const CENTER_Y = 260;
     private const RADIUS = 120;
@@ -20,22 +21,36 @@ class TotalPerMonthSvgGenerator
 
         $total = array_sum($data);
         $isOverBudget = ($budget !== null && $total > $budget);
+        $isUnderBudget = ($budget !== null && $total < $budget);
 
-        $legendData = $this->prepareLegendData($data, $total, $budget, $isOverBudget);
+        // Add remaining budget to data if under budget
+        if ($isUnderBudget) {
+            $remainingBudget = $budget - $total;
+            $data['Remaining Budget'] = $remainingBudget;
+            $total = $budget; // Use budget as total for percentage calculations
+        }
 
-        return $this->generatePieChartSvg($data, $total, $budget, $legendData, $isOverBudget);
+        $legendData = $this->prepareLegendData($data, $total, $budget, $isOverBudget, $isUnderBudget);
+
+        return $this->generatePieChartSvg($data, $total, $budget, $legendData, $isOverBudget, $isUnderBudget);
     }
 
-    private function prepareLegendData(array $data, float $total, ?float $budget, bool $isOverBudget): array
+    private function prepareLegendData(array $data, float $total, ?float $budget, bool $isOverBudget, bool $isUnderBudget): array
     {
         $legendData = [];
 
         foreach ($data as $label => $amount) {
             if ($isOverBudget && $label === 'OVER BUDGET!') {
-                $overBudgetAmount = $total - $budget;
+                $overBudgetAmount = array_sum(array_filter($data, fn($key) => $key !== 'OVER BUDGET!', ARRAY_FILTER_USE_KEY)) - $budget;
                 $legendData[] = [
                     'label' => 'OVER BUDGET! +$' . number_format($overBudgetAmount, 2),
                     'amount' => 0
+                ];
+            } elseif ($label === 'Remaining Budget') {
+                $percentage = ($total > 0) ? ($amount / $total) * 100 : 0;
+                $legendData[] = [
+                    'label' => 'Remaining Budget - ' . round($percentage, 1) . '% ($' . number_format($amount, 2) . ')',
+                    'amount' => $amount
                 ];
             } else {
                 $percentage = ($total > 0) ? ($amount / $total) * 100 : 0;
@@ -57,23 +72,22 @@ class TotalPerMonthSvgGenerator
         </svg>';
     }
 
-    private function generatePieChartSvg(array $data, float $total, ?float $budget, array $legendData, bool $isOverBudget = false): string
+    private function generatePieChartSvg(array $data, float $total, ?float $budget, array $legendData, bool $isOverBudget = false, bool $isUnderBudget = false): string
     {
-        // la fel ca în Service
         $svg = '<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">';
-        $svg .= $this->generateLegend($legendData, $isOverBudget, $total, $budget);
+        $svg .= $this->generateLegend($legendData, $isOverBudget, $isUnderBudget, $total, $budget);
 
         if (count($data) === 1) {
-            $svg .= $this->generateSingleSlice($data, $total, $isOverBudget);
+            $svg .= $this->generateSingleSlice($data, $total, $isOverBudget, $isUnderBudget);
         } else {
-            $svg .= $this->generateMultipleSlices($data, $total, $isOverBudget);
+            $svg .= $this->generateMultipleSlices($data, $total, $isOverBudget, $isUnderBudget);
         }
 
         $svg .= '</svg>';
         return $svg;
     }
 
-    private function generateLegend(array $legendData, bool $isOverBudget = false, float $total = 0, ?float $budget = 0): string
+    private function generateLegend(array $legendData, bool $isOverBudget = false, bool $isUnderBudget = false, float $total = 0, ?float $budget = 0): string
     {
         $colors = $isOverBudget ? self::RED_SHADES : self::COLORS;
         $legendContent = '';
@@ -81,7 +95,13 @@ class TotalPerMonthSvgGenerator
         $legendY = 20;
 
         foreach ($legendData as $index => $item) {
-            $color = $colors[$index % count($colors)];
+            // Use budget color for remaining budget, otherwise use regular colors
+            if (strpos($item['label'], 'Remaining Budget') === 0) {
+                $color = self::BUDGET_COLOR;
+            } else {
+                $color = $colors[$index % count($colors)];
+            }
+
             $y = $legendY + ($index * 20);
 
             $legendContent .= '<rect x="' . $legendX . '" y="' . $y . '" width="12" height="12" fill="' . $color . '"/>';
@@ -98,18 +118,21 @@ class TotalPerMonthSvgGenerator
         return $legendContent;
     }
 
-    private function generateSingleSlice(array $data, float $total, bool $isOverBudget = false): string
+    private function generateSingleSlice(array $data, float $total, bool $isOverBudget = false, bool $isUnderBudget = false): string
     {
         $percentage = (current($data) / $total) * 100;
         $colors = $isOverBudget ? self::RED_SHADES : self::COLORS;
-        $color = $colors[0];
+
+        // Use budget color if this is the remaining budget slice
+        $label = key($data);
+        $color = ($label === 'Remaining Budget') ? self::BUDGET_COLOR : $colors[0];
 
         return '<circle cx="' . self::CENTER_X . '" cy="' . self::CENTER_Y . '" r="' . self::RADIUS . '" fill="' . $color . '" stroke="white" stroke-width="2" />
             <text x="' . self::CENTER_X . '" y="' . self::CENTER_Y . '" text-anchor="middle" dominant-baseline="middle" fill="white" font-size="18" font-weight="bold">'
             . round($percentage, 1) . '%</text>';
     }
 
-    private function generateMultipleSlices(array $data, float $total, bool $isOverBudget = false): string
+    private function generateMultipleSlices(array $data, float $total, bool $isOverBudget = false, bool $isUnderBudget = false): string
     {
         $colors = $isOverBudget ? self::RED_SHADES : self::COLORS;
         $svg = '';
@@ -128,7 +151,13 @@ class TotalPerMonthSvgGenerator
             $largeArc = $angle > 180 ? 1 : 0;
             $pathData = "M " . self::CENTER_X . " " . self::CENTER_Y . " L $x1 $y1 A " . self::RADIUS . " " . self::RADIUS . " 0 $largeArc 1 $x2 $y2 Z";
 
-            $color = $colors[$colorIndex % count($colors)];
+            // Use budget color for remaining budget slice
+            if ($label === 'Remaining Budget') {
+                $color = self::BUDGET_COLOR;
+            } else {
+                $color = $colors[$colorIndex % count($colors)];
+            }
+
             $svg .= '<path d="' . $pathData . '" fill="' . $color . '" stroke="white" stroke-width="2"/>';
 
             if ($percentage > 5) {
