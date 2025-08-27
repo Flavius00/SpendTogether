@@ -1,0 +1,13 @@
+login:
+    title: "Conectare"
+    email: "Adresa de email"
+    password: "Parola"
+    submit: "Autentificare"
+    register: "Înregistrare"
+    welcome_message: "Bine ai revenit"
+language:
+    en: "EN"
+    fr: "Franceza"
+    ro: "RO"
+    de: "Germana"
+    select: "Limba"

@@ -9,11 +9,13 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\HttpFoundation\Request;
 
 class SecurityController extends AbstractController
 {
-    #[Route(path: '/login', name: 'app_login')]
+    #[Route(path: '/{_locale}/login', name: 'app_login', requirements: ['_locale' => 'en|ro'], defaults: ['_locale' => 'en'])]
     public function login(
+        Request                         $request,
         AuthenticationUtils             $authenticationUtils,
         AuthorizationCheckerInterface   $authChecker,
     ): Response {

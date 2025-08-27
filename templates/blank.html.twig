@@ -39,13 +39,21 @@
 
         <!-- Auth Actions - Far Right -->
         <div class="flex items-center space-x-4 ml-auto">
-            <a href="{{ path('app_login') }}"
+            <a href="{{ path('app_login', {'_locale': 'ro'}) }}"
                class="px-4 py-2 border-2 border-custom-teal text-custom-teal hover:bg-custom-teal hover:text-custom-light transition-all duration-300 font-medium rounded-lg">
-                Login
+                {{ 'language.ro'|trans }}
             </a>
-            <a href="{{ path('app_register') }}"
+            <a href="{{ path('app_login', {'_locale': 'en'}) }}"
+               class="px-4 py-2 border-2 border-custom-teal text-custom-teal hover:bg-custom-teal hover:text-custom-light transition-all duration-300 font-medium rounded-lg">
+                {{ 'language.en'|trans }}
+            </a>
+            <a href="{{ path('app_login', {'_locale': 'en'}) }}"
+               class="px-4 py-2 border-2 border-custom-teal text-custom-teal hover:bg-custom-teal hover:text-custom-light transition-all duration-300 font-medium rounded-lg">
+                {{ 'login.title'|trans }}
+            </a>
+            <a href="{{ path('app_register')}}"
                class="px-4 py-2 border-2 border-custom-light text-custom-light hover:bg-custom-light hover:text-custom-dark transition-all duration-300 font-medium rounded-lg">
-                Register
+                {{ 'login.register'|trans }}
             </a>
         </div>
     </div>
