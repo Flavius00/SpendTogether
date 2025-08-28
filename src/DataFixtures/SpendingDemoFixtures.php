@@ -30,18 +30,18 @@ final class SpendingDemoFixtures extends Fixture implements FixtureGroupInterfac
 
         $usersConfig = [
             [
-                'email' => 'user@gmail.com',
-                'name'  => 'User Demo',
+                'email' => 'dan@evozon.com',
+                'name'  => 'Dan Homorodean',
                 'roles' => ['ROLE_ADMIN'],
             ],
             [
-                'email' => 'sebi@gmail.com',
-                'name'  => 'Sebi Demo',
+                'email' => 'sebi@yahoo.com',
+                'name'  => 'Sebi Hojda',
                 'roles' => ['ROLE_MEMBER'],
             ],
             [
-                'email' => 'user2@gmail.com',
-                'name'  => 'User2 Demo',
+                'email' => 'flavius@gmail.com',
+                'name'  => 'Flavius Turcu',
                 'roles' => ['ROLE_MEMBER'],
             ],
         ];
@@ -67,9 +67,9 @@ final class SpendingDemoFixtures extends Fixture implements FixtureGroupInterfac
 
         // Amount profiles (min, max) per user for one-time expenses
         $amountProfiles = [
-            'user@gmail.com'  => [30, 120],
-            'sebi@gmail.com'  => [20, 90],
-            'user2@gmail.com' => [40, 150],
+            'dan@evozon.com'     => [10, 120],
+            'sebi@yahoo.com'     => [10, 90],
+            'flavius@gmail.com'  => [10, 150],
         ];
 
         // Date range for historical data
@@ -80,12 +80,10 @@ final class SpendingDemoFixtures extends Fixture implements FixtureGroupInterfac
             if (!$user instanceof User) {
                 continue;
             }
-            [$minA, $maxA] = $amountProfiles[$email] ?? [25, 100];
+            [$minA, $maxA] = $amountProfiles[$email] ?? [5, 100];
 
-            // Variație: definim subscripții diferite per user, cu ferestre de activitate și "skip" periodic
             $subsDefs = $this->subscriptionDefinitionsForUser($user, $catUtilities, $catEntertainment, $catTransport);
 
-            // Crează/actualizează subscripțiile și asamblează descriptorii
             $subscriptions = $this->getOrCreateUserSubscriptions(
                 $manager,
                 $user,
@@ -93,7 +91,6 @@ final class SpendingDemoFixtures extends Fixture implements FixtureGroupInterfac
                 baseStart: new \DateTime('2024-08-01 00:00:00')
             );
 
-            // Generează istoricul de cheltuieli din subscripții în [from .. to] cu variații lunare
             $subDaysByMonth = $this->generateSubscriptionExpensesHistory(
                 $manager,
                 $user,
@@ -102,7 +99,6 @@ final class SpendingDemoFixtures extends Fixture implements FixtureGroupInterfac
                 $to
             );
 
-            // Generează one-time expenses cu țintă dinamică de zile/lună (>=20 când este posibil)
             $this->generateOneTimeExpensesByMonth(
                 $manager,
                 $user,
@@ -122,33 +118,33 @@ final class SpendingDemoFixtures extends Fixture implements FixtureGroupInterfac
     {
         $u = $user->getEmail();
 
-        if ($u === 'user@gmail.com') {
+        if ($u === 'dan@evozon.com') {
             return [
                 // name, amount, category, day, start, end?, skip?
-                ['name' => 'Internet',      'amount' => '50.00',  'category' => $catUtilities,     'day' => 3,  'start' => new \DateTime('2024-08-01')],
-                ['name' => 'Mobile Plan',   'amount' => '25.00',  'category' => $catUtilities,     'day' => 7,  'start' => new \DateTime('2024-09-01')],
-                ['name' => 'Streaming',     'amount' => '42.00',  'category' => $catEntertainment, 'day' => 12, 'start' => new \DateTime('2024-08-01'), 'skip' => ['mod' => 6, 'phase' => 0]], // sare fiecare a 6-a lună
-                ['name' => 'Gym',           'amount' => '30.00',  'category' => $catEntertainment, 'day' => 18, 'start' => new \DateTime('2024-10-01'), 'end' => new \DateTime('2025-06-30')], // anulat vara
-                ['name' => 'Parking',       'amount' => '60.00',  'category' => $catTransport,     'day' => 24, 'start' => new \DateTime('2024-08-01')],
-                ['name' => 'Cloud Storage', 'amount' => '9.99',   'category' => $catUtilities,     'day' => 5,  'start' => new \DateTime('2024-11-01')],
-                ['name' => 'Music',         'amount' => '12.99',  'category' => $catEntertainment, 'day' => 15, 'start' => new \DateTime('2025-02-01')],
+                ['name' => 'Digi Fiber',       'amount' => '50.00',  'category' => $catUtilities,     'day' => 3,  'start' => new \DateTime('2024-08-01')],
+                ['name' => 'Vodafone Mobile',  'amount' => '25.00',  'category' => $catUtilities,     'day' => 7,  'start' => new \DateTime('2024-09-01')],
+                ['name' => 'Netflix',          'amount' => '42.00',  'category' => $catEntertainment, 'day' => 12, 'start' => new \DateTime('2024-08-01'), 'skip' => ['mod' => 6, 'phase' => 0]],
+                ['name' => 'World Class',      'amount' => '30.00',  'category' => $catEntertainment, 'day' => 18, 'start' => new \DateTime('2024-10-01'), 'end' => new \DateTime('2025-06-30')],
+                ['name' => 'Parking', 'amount' => '60.00',  'category' => $catTransport,     'day' => 24, 'start' => new \DateTime('2024-08-01')],
+                ['name' => 'Google Drive',     'amount' => '9.99',   'category' => $catUtilities,     'day' => 5,  'start' => new \DateTime('2024-11-01')],
+                ['name' => 'Spotify',          'amount' => '12.99',  'category' => $catEntertainment, 'day' => 15, 'start' => new \DateTime('2025-02-01')],
             ];
         }
 
-        if ($u === 'sebi@gmail.com') {
+        if ($u === 'sebi@yahoo.com') {
             return [
-                ['name' => 'Internet',    'amount' => '45.00',  'category' => $catUtilities,     'day' => 4,  'start' => new \DateTime('2024-08-01')],
-                ['name' => 'Streaming',   'amount' => '35.00',  'category' => $catEntertainment, 'day' => 14, 'start' => new \DateTime('2024-12-01')],
-                ['name' => 'Gym',         'amount' => '25.00',  'category' => $catEntertainment, 'day' => 20, 'start' => new \DateTime('2025-01-01')],
-                ['name' => 'Parking',     'amount' => '50.00',  'category' => $catTransport,     'day' => 26, 'start' => new \DateTime('2024-08-01'), 'skip' => ['mod' => 4, 'phase' => 1]],
+                ['name' => 'Orange Fiber',     'amount' => '45.00',  'category' => $catUtilities,     'day' => 4,  'start' => new \DateTime('2024-08-01')],
+                ['name' => 'HBO Max',          'amount' => '35.00',  'category' => $catEntertainment, 'day' => 14, 'start' => new \DateTime('2024-12-01')],
+                ['name' => 'Smart Fit',        'amount' => '25.00',  'category' => $catEntertainment, 'day' => 20, 'start' => new \DateTime('2025-01-01')],
+                ['name' => 'Parking', 'amount' => '50.00',  'category' => $catTransport,     'day' => 26, 'start' => new \DateTime('2024-08-01'), 'skip' => ['mod' => 4, 'phase' => 1]],
             ];
         }
 
-        // user2@gmail.com
+        // flavius@gmail.com
         return [
-            ['name' => 'Mobile Plan',   'amount' => '20.00',  'category' => $catUtilities,     'day' => 8,  'start' => new \DateTime('2024-08-01')],
-            ['name' => 'Streaming',     'amount' => '45.00',  'category' => $catEntertainment, 'day' => 13, 'start' => new \DateTime('2024-08-01')],
-            ['name' => 'Cloud Storage', 'amount' => '9.99',   'category' => $catUtilities,     'day' => 6,  'start' => new \DateTime('2025-03-01'), 'end' => new \DateTime('2025-12-31')],
+            ['name' => 'Digi Mobile',   'amount' => '20.00',  'category' => $catUtilities,     'day' => 8,  'start' => new \DateTime('2024-08-01')],
+            ['name' => 'Disney Plus',   'amount' => '45.00',  'category' => $catEntertainment, 'day' => 13, 'start' => new \DateTime('2024-08-01')],
+            ['name' => 'Dropbox',       'amount' => '9.99',   'category' => $catUtilities,     'day' => 6,  'start' => new \DateTime('2025-03-01'), 'end' => new \DateTime('2025-12-31')],
         ];
     }
 
@@ -233,7 +229,6 @@ final class SpendingDemoFixtures extends Fixture implements FixtureGroupInterfac
     ): array {
         $subs = [];
         foreach ($defs as $def) {
-            // Defensive: accept și listă numerică
             if (array_is_list($def)) {
                 [$n, $a, $c, $d] = $def;
                 $def = ['name' => $n, 'amount' => $a, 'category' => $c, 'day' => $d, 'start' => $baseStart];
@@ -247,7 +242,7 @@ final class SpendingDemoFixtures extends Fixture implements FixtureGroupInterfac
                 $def['category'],
                 $baseStart,
                 'monthly',
-                $def['day']
+                (int) $def['day']
             );
 
             $subs[] = [
@@ -331,7 +326,6 @@ final class SpendingDemoFixtures extends Fixture implements FixtureGroupInterfac
                 $end   = $desc['end'] ?? null;
                 $skip  = $desc['skip'] ?? null;
 
-                // Ferestre active
                 if ($this->isBeforeMonth($monthCursor, $start)) {
                     continue;
                 }
@@ -353,10 +347,10 @@ final class SpendingDemoFixtures extends Fixture implements FixtureGroupInterfac
                 }
                 $chargeDate = \DateTime::createFromFormat('Y-m-d H:i:s', sprintf('%s-%02d 10:00:00', $ym, $chargeDay));
                 if ($chargeDate > $to) {
-                    continue; // nu creăm cheltuieli din viitor
+                    continue;
                 }
 
-                // Create expense for this subscription (nume compatibil cu validatorul)
+                // Create expense for this subscription
                 $this->addExpense(
                     manager: $manager,
                     user: $user,
@@ -451,8 +445,8 @@ final class SpendingDemoFixtures extends Fixture implements FixtureGroupInterfac
             $jitter = (int)($seed % 7) - 3; // -3..+3
 
             $targetRaw = 20 + $seasonalAdj + $jitter;
-            $targetRaw = max(10, $targetRaw); // protecție minimală
-            $targetDays = min($possibleDays, max(20, min(28, $targetRaw))); // între 20..28 când se poate
+            $targetRaw = max(10, $targetRaw);
+            $targetDays = min($possibleDays, max(20, min(28, $targetRaw)));
 
             $missingDaysCount = max(0, $targetDays - count($usedDays));
 
@@ -480,10 +474,10 @@ final class SpendingDemoFixtures extends Fixture implements FixtureGroupInterfac
     private function seasonalAdjustment(int $month): int
     {
         return match ($month) {
-            12 => 6,          // Decembrie: mai mult consum
-            6,7,8 => 3,       // vară
-            11,1 => 2,        // prag de sărbători / început de an
-            2 => -2,          // Februarie: mai scurtă
+            12 => 6,
+            6,7,8 => 3,
+            11,1 => 2,
+            2 => -2,
             default => 0,
         };
     }
@@ -526,13 +520,29 @@ final class SpendingDemoFixtures extends Fixture implements FixtureGroupInterfac
 
     private function nameForCategory(string $categoryName, int $day): string
     {
-        return match ($categoryName) {
-            'Food' => 'Groceries D' . $day,
-            'Transport' => 'Transport Ticket D' . $day,
-            'Utilities' => 'Utilities D' . $day,
-            'Entertainment' => 'Entertainment D' . $day,
-            default => 'Expense D' . $day,
-        };
+        $lists = [
+            'Food' => [
+                'Pizza', 'Mc Donalds', 'KFC', 'Ice Cream', 'Fruits', 'Vegetables',
+                'Chocolate', 'Bakery', 'Coffee', 'Sushi', 'Burger', 'Pasta',
+                'Groceries Lidl', 'Groceries Kaufland', 'Sandwich', 'Steak'
+            ],
+            'Transport' => [
+                'Gasoline', 'Uber', 'Bolt', 'Taxi', 'Tires', 'Parking',
+                'Metro Ticket', 'Bus Ticket', 'Car Wash', 'Highway Toll'
+            ],
+            'Utilities' => [
+                'Electricity Bill', 'Water Bill', 'Gas Bill', 'Internet',
+                'Mobile Plan', 'Cloud Storage'
+            ],
+            'Entertainment' => [
+                'Movies', 'Theater', 'Opera', 'Concert',
+                'Books', 'Game', 'Theme Park', 'Museum'
+            ],
+        ];
+
+        $list = $lists[$categoryName] ?? ['General Expense'];
+        $idx = max(0, ($day - 1) % count($list));
+        return $list[$idx];
     }
 
     private function addExpense(
